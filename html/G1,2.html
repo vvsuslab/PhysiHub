@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysiHub - Đấu Trường Game & Thử Thách Trí Tuệ Vật Lí 12</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ==================== VARIABLE DEFINITIONS ==================== */
+        :root[data-theme="dark"] {
+            --bg-main: #0a0d14;
+            --bg-header: rgba(10, 13, 20, 0.8);
+            --bg-card: #111622;
+            --bg-card-inner: #0d111a;
+            --bg-tag: rgba(56, 189, 248, 0.1);
+            --border-color: #1e2638;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #38bdf8;
+            --btn-blue-bg: #38bdf8;
+            --btn-blue-text: #090d16;
+            --btn-orange-bg: #f97316;
+            --btn-orange-text: #ffffff;
+            --tag-text: #38bdf8;
+            --icon-bg: #1e293b;
+        }
+
+        :root[data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-header: rgba(255, 255, 255, 0.8);
+            --bg-card: #ffffff;
+            --bg-card-inner: #f1f5f9;
+            --bg-tag: rgba(14, 165, 233, 0.1);
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --accent-cyan: #0284c7;
+            --btn-blue-bg: #0284c7;
+            --btn-blue-text: #ffffff;
+            --btn-orange-bg: #ea580c;
+            --btn-orange-text: #ffffff;
+            --tag-text: #0284c7;
+            --icon-bg: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: var(--bg-header);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex: 1;
+        }
+
+        /* ==================== EXACT LOGO STYLES ==================== */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .logo-atom-wrapper {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-atom {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: #040814;
+            border: 2px solid #00d8ff;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 216, 255, 0.3);
+            overflow: hidden;
+        }
+
+        /* Tâm nguyên tử */
+        .atom-core {
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00d8ff, 0 0 12px #00d8ff;
+            z-index: 2;
+        }
+
+        /* Quỹ đạo đứt nét */
+        .atom-orbit {
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            border: 1.5px dashed #8b5cf6;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+        }
+
+        .orbit-1 {
+            transform: translate(-50%, -50%) rotate(-30deg);
+        }
+
+        .orbit-2 {
+            transform: translate(-50%, -50%) rotate(30deg);
+        }
+
+        /* Các hạt electron */
+        .electron {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+        }
+
+        .electron-1 {
+            background-color: #00d8ff;
+            top: 4px;
+            right: 8px;
+            box-shadow: 0 0 4px #00d8ff;
+        }
+
+        .electron-2 {
+            background-color: #10b981;
+            bottom: 6px;
+            left: 4px;
+            box-shadow: 0 0 4px #10b981;
+        }
+
+        /* Huy hiệu VI-EN */
+        .badge-vien {
+            position: absolute;
+            bottom: -2px;
+            right: -4px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #00d8ff;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 1px 4px;
+            border-radius: 4px;
+            border: 1px solid #00d8ff;
+            letter-spacing: -0.2px;
+            z-index: 3;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Tên thương hiệu PhysiHub */
+        .logo-text-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+
+        .brand-name .physi {
+            color: var(--text-primary);
+        }
+
+        .brand-name .hub {
+            color: #00d8ff;
+        }
+
+        /* Khung KNTT 12 */
+        .kntt-tag {
+            border: 1.5px solid rgba(0, 216, 255, 0.6);
+            background-color: rgba(0, 216, 255, 0.08);
+            color: #00d8ff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        /* ==================== SEARCH & NAV ==================== */
+        .search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 16px;
+            height: 16px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-games {
+            background-color: #0284c7;
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+        }
+
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-card);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* HERO CARD */
+        .hero-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--bg-tag);
+            color: var(--tag-text);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .hero-title {
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title span {
+            color: var(--accent-cyan);
+        }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .btn-play-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--btn-blue-bg);
+            color: var(--btn-blue-text);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-play-hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* SECTION HEADINGS */
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--tag-text);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* GAME GRID */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .game-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background-color: var(--icon-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 6px;
+        }
+
+        .tag {
+            background-color: var(--bg-card-inner);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .game-card-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .game-card-desc {
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background-color: var(--bg-card-inner);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .info-item i {
+            width: 14px;
+            height: 14px;
+            color: var(--accent-cyan);
+        }
+
+        .info-item strong {
+            color: var(--text-primary);
+        }
+
+        .btn-card-action {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-card-action:hover {
+            opacity: 0.9;
+        }
+
+        .btn-blue {
+            background-color: var(--btn-blue-bg);
+            color: var(--btn-blue-text);
+        }
+
+        .btn-orange {
+            background-color: var(--btn-orange-bg);
+            color: var(--btn-orange-text);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 40px;
+        }
+
+        .footer-left p {
+            margin-bottom: 4px;
+        }
+
+        .footer-left p:first-child {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .footer-dot {
+            width: 6px;
+            height: 6px;
+            background-color: #38bdf8;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-box {
+                display: none;
+            }
+            .hero-title {
+                font-size: 28px;
+            }
+            footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-left">
+            <!-- CHỈNH SỬA LOGO CHÍNH XÁC THEO HÌNH ẢNH MỚI -->
+            <a href="#" class="logo">
+                <div class="logo-atom-wrapper">
+                    <div class="logo-atom">
+                        <div class="atom-core"></div>
+                        <div class="atom-orbit orbit-1"></div>
+                        <div class="atom-orbit orbit-2"></div>
+                        <div class="electron electron-1"></div>
+                        <div class="electron electron-2"></div>
+                    </div>
+                    <div class="badge-vien">VI•EN</div>
+                </div>
+                <div class="logo-text-group">
+                    <div class="brand-name">
+                        <span class="physi">Physi</span><span class="hub">Hub</span>
+                    </div>
+                    <div class="kntt-tag">KNTT 12</div>
+                </div>
+            </a>
+
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Tìm kiếm mô phỏng, công thức, thí nghiệm...">
+            </div>
+        </div>
+        <div class="header-right">
+            <ul class="nav-links">
+                <li><a href="#">Bài học</a></li>
+                <li><a href="#">Luyện đề</a></li>
+                <li><a href="#" class="btn-games">Games</a></li>
+            </ul>
+            <div class="lang-switch">
+                <i data-lucide="languages" style="width: 14px; height: 14px;"></i>
+                <span>VI | EN</span>
+            </div>
+            <button class="theme-toggle" id="themeToggleBtn" title="Đổi chế độ Sáng/Tối">
+                <i data-lucide="moon" id="themeIcon" style="width: 18px; height: 18px;"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HERO BANNER -->
+        <div class="hero-card">
+            <div class="badge-pill">
+                <i data-lucide="gamepad-2" style="width: 14px; height: 14px;"></i>
+                ĐẤU TRƯỜNG TƯƠNG TÁC & TRÒ CHƠI SONG NGỮ
+            </div>
+            <h1 class="hero-title">
+                Đấu Trường Game & Thử Thách Trí Tuệ <span>Vật Lí 12</span>
+            </h1>
+            <p class="hero-desc">
+                Không gian luyện tập phản xạ kiến thức, rèn luyện thuật ngữ song ngữ Anh - Việt qua các trò chơi tương tác cuốn hút và thi đấu trí tuệ củng cố kiến thức Vật Lí 12.
+            </p>
+            <button class="btn-play-hero" id="scrollBtn">
+                <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                Vào Trò Chơi Ôn Tập
+            </button>
+        </div>
+
+        <!-- MAIN GAMES SECTION -->
+        <section id="game-section">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i data-lucide="gamepad-2" style="width: 14px; height: 14px;"></i>
+                    HỆ THỐNG TRÒ CHƠI ÔN TẬP ĐA NĂNG & ĐẤU TRÍ THUẬT NGỮ SONG NGỮ
+                </div>
+                <h2 class="section-title">Trò Chơi Trọng Tâm & Thử Thách Trí Tuệ</h2>
+            </div>
+
+            <div class="game-grid">
+                <!-- GAME CARD 1 -->
+                <div class="game-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-icon">
+                                <i data-lucide="zap" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="card-tags">
+                                <span class="tag">Speed Mode • 60s</span>
+                                <span class="tag">Song ngữ Anh - Việt</span>
+                            </div>
+                        </div>
+                        <h3 class="game-card-title">Term Rush – Đua Tốc Độ Thuật Ngữ</h3>
+                        <p class="game-card-desc">
+                            Từ vựng và thuật ngữ rơi liên tục theo chu kỳ thời gian thực kèm phiên âm IPA chuẩn quốc tế. Người chơi cần chọn chuẩn xác định nghĩa tiếng Việt tương ứng với định luật vật lí trước khi chạm đáy thời gian.
+                        </p>
+                        <div class="info-box">
+                            <div class="info-item">
+                                <i data-lucide="target"></i>
+                                <span><strong>Mục tiêu:</strong> Phản xạ đọc hiểu thuật ngữ, định luật.</span>
+                            </div>
+                            <div class="info-item">
+                                <i data-lucide="clock"></i>
+                                <span><strong>60 Giây / Vòng</strong> (10 câu)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-card-action btn-blue">
+                        <i data-lucide="play" style="width: 14px; height: 14px; fill: currentColor;"></i>
+                        Bắt đầu chơi ngay <span>→</span>
+                    </button>
+                </div>
+
+                <!-- GAME CARD 2 -->
+                <div class="game-card">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-icon">
+                                <i data-lucide="grid" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="card-tags">
+                                <span class="tag">Memory Match • 12 Thẻ</span>
+                                <span class="tag">Công thức & Định Luật</span>
+                            </div>
+                        </div>
+                        <h3 class="game-card-title">Ghép Cặp Vật Lí – Trí Nhớ Đỉnh Cao</h3>
+                        <p class="game-card-desc">
+                            Lật mở ma trận 12 thẻ bài chứa các cặp liên kết kiến thức cốt lõi: Công thức ↔ Định luật. Ghép đúng cặp trong số lượt lật ít nhất để ghi điểm tuyệt đối.
+                        </p>
+                        <div class="info-box">
+                            <div class="info-item">
+                                <i data-lucide="target"></i>
+                                <span><strong>Mục tiêu:</strong> Khắc sâu công thức, định luật trọng tâm.</span>
+                            </div>
+                            <div class="info-item">
+                                <i data-lucide="refresh-cw"></i>
+                                <span><strong>Không giới hạn / Lượt lật</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-card-action btn-orange">
+                        <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
+                        Vào bàn ghép thẻ <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-left">
+            <p>Sản phẩm dự thi Khoa học kỹ thuật - Trường THPT Bùi Hữu Nghĩa, Cần Thơ - Năm học 2026–2027</p>
+            <p>Nội dung tham khảo SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoá của Bộ GD&ĐT, dùng cho mục đích học tập.</p>
+        </div>
+        <div class="footer-right">
+            <span class="footer-dot"></span>
+            <span>© 2026 PhysiHub.</span>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Khởi tạo các biểu tượng Lucide
+        lucide.createIcons();
+
+        // 1. Tính năng cuộn mượt (Smooth Scroll) xuống phần Game
+        const scrollBtn = document.getElementById('scrollBtn');
+        const gameSection = document.getElementById('game-section');
+
+        scrollBtn.addEventListener('click', () => {
+            gameSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // 2. Tính năng chuyển đổi Chế độ Sáng / Tối (Dark / Light Mode)
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlTag = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlTag.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlTag.setAttribute('data-theme', newTheme);
+            
+            // Đổi icon
+            if (newTheme === 'light') {
+                themeIcon.setAttribute('data-lucide', 'sun');
+            } else {
+                themeIcon.setAttribute('data-lucide', 'moon');
+            }
+            
+            // Cập nhật lại biểu tượng hiển thị
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
