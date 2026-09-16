@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhysiHub - Từ Trường & Cảm Ứng Điện Từ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-header: #0d121f;
+      --bg-card: #131927;
+      --bg-card-sub: #1a2235;
+      --bg-tag: #1c2638;
+      --border-color: #1e293b;
+      
+      --text-main: #f1f5f9;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      
+      --accent-cyan: #00d2fe;
+      --accent-cyan-bg: rgba(0, 210, 254, 0.18);
+      --accent-orange: #ff9800;
+      
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f8fafc;
+      --bg-header: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-sub: #f1f5f9;
+      --bg-tag: #e2e8f0;
+      --border-color: #cbd5e1;
+      
+      --text-main: #0f172a;
+      --text-sub: #475569;
+      --text-muted: #64748b;
+      
+      --accent-cyan: #0284c7;
+      --accent-cyan-bg: rgba(2, 132, 199, 0.15);
+      --accent-orange: #ea580c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    /* HEADER & NAV */
+    header {
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+    }
+
+    [data-theme="light"] .logo-text {
+      color: #0f172a;
+    }
+
+    .logo-text span {
+      color: var(--accent-cyan);
+    }
+
+    .logo-badge {
+      border: 1.5px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+    }
+
+    .search-bar {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 320px;
+      color: var(--text-sub);
+      font-size: 13px;
+    }
+
+    .search-bar input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-main);
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .kbd {
+      background: var(--bg-tag);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background-color: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .nav-btn.active {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .lang-btn {
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background-color: var(--bg-tag);
+      color: var(--text-main);
+      border-radius: 4px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* LAYOUT & CONTAINERS */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .chapter-tag {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .main-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .tab-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .tab-item.active {
+      background-color: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .section-header::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-cyan);
+      border-radius: 2px;
+    }
+
+    /* CARD STYLES */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-badge {
+      background-color: var(--bg-tag);
+      border: 1px solid var(--border-color);
+      color: var(--text-sub);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .card-subtitle {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* FORMULA DISPLAY BOX */
+    .formula-display-box {
+      background-color: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .formula-math {
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    .formula-note {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .sub-box {
+      background-color: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+
+    .sub-box-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sub-box-desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* GLOSSARY SIDEBAR */
+    .glossary-card {
+      background-color: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .glossary-term {
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-size: 15px;
+    }
+
+    .glossary-phonetic {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .glossary-def {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    /* HIGHLIGHT & TOOLTIP POPUP */
+    .term-highlight {
+      color: var(--accent-cyan);
+      border-bottom: 1.5px dashed var(--accent-cyan);
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0 2px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .term-highlight:hover, .term-highlight.active-term {
+      background-color: var(--accent-cyan-bg);
+    }
+
+    .term-popup {
+      position: absolute;
+      z-index: 1000;
+      background-color: var(--bg-header);
+      border: 1.5px solid var(--accent-cyan);
+      border-radius: 10px;
+      padding: 14px;
+      width: 290px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      display: none;
+      animation: popIn 0.15s ease-out;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .term-popup::after {
+      content: '';
+      position: absolute;
+      left: 20px;
+      width: 10px;
+      height: 10px;
+      background: var(--bg-header);
+      border-left: 1.5px solid var(--accent-cyan);
+      border-top: 1.5px solid var(--accent-cyan);
+    }
+
+    .term-popup.pos-below::after {
+      top: -6px;
+      transform: rotate(45deg);
+    }
+
+    .term-popup.pos-above::after {
+      bottom: -6px;
+      transform: rotate(225deg);
+    }
+
+    .term-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .term-popup-title {
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-size: 16px;
+    }
+
+    .term-popup-pos {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      background: var(--bg-tag);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text-sub);
+    }
+
+    .term-popup-phonetic {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .term-popup-body {
+      font-size: 12px;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    /* FOOTER NAV */
+    .chapter-nav-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .chapter-nav-btn {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .chapter-nav-btn.next {
+      background-color: #0284c7;
+      color: #ffffff;
+      justify-content: space-between;
+    }
+
+    .chapter-nav-btn.prev {
+      color: var(--text-sub);
+    }
+
+    .chapter-nav-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .chapter-nav-btn.next .chapter-nav-label {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .chapter-nav-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo-container">
+      <svg class="logo-icon" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="45" fill="none" stroke="#00d2fe" stroke-width="5"/>
+        <ellipse cx="50" cy="50" rx="38" ry="14" fill="none" stroke="#6366f1" stroke-width="4" stroke-dasharray="6,4" transform="rotate(30 50 50)"/>
+        <ellipse cx="50" cy="50" rx="38" ry="14" fill="none" stroke="#6366f1" stroke-width="4" stroke-dasharray="6,4" transform="rotate(-30 50 50)"/>
+        <circle cx="50" cy="50" r="10" fill="#00d2fe"/>
+        <circle cx="82" cy="32" r="5" fill="#00d2fe"/>
+        <circle cx="20" cy="60" r="5" fill="#10b981"/>
+      </svg>
+      <div class="logo-text">Physi<span>Hub</span></div>
+      <span class="logo-badge">KNTT 12</span>
+    </a>
+
+    <div class="search-bar">
+      <span>🔍</span>
+      <input type="text" placeholder="Tìm kiếm định luật, công thức...">
+      <span class="kbd">Ctrl+K</span>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn active">Bài học</button>
+      <button class="nav-btn">Luyện đề</button>
+      <button class="nav-btn">Games</button>
+      
+      <div class="lang-toggle">
+        <button class="lang-btn active">VI</button>
+        <button class="lang-btn">EN</button>
+      </div>
+
+      <button class="theme-toggle-btn" id="themeToggleBtn" title="Chuyển chế độ Sáng/Tối">
+        🌙
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTAINER -->
+  <div class="container">
+    
+    <div class="breadcrumb">
+      <a href="#" class="back-btn">← QUAY LẠI TỔNG QUAN 4 CHƯƠNG</a>
+      <span class="chapter-tag">• CHƯƠNG 03</span>
+    </div>
+
+    <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--accent-cyan); letter-spacing: 1px; margin-bottom: 4px;">
+      MAGNETIC FIELDS & ELECTROMAGNETIC INDUCTION • Vật Lí 12 KNTT
+    </div>
+    <h1 class="main-title auto-highlight">TỪ TRƯỜNG & CẢM ỨNG ĐIỆN TỪ</h1>
+
+    <!-- FILTER TABS -->
+    <div class="filter-tabs" id="filterTabs">
+      <div class="tab-item active" data-filter="all">Tất cả nội dung</div>
+      <div class="tab-item" data-filter="1">1. Từ trường & Cảm ứng từ</div>
+      <div class="tab-item" data-filter="2">2. Từ thông & Định luật Faraday</div>
+      <div class="tab-item" data-filter="3">3. Dòng xoay chiều & Dòng Foucault</div>
+    </div>
+
+    <!-- GRID LAYOUT -->
+    <div class="content-grid">
+      
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+        <div class="section-header">Lý thuyết cốt lõi / CORE CONCEPTS</div>
+
+        <!-- BÀI 1 -->
+        <div class="card lesson-card" data-lesson="1">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title auto-highlight">1. Từ trường & Lực từ Ampère</div>
+              <div class="card-subtitle">MAGNETIC FIELD & AMPÈRE FORCE</div>
+            </div>
+            <span class="card-badge">BÀI 14 - 15</span>
+          </div>
+
+          <div style="font-size: 13px; color: var(--text-sub); line-height: 1.6; margin-bottom: 14px;" class="auto-highlight">
+            Từ trường là môi trường vật chất đặc biệt sinh ra xung quanh các điện tích chuyển động (dòng điện) hoặc nam châm. Đại lượng đặc trưng cho tác dụng lực của từ trường tại mỗi điểm là cảm ứng từ B (đơn vị: Tesla - T).
+          </div>
+
+          <div class="formula-display-box">
+            <div class="formula-math">F = B · I · L · sin(α)</div>
+            <div class="formula-note">α = (B, I) • Quy tắc bàn tay trái</div>
+          </div>
+
+          <div class="sub-box">
+            <div class="sub-box-title auto-highlight">
+              <span>🛡️</span> Quy tắc bàn tay trái xác định lực Ampère:
+            </div>
+            <div class="sub-box-desc auto-highlight">
+              Đặt bàn tay trái duỗi thẳng sao cho các đường cảm ứng từ B xuyên vào lòng bàn tay, chiều từ cổ tay đến các ngón tay là chiều dòng điện I, khi đó ngón tay cái choãi ra 90° chỉ chiều của lực từ F tác dụng lên đoạn dây dẫn.
+            </div>
+          </div>
+        </div>
+
+        <!-- BÀI 2 -->
+        <div class="card lesson-card" data-lesson="2">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title auto-highlight">2. Từ thông & Hiện tượng Cảm ứng điện từ</div>
+              <div class="card-subtitle">MAGNETIC FLUX & ELECTROMAGNETIC INDUCTION</div>
+            </div>
+            <span class="card-badge" style="color:var(--accent-orange); border-color:var(--accent-orange);">TRỌNG TÂM THI</span>
+          </div>
+
+          <div class="formula-display-box">
+            <div class="formula-math">Φ = B · S · cos(α)</div>
+            <div class="formula-note">Đơn vị: Weber (Wb)<br>α = (n, B)</div>
+          </div>
+
+          <div class="formula-display-box">
+            <div class="formula-math">e_c = - N · (ΔΦ / Δt)</div>
+            <div class="formula-note">ĐỊNH LUẬT FARADAY</div>
+          </div>
+
+          <div class="sub-box">
+            <div class="sub-box-title auto-highlight" style="color: var(--accent-orange);">
+              <span>🛡️</span> ĐỊNH LUẬT LENZ (BẢN CHẤT DẤU TRỪ):
+            </div>
+            <div class="sub-box-desc auto-highlight">
+              Dòng điện cảm ứng có chiều sao cho từ trường do nó sinh ra có tác dụng chống lại sự biến thiên của từ thông sinh ra nó.
+            </div>
+
+            <div class="grid-2col" style="margin-top: 10px;">
+              <div style="background: var(--bg-main); padding: 8px 12px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono);" class="auto-highlight">
+                • Khi Φ tăng: B_cảm ứng ngược chiều B_ngoài
+              </div>
+              <div style="background: var(--bg-main); padding: 8px 12px; border-radius: 6px; font-size: 11px; font-family: var(--font-mono);" class="auto-highlight">
+                • Khi Φ giảm: B_cảm ứng cùng chiều B_ngoài
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BÀI 3 -->
+        <div class="card lesson-card" data-lesson="3">
+          <div class="card-title-row">
+            <div>
+              <div class="card-title auto-highlight">3. Ứng dụng: Dòng xoay chiều & Dòng Foucault</div>
+              <div class="card-subtitle">APPLICATIONS: AC CURRENT & EDDY CURRENT</div>
+            </div>
+            <span class="card-badge">BÀI 17 - 18</span>
+          </div>
+
+          <div class="grid-2col">
+            <div class="sub-box">
+              <div class="sub-box-title auto-highlight">
+                <span>⚙️</span> SUẤT ĐIỆN ĐỘNG XOAY CHIỀU
+              </div>
+              <div class="sub-box-desc auto-highlight">
+                Khung dây quay đều trong từ trường đều làm từ thông biến thiên điều hòa theo hàm sin/cos: e = E₀cos(ωt + φ), sinh ra dòng xoay chiều biến đổi cơ năng thành điện năng.
+              </div>
+            </div>
+
+            <div class="sub-box">
+              <div class="sub-box-title auto-highlight">
+                <span>🔄</span> DÒNG ĐIỆN FOUCAULT (XOÁY)
+              </div>
+              <div class="sub-box-desc auto-highlight">
+                Dòng điện cảm ứng sinh ra trong khối kim loại khi chuyển động trong từ trường hoặc đặt trong từ trường biến thiên. Ứng dụng: bếp từ, phanh điện từ; Khắc phục: ghép các lá thép kỹ thuật mỏng bọc cách điện trong máy biến áp.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN (GLOSSARY SIDEBAR) -->
+      <div class="right-col">
+        <div class="section-header">Thuật ngữ song ngữ / GLOSSARY</div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: -12px; margin-bottom: 12px;">6 THUẬT NGỮ CƠ BẢN</div>
+
+        <div class="search-bar" style="width: 100%; margin-bottom: 16px;">
+          <span>🔍</span>
+          <input type="text" id="glossarySearch" placeholder="Tìm kiếm thuật ngữ tiếng Anh / Việt...">
+        </div>
+
+        <div id="glossaryList"></div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER NAV -->
+    <div class="chapter-nav-container">
+      <a href="#" class="chapter-nav-btn prev">
+        <span style="font-size: 18px;">←</span>
+        <div>
+          <div class="chapter-nav-label">CHƯƠNG TRƯỚC</div>
+          <div class="chapter-nav-title">Chương 2: Khí lí tưởng</div>
+        </div>
+      </a>
+
+      <a href="#" class="chapter-nav-btn next">
+        <div>
+          <div class="chapter-nav-label">CHƯƠNG TIẾP THEO</div>
+          <div class="chapter-nav-title">Chương 4: Vật lí hạt nhân</div>
+        </div>
+        <span style="font-size: 18px;">→</span>
+      </a>
+    </div>
+
+    <footer>
+      <div>
+        <strong>Sản phẩm dự thi Khoa học kỹ thuật - Trường THPT Bùi Hữu Nghĩa, Cần Thơ - Năm học 2026–2027</strong><br>
+        <span style="font-size: 11px;">Nội dung tham khảo SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoá của Bộ GD&ĐT, dùng cho mục đích học tập.</span>
+      </div>
+      <div>© 2026 PhysiHub</div>
+    </footer>
+
+  </div>
+
+  <!-- TOOLTIP POPUP (KHUNG GIẢI THÍCH NỔI) -->
+  <div id="termPopup" class="term-popup">
+    <div class="term-popup-header">
+      <span id="popupEn" class="term-popup-title">Magnetic Field</span>
+      <span id="popupPos" class="term-popup-pos">Đại lượng cơ bản</span>
+    </div>
+    <div id="popupPhonetic" class="term-popup-phonetic">/mæɡˈnet.ɪk fiːld/</div>
+    <div id="popupVi" class="term-popup-body">Từ trường: Môi trường vật chất đặc biệt tồn tại xung quanh hạt mang điện chuyển động hoặc nam châm, tác dụng lực từ lên điện tích hoặc nam châm khác.</div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    /* 1. TỪ ĐIỂN CHƯƠNG 3 DÀNH CHO HIGHLIGHT & POPUP */
+    const dictionary = [
+      {
+        termVi: "Từ trường",
+        termEn: "Magnetic Field",
+        phonetic: "/mæɡˈnet.ɪk fiːld/",
+        pos: "Đại lượng cơ bản",
+        def: "Môi trường vật chất đặc biệt tồn tại xung quanh hạt mang điện chuyển động hoặc nam châm, tác dụng lực từ lên điện tích hoặc nam châm khác."
+      },
+      {
+        termVi: "Cảm ứng từ",
+        termEn: "Magnetic Induction",
+        phonetic: "/mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+        pos: "Vectơ (B)",
+        def: "Đại lượng vectơ đặc trưng cho từ trường về phương diện tác dụng lực từ (đơn vị: Tesla - T)."
+      },
+      {
+        termVi: "Từ thông",
+        termEn: "Magnetic Flux",
+        phonetic: "/mæɡˈnet.ɪk flʌks/",
+        pos: "Ký hiệu (Φ)",
+        def: "Đại lượng đo số lượng đường sức từ xuyên qua một diện tích kín nhất định theo phương pháp tuyến (đơn vị: Weber - Wb)."
+      },
+      {
+        termVi: "Cảm ứng điện từ",
+        termEn: "Electromagnetic Induction",
+        phonetic: "/ɪˌlek.trəʊ.mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+        pos: "Hiện tượng",
+        def: "Hiện tượng xuất hiện suất điện động cảm ứng (và dòng điện cảm ứng nếu mạch kín) khi từ thông gửi qua mạch kín biến thiên theo thời gian."
+      },
+      {
+        termVi: "Định luật Lenz",
+        termEn: "Lenz's Law",
+        phonetic: "/ˈlentsɪz lɔː/",
+        pos: "Quy tắc chiều",
+        def: "Quy tắc xác định chiều của dòng điện cảm ứng: luôn sinh ra từ trường chống lại sự biến thiên của từ thông nguyên nhân."
+      },
+      {
+        termVi: "Dòng điện Foucault",
+        termEn: "Eddy Current",
+        phonetic: "/ˈed.i ˈkʌr.ənt/",
+        pos: "Dòng điện xoáy",
+        def: "Dòng điện cảm ứng sinh ra trực tiếp trong khối vật dẫn kim loại khi nó chuyển động trong từ trường hoặc đặt trong từ trường biến thiên."
+      },
+      {
+        termVi: "Dòng xoay chiều",
+        termEn: "Alternating Current (AC)",
+        phonetic: "/ˈɒl.tə.neɪ.tɪŋ ˈkʌr.ənt/",
+        pos: "Điện năng",
+        def: "Dòng điện có cường độ biến thiên điều hòa theo thời gian theo dạng sóng hình sin: i = I₀cos(ωt + φ)."
+      },
+      {
+        termVi: "chống lại sự biến thiên của từ thông",
+        termEn: "Oppose Flux Change",
+        phonetic: "/əˈpəʊz flʌks tʃeɪndʒ/",
+        pos: "Bản chất",
+        def: "Nguyên lý bảo toàn năng lượng trong cảm ứng điện từ thể hiện qua dấu trừ trong công thức Faraday."
+      }
+    ];
+
+    /* 2. TAB FILTER LOGIC */
+    const filterContainer = document.getElementById('filterTabs');
+    const tabItems = filterContainer.querySelectorAll('.tab-item');
+    const lessonCards = document.querySelectorAll('.lesson-card');
+
+    filterContainer.addEventListener('click', (e) => {
+      const tab = e.target.closest('.tab-item');
+      if (!tab) return;
+
+      tabItems.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filterValue = tab.getAttribute('data-filter');
+
+      lessonCards.forEach(card => {
+        const lessonNum = card.getAttribute('data-lesson');
+        if (filterValue === 'all' || filterValue === lessonNum) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    /* 3. RENDER GLOSSARY SIDEBAR */
+    const glossaryListEl = document.getElementById('glossaryList');
+    const glossarySearchInput = document.getElementById('glossarySearch');
+
+    function renderGlossary(items) {
+      glossaryListEl.innerHTML = '';
+      if (items.length === 0) {
+        glossaryListEl.innerHTML = '<div style="color:var(--text-muted); font-size:13px; text-align:center; padding: 20px 0;">Không tìm thấy thuật ngữ phù hợp</div>';
+        return;
+      }
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'glossary-card';
+        card.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="glossary-term">${item.termEn}</div>
+            <span style="font-size:10px; font-weight:700; background:var(--bg-tag); padding:2px 6px; border-radius:4px; color:var(--text-sub);">${item.pos}</span>
+          </div>
+          <div class="glossary-phonetic">${item.phonetic}</div>
+          <div class="glossary-def"><strong>${item.termVi}:</strong> ${item.def}</div>
+        `;
+        glossaryListEl.appendChild(card);
+      });
+    }
+
+    renderGlossary(dictionary);
+
+    glossarySearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.trim().toLowerCase();
+      const filtered = dictionary.filter(item => 
+        item.termEn.toLowerCase().includes(query) || 
+        item.termVi.toLowerCase().includes(query) ||
+        item.def.toLowerCase().includes(query)
+      );
+      renderGlossary(filtered);
+    });
+
+    /* 4. TỰ ĐỘNG THÊM SPAN HIGHLIGHT CHO NỘI DUNG BÀI HỌC */
+    function applyHighlights() {
+      const targets = document.querySelectorAll('.auto-highlight');
+      // Sắp xếp thuật ngữ dài trước để tránh đè trùng
+      const sortedDict = [...dictionary].sort((a,b) => b.termVi.length - a.termVi.length);
+
+      targets.forEach(el => {
+        let html = el.innerHTML;
+
+        sortedDict.forEach(item => {
+          const regex = new RegExp(`(?<!<[^>]*)${item.termVi}`, 'gi');
+          html = html.replace(regex, (match) => {
+            return `<span class="term-highlight" data-term="${item.termVi}">${match}</span>`;
+          });
+        });
+
+        el.innerHTML = html;
+      });
+    }
+
+    applyHighlights();
+
+    /* 5. TƯƠNG TÁC POPUP GIẢI THÍCH (CLICK ĐỂ BẬT/TẮT HỘP LÝ THUYẾT) */
+    const popup = document.getElementById('termPopup');
+    const popupEn = document.getElementById('popupEn');
+    const popupPos = document.getElementById('popupPos');
+    const popupPhonetic = document.getElementById('popupPhonetic');
+    const popupVi = document.getElementById('popupVi');
+
+    let activeHighlightEl = null;
+
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('.term-highlight');
+      
+      if (target) {
+        if (activeHighlightEl) activeHighlightEl.classList.remove('active-term');
+        
+        activeHighlightEl = target;
+        activeHighlightEl.classList.add('active-term');
+
+        const termName = target.getAttribute('data-term').toLowerCase();
+        const found = dictionary.find(d => d.termVi.toLowerCase() === termName);
+
+        if (found) {
+          popupEn.textContent = found.termEn;
+          popupPos.textContent = found.pos;
+          popupPhonetic.textContent = found.phonetic;
+          popupVi.textContent = `${found.termVi}: ${found.def}`;
+
+          popup.style.display = 'block';
+
+          // Tính toán vị trí hiển thị ô popup
+          const rect = target.getBoundingClientRect();
+          const popupRect = popup.getBoundingClientRect();
+          
+          let top = rect.bottom + window.scrollY + 8;
+          let left = rect.left + window.scrollX - 10;
+
+          if (left + popupRect.width > window.innerWidth - 20) {
+            left = window.innerWidth - popupRect.width - 20;
+          }
+
+          if (rect.bottom + popupRect.height + 20 > window.innerHeight) {
+            top = rect.top + window.scrollY - popupRect.height - 8;
+            popup.className = 'term-popup pos-above';
+          } else {
+            popup.className = 'term-popup pos-below';
+          }
+
+          popup.style.top = `${top}px`;
+          popup.style.left = `${left}px`;
+        }
+      } else if (!popup.contains(e.target)) {
+        popup.style.display = 'none';
+        if (activeHighlightEl) {
+          activeHighlightEl.classList.remove('active-term');
+          activeHighlightEl = null;
+        }
+      }
+    });
+
+    /* 6. CHUYỂN ĐỔI CHẾ ĐỘ SÁNG / TỐI (LIGHT/DARK MODE) */
+    const themeBtn = document.getElementById('themeToggleBtn');
+    let isDark = true;
+
+    themeBtn.addEventListener('click', () => {
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      themeBtn.textContent = isDark ? '🌙' : '☀️';
+    });
+  </script>
+</body>
+</html>
