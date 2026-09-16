@@ -91,7 +91,7 @@
             flex: 1;
         }
 
-        /* ==================== EXACT LOGO STYLES ==================== */
+        /* LOGO STYLES */
         .logo {
             display: flex;
             align-items: center;
@@ -123,7 +123,6 @@
             overflow: hidden;
         }
 
-        /* Tâm nguyên tử */
         .atom-core {
             width: 8px;
             height: 8px;
@@ -133,7 +132,6 @@
             z-index: 2;
         }
 
-        /* Quỹ đạo đứt nét */
         .atom-orbit {
             position: absolute;
             width: 30px;
@@ -144,15 +142,9 @@
             left: 50%;
         }
 
-        .orbit-1 {
-            transform: translate(-50%, -50%) rotate(-30deg);
-        }
+        .orbit-1 { transform: translate(-50%, -50%) rotate(-30deg); }
+        .orbit-2 { transform: translate(-50%, -50%) rotate(30deg); }
 
-        .orbit-2 {
-            transform: translate(-50%, -50%) rotate(30deg);
-        }
-
-        /* Các hạt electron */
         .electron {
             position: absolute;
             width: 4px;
@@ -174,7 +166,6 @@
             box-shadow: 0 0 4px #10b981;
         }
 
-        /* Huy hiệu VI-EN */
         .badge-vien {
             position: absolute;
             bottom: -2px;
@@ -191,7 +182,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Tên thương hiệu PhysiHub */
         .logo-text-group {
             display: flex;
             align-items: center;
@@ -205,15 +195,9 @@
             line-height: 1;
         }
 
-        .brand-name .physi {
-            color: var(--text-primary);
-        }
+        .brand-name .physi { color: var(--text-primary); }
+        .brand-name .hub { color: #00d8ff; }
 
-        .brand-name .hub {
-            color: #00d8ff;
-        }
-
-        /* Khung KNTT 12 */
         .kntt-tag {
             border: 1.5px solid rgba(0, 216, 255, 0.6);
             background-color: rgba(0, 216, 255, 0.08);
@@ -227,15 +211,18 @@
             display: inline-block;
         }
 
-        /* ==================== SEARCH & NAV ==================== */
+        /* ==================== SEARCH BOX (FIXED) ==================== */
         .search-box {
             position: relative;
-            width: 320px;
+            display: flex;
+            align-items: center;
+            width: 340px;
         }
 
         .search-box input {
             width: 100%;
-            padding: 8px 12px 8px 36px;
+            height: 38px;
+            padding: 0 12px 0 38px;
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -248,16 +235,25 @@
             color: var(--text-muted);
         }
 
-        .search-box i {
+        .search-box .search-icon {
             position: absolute;
             left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
             width: 16px;
             height: 16px;
+            color: var(--text-muted);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        .search-box .search-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-muted);
+        }
+
+        /* ==================== NAV LINKS ==================== */
         .header-right {
             display: flex;
             align-items: center;
@@ -608,7 +604,6 @@
     <!-- HEADER -->
     <header>
         <div class="header-left">
-            <!-- CHỈNH SỬA LOGO CHÍNH XÁC THEO HÌNH ẢNH MỚI -->
             <a href="#" class="logo">
                 <div class="logo-atom-wrapper">
                     <div class="logo-atom">
@@ -628,8 +623,14 @@
                 </div>
             </a>
 
+            <!-- KHUNG TÌM KIẾM ĐÃ ĐƯỢC SỬA BẰNG SVG CHUẨN VỊ TRÍ -->
             <div class="search-box">
-                <i data-lucide="search"></i>
+                <span class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
                 <input type="text" placeholder="Tìm kiếm mô phỏng, công thức, thí nghiệm...">
             </div>
         </div>
@@ -677,6 +678,7 @@
                     HỆ THỐNG TRÒ CHƠI ÔN TẬP ĐA NĂNG & ĐẤU TRÍ THUẬT NGỮ SONG NGỮ
                 </div>
                 <h2 class="section-title">Trò Chơi Trọng Tâm & Thử Thách Trí Tuệ</h2>
+                <p class="section-subtitle">Lựa chọn hình thức ôn tập phù hợp để củng cố thuật ngữ chuẩn song ngữ và liên kết công thức cốt lõi Vật Lí 12.</p>
             </div>
 
             <div class="game-grid">
@@ -766,7 +768,7 @@
         // Khởi tạo các biểu tượng Lucide
         lucide.createIcons();
 
-        // 1. Tính năng cuộn mượt (Smooth Scroll) xuống phần Game
+        // 1. Tính năng cuộn mượt (Smooth Scroll)
         const scrollBtn = document.getElementById('scrollBtn');
         const gameSection = document.getElementById('game-section');
 
@@ -777,7 +779,7 @@
             });
         });
 
-        // 2. Tính năng chuyển đổi Chế độ Sáng / Tối (Dark / Light Mode)
+        // 2. Tính năng chuyển đổi Chế độ Sáng / Tối
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         const themeIcon = document.getElementById('themeIcon');
         const htmlTag = document.documentElement;
@@ -788,14 +790,12 @@
             
             htmlTag.setAttribute('data-theme', newTheme);
             
-            // Đổi icon
             if (newTheme === 'light') {
                 themeIcon.setAttribute('data-lucide', 'sun');
             } else {
                 themeIcon.setAttribute('data-lucide', 'moon');
             }
             
-            // Cập nhật lại biểu tượng hiển thị
             lucide.createIcons();
         });
     </script>
