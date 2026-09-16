@@ -3,678 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhysiHub - TỔNG ÔN TOÀN DIỆN VẬT LÍ 12</title>
-    <!-- Font Inter & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>PhysiHub - Tổng ôn toàn diện Vật lí 12</title>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- GLOBAL & RESET --- */
+        /* --- RESET & GLOBAL STYLES --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            background-color: #0b111e;
-            color: #94a3b8;
+            background-color: #0b1329;
+            color: #ffffff;
             line-height: 1.5;
-            padding-bottom: 60px;
+            padding-bottom: 40px;
         }
 
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
         }
 
+        /* --- CONTAINER --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* --- NAVBAR --- */
-        .navbar {
-            background-color: #080d19;
+        /* --- HEADER / NAVBAR --- */
+        header {
+            background-color: #0b1329;
             border-bottom: 1px solid #1e293b;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
-        .nav-container {
+        .navbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 65px;
+            height: 64px;
         }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 800;
-            font-size: 20px;
-            color: #ffffff;
-        }
-
-        .brand-logo .accent {
-            color: #38bdf8;
-        }
-
-        .brand-logo .badge-hub {
-            background: #0284c7;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .search-bar {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 8px 14px;
+        .brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 320px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #60a5fa;
         }
 
-        .search-bar i {
-            color: #6b7280;
-        }
-
-        .search-bar input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #e5e7eb;
-            width: 100%;
-            font-size: 13px;
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .nav-link {
-            font-size: 14px;
-            font-weight: 600;
-            color: #9ca3af;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: 0.2s;
-        }
-
-        .nav-link.active {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
-        .nav-link:hover:not(.active) {
-            color: #ffffff;
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 1px solid #1f2937;
-            padding-left: 15px;
-        }
-
-        .btn-icon {
-            background: none;
-            border: none;
-            color: #9ca3af;
-            font-size: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .btn-icon:hover {
-            color: #fff;
-        }
-
-        .avatar-btn {
+        .brand-icon {
             width: 32px;
             height: 32px;
-            background: #1f2937;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #9ca3af;
+            color: white;
         }
 
-        /* --- SUB HEADER TAG --- */
-        .sub-header-tag {
-            text-align: center;
-            margin: 25px 0 15px;
+        .brand span.w12 {
+            font-size: 0.75rem;
+            background: #1e3a8a;
+            color: #93c5fd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 2px;
         }
 
-        .tag-pill {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            color: #9ca3af;
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
+        .nav-search {
+            position: relative;
+            flex: 0 1 360px;
+        }
+
+        .nav-search input {
+            width: 100%;
+            background-color: #090d16;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 8px 12px 8px 36px;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            outline: none;
+        }
+
+        .nav-search svg {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            background: #1e293b;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: #94a3b8;
+        }
+
+        .lang-switch span.active {
+            color: #fff;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         /* --- HERO SECTION --- */
-        .hero-grid {
+        .hero {
+            padding: 40px 0 20px 0;
             display: grid;
-            grid-template-columns: 1.8fr 1fr;
-            gap: 25px;
-            margin-bottom: 35px;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+            align-items: start;
         }
 
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 58, 138, 0.4);
+            border: 1px solid #1e40af;
+            color: #60a5fa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
-        .hero-subtitle-top {
-            color: #38bdf8;
-            font-size: 12px;
+        .hero-title-vi {
+            font-size: 2.5rem;
             font-weight: 800;
-            letter-spacing: 1.5px;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            font-size: 42px;
-            font-weight: 900;
-            line-height: 1.1;
+            line-height: 1.15;
             color: #ffffff;
-            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
 
         .hero-title-en {
-            font-size: 15px;
-            font-weight: 700;
-            color: #38bdf8;
-            letter-spacing: 1px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-top: 6px;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
         .hero-desc {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 25px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin-bottom: 28px;
             line-height: 1.6;
         }
 
-        .hero-btns {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
+        .btn-start {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 18px;
-            border-radius: 6px;
-            font-size: 13px;
+            background: #38bdf8;
+            color: #090d16;
             font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
+            padding: 12px 24px;
+            border-radius: 8px;
             border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s;
         }
 
-        .btn-primary {
-            background-color: #38bdf8;
-            color: #0f172a;
+        .btn-start:hover {
+            background: #0ea5e9;
         }
 
-        .btn-primary:hover {
-            background-color: #7dd3fc;
-        }
-
-        .btn-secondary {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            border: 1px solid #334155;
-        }
-
-        .btn-secondary:hover {
-            background-color: #334155;
-        }
-
-        /* HERO RIGHT CARDS */
-        .hero-right {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .stats-box {
-            background-color: #0f172a;
+        /* --- SIDE CARD / BADGE --- */
+        .source-card {
+            background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 10px;
-            padding: 18px;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.8rem;
         }
 
-        .stats-header {
-            font-size: 11px;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 15px;
+        .source-header {
             display: flex;
             align-items: center;
             gap: 6px;
+            color: #64748b;
+            margin-bottom: 12px;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .source-header strong {
+            color: #38bdf8;
         }
 
-        .stat-item {
-            background-color: #1e293b;
-            border-radius: 8px;
-            padding: 12px;
-        }
-
-        .stat-num {
-            font-size: 32px;
-            font-weight: 900;
-            color: #ffffff;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        .project-info-card {
-            background-color: #0f172a;
+        .project-badge {
+            background: #070e1b;
             border: 1px solid #1e293b;
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 16px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
             position: relative;
         }
 
-        .project-info-card i.icon-badge {
-            background: #1e293b;
+        .badge-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             color: #38bdf8;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .project-info-text {
-            flex: 1;
-        }
-
-        .project-info-text .title {
-            font-size: 11px;
             font-weight: 700;
-            color: #38bdf8;
-            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
         }
 
-        .project-info-text .sub {
-            font-size: 11px;
-            color: #94a3b8;
+        .badge-sub {
+            color: #64748b;
+            font-size: 0.7rem;
+            margin-left: 24px;
             margin-top: 2px;
         }
 
-        .project-info-text .brand-footer {
-            font-size: 15px;
+        .badge-brand {
+            margin-top: 20px;
+            font-size: 1.1rem;
             font-weight: 800;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-
-        /* --- SECTION TITLE GENERAL --- */
-        .section-badge-info {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #0f172a;
-            border: 1px solid #1e293b;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #38bdf8;
-            margin-bottom: 8px;
-        }
-
-        .section-badge-info .btn-xs {
-            background-color: #0284c7;
             color: #fff;
-            padding: 1px 5px;
-            border-radius: 3px;
-            font-size: 10px;
-        }
-
-        .section-main-title {
-            font-size: 26px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-
-        .section-desc {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 20px;
-        }
-
-        /* --- GRID INFO CARDS (4 CARDS) --- */
-        .info-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 35px;
-        }
-
-        .info-card {
-            background-color: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .info-card-header {
-            font-size: 15px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-card-header i {
-            color: #38bdf8;
-        }
-
-        .info-card-body {
-            font-size: 12.5px;
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-
-        /* Card 3: Member list */
-        .member-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .member-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px dashed #1e293b;
-            padding-bottom: 6px;
         }
 
-        .member-name {
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .member-role {
-            font-size: 11px;
-            background: #1e293b;
-            padding: 2px 8px;
-            border-radius: 4px;
-            color: #f97316;
-            font-weight: 600;
-        }
-
-        .member-role.student {
-            color: #38bdf8;
-        }
-
-        /* Card 4: Tech Stack */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .tech-title {
-            font-size: 10px;
-            font-weight: 800;
-            color: #64748b;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-
-        .tech-val {
-            font-weight: 700;
-            color: #ffffff;
-            font-size: 13px;
-        }
-
-        /* --- QUICK SEARCH KEYWORDS --- */
-        .search-full-box {
-            background-color: #0f172a;
+        /* --- MAIN SEARCH BAR --- */
+        .main-search-box {
+            background: #090d16;
             border: 1px solid #1e293b;
             border-radius: 8px;
-            padding: 12px 16px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
+            margin: 20px 0 16px 0;
         }
 
-        .search-full-box input {
+        .main-search-box input {
             background: transparent;
             border: none;
             outline: none;
-            color: #ffffff;
+            color: #94a3b8;
             width: 100%;
-            font-size: 13.5px;
+            font-size: 0.95rem;
         }
 
-        .keywords-bar {
+        .quick-tags {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 45px;
+            gap: 8px;
             flex-wrap: wrap;
-        }
-
-        .keywords-title {
+            margin-bottom: 40px;
+            font-size: 0.8rem;
             color: #64748b;
-            text-transform: uppercase;
         }
 
-        .tag-item {
-            background-color: #0f172a;
-            border: 1px solid #1e293b;
+        .tag {
+            background: #111c35;
             color: #38bdf8;
             padding: 4px 10px;
             border-radius: 4px;
+            font-size: 0.75rem;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .tag-item:hover {
-            background-color: #1e293b;
+        .tag:hover {
+            background: #1e293b;
         }
 
-        /* --- CHAPTERS / LESSONS LIST (IMAGE 2) --- */
-        .chapter-section-head {
+        /* --- SECTION HEADING --- */
+        .section-header {
             margin-bottom: 20px;
         }
 
-        .chapter-sub-title {
-            font-size: 11px;
-            font-weight: 800;
+        .section-sub {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             color: #38bdf8;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
             margin-bottom: 4px;
         }
 
-        .chapters-list {
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* --- CHAPTER CARDS GRID --- */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            margin-bottom: 50px;
-        }
-
-        .chapter-card {
-            background-color: #0f172a;
-            border: 1px solid #1e293b;
-            border-radius: 10px;
-            padding: 22px;
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 20px;
-            transition: border-color 0.2s;
+            position: relative;
         }
 
-        .chapter-card:hover {
-            border-color: #334155;
-        }
-
-        .chapter-left-info {
+        .card-header {
             display: flex;
+            justify-content: space-between;
             align-items: flex-start;
-            gap: 18px;
-            flex: 1;
+            margin-bottom: 16px;
         }
 
-        .chapter-icon-box {
-            width: 48px;
-            height: 48px;
-            background-color: #1e293b;
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            background: #1e293b;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
             color: #38bdf8;
-            flex-shrink: 0;
         }
 
-        .chapter-details {
-            flex: 1;
-        }
-
-        .chapter-tag {
-            font-size: 11px;
-            font-weight: 800;
-            color: #38bdf8;
+        .chapter-badge {
+            background: #1e293b;
+            color: #94a3b8;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
             letter-spacing: 0.5px;
+        }
+
+        .card-sub {
+            color: #64748b;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 4px;
         }
 
-        .chapter-title {
-            font-size: 20px;
+        .card-title {
+            font-size: 1.15rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
         }
 
-        .chapter-desc {
-            font-size: 12.5px;
+        .card-desc {
             color: #94a3b8;
+            font-size: 0.85rem;
             line-height: 1.5;
+            margin-bottom: 24px;
         }
 
-        .chapter-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
-        .btn-tag-action {
-            background-color: #1e293b;
-            color: #e2e8f0;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
+        .btn-card {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
             cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
         }
 
-        .btn-tag-action:hover {
-            background-color: #334155;
+        .btn-card:hover {
+            opacity: 0.9;
         }
 
-        .btn-orange {
-            background-color: #ffedd5;
-            color: #9a3412;
+        .btn-terms {
+            background: #1e293b;
+            color: #cbd5e1;
         }
 
-        .btn-orange:hover {
-            background-color: #fed7aa;
-        }
+        /* Color variations per chapter button */
+        .btn-c1 { background: #fca5a5; color: #450a0a; }
+        .btn-c2 { background: #7dd3fc; color: #0c4a6e; }
+        .btn-c3 { background: #2563eb; color: #ffffff; }
+        .btn-c4 { background: #38bdf8; color: #090d16; }
 
-        .btn-cyan {
-            background-color: #bae6fd;
-            color: #0369a1;
-        }
-
-        .btn-cyan:hover {
-            background-color: #7dd3fc;
-        }
-
-        .btn-blue {
-            background-color: #0284c7;
-            color: #ffffff;
-        }
-
-        .btn-blue:hover {
-            background-color: #0369a1;
-        }
-
-        .btn-light-blue {
-            background-color: #38bdf8;
-            color: #0f172a;
-        }
-
-        .btn-light-blue:hover {
-            background-color: #7dd3fc;
-        }
-
-        /* --- CONSTANTS TABLE (IMAGE 3) --- */
+        /* --- CONSTANTS SECTION --- */
         .constants-section {
-            background-color: #0f172a;
+            background: #070e1b;
             border: 1px solid #1e293b;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 24px;
             margin-bottom: 40px;
         }
@@ -686,451 +450,352 @@
             margin-bottom: 20px;
         }
 
-        .constants-title {
-            font-size: 22px;
+        .constants-header h3 {
+            font-size: 1.35rem;
             font-weight: 800;
-            color: #ffffff;
-        }
-
-        .constants-source {
-            font-size: 11px;
-            font-weight: 700;
-            color: #38bdf8;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .constants-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .constant-card {
-            background-color: #1e293b;
+        .constant-item {
+            background: #0f172a;
+            border: 1px solid #1e293b;
             border-radius: 6px;
-            padding: 12px;
+            padding: 12px 14px;
         }
 
-        .constant-name {
-            font-size: 11px;
-            font-weight: 800;
-            color: #94a3b8;
-            margin-bottom: 4px;
+        .c-name {
+            color: #64748b;
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
-        .constant-val {
-            font-size: 13px;
-            font-weight: 800;
-            color: #ffffff;
+        .c-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #e2e8f0;
         }
 
         .constants-footer {
-            font-size: 11px;
-            color: #64748b;
             display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* --- FOOTER COPYRIGHT --- */
-        .footer-bottom {
-            display: flex;
-            justify-content: flex-end;
             align-items: center;
             gap: 8px;
-            font-size: 12px;
-            font-weight: 700;
             color: #64748b;
-            margin-top: 20px;
+            font-size: 0.75rem;
+            margin-top: 12px;
         }
 
-        .dot-green {
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid #1e293b;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .footer-left strong {
+            color: #cbd5e1;
+        }
+
+        .footer-left p {
+            margin-top: 4px;
+        }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .status-dot {
             width: 8px;
             height: 8px;
-            background-color: #38bdf8;
+            background: #38bdf8;
             border-radius: 50%;
-            display: inline-block;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-            .info-cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .constants-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .chapter-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .chapter-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-            .nav-menu {
-                display: none;
-            }
+        /* Responsive design */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; }
+            .chapters-grid { grid-template-columns: 1fr; }
+            .constants-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR HEADER -->
-    <header class="navbar">
-        <div class="container nav-container">
-            <!-- LOGO -->
-            <a href="#" class="brand-logo">
-                Physi<span class="accent">Hub</span>
-                <span class="badge-hub"><i class="fa-solid fa-atom"></i></span>
-            </a>
+    <!-- NAVBAR -->
+    <header>
+        <div class="container navbar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </div>
+                PhysiHub
+            </div>
 
-            <!-- SEARCH BAR -->
-            <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="nav-search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <input type="text" placeholder="Tìm nhanh công thức, định luật, bài thi...">
             </div>
 
-            <!-- MENU LINKS -->
-            <nav class="nav-menu">
-                <a href="#" class="nav-link active">Tổng quan</a>
-                <a href="#" class="nav-link">Bài học</a>
-                <a href="#" class="nav-link">Luyện đề</a>
-                <a href="#" class="nav-link">Games</a>
-            </nav>
+            <div class="nav-links">
+                <a href="#">Bài học</a>
+                <a href="#">Luyện đề</a>
+                <a href="#">Games</a>
+            </div>
 
-            <!-- CONTROLS / USER -->
-            <div class="nav-controls">
-                <button class="btn-icon"><i class="fa-solid fa-language"></i> VI | EN</button>
-                <button class="btn-icon"><i class="fa-solid fa-moon"></i></button>
-                <div class="avatar-btn">
-                    <i class="fa-solid fa-user"></i>
+            <div class="nav-actions">
+                <div class="lang-switch">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+                    <span class="active">VI</span> | <span>EN</span>
                 </div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #94a3b8; cursor: pointer;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        
-        <!-- SUB HEADER TAG -->
-        <div class="sub-header-tag">
-            <span class="tag-pill">• CHUẨN BỘ GIÁO DỤC & ĐÀO TẠO 2026 • CẤU TRÚC 3 ĐỊNH DẠNG MỚI (TRẮC NGHIỆM NHIỀU PHƯƠNG ÁN, ĐÚNG/SAI, TRẢ LỜI NGẮN)</span>
+    <div class="container">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    ● CHUẨN BỘ GIÁO DỤC & ĐÀO TẠO 2026 • CẤU TRÚC 3 ĐỊNH DẠNG MỚI (TRẮC NGHIỆM NHIỀU PHƯƠNG ÁN, ĐÚNG/SAI, TRẢ LỜI NGẮN)
+                </div>
+                <h1 class="hero-title-vi">TỔNG ÔN TOÀN DIỆN<br>VẬT LÍ 12 (SONG NGỮ ANH-VIỆT)</h1>
+                <div class="hero-title-en">COMPREHENSIVE REVIEW OF PHYSICS 12 (BILINGUAL)</div>
+                <p class="hero-desc">
+                    Nền tảng tri thức vật lí bám sát từng bài học SGK Kết Nối Tri Thức. Tích hợp định nghĩa, thuật ngữ, đề ôn, trò chơi bằng song ngữ Anh-Việt.
+                </p>
+                <button class="btn-start">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    Bắt đầu học ➔
+                </button>
+            </div>
+
+            <!-- SIDE BADGE CARD -->
+            <div class="source-card">
+                <div class="source-header">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Nguồn: <strong>CODATA/NIST & SGK KNTT Vật lí 12</strong>
+                </div>
+                <div class="project-badge">
+                    <div class="badge-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        ● ĐỀ ÁN KHOA HỌC KỸ THUẬT 2026
+                    </div>
+                    <div class="badge-sub">Theo Đề án 2371/QĐ-TTg</div>
+                    <div class="badge-brand">
+                        PhysiHub
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN SEARCH & QUICK TAGS -->
+        <div class="main-search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="searchInput" placeholder="Gõ từ khóa định luật, công thức, ký hiệu (VD: pV=nRT, Định luật Boyle, Lực từ, E=mc², Chu kỳ bán rã)...">
         </div>
 
-        <!-- HERO SECTION (IMAGE 1 TOP) -->
-        <section class="hero-grid">
-            <div class="hero-left">
-                <div class="hero-subtitle-top">• CHUẨN SGK KNTT 2026</div>
-                <h1 class="hero-title">TỔNG ÔN TOÀN DIỆN<br>VẬT LÍ 12</h1>
-                <div class="hero-title-en">COMPREHENSIVE PHYSICS 12 REVIEW & ANALYTICAL LAB</div>
-                <p class="hero-desc">
-                    Nền tảng trí thức vật lí thực nghiệm & lý thuyết số hoá bám sát từng bài học SGK Kết Nối Tri Thức. Tích hợp định nghĩa, thuật ngữ, đề ôn, trò chơi cho kỳ thi tốt nghiệp THPT 2026.
-                </p>
-                <div class="hero-btns">
-                    <button class="btn btn-primary"><i class="fa-regular fa-folder-open"></i> Khám phá 25 bài học</button>
-                    <button class="btn btn-secondary"><i class="fa-solid fa-flask"></i> Mô Phỏng Thí Nghiệm</button>
-                    <button class="btn btn-secondary"><i class="fa-circle-info"></i> Về dự án</button>
+        <div class="quick-tags">
+            <span>TỪ KHÓA TRA CỨU NHANH:</span>
+            <span class="tag">#ĐịnhLuậtNhiệtĐộngLựcHọc</span>
+            <span class="tag">#PhươngTrìnhClapeyron</span>
+            <span class="tag">#LựcLorenxd</span>
+            <span class="tag">#CảmỨngĐiệnTừ</span>
+            <span class="tag">#PhảnỨngNhiệtHạch</span>
+            <span class="tag">#ĐộHụtKhối</span>
+        </div>
+
+        <!-- CHAPTERS SECTION -->
+        <div class="section-header">
+            <div class="section-sub">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                KIẾN THỨC CHI TIẾT THEO TỪNG BÀI
+            </div>
+            <h2 class="section-title">4 Chương & 25 Bài Học SGK Kết Nối Tri Thức 2026</h2>
+        </div>
+
+        <div class="chapters-grid">
+            <!-- Card 1 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>
+                        </div>
+                        <span class="chapter-badge">CHƯƠNG 01</span>
+                    </div>
+                    <div class="card-sub">VẬT LÍ NHIỆT</div>
+                    <h3 class="card-title">VẬT LÍ NHIỆT & CÁC ĐỊNH LUẬT NHIỆT ĐỘNG LỰC HỌC</h3>
+                    <p class="card-desc">Mô hình động học phân tử chất khí, nội năng, nguyên lí I nhiệt động lực học, thang nhiệt độ Kelvin - Celsius, đo nhiệt dung riêng và nhiệt chuyển thể pha.</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-terms">🌐 Thuật ngữ</button>
+                    <button class="btn-card btn-c1">📖 Xem lý thuyết</button>
                 </div>
             </div>
 
-            <div class="hero-right">
-                <!-- STATS CARD -->
-                <div class="stats-box">
-                    <div class="stats-header">
-                        <i class="fa-solid fa-circle-check"></i> Nguồn: CODATA/NIST & SGK KNTT Vật Lí 12
+            <!-- Card 2 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                        </div>
+                        <span class="chapter-badge">CHƯƠNG 02</span>
                     </div>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-num">04</div>
-                            <div class="stat-label">Chương</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-num">25</div>
-                            <div class="stat-label">Bài Học SGK</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-num">70+</div>
-                            <div class="stat-label">Kiến Thức Cốt Lõi</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-num">02</div>
-                            <div class="stat-label">Games</div>
-                        </div>
-                    </div>
+                    <div class="card-sub">KHÍ LÍ TƯỞNG</div>
+                    <h3 class="card-title">KHÍ LÍ TƯỞNG & THUYẾT ĐỘNG HỌC PHÂN TỬ</h3>
+                    <p class="card-desc">Mô hình phân tử khí lí tưởng, định luật Boyle, định luật Charles, phương trình trạng thái Clapeyron và liên hệ giữa nhiệt độ tuyệt đối với động năng phân tử.</p>
                 </div>
-
-                <!-- PROJECT CARD -->
-                <div class="project-info-card">
-                    <i class="fa-solid fa-graduation-cap icon-badge"></i>
-                    <div class="project-info-text">
-                        <div class="title">• ĐỀ ÁN KHOA HỌC KỸ THUẬT 2026</div>
-                        <div class="sub">Theo Đề án 2371/QĐ-TTg</div>
-                        <div class="brand-footer">PhysiHub</div>
-                    </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-terms">🌐 Thuật ngữ</button>
+                    <button class="btn-card btn-c2">📖 Xem lý thuyết</button>
                 </div>
             </div>
-        </section>
 
-        <!-- PROJECT DESCRIPTION & 4 INFO CARDS -->
-        <section>
-            <div class="section-badge-info">
-                <i class="fa-solid fa-circle-info"></i> THÔNG TIN DỰ ÁN NGHIÊN CỨU <span class="btn-xs">Đề án 2371/QĐ-TTg</span>
-            </div>
-            <h2 class="section-main-title">Về Dự Án Nghiên Cứu KHKT – PhysiHub</h2>
-            <p class="section-desc">Sản phẩm KHKT 2026 – Nền tảng số hóa học tập, thí nghiệm ảo và ôn luyện phân hóa môn Vật Lí 12 theo Chương trình GDPT 2018.</p>
-
-            <div class="info-cards-grid">
-                <!-- Card 1 -->
-                <div class="info-card">
-                    <div class="info-card-header">
-                        <i class="fa-solid fa-flag"></i> 1. Mục tiêu nghiên cứu
+            <!-- Card 3 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        </div>
+                        <span class="chapter-badge">CHƯƠNG 03</span>
                     </div>
-                    <div class="info-card-body">
-                        Xây dựng nền tảng số hóa hỗ trợ học sinh THPT tổng ôn toàn diện kiến thức Vật lí 12 (SGK Kết nối trí thức); rèn luyện tư duy thực nghiệm thông qua các định nghĩa, thuật ngữ và phòng Lab ảo; tích hợp thuật ngữ song ngữ Việt - Anh nhằm nâng cao năng lực hội nhập quốc tế theo định hướng Đề án 2371/QĐ-TTg.
-                    </div>
+                    <div class="card-sub">TỪ TRƯỜNG</div>
+                    <h3 class="card-title">TỪ TRƯỜNG & CẢM ỨNG ĐIỆN TỪ</h3>
+                    <p class="card-desc">Lực từ Ampere, cảm ứng từ B, từ thông, định luật cảm ứng điện từ Faraday, định luật Lenz, máy phát điện xoay chiều và ứng dụng dòng Foucault.</p>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="info-card">
-                    <div class="info-card-header">
-                        <i class="fa-solid fa-compass"></i> 2. Hướng dẫn sử dụng
-                    </div>
-                    <div class="info-card-body">
-                        <p style="margin-bottom: 6px;"><strong>01</strong> Tra cứu nhanh lý thuyết & công thức trọng tâm theo 4 chương hoặc từ khóa.</p>
-                        <p style="margin-bottom: 6px;"><strong>02</strong> Quan sát hiện tượng & kiểm chứng thông số vật lí qua 4 Phòng Lab tương tác.</p>
-                        <p><strong>03</strong> Luyện đề thi chuẩn 3 định dạng mới của Bộ GD&ĐT (Trắc nghiệm, Đúng/Sai, Điền số).</p>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="info-card">
-                    <div class="info-card-header">
-                        <i class="fa-solid fa-user-shield"></i> 3. Người thực hiện & thẩm định nội dung
-                    </div>
-                    <div class="member-list">
-                        <div class="member-item">
-                            <span class="member-name">Mai Thị Trinh</span>
-                            <span class="member-role">Giáo viên hướng dẫn</span>
-                        </div>
-                        <div class="member-item">
-                            <span class="member-name">Trần Thị Thanh Xuân</span>
-                            <span class="member-role student">Học sinh THPT</span>
-                        </div>
-                        <div class="member-item">
-                            <span class="member-name">Ngô Thị Kiều Tiên</span>
-                            <span class="member-role student">Học sinh THPT</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="info-card">
-                    <div class="info-card-header">
-                        <i class="fa-solid fa-box-archive"></i> 4. Công cụ đã sử dụng
-                    </div>
-                    <div class="tech-grid">
-                        <div>
-                            <div class="tech-title">NGÔN NGỮ LẬP TRÌNH</div>
-                            <div class="tech-val">HTML / CSS / JS</div>
-                        </div>
-                        <div>
-                            <div class="tech-title">CSDL & KHO DỮ LIỆU</div>
-                            <div class="tech-val">LocalStorage / CODATA NIST</div>
-                        </div>
-                    </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-terms">🌐 Thuật ngữ</button>
+                    <button class="btn-card btn-c3">📖 Xem lý thuyết</button>
                 </div>
             </div>
-        </section>
 
-        <!-- SEARCH INPUT FULL -->
-        <section>
-            <div class="search-full-box">
-                <i class="fa-solid fa-magnifying-glass" style="color: #64748b;"></i>
-                <input type="text" placeholder="Gõ từ khóa định luật, công thức, ký hiệu (VD: pV=nRT, Định luật Boyle, Lực từ, E=mc², Chu kỳ bán rã)...">
-            </div>
-            <div class="keywords-bar">
-                <span class="keywords-title">TỪ KHÓA TRA CỨU NHANH:</span>
-                <span class="tag-item">#ĐịnhLuậtNhiệtĐộngLựcHọc</span>
-                <span class="tag-item">#PhươngTrìnhClapeyron</span>
-                <span class="tag-item">#LựcLorenxd</span>
-                <span class="tag-item">#CảmỨngĐiệnTừ</span>
-                <span class="tag-item">#PhảnỨngNhiệtHạch</span>
-                <span class="tag-item">#ĐộHụtKhối</span>
-            </div>
-        </section>
-
-        <!-- CHAPTERS LIST (IMAGE 2) -->
-        <section>
-            <div class="chapter-section-head">
-                <div class="chapter-sub-title">• KIẾN THỨC CHI TIẾT THEO TỪNG BÀI</div>
-                <h2 class="section-main-title">4 Chương & 25 Bài Học SGK Kết Nối Tri Thức 2026</h2>
-            </div>
-
-            <div class="chapters-list">
-                <!-- Chương 1 -->
-                <div class="chapter-card">
-                    <div class="chapter-left-info">
-                        <div class="chapter-icon-box">
-                            <i class="fa-solid fa-temperature-three-quarters"></i>
+            <!-- Card 4 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.83a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path></svg>
                         </div>
-                        <div class="chapter-details">
-                            <div class="chapter-tag">CHƯƠNG 01 • VẬT LÍ NHIỆT</div>
-                            <h3 class="chapter-title">VẬT LÍ NHIỆT & CÁC ĐỊNH LUẬT NHIỆT ĐỘNG LỰC HỌC</h3>
-                            <p class="chapter-desc">Mô hình động học phân tử chất khí, nội năng, nguyên lí I nhiệt động lực học, thang nhiệt độ Kelvin - Celsius, đo nhiệt dung riêng và nhiệt chuyển thể pha.</p>
-                        </div>
+                        <span class="chapter-badge">CHƯƠNG 04</span>
                     </div>
-                    <div class="chapter-actions">
-                        <button class="btn-tag-action"><i class="fa-solid fa-language"></i> Giải mã thuật ngữ</button>
-                        <button class="btn-tag-action btn-orange"><i class="fa-regular fa-file-lines"></i> Xem lý thuyết chuyên sâu</button>
-                    </div>
+                    <div class="card-sub">VẬT LÍ HẠT NHÂN</div>
+                    <h3 class="card-title">VẬT LÍ HẠT NHÂN & NĂNG LƯỢNG NGUYÊN TỬ</h3>
+                    <p class="card-desc">Cấu tạo hạt nhân, năng lượng liên kết riêng, độ hụt khối, định luật phóng xạ, phản ứng hạt nhân phân hạch và nhiệt hạch ứng dụng trong năng lượng, y học hiện đại.</p>
                 </div>
-
-                <!-- Chương 2 -->
-                <div class="chapter-card">
-                    <div class="chapter-left-info">
-                        <div class="chapter-icon-box">
-                            <i class="fa-solid fa-wind"></i>
-                        </div>
-                        <div class="chapter-details">
-                            <div class="chapter-tag">CHƯƠNG 02 • KHÍ LÍ TƯỞNG</div>
-                            <h3 class="chapter-title">KHÍ LÍ TƯỞNG & THUYẾT ĐỘNG HỌC PHÂN TỬ</h3>
-                            <p class="chapter-desc">Mô hình phân tử khí lí tưởng, định luật Boyle, định luật Charles, phương trình trạng thái Clapeyron và liên hệ giữa nhiệt độ tuyệt đối với động năng phân tử.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-actions">
-                        <button class="btn-tag-action"><i class="fa-solid fa-language"></i> Giải mã thuật ngữ</button>
-                        <button class="btn-tag-action btn-cyan"><i class="fa-regular fa-file-lines"></i> Xem lý thuyết chuyên sâu</button>
-                    </div>
-                </div>
-
-                <!-- Chương 3 -->
-                <div class="chapter-card">
-                    <div class="chapter-left-info">
-                        <div class="chapter-icon-box">
-                            <i class="fa-solid fa-bolt"></i>
-                        </div>
-                        <div class="chapter-details">
-                            <div class="chapter-tag">CHƯƠNG 03 • TỪ TRƯỜNG</div>
-                            <h3 class="chapter-title">TỪ TRƯỜNG & CẢM ỨNG ĐIỆN TỪ</h3>
-                            <p class="chapter-desc">Lực từ Ampere, cảm ứng từ B, từ thông, định luật cảm ứng điện từ Faraday, định luật Lenz, máy phát điện xoay chiều và ứng dụng dòng Foucault.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-actions">
-                        <button class="btn-tag-action"><i class="fa-solid fa-language"></i> Giải mã thuật ngữ</button>
-                        <button class="btn-tag-action btn-blue"><i class="fa-regular fa-file-lines"></i> Xem lý thuyết chuyên sâu</button>
-                    </div>
-                </div>
-
-                <!-- Chương 4 -->
-                <div class="chapter-card">
-                    <div class="chapter-left-info">
-                        <div class="chapter-icon-box">
-                            <i class="fa-solid fa-atom"></i>
-                        </div>
-                        <div class="chapter-details">
-                            <div class="chapter-tag">CHƯƠNG 04 • VẬT LÍ HẠT NHÂN</div>
-                            <h3 class="chapter-title">VẬT LÍ HẠT NHÂN & NĂNG LƯỢNG NGUYÊN TỬ</h3>
-                            <p class="chapter-desc">Cấu tạo hạt nhân, năng lượng liên kết riêng, độ hụt khối, định luật phóng xạ, phản ứng hạt nhân phân hạch và nhiệt hạch ứng dụng trong năng lượng, y học hiện đại.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-actions">
-                        <button class="btn-tag-action"><i class="fa-solid fa-language"></i> Giải mã thuật ngữ</button>
-                        <button class="btn-tag-action btn-light-blue"><i class="fa-regular fa-file-lines"></i> Xem lý thuyết chuyên sâu</button>
-                    </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-terms">🌐 Thuật ngữ</button>
+                    <button class="btn-card btn-c4">📖 Xem lý thuyết</button>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- CONSTANTS TABLE SECTION (IMAGE 3) -->
-        <section class="constants-section">
+        <!-- CONSTANTS TABLE SECTION -->
+        <div class="constants-section">
             <div class="constants-header">
-                <h2 class="constants-title">Bảng Hằng Số Vật Lí Thực Nghiệm Phổ Biến</h2>
-                <div class="constants-source">
-                    <i class="fa-solid fa-circle-check"></i> Nguồn: CODATA/NIST & SGK KNTT 2026
+                <h3>Bảng Hằng Số Vật Lí Thực Nghiệm Phổ Biến</h3>
+                <div class="source-header" style="margin: 0;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Nguồn: <strong>CODATA/NIST & SGK KNTT 2026</strong>
                 </div>
             </div>
 
             <div class="constants-grid">
-                <div class="constant-card">
-                    <div class="constant-name">TỐC ĐỘ ÁNH SÁNG (c)</div>
-                    <div class="constant-val">2.9979 × 10⁸ m/s</div>
+                <div class="constant-item">
+                    <div class="c-name">TỐC ĐỘ ÁNH SÁNG (c)</div>
+                    <div class="c-value">2.9979 × 10⁸ m/s</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">HẰNG SỐ KHÍ LÍ TƯỞNG (R)</div>
-                    <div class="constant-val">8.314 J/(mol·K)</div>
+                <div class="constant-item">
+                    <div class="c-name">HẰNG SỐ KHÍ LÝ TƯỞNG (R)</div>
+                    <div class="c-value">8.314 J/(mol·K)</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">SỐ AVOGADRO (N_A)</div>
-                    <div class="constant-val">6.022 × 10²³ mol⁻¹</div>
+                <div class="constant-item">
+                    <div class="c-name">SỐ AVOGADRO (N_A)</div>
+                    <div class="c-value">6.022 × 10²³ mol⁻¹</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">ĐIỆN TÍCH NGUYÊN TỐ (e)</div>
-                    <div class="constant-val">1.602 × 10⁻¹⁹ C</div>
+                <div class="constant-item">
+                    <div class="c-name">ĐIỆN TÍCH NGUYÊN TỐ (e)</div>
+                    <div class="c-value">1.602 × 10⁻¹⁹ C</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">HẰNG SỐ BOLTZMANN (k)</div>
-                    <div class="constant-val">1.381 × 10⁻²³ J/K</div>
+                <div class="constant-item">
+                    <div class="c-name">HẰNG SỐ BOLTZMANN (k)</div>
+                    <div class="c-value">1.381 × 10⁻²³ J/K</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">HẰNG SỐ PLANCK (h)</div>
-                    <div class="constant-val">6.626 × 10⁻³⁴ J·s</div>
+                <div class="constant-item">
+                    <div class="c-name">HẰNG SỐ PLANCK (h)</div>
+                    <div class="c-value">6.626 × 10⁻³⁴ J·s</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">KHỐI LƯỢNG NGUYÊN TỬ (u)</div>
-                    <div class="constant-val">1.6605 × 10⁻²⁷ kg</div>
+                <div class="constant-item">
+                    <div class="c-name">KHỐI LƯỢNG NGUYÊN TỬ (u)</div>
+                    <div class="c-value">1.6605 × 10⁻²⁷ kg</div>
                 </div>
-                <div class="constant-card">
-                    <div class="constant-name">GIA TỐC TRỌNG TRƯỜNG (g)</div>
-                    <div class="constant-val">9.81 m/s² (hoặc 10)</div>
+                <div class="constant-item">
+                    <div class="c-name">GIA TỐC TRỌNG TRƯỜNG (g)</div>
+                    <div class="c-value">9.81 m/s² (hoặc 10)</div>
                 </div>
             </div>
 
             <div class="constants-footer">
-                <i class="fa-regular fa-bookmark"></i>
-                <span>Nguồn dữ liệu: Ủy ban Dữ liệu Khoa học & Công nghệ CODATA (NIST Internationally Recommended Values) kết hợp Bảng tra cứu SGK Vật Lý 12 Kết Nối Tri Thức Với Cuộc Sống (Bộ GD&ĐT 2026).</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <strong>Nguồn dữ liệu:</strong> Ủy ban Dữ liệu Khoa học & Công nghệ CODATA (NIST Internationally Recommended Values) kết hợp Bảng tra cứu SGK Vật Lý 12 Kết Nối Tri Thức Với Cuộc Sống (Bộ GD&ĐT 2026).
             </div>
-        </section>
+        </div>
 
-        <!-- FOOTER BOTTOM -->
-        <footer class="footer-bottom">
-            <span class="dot-green"></span>
-            <span>© 2026 PhysiHub.</span>
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-left">
+                <strong>Sản phẩm dự thi Khoa học kỹ thuật · Trường THPT Bùi Hữu Nghĩa, Cần Thơ · Năm học 2026–2027</strong>
+                <p>Nội dung tham khảo SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoạ của Bộ GD&ĐT, dùng cho mục đích học tập.</p>
+            </div>
+            <div class="footer-right">
+                <span class="status-dot"></span>
+                © 2026 PhysiHub.
+            </div>
         </footer>
+    </div>
 
-    </main>
-
-    <!-- JAVASCRIPT THÊM TÍNH NĂNG TƯƠNG TÁC -->
+    <!-- JAVASCRIPT HARDWARE & INTERACTION LOGIC -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Xử lý sự kiện click trên thanh Menu Navigation
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    navLinks.forEach(item => item.classList.remove('active'));
-                    this.classList.add('active');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sự kiện click Tag từ khóa nhanh
+            const tags = document.querySelectorAll('.tag');
+            const searchInput = id => document.getElementById(id);
+            const mainSearch = searchInput('searchInput');
+
+            tags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    if (mainSearch) {
+                        mainSearch.value = tag.textContent.replace('#', '');
+                        mainSearch.focus();
+                    }
                 });
             });
 
-            // Xử lý sự kiện bấm thẻ Keyword nhanh
-            const tagItems = document.querySelectorAll('.tag-item');
-            const fullSearchInput = document.querySelector('.search-full-box input');
-
-            tagItems.forEach(tag => {
-                tag.addEventListener('click', function () {
-                    const text = this.innerText.replace('#', '');
-                    fullSearchInput.value = text;
-                    fullSearchInput.focus();
+            // Hiệu ứng phản hồi khi ấn nút Xem lý thuyết / Thuật ngữ
+            const buttons = document.querySelectorAll('.btn-card, .btn-start');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const text = e.currentTarget.innerText.trim();
+                    console.log(`Đã chọn tính năng: ${text}`);
                 });
             });
         });
