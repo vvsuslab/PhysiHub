@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysiHub - Ghép Cặp Vật Lý – Trí Nhớ Đỉnh Cao</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CORE VARIABLES & THEMES
+           ========================================================================== */
+        :root[data-theme="dark"] {
+            --bg-main: #060a12;
+            --bg-header: #0a101d;
+            --bg-card-back: #0f182a;
+            --bg-card-front: #0c1424;
+            --bg-panel: #0d1627;
+            --border-panel: #1e2c46;
+            --border-card: #1b2942;
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --cyan-primary: #00d8f6;
+            --cyan-glow: rgba(0, 216, 246, 0.25);
+            --cyan-border: #00b4d8;
+            
+            --green-match: #10b981;
+            --green-glow: rgba(16, 185, 129, 0.25);
+            
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        :root[data-theme="light"] {
+            --bg-main: #f1f5f9;
+            --bg-header: #ffffff;
+            --bg-card-back: #e2e8f0;
+            --bg-card-front: #ffffff;
+            --bg-panel: #ffffff;
+            --border-panel: #cbd5e1;
+            --border-card: #cbd5e1;
+            
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            
+            --cyan-primary: #0284c7;
+            --cyan-glow: rgba(2, 132, 199, 0.15);
+            --cyan-border: #0369a1;
+            
+            --green-match: #059669;
+            --green-glow: rgba(5, 150, 105, 0.15);
+            
+            --shadow-card: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           2. HEADER & LOGO (Exact replica of PhysiHub image)
+           ========================================================================== */
+        .navbar {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-panel);
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--header-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        /* Recreated SVG Atom Logo from image */
+        .logo-icon {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+
+        .logo-text {
+            display: flex;
+            align-items: center;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text .physi {
+            color: var(--text-primary);
+        }
+
+        .logo-text .hub {
+            color: var(--cyan-primary);
+        }
+
+        .badge-kntt {
+            margin-left: 8px;
+            border: 1.5px solid var(--cyan-primary);
+            color: var(--cyan-primary);
+            background: rgba(0, 216, 246, 0.08);
+            border-radius: 8px;
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Search Bar */
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-panel);
+            border-radius: 10px;
+            padding: 0 14px;
+            width: 320px;
+            height: 38px;
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .shortcut-badge {
+            background-color: var(--border-panel);
+            color: var(--text-secondary);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        /* Nav Items */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-btn-games {
+            background-color: var(--cyan-primary);
+            color: #040914 !important;
+            font-weight: 700;
+            padding: 8px 18px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        /* Right Header Controls */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-panel);
+            border-radius: 6px;
+            padding: 3px 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .lang-switch span.active {
+            color: var(--cyan-primary);
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-panel);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--cyan-primary);
+            color: var(--cyan-primary);
+        }
+
+        /* ==========================================================================
+           3. MAIN LAYOUT & GAME HEADER
+           ========================================================================== */
+        .main-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 24px 20px 40px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* Sub-header / Title row */
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 216, 246, 0.08);
+            border: 1px solid rgba(0, 216, 246, 0.2);
+            color: var(--cyan-primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-back:hover {
+            background: rgba(0, 216, 246, 0.18);
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--cyan-primary);
+            letter-spacing: -0.2px;
+        }
+
+        /* Dashboard Status Bar */
+        .status-dashboard {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.2fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-panel);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(0, 216, 246, 0.1);
+            color: var(--cyan-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+        }
+
+        .stat-value-group {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .stat-subtext {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00b4d8, #00d8f6);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Reset Button Card */
+        .btn-restart {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 216, 246, 0.12);
+            border: 1px solid var(--cyan-border);
+            color: var(--cyan-primary);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 14px;
+        }
+
+        .btn-restart:hover {
+            background: var(--cyan-primary);
+            color: #040914;
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        /* ==========================================================================
+           4. 16-CARDS MEMORY GRID (4x4 Exact Layout)
+           ========================================================================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            perspective: 1000px;
+        }
+
+        .card {
+            height: 185px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .card.flipped, .card.matched {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-card);
+            border: 1.5px solid var(--border-card);
+        }
+
+        /* Card Back */
+        .card-back {
+            background-color: var(--bg-card-back);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-back-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .infinity-icon {
+            font-size: 38px;
+            color: var(--cyan-primary);
+            opacity: 0.85;
+            filter: drop-shadow(0 0 8px var(--cyan-glow));
+        }
+
+        .card-brand {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        .card-number {
+            position: absolute;
+            bottom: 12px;
+            right: 14px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            opacity: 0.6;
+        }
+
+        /* Card Front (Flipped State) */
+        .card-front {
+            background-color: var(--bg-card-front);
+            transform: rotateY(180deg);
+        }
+
+        /* Card States: Selected vs Matched */
+        .card.selected .card-front {
+            border-color: var(--cyan-primary);
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }
+
+        .card.matched .card-front {
+            border-color: var(--green-match);
+            box-shadow: 0 0 20px var(--green-glow);
+        }
+
+        /* Card Header */
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .status-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .card.selected .status-tag {
+            color: var(--cyan-primary);
+        }
+
+        .card.matched .status-tag {
+            color: var(--green-match);
+        }
+
+        .type-tag {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Card Body Content */
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-grow: 1;
+            padding: 8px 4px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.3;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .card-icon-center {
+            font-size: 22px;
+            color: var(--cyan-primary);
+            margin-bottom: 8px;
+        }
+
+        /* ==========================================================================
+           5. WIN MODAL / CELEBRATION
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(4, 8, 16, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--cyan-border);
+            border-radius: 20px;
+            padding: 36px;
+            width: 440px;
+            text-align: center;
+            box-shadow: 0 0 40px var(--cyan-glow);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--green-match);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 18px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .modal-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .modal-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .modal-stat-item label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .modal-stat-item span {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--cyan-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn-modal-close {
+            width: 100%;
+            background: var(--cyan-primary);
+            color: #040914;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           6. FOOTER (Exact copy of image footer text)
+           ========================================================================== */
+        .footer {
+            background-color: var(--bg-header);
+            border-top: 1px solid var(--border-panel);
+            padding: 16px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+
+        .footer-left p:first-child {
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 3px;
+        }
+
+        /* Responsive Layout Adjustments */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .status-dashboard {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .navbar {
+                padding: 12px 16px;
+            }
+            .search-box {
+                display: none;
+            }
+            .status-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         TOP NAVBAR
+         ========================================================================== -->
+    <header class="navbar">
+        <a href="#" class="logo-container">
+            <!-- Exact Atom SVG Logo structure -->
+            <div class="logo-icon">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <circle cx="50" cy="50" r="46" fill="#070c18" stroke="#00d8f6" stroke-width="4"/>
+                    <!-- Orbits -->
+                    <ellipse cx="50" cy="50" rx="35" ry="14" fill="none" stroke="#6366f1" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(-30 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="35" ry="14" fill="none" stroke="#00d8f6" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(30 50 50)"/>
+                    <ellipse cx="50" cy="50" rx="35" ry="14" fill="none" stroke="#38bdf8" stroke-width="2.5" transform="rotate(90 50 50)"/>
+                    <!-- Nucleus -->
+                    <circle cx="50" cy="50" r="8" fill="#00d8f6" filter="drop-shadow(0 0 6px #00d8f6)"/>
+                    <!-- Electrons -->
+                    <circle cx="20" cy="65" r="4" fill="#10b981"/>
+                    <circle cx="80" cy="35" r="4" fill="#38bdf8"/>
+                </svg>
+            </div>
+            <div class="logo-text">
+                <span class="physi">Physi</span><span class="hub">Hub</span>
+                <span class="badge-kntt">KNTT 12</span>
+            </div>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="search-input" id="globalSearch" placeholder="Tìm kiếm thuật ngữ, phòng lab, bài học...">
+            <span class="shortcut-badge">Ctrl+K</span>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <a href="#" class="nav-link">Bài học</a>
+            <a href="#" class="nav-link">Luyện đề</a>
+            <a href="#" class="nav-link nav-btn-games">Games</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="header-actions">
+            <div class="lang-switch">
+                <span class="active">VI</span> | <span>EN</span>
+            </div>
+            <button class="theme-toggle-btn" id="themeToggleBtn" title="Chuyển chế độ Sáng / Tối">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         MAIN CONTENT AREA
+         ========================================================================== -->
+    <main class="main-container">
+        <!-- Breadcrumb / Page Title -->
+        <div class="page-header">
+            <a href="#" class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i> Quay lại
+            </a>
+            <h1 class="page-title">Ghép Cặp Vật Lý – Trí Nhớ Đỉnh Cao</h1>
+        </div>
+
+        <!-- Dashboard Stats Bar -->
+        <div class="status-dashboard">
+            <!-- Flips & Matched Counter -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-cards-blank"></i>
+                </div>
+                <div class="stat-info">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span class="stat-label">SỐ LƯỢT LẬT</span>
+                        <span class="stat-subtext">ĐÃ GHẾP: <strong id="matchedPairsText" style="color:var(--text-primary);">0 / 8 cặp</strong></span>
+                    </div>
+                    <div class="stat-value-group">
+                        <span class="stat-value" id="flipCount">00</span>
+                        <span style="font-size:12px; color:var(--text-muted); font-weight:700;">Lượt</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timer -->
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">THỜI GIAN</span>
+                    <span class="stat-value" id="timer">00:00</span>
+                </div>
+            </div>
+
+            <!-- Restart Button -->
+            <div>
+                <button class="btn-restart" id="btnRestart">
+                    <i class="fa-solid fa-rotate-right"></i> Chơi lại ván mới
+                </button>
+            </div>
+
+            <!-- Record Best Score -->
+            <div class="stat-card">
+                <div class="stat-info">
+                    <span class="stat-label">KỶ LỤC LẬT THẺ</span>
+                    <span class="stat-value" id="bestScoreText">--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 16 CARDS MEMORY GRID -->
+        <div class="cards-grid" id="cardsGrid">
+            <!-- 16 Cards will be dynamically rendered here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- ==========================================================================
+         WIN / RECORD MODAL
+         ========================================================================== -->
+    <div class="modal-overlay" id="winModal">
+        <div class="modal-box">
+            <div class="modal-icon">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="modal-title">Hoàn Thành Xuất Sắc!</h2>
+            <p class="modal-desc">Bạn đã ghép đúng tất cả 8 cặp thẻ Vật Lý thành công.</p>
+            <div class="modal-stats-grid">
+                <div class="modal-stat-item">
+                    <label>SỐ LƯỢT LẬT</label>
+                    <span id="modalFlips">0</span>
+                </div>
+                <div class="modal-stat-item">
+                    <label>THỜI GIAN</label>
+                    <span id="modalTime">00:00</span>
+                </div>
+            </div>
+            <button class="btn-modal-close" id="btnModalRestart">Chơi ván tiếp theo</button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         FOOTER
+         ========================================================================== -->
+    <footer class="footer">
+        <div class="footer-left">
+            <p>Sản phẩm dự thi Khoa học kỹ thuật · Trường THPT Bùi Hữu Nghĩa, Cần Thơ - Năm học 2026–2027</p>
+            <p>Nội dung tham khảo SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh họa của Bộ GD&ĐT, dùng cho mục đích học tập.</p>
+        </div>
+        <div class="footer-right">
+            <p>© 2026 PhysiHub</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+         JAVASCRIPT GAME LOGIC & DATABASE
+         ========================================================================== -->
+    <script>
+        /* --------------------------------------------------------------------------
+           1. PHYSICS KNOWLEDGE DATABASE (Formulas, Laws, Definitions)
+           -------------------------------------------------------------------------- */
+        const physicsDatabase = [
+            {
+                id: 'pair_1',
+                cardA: { title: 'Φ = B · S · cosα', desc: 'Công thức Từ thông', type: 'CÔNG THỨC' },
+                cardB: { title: 'Weber (Wb)', desc: 'Từ thông qua diện tích S (1 Wb = 1 T·m²)', type: 'ĐỊNH NGHĨA' }
+            },
+            {
+                id: 'pair_2',
+                cardA: { title: 'p · V = const', desc: 'Định luật Boyle (Đẳng nhiệt)', type: 'CÔNG THỨC' },
+                cardB: { title: 'Trong quá trình đẳng nhiệt, áp suất tỉ lệ nghịch với thể tích', desc: 'T = hằng số, p₁V₁ = p₂V₂', type: 'ĐỊNH LUẬT' }
+            },
+            {
+                id: 'pair_3',
+                cardA: { title: 'ΔU = A + Q', desc: 'Nguyên lý I NĐLH', type: 'CÔNG THỨC' },
+                cardB: { title: 'Độ biến thiên nội năng bằng tổng công và nhiệt lượng', desc: 'Q > 0: nhận nhiệt | A > 0: nhận công', type: 'PHÁT BIỂU' }
+            },
+            {
+                id: 'pair_4',
+                cardA: { title: 'Q = m · c · ΔT', desc: 'Nhiệt lượng thu vào / tỏa ra', type: 'CÔNG THỨC' },
+                cardB: { title: 'Joule (J)', desc: 'Đơn vị nhiệt lượng trao đổi làm biến đổi nhiệt độ', type: 'ĐƠN VỊ' }
+            },
+            {
+                id: 'pair_5',
+                cardA: { title: 'F = B · I · L · sinα', desc: 'Lực Ampe tác dụng lên dây dẫn', type: 'CÔNG THỨC' },
+                cardB: { title: 'Lực từ tác dụng lên đoạn dây dẫn mang dòng điện', desc: 'Đơn vị lực F tính bằng Newton (N)', type: 'PHÁT BIỂU' }
+            },
+            {
+                id: 'pair_6',
+                cardA: { title: 'e = -ΔΦ / Δt', desc: 'Định luật Faraday về cảm ứng điện từ', type: 'CÔNG THỨC' },
+                cardB: { title: 'Suất điện động cảm ứng tỉ lệ với tốc độ biến thiên từ thông', desc: 'Dấu âm thể hiện định luật Lenz', type: 'ĐỊNH LUẬT' }
+            },
+            {
+                id: 'pair_7',
+                cardA: { title: 'V₁ / T₁ = V₂ / T₂', desc: 'Định luật Charles (Đẳng áp)', type: 'CÔNG THỨC' },
+                cardB: { title: 'Trong quá trình đẳng áp, thể tích tỉ lệ thuận với nhiệt độ tuyệt đối', desc: 'p = hằng số, T tính bằng Kelvin (K)', type: 'PHÁT BIỂU' }
+            },
+            {
+                id: 'pair_8',
+                cardA: { title: 'P = U · I · cosφ', desc: 'Công suất mạch điện xoay chiều', type: 'CÔNG THỨC' },
+                cardB: { title: 'Watt (W)', desc: 'Công suất tiêu thụ trung bình trong mạch AC', type: 'ĐƠN VỊ' }
+            },
+            {
+                id: 'pair_9',
+                cardA: { title: 'E = m · c²', desc: 'Hệ thức Anh-xtanh giữa khối lượng & năng lượng', type: 'CÔNG THỨC' },
+                cardB: { title: 'Năng lượng nghỉ tương đương với khối lượng nghỉ', desc: 'c = 3·10⁸ m/s (tốc độ ánh sáng)', type: 'ĐỊNH NGHĨA' }
+            },
+            {
+                id: 'pair_10',
+                cardA: { title: 'p₁ / T₁ = p₂ / T₂', desc: 'Định luật Gay-Lussac (Đẳng tích)', type: 'CÔNG THỨC' },
+                cardB: { title: 'Trong quá trình đẳng tích, áp suất tỉ lệ thuận với nhiệt độ tuyệt đối', desc: 'V = hằng số', type: 'ĐỊNH LUẬT' }
+            }
+        ];
+
+        /* --------------------------------------------------------------------------
+           2. GAME STATE VARIABLES
+           -------------------------------------------------------------------------- */
+        let activeCards = [];
+        let flippedCards = [];
+        let matchedCount = 0;
+        let flipCount = 0;
+        let timerSeconds = 0;
+        let timerInterval = null;
+        let isLockGrid = false;
+        let bestScore = localStorage.getItem('physihub_best_flips') || null;
+
+        /* DOM Elements */
+        const cardsGrid = document.getElementById('cardsGrid');
+        const flipCountEl = document.getElementById('flipCount');
+        const matchedPairsTextEl = document.getElementById('matchedPairsText');
+        const progressBarEl = document.getElementById('progressBar');
+        const timerEl = document.getElementById('timer');
+        const bestScoreTextEl = document.getElementById('bestScoreText');
+        const btnRestart = document.getElementById('btnRestart');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const winModal = document.getElementById('winModal');
+        const btnModalRestart = document.getElementById('btnModalRestart');
+
+        /* --------------------------------------------------------------------------
+           3. INITIALIZATION & GAME SETUP
+           -------------------------------------------------------------------------- */
+        function init() {
+            updateBestScoreDisplay();
+            startNewGame();
+            
+            // Event Listeners
+            btnRestart.addEventListener('click', startNewGame);
+            btnModalRestart.addEventListener('click', () => {
+                winModal.classList.remove('active');
+                startNewGame();
+            });
+            themeToggleBtn.addEventListener('click', toggleTheme);
+
+            // Ctrl+K Search focus shortcut
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    document.getElementById('globalSearch').focus();
+                }
+            });
+        }
+
+        /* Pick 8 random pairs and shuffle into 16 cards */
+        function startNewGame() {
+            // Reset Stats & Timer
+            clearInterval(timerInterval);
+            timerSeconds = 0;
+            flipCount = 0;
+            matchedCount = 0;
+            flippedCards = [];
+            isLockGrid = false;
+
+            updateStatsDisplay();
+            startTimer();
+
+            // Select 8 random pairs from DB
+            const shuffledDB = [...physicsDatabase].sort(() => 0.5 - Math.random());
+            const selectedPairs = shuffledDB.slice(0, 8);
+
+            // Create 16 card objects
+            activeCards = [];
+            selectedPairs.forEach(pair => {
+                activeCards.push({
+                    pairId: pair.id,
+                    title: pair.cardA.title,
+                    desc: pair.cardA.desc,
+                    type: pair.cardA.type
+                });
+                activeCards.push({
+                    pairId: pair.id,
+                    title: pair.cardB.title,
+                    desc: pair.cardB.desc,
+                    type: pair.cardB.type
+                });
+            });
+
+            // Shuffle 16 cards
+            activeCards.sort(() => 0.5 - Math.random());
+
+            // Render to Grid
+            renderGrid();
+        }
+
+        /* --------------------------------------------------------------------------
+           4. RENDER CARDS GRID
+           -------------------------------------------------------------------------- */
+        function renderGrid() {
+            cardsGrid.innerHTML = '';
+            activeCards.forEach((card, index) => {
+                const numStr = (index + 1).toString().padStart(2, '0');
+                
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card';
+                cardEl.dataset.index = index;
+                cardEl.dataset.pairId = card.pairId;
+
+                cardEl.innerHTML = `
+                    <!-- Back of Card -->
+                    <div class="card-face card-back">
+                        <div class="card-back-content">
+                            <i class="fa-solid fa-infinity infinity-icon"></i>
+                            <span class="card-brand">PHYSIHUB</span>
+                        </div>
+                        <span class="card-number">#${numStr}</span>
+                    </div>
+
+                    <!-- Front of Card -->
+                    <div class="card-face card-front">
+                        <div class="card-header">
+                            <span class="status-tag"></span>
+                            <span class="type-tag">${card.type}</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">${card.title}</div>
+                            <div class="card-desc">${card.desc}</div>
+                        </div>
+                        <div></div>
+                    </div>
+                `;
+
+                cardEl.addEventListener('click', () => handleCardClick(cardEl, index));
+                cardsGrid.appendChild(cardEl);
+            });
+        }
+
+        /* --------------------------------------------------------------------------
+           5. CARD CLICK & MATCHING LOGIC
+           -------------------------------------------------------------------------- */
+        function handleCardClick(cardEl, index) {
+            if (isLockGrid) return;
+            if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+
+            // Flip current card
+            cardEl.classList.add('flipped', 'selected');
+            const statusTag = cardEl.querySelector('.status-tag');
+            statusTag.innerHTML = `<i class="fa-solid fa-bolt"></i> ĐANG CHỌN`;
+
+            flippedCards.push({ cardEl, index, pairId: activeCards[index].pairId });
+
+            if (flippedCards.length === 2) {
+                // Increment Flip Counter
+                flipCount++;
+                updateStatsDisplay();
+
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            isLockGrid = true;
+            const [first, second] = flippedCards;
+
+            if (first.pairId === second.pairId) {
+                // MATCHED!
+                setTimeout(() => {
+                    first.cardEl.classList.remove('selected');
+                    second.cardEl.classList.remove('selected');
+
+                    first.cardEl.classList.add('matched');
+                    second.cardEl.classList.add('matched');
+
+                    first.cardEl.querySelector('.status-tag').innerHTML = `<i class="fa-solid fa-check"></i> ĐÃ GHẾP`;
+                    second.cardEl.querySelector('.status-tag').innerHTML = `<i class="fa-solid fa-check"></i> ĐÃ GHẾP`;
+
+                    matchedCount++;
+                    updateStatsDisplay();
+                    flippedCards = [];
+                    isLockGrid = false;
+
+                    // Check Win Condition
+                    if (matchedCount === 8) {
+                        handleWin();
+                    }
+                }, 400);
+            } else {
+                // NOT MATCHED - Flip back
+                setTimeout(() => {
+                    first.cardEl.classList.remove('flipped', 'selected');
+                    second.cardEl.classList.remove('flipped', 'selected');
+                    
+                    flippedCards = [];
+                    isLockGrid = false;
+                }, 1000);
+            }
+        }
+
+        /* --------------------------------------------------------------------------
+           6. STATS & RECORD HANDLING
+           -------------------------------------------------------------------------- */
+        function updateStatsDisplay() {
+            flipCountEl.textContent = flipCount.toString().padStart(2, '0');
+            matchedPairsTextEl.textContent = `${matchedCount} / 8 cặp`;
+            
+            const progressPercent = (matchedCount / 8) * 100;
+            progressBarEl.style.width = `${progressPercent}%`;
+        }
+
+        function updateBestScoreDisplay() {
+            if (bestScore) {
+                bestScoreTextEl.textContent = `${bestScore} Lượt`;
+            } else {
+                bestScoreTextEl.textContent = '--';
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds++;
+                const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+                const secs = (timerSeconds % 60).toString().padStart(2, '0');
+                timerEl.textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function handleWin() {
+            clearInterval(timerInterval);
+
+            // Check Best Score record
+            if (!bestScore || flipCount < parseInt(bestScore)) {
+                bestScore = flipCount;
+                localStorage.setItem('physihub_best_flips', bestScore);
+                updateBestScoreDisplay();
+            }
+
+            // Show Win Modal
+            document.getElementById('modalFlips').textContent = `${flipCount} lượt`;
+            document.getElementById('modalTime').textContent = timerEl.textContent;
+            winModal.classList.add('active');
+        }
+
+        /* --------------------------------------------------------------------------
+           7. THEME TOGGLE (Dark / Light)
+           -------------------------------------------------------------------------- */
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            themeToggleBtn.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
