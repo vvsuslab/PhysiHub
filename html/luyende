@@ -1,1 +1,1345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysiHub - Luyện Đề Thi Chuẩn Cấu Trúc Bộ GD&ĐT 2026</title>
+    <!-- Font Inter & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --card-bg: #111827;
+            --border-color: #1f2937;
+            --primary-blue: #00a3ff;
+            --primary-dark: #0f172a;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --header-bg: rgba(17, 24, 39, 0.9);
+            --input-bg: #1e293b;
+            --green-color: #10b981;
+            --red-color: #ef4444;
+            --orange-color: #f97316;
+            --purple-color: #6366f1;
+        }
 
+        /* LIGHT MODE VARIABLES */
+        body.light-mode {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --primary-blue: #0284c7;
+            --primary-dark: #f1f5f9;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --input-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* CUSTOM LOGO MATCHING IMAGE EXACTLY */
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .logo-icon-wrapper {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            background: #040914;
+            border: 2px solid #00c8ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
+        }
+
+        .atom-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .vi-en-badge {
+            position: absolute;
+            bottom: -3px;
+            right: -6px;
+            background-color: #0284c7;
+            color: #ffffff;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 1px 4px;
+            border-radius: 4px;
+            border: 1px solid #00c8ff;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-name .physi {
+            color: var(--text-color);
+        }
+
+        .brand-name .hub {
+            color: #00b4d8;
+        }
+
+        .kntt-badge {
+            border: 1.5px solid #00b4d8;
+            color: #00b4d8;
+            background-color: rgba(0, 180, 216, 0.1);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 320px;
+        }
+
+        .search-box input {
+            width: 100%;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px 8px 36px;
+            border-radius: 20px;
+            color: var(--text-color);
+            outline: none;
+            font-size: 13px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .nav-link.active {
+            background-color: var(--primary-blue);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-switch {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 18px;
+            padding: 6px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 16px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* EXAM HEADER CARD */
+        .exam-header {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .exam-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .exam-icon {
+            width: 44px;
+            height: 44px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 20px;
+        }
+
+        .exam-title h2 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .exam-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .progress-badge {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--green-color);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .exam-timer-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .timer-box {
+            border: 1px solid rgba(249, 115, 22, 0.4);
+            background-color: rgba(249, 115, 22, 0.05);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .timer-label {
+            font-size: 10px;
+            color: var(--orange-color);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .timer-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-blue);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 12px rgba(0, 163, 255, 0.3);
+        }
+
+        .btn-submit:hover {
+            opacity: 0.9;
+        }
+
+        /* RESULT SUMMARY BANNER */
+        .result-banner {
+            display: none;
+            background: linear-gradient(135deg, var(--card-bg), var(--input-bg));
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .result-score {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 8px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .result-details {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--text-color);
+            margin-top: 10px;
+        }
+
+        /* NAVIGATOR PANEL */
+        .nav-panel {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .nav-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .nav-panel-title {
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-legend {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .dot-done { background-color: var(--primary-blue); }
+        .dot-empty { background-color: var(--input-bg); }
+
+        .nav-grid-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-section {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .nav-section-1 { flex: 2.2; }
+        .nav-section-2 { flex: 1.2; }
+        .nav-section-3 { flex: 1; }
+
+        .sec-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sec-title span { color: var(--text-muted); font-weight: 400; }
+
+        .btn-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .q-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .q-btn:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .q-btn.done { background-color: var(--primary-blue); border-color: var(--primary-blue); color: #fff; }
+        .q-btn.correct { background-color: var(--green-color) !important; border-color: var(--green-color) !important; color: #fff !important; }
+        .q-btn.wrong { background-color: var(--red-color) !important; border-color: var(--red-color) !important; color: #fff !important; }
+
+        /* QUESTION CARDS */
+        .part-header {
+            background-color: #0284c7;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            scroll-margin-top: 80px;
+        }
+
+        .question-title {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .q-number {
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .highlight-red {
+            color: var(--red-color);
+            text-decoration: underline;
+            font-weight: 700;
+        }
+
+        /* CONCEPT BOX */
+        .concept-box {
+            background-color: var(--bg-color);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .concept-content {
+            font-size: 13.5px;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .concept-title {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* OPTIONS */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .option-item:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .option-item.selected {
+            border-color: var(--primary-blue);
+            background-color: rgba(0, 163, 255, 0.08);
+        }
+
+        .option-item.opt-correct {
+            border-color: var(--green-color) !important;
+            background-color: rgba(16, 185, 129, 0.15) !important;
+        }
+
+        .option-item.opt-wrong {
+            border-color: var(--red-color) !important;
+            background-color: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .radio-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option-item.selected .radio-dot {
+            border-color: var(--primary-blue);
+            background-color: var(--primary-blue);
+        }
+
+        .radio-dot::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: none;
+        }
+
+        .option-item.selected .radio-dot::after {
+            display: block;
+        }
+
+        .opt-label {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* SOLUTION BREAKDOWN */
+        .solution-box {
+            display: none;
+            background-color: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .sol-title {
+            color: var(--green-color);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sgk-tag {
+            background-color: var(--input-bg);
+            color: var(--text-muted);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            display: inline-block;
+            margin-top: 10px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* TRUE/FALSE SECTION */
+        .tf-item {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tf-text {
+            flex: 1;
+            padding-right: 20px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .tf-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-tf {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .btn-tf.active {
+            background-color: var(--primary-blue);
+            color: #fff;
+            border-color: var(--primary-blue);
+        }
+
+        .btn-tf.tf-correct {
+            background-color: var(--green-color) !important;
+            border-color: var(--green-color) !important;
+            color: #fff !important;
+        }
+
+        .btn-tf.tf-wrong {
+            background-color: var(--red-color) !important;
+            border-color: var(--red-color) !important;
+            color: #fff !important;
+        }
+
+        /* NUMERIC INPUT SECTION */
+        .numeric-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .num-input-box {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .display-input {
+            background-color: var(--card-bg);
+            border: 1px solid var(--primary-blue);
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 52px;
+        }
+
+        .unit-label {
+            color: var(--primary-blue);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .key-btn {
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 12px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            user-select: none;
+        }
+
+        .key-btn:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .btn-clear {
+            width: 100%;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* DERIVATION BOX */
+        .derivation-box {
+            display: none;
+            background-color: var(--bg-color);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .derivation-title {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .step-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .final-val {
+            color: var(--green-color);
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 20px 24px;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            background-color: var(--card-bg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <!-- LOGO ĐÃ ĐƯỢC CHỈNH SỬA CHÍNH XÁC THEO HÌNH CỦA BẠN -->
+        <div class="brand-logo">
+            <div class="logo-icon-wrapper">
+                <svg class="atom-svg" viewBox="0 0 100 100">
+                    <!-- Orbit 1 -->
+                    <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(-30 50 50)" />
+                    <!-- Orbit 2 -->
+                    <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(30 50 50)" />
+                    
+                    <!-- Nucleus Glow & Core -->
+                    <circle cx="50" cy="50" r="9" fill="#00c8ff" opacity="0.4" />
+                    <circle cx="50" cy="50" r="5" fill="#ffffff" />
+                    
+                    <!-- Electrons -->
+                    <circle cx="16" cy="62" r="4.5" fill="#10b981" />
+                    <circle cx="84" cy="22" r="4.5" fill="#00c8ff" />
+                </svg>
+                <div class="vi-en-badge">VI·EN</div>
+            </div>
+            <div class="logo-text-group">
+                <div class="brand-name">
+                    <span class="physi">Physi</span><span class="hub">Hub</span>
+                </div>
+                <div class="kntt-badge">KNTT 12</div>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Tìm kiếm đề, lý thuyết...">
+        </div>
+        <div class="nav-links">
+            <a class="nav-link">Bài học</a>
+            <a class="nav-link active">Luyện đề</a>
+            <a class="nav-link">Games</a>
+        </div>
+        <div class="header-actions">
+            <div class="lang-switch">
+                <i class="fa-solid fa-globe"></i>
+                <b>VI</b> | EN
+            </div>
+            <i class="fa-solid fa-moon theme-toggle" id="theme-btn" title="Chuyển chế độ Sáng/Tối"></i>
+        </div>
+    </header>
+
+    <!-- MAIN BODY CONTENT -->
+    <div class="container">
+
+        <!-- EXAM TOP BANNER -->
+        <div class="exam-header">
+            <div class="exam-info">
+                <div class="exam-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="exam-title">
+                    <h2>Luyện Đề Thi Chuẩn Cấu Trúc Bộ GD&ĐT 2026</h2>
+                    <div class="exam-meta">Môn: Vật Lí 12 • Thời gian làm bài: 50 phút • 3 câu hỏi minh họa</div>
+                </div>
+                <div class="progress-badge" id="progress-badge">Đã làm 0 / 3 câu (0.0%)</div>
+            </div>
+            <div class="exam-timer-section">
+                <div class="timer-box">
+                    <div class="timer-label"><i class="fa-regular fa-clock"></i> THỜI GIAN CÒN LẠI</div>
+                    <div class="timer-value" id="timer">50:00</div>
+                </div>
+                <button class="btn-submit" id="btn-submit-exam">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> NỘP BÀI THI
+                </button>
+            </div>
+        </div>
+
+        <!-- BẢNG KẾT QUẢ HIỂN THỊ SAU KHINỘP BÀI -->
+        <div class="result-banner" id="result-banner">
+            <h3 style="color: var(--text-color); font-size: 20px;">KẾT QUẢ BÀI THI CỦA BẠN</h3>
+            <div class="result-score" id="result-score">0.0 / 10</div>
+            <div class="result-details">
+                <span><i class="fa-solid fa-circle-check" style="color: var(--green-color);"></i> Số câu đúng: <b id="res-correct">0</b>/3</span>
+                <span><i class="fa-solid fa-clock"></i> Thời gian làm bài: <b id="res-time">00:00</b></span>
+            </div>
+        </div>
+
+        <!-- NAVIGATOR PANEL -->
+        <div class="nav-panel">
+            <div class="nav-panel-header">
+                <div class="nav-panel-title">
+                    <i class="fa-solid fa-list-check" style="color: var(--primary-blue);"></i> Bảng Điều Hướng Câu Hỏi (Exam Navigator)
+                </div>
+                <div class="nav-legend">
+                    <div class="legend-item"><div class="legend-dot dot-done"></div> Đã làm</div>
+                    <div class="legend-item"><div class="legend-dot dot-empty"></div> Chưa làm</div>
+                </div>
+            </div>
+
+            <div class="nav-grid-container">
+                <div class="nav-section nav-section-1">
+                    <div class="sec-title">
+                        PHẦN I: TRẮC NGHIỆM (1)
+                        <span>0.25đ / câu</span>
+                    </div>
+                    <div class="btn-grid">
+                        <div class="q-btn" id="nav-q1" onclick="scrollToQuestion('q-card-1')">1</div>
+                    </div>
+                </div>
+
+                <div class="nav-section nav-section-2">
+                    <div class="sec-title">
+                        PHẦN II: ĐÚNG / SAI (1)
+                        <span>Tối đa 1.0đ</span>
+                    </div>
+                    <div class="btn-grid">
+                        <div class="q-btn" id="nav-q2" onclick="scrollToQuestion('q-card-2')">2</div>
+                    </div>
+                </div>
+
+                <div class="nav-section nav-section-3">
+                    <div class="sec-title">
+                        PHẦN III: ĐIỀN SỐ (1)
+                        <span>0.25đ / câu</span>
+                    </div>
+                    <div class="btn-grid">
+                        <div class="q-btn" id="nav-q3" onclick="scrollToQuestion('q-card-3')">3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CÂU HỎI 1: PHẦN I -->
+        <div class="part-header">PHẦN I &nbsp;|&nbsp; Câu trắc nghiệm nhiều phương án lựa chọn</div>
+        <div class="question-card" id="q-card-1">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <div class="question-title">
+                    <span class="q-number">CÂU 1:</span> Theo thuyết động học phân tử chất khí lý tưởng, phát biểu nào sau đây về chuyển động và tương tác của các phân tử là <span class="highlight-red">không chính xác</span>?
+                </div>
+                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
+            </div>
+
+            <div class="concept-box">
+                <div class="concept-title"><i class="fa-solid fa-atom"></i> MÔ HÌNH HẠT VÀ CHẠM ĐÀN HỒI (IDEAL GAS KINETICS)</div>
+                <div class="concept-content">
+                    Thể tích riêng của các phân tử khí là vô cùng nhỏ so với thể tích bình chứa; các phân tử chuyển động hỗn loạn không ngừng và chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình.
+                </div>
+            </div>
+
+            <div class="options-list">
+                <div class="option-item" onclick="selectOption('A')">
+                    <div class="radio-dot"></div>
+                    <div><span class="opt-label">A.</span> Các phân tử khí chuyển động hỗn loạn không ngừng; nhiệt độ càng cao thì chuyển động nhiệt càng nhanh.</div>
+                </div>
+                <div class="option-item" onclick="selectOption('B')">
+                    <div class="radio-dot"></div>
+                    <div><span class="opt-label">B.</span> Lực tương tác giữa các phân tử khí rất mạnh khi chúng ở xa nhau và giảm dần về không khi chúng lại gần nhau.</div>
+                </div>
+                <div class="option-item" onclick="selectOption('C')">
+                    <div class="radio-dot"></div>
+                    <div><span class="opt-label">C.</span> Kích thước của các phân tử chất khí là rất nhỏ so với khoảng cách trung bình giữa các phân tử đó.</div>
+                </div>
+                <div class="option-item" onclick="selectOption('D')">
+                    <div class="radio-dot"></div>
+                    <div><span class="opt-label">D.</span> Khi va chạm vào thành bình chứa, các phân tử khí tác dụng lực và gây ra áp suất lên thành bình.</div>
+                </div>
+            </div>
+
+            <div class="solution-box" id="sol-q1">
+                <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng: B (Phát biểu sai về tương tác phân tử)</div>
+                Theo mô hình khí lý tưởng: Ở khoảng cách trung bình giữa các phân tử (ở xa nhau), lực tương tác phân tử là <b>rất nhỏ, coi như bằng không</b>. Các phân tử chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình. Do đó, khẳng định B "lực tương tác rất mạnh khi ở xa nhau" là sai so với thuyết động học phân tử.
+                <div>
+                    <span class="sgk-tag">SGK Vật Lí 12 KNTT - Bài 9, Trang 42</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CÂU HỎI 2: PHẦN II -->
+        <div class="part-header" style="background-color: var(--orange-color);">PHẦN II &nbsp;|&nbsp; Câu trắc nghiệm Đúng / Sai</div>
+        <div class="question-card" id="q-card-2">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <div class="question-title">
+                    <span class="q-number" style="color: var(--orange-color);">CÂU 2:</span> Khi nói về mô hình động học phân tử của chất, nhiệt độ và nội năng, hãy xác định tính đúng/sai của các phát biểu sau:
+                </div>
+                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">1 ý=0.1đ | 2 ý=0.25đ | 3 ý=0.5đ | 4 ý=1.0đ</div>
+            </div>
+
+            <div class="tf-item">
+                <div class="tf-text">a) Nhiệt độ của vật càng cao thì các phân tử cấu tạo nên vật chuyển động nhiệt càng nhanh và nội năng của vật càng lớn.</div>
+                <div class="tf-actions">
+                    <button class="btn-tf" id="tf-a-true" onclick="selectTF('a', true)">ĐÚNG (TRUE)</button>
+                    <button class="btn-tf" id="tf-a-false" onclick="selectTF('a', false)">SAI (FALSE)</button>
+                </div>
+            </div>
+
+            <div class="tf-item">
+                <div class="tf-text">b) Khi hai vật có nhiệt độ khác nhau tiếp xúc nhau, nhiệt lượng sẽ tự truyền từ vật có nhiệt độ cao hơn sang vật có nhiệt độ thấp hơn cho đến khi đạt cân bằng nhiệt.</div>
+                <div class="tf-actions">
+                    <button class="btn-tf" id="tf-b-true" onclick="selectTF('b', true)">ĐÚNG (TRUE)</button>
+                    <button class="btn-tf" id="tf-b-false" onclick="selectTF('b', false)">SAI (FALSE)</button>
+                </div>
+            </div>
+
+            <div class="tf-item">
+                <div class="tf-text">c) Nội năng của một khối khí lý tưởng xác định chỉ phụ thuộc vào nhiệt độ tuyệt đối của khối khí đó.</div>
+                <div class="tf-actions">
+                    <button class="btn-tf" id="tf-c-true" onclick="selectTF('c', true)">ĐÚNG (TRUE)</button>
+                    <button class="btn-tf" id="tf-c-false" onclick="selectTF('c', false)">SAI (FALSE)</button>
+                </div>
+            </div>
+
+            <div class="tf-item">
+                <div class="tf-text">d) Nếu nhiệt độ của một chất lỏng tăng thêm 15°C thì trong thang nhiệt độ Kelvin, nhiệt độ của nó cũng tăng thêm đúng 15 K.</div>
+                <div class="tf-actions">
+                    <button class="btn-tf" id="tf-d-true" onclick="selectTF('d', true)">ĐÚNG (TRUE)</button>
+                    <button class="btn-tf" id="tf-d-false" onclick="selectTF('d', false)">SAI (FALSE)</button>
+                </div>
+            </div>
+
+            <div class="solution-box" id="sol-q2">
+                <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng cả 4 ý: a) ĐÚNG | b) ĐÚNG | c) ĐÚNG | d) ĐÚNG</div>
+                - <b>a, b:</b> Kiến thức cơ bản về mô hình phân tử và sự truyền nhiệt.<br>
+                - <b>c:</b> Khí lý tưởng bỏ qua thế năng tương tác nên nội năng chỉ phụ thuộc nhiệt độ.<br>
+                - <b>d:</b> Độ biến thiên nhiệt độ trong thang Celsius bằng thang Kelvin (ΔT = Δt).
+            </div>
+        </div>
+
+        <!-- CÂU HỎI 3: PHẦN III -->
+        <div class="part-header" style="background-color: var(--purple-color);">PHẦN III &nbsp;|&nbsp; Câu trắc nghiệm trả lời ngắn (Điền số)</div>
+        <div class="question-card" id="q-card-3">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                <div class="question-title">
+                    <span class="q-number" style="color: var(--purple-color);">CÂU 3:</span> Một bình đun nước siêu tốc chứa <span style="color:var(--primary-blue)">0,5 kg</span> nước ở nhiệt độ ban đầu <span style="color:var(--primary-blue)">25°C</span>. Người ta bật ấm đun để làm nóng nước lên đến <span style="color:var(--primary-blue)">85°C</span>. Biết nhiệt dung riêng của nước là <span style="color:var(--primary-blue)">c = 4200 J/(kg·K)</span>. Bỏ qua nhiệt lượng làm nóng vỏ ấm và mất mát nhiệt ra môi trường. Hãy tính nhiệt lượng cần cung cấp cho khối nước theo đơn vị <span style="color:var(--primary-blue)">kilôjun (kJ)</span>.
+                </div>
+                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
+            </div>
+
+            <div class="numeric-container">
+                <div class="num-input-box">
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">KẾT QUẢ ĐIỀN VÀO PHIẾU TRẢ LỜI</div>
+                        <div class="display-input">
+                            <span id="numeric-display"></span>
+                            <span class="unit-label">kJ</span>
+                        </div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Lưu ý: Nhập số nguyên hoặc số thập phân.</div>
+                    </div>
+                    <div class="action-btns" style="margin-top: 15px;">
+                        <button class="btn-clear" onclick="clearInput()">Xóa nhập lại</button>
+                    </div>
+                </div>
+
+                <div class="keypad">
+                    <button class="key-btn" onclick="pressKey('7')">7</button>
+                    <button class="key-btn" onclick="pressKey('8')">8</button>
+                    <button class="key-btn" onclick="pressKey('9')">9</button>
+                    <button class="key-btn" onclick="deleteLastKey()"><i class="fa-solid fa-delete-left"></i></button>
+
+                    <button class="key-btn" onclick="pressKey('4')">4</button>
+                    <button class="key-btn" onclick="pressKey('5')">5</button>
+                    <button class="key-btn" onclick="pressKey('6')">6</button>
+                    <button class="key-btn" onclick="pressKey('.')">.</button>
+
+                    <button class="key-btn" onclick="pressKey('1')">1</button>
+                    <button class="key-btn" onclick="pressKey('2')">2</button>
+                    <button class="key-btn" onclick="pressKey('3')">3</button>
+                    <button class="key-btn" onclick="pressKey('0')">0</button>
+                </div>
+            </div>
+
+            <div class="derivation-box" id="sol-q3">
+                <div class="derivation-title">
+                    <i class="fa-solid fa-flask"></i> Khung suy luận vật lý (Physics Derivation):
+                </div>
+                <div style="font-weight:700; font-size:12px; margin-bottom:6px;">1. Độ tăng nhiệt độ của lượng nước:</div>
+                <div class="step-box">
+                    ΔT = T₂ - T₁ = 85°C - 25°C = 60°C = 60 K
+                </div>
+
+                <div style="font-weight:700; font-size:12px; margin-bottom:6px;">2. Nhiệt lượng cần cung cấp cho khối nước:</div>
+                <div class="step-box">
+                    Q = m · c · ΔT = 0,5 × 4200 × 60 = 126 000 J = 126 kJ
+                </div>
+
+                <div class="final-val">⇒ Giá trị điền vào phiếu trả lời đúng: 126</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>
+            <b>Sản phẩm dự thi Khoa học kỹ thuật - Trường THPT Bùi Hữu Nghĩa, Cần Thơ</b><br>
+            <span style="opacity:0.7">Nội dung tham khảo SGK Vật Lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoạ của Bộ GD&ĐT.</span>
+        </div>
+        <div>
+            <b>© 2026 PhysiHub</b>
+        </div>
+    </footer>
+
+    <!-- JS ENGINE -->
+    <script>
+        // 1. Quản lý Chế độ Sáng/Tối (Dark/Light Theme)
+        const themeBtn = document.getElementById('theme-btn');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                themeBtn.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                themeBtn.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // 2. Dữ liệu bài thi & Đáp án chuẩn
+        const correctAnswers = {
+            q1: 'B',
+            q2: { a: true, b: true, c: true, d: true },
+            q3: '126'
+        };
+
+        let userAnswers = {
+            q1: null,
+            q2: { a: null, b: null, c: null, d: null },
+            q3: ''
+        };
+
+        let isSubmitted = false;
+
+        // 3. Đếm ngược thời gian
+        let totalSeconds = 50 * 60;
+        const timerEl = document.getElementById('timer');
+        const timerInterval = setInterval(() => {
+            if (totalSeconds > 0 && !isSubmitted) {
+                totalSeconds--;
+                let min = Math.floor(totalSeconds / 60);
+                let sec = totalSeconds % 60;
+                timerEl.innerText = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+            }
+        }, 1000);
+
+        // Cuộn mượt đến câu hỏi
+        function scrollToQuestion(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 4. Xử lý Chọn đáp án Câu 1
+        function selectOption(val) {
+            if (isSubmitted) return;
+            userAnswers.q1 = val;
+            
+            const items = document.querySelectorAll('#q-card-1 .option-item');
+            const labels = ['A', 'B', 'C', 'D'];
+            
+            items.forEach((item, idx) => {
+                if (labels[idx] === val) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            });
+
+            updateProgress();
+        }
+
+        // 5. Xử lý Chọn Đúng/Sai Câu 2
+        function selectTF(subKey, val) {
+            if (isSubmitted) return;
+            userAnswers.q2[subKey] = val;
+
+            const btnTrue = document.getElementById(`tf-${subKey}-true`);
+            const btnFalse = document.getElementById(`tf-${subKey}-false`);
+
+            if (val === true) {
+                btnTrue.classList.add('active');
+                btnFalse.classList.remove('active');
+            } else {
+                btnFalse.classList.add('active');
+                btnTrue.classList.remove('active');
+            }
+
+            updateProgress();
+        }
+
+        // 6. Bàn phím số Câu 3
+        const display = document.getElementById('numeric-display');
+
+        function pressKey(val) {
+            if (isSubmitted) return;
+            if (val === '.' && userAnswers.q3.includes('.')) return;
+            userAnswers.q3 += val;
+            display.innerText = userAnswers.q3;
+            updateProgress();
+        }
+
+        function deleteLastKey() {
+            if (isSubmitted) return;
+            userAnswers.q3 = userAnswers.q3.slice(0, -1);
+            display.innerText = userAnswers.q3;
+            updateProgress();
+        }
+
+        function clearInput() {
+            if (isSubmitted) return;
+            userAnswers.q3 = '';
+            display.innerText = '';
+            updateProgress();
+        }
+
+        // 7. Cập nhật thanh tiến trình
+        function updateProgress() {
+            let doneCount = 0;
+
+            if (userAnswers.q1 !== null) {
+                doneCount++;
+                document.getElementById('nav-q1').classList.add('done');
+            } else {
+                document.getElementById('nav-q1').classList.remove('done');
+            }
+
+            const q2Done = Object.values(userAnswers.q2).every(v => v !== null);
+            if (q2Done) {
+                doneCount++;
+                document.getElementById('nav-q2').classList.add('done');
+            } else {
+                document.getElementById('nav-q2').classList.remove('done');
+            }
+
+            if (userAnswers.q3.trim() !== '') {
+                doneCount++;
+                document.getElementById('nav-q3').classList.add('done');
+            } else {
+                document.getElementById('nav-q3').classList.remove('done');
+            }
+
+            const percent = ((doneCount / 3) * 100).toFixed(1);
+            document.getElementById('progress-badge').innerText = `Đã làm ${doneCount} / 3 câu (${percent}%)`;
+        }
+
+        // 8. Chức năng Nộp bài & Chấm điểm
+        document.getElementById('btn-submit-exam').addEventListener('click', function() {
+            if (isSubmitted) return;
+
+            if (!confirm('Bạn có chắc chắn muốn nộp bài thi?')) return;
+
+            isSubmitted = true;
+            clearInterval(timerInterval);
+
+            let rawScore = 0;
+            let correctCount = 0;
+
+            // Chấm Câu 1 (0.25đ)
+            const navQ1 = document.getElementById('nav-q1');
+            const q1Items = document.querySelectorAll('#q-card-1 .option-item');
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q1Items.forEach((item, idx) => {
+                if (labels[idx] === correctAnswers.q1) {
+                    item.classList.add('opt-correct');
+                } else if (labels[idx] === userAnswers.q1) {
+                    item.classList.add('opt-wrong');
+                }
+            });
+
+            if (userAnswers.q1 === correctAnswers.q1) {
+                rawScore += 0.25;
+                correctCount++;
+                navQ1.classList.add('correct');
+            } else {
+                navQ1.classList.add('wrong');
+            }
+            document.getElementById('sol-q1').style.display = 'block';
+
+            // Chấm Câu 2 (Tối đa 1.0đ)
+            let q2CorrectCount = 0;
+            ['a', 'b', 'c', 'd'].forEach(sub => {
+                const isUserCorrect = userAnswers.q2[sub] === correctAnswers.q2[sub];
+                const btnTrue = document.getElementById(`tf-${sub}-true`);
+                const btnFalse = document.getElementById(`tf-${sub}-false`);
+
+                if (correctAnswers.q2[sub] === true) {
+                    btnTrue.classList.add('tf-correct');
+                    if (userAnswers.q2[sub] === false) btnFalse.classList.add('tf-wrong');
+                } else {
+                    btnFalse.classList.add('tf-correct');
+                    if (userAnswers.q2[sub] === true) btnTrue.classList.add('tf-wrong');
+                }
+
+                if (isUserCorrect) q2CorrectCount++;
+            });
+
+            let q2Points = 0;
+            if (q2CorrectCount === 1) q2Points = 0.1;
+            else if (q2CorrectCount === 2) q2Points = 0.25;
+            else if (q2CorrectCount === 3) q2Points = 0.5;
+            else if (q2CorrectCount === 4) q2Points = 1.0;
+
+            rawScore += q2Points;
+            const navQ2 = document.getElementById('nav-q2');
+            if (q2CorrectCount === 4) {
+                correctCount++;
+                navQ2.classList.add('correct');
+            } else {
+                navQ2.classList.add('wrong');
+            }
+            document.getElementById('sol-q2').style.display = 'block';
+
+            // Chấm Câu 3 (0.25đ)
+            const navQ3 = document.getElementById('nav-q3');
+            if (userAnswers.q3.trim() === correctAnswers.q3) {
+                rawScore += 0.25;
+                correctCount++;
+                navQ3.classList.add('correct');
+            } else {
+                navQ3.classList.add('wrong');
+            }
+            document.getElementById('sol-q3').style.display = 'block';
+
+            // Tính điểm thang 10
+            let scaledScore = ((rawScore / 1.5) * 10).toFixed(2);
+
+            // Bảng kết quả
+            document.getElementById('result-score').innerText = `${scaledScore} / 10`;
+            document.getElementById('res-correct').innerText = correctCount;
+
+            let spentTime = (50 * 60) - totalSeconds;
+            let m = Math.floor(spentTime / 60);
+            let s = spentTime % 60;
+            document.getElementById('res-time').innerText = `${m} phút ${s} giây`;
+
+            document.getElementById('result-banner').style.display = 'block';
+            this.innerText = 'ĐÃ NỘP BÀI';
+            this.style.backgroundColor = '#64748b';
+            this.style.cursor = 'not-allowed';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
