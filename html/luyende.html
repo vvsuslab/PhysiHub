@@ -68,7 +68,6 @@
             z-index: 100;
         }
 
-        /* CUSTOM LOGO MATCHING IMAGE EXACTLY */
         .brand-logo {
             display: flex;
             align-items: center;
@@ -809,20 +808,13 @@
 
     <!-- HEADER -->
     <header>
-        <!-- LOGO ĐÃ ĐƯỢC CHỈNH SỬA CHÍNH XÁC THEO HÌNH CỦA BẠN -->
         <div class="brand-logo">
             <div class="logo-icon-wrapper">
                 <svg class="atom-svg" viewBox="0 0 100 100">
-                    <!-- Orbit 1 -->
                     <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(-30 50 50)" />
-                    <!-- Orbit 2 -->
                     <ellipse cx="50" cy="50" rx="42" ry="16" fill="none" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="4 3" transform="rotate(30 50 50)" />
-                    
-                    <!-- Nucleus Glow & Core -->
                     <circle cx="50" cy="50" r="9" fill="#00c8ff" opacity="0.4" />
                     <circle cx="50" cy="50" r="5" fill="#ffffff" />
-                    
-                    <!-- Electrons -->
                     <circle cx="16" cy="62" r="4.5" fill="#10b981" />
                     <circle cx="84" cy="22" r="4.5" fill="#00c8ff" />
                 </svg>
@@ -841,9 +833,9 @@
             <input type="text" placeholder="Tìm kiếm đề, lý thuyết...">
         </div>
         <div class="nav-links">
-            <a class="nav-link">Bài học</a>
-            <a class="nav-link active">Luyện đề</a>
-            <a class="nav-link">Games</a>
+            <a href="#" class="nav-link">Bài học</a>
+            <a href="#" class="nav-link active">Luyện đề</a>
+            <a href="#" class="nav-link">Games</a>
         </div>
         <div class="header-actions">
             <div class="lang-switch">
@@ -1106,7 +1098,7 @@
 
     <!-- JS ENGINE -->
     <script>
-        // 1. Quản lý Chế độ Sáng/Tối (Dark/Light Theme)
+        // 1. Quản lý Chế độ Sáng/Tối
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
@@ -1144,12 +1136,11 @@
             }
         }, 1000);
 
-        // Cuộn mượt đến câu hỏi
         function scrollToQuestion(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 4. Xử lý Chọn đáp án Câu 1
+        // 4. Chọn đáp án Câu 1
         function selectOption(val) {
             if (isSubmitted) return;
             userAnswers.q1 = val;
@@ -1168,7 +1159,7 @@
             updateProgress();
         }
 
-        // 5. Xử lý Chọn Đúng/Sai Câu 2
+        // 5. Chọn Đúng/Sai Câu 2
         function selectTF(subKey, val) {
             if (isSubmitted) return;
             userAnswers.q2[subKey] = val;
@@ -1212,7 +1203,7 @@
             updateProgress();
         }
 
-        // 7. Cập nhật thanh tiến trình
+        // 7. Cập nhật tiến trình
         function updateProgress() {
             let doneCount = 0;
 
@@ -1223,7 +1214,7 @@
                 document.getElementById('nav-q1').classList.remove('done');
             }
 
-            const q2Done = Object.values(userAnswers.q2).every(v => v !== null);
+            const q2Done = Object.values(userAnswers.q2).some(v => v !== null);
             if (q2Done) {
                 doneCount++;
                 document.getElementById('nav-q2').classList.add('done');
@@ -1254,7 +1245,7 @@
             let rawScore = 0;
             let correctCount = 0;
 
-            // Chấm Câu 1 (0.25đ)
+            // Chấm Câu 1
             const navQ1 = document.getElementById('nav-q1');
             const q1Items = document.querySelectorAll('#q-card-1 .option-item');
             const labels = ['A', 'B', 'C', 'D'];
@@ -1276,7 +1267,7 @@
             }
             document.getElementById('sol-q1').style.display = 'block';
 
-            // Chấm Câu 2 (Tối đa 1.0đ)
+            // Chấm Câu 2
             let q2CorrectCount = 0;
             ['a', 'b', 'c', 'd'].forEach(sub => {
                 const isUserCorrect = userAnswers.q2[sub] === correctAnswers.q2[sub];
@@ -1310,7 +1301,7 @@
             }
             document.getElementById('sol-q2').style.display = 'block';
 
-            // Chấm Câu 3 (0.25đ)
+            // Chấm Câu 3
             const navQ3 = document.getElementById('nav-q3');
             if (userAnswers.q3.trim() === correctAnswers.q3) {
                 rawScore += 0.25;
@@ -1319,12 +1310,13 @@
             } else {
                 navQ3.classList.add('wrong');
             }
+            // Sửa hiển thị khung lời giải câu 3
             document.getElementById('sol-q3').style.display = 'block';
 
-            // Tính điểm thang 10
+            // Quy đổi ra thang điểm 10 chuẩn
             let scaledScore = ((rawScore / 1.5) * 10).toFixed(2);
 
-            // Bảng kết quả
+            // Cập nhật Bảng kết quả
             document.getElementById('result-score').innerText = `${scaledScore} / 10`;
             document.getElementById('res-correct').innerText = correctCount;
 
