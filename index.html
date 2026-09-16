@@ -7,17 +7,50 @@
     <!-- Google Font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* --- CSS VARIABLES FOR THEME SWITCHING --- */
+        :root {
+            --bg-body: #0b1329;
+            --bg-header: #0b1329;
+            --bg-card: #0f172a;
+            --bg-card-inner: #070e1b;
+            --bg-input: #090d16;
+            --border-color: #1e293b;
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-submuted: #64748b;
+            --brand-cyan: #00bcd4;
+            --accent-blue: #38bdf8;
+        }
+
+        /* Light Theme Palette */
+        body.light-mode {
+            --bg-body: #f8fafc;
+            --bg-header: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-inner: #f1f5f9;
+            --bg-input: #f1f5f9;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #475569;
+            --text-submuted: #64748b;
+            --brand-cyan: #0284c7;
+            --accent-blue: #0284c7;
+        }
+
         /* --- RESET & GLOBAL STYLES --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
-            background-color: #0b1329;
-            color: #ffffff;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.5;
             padding-bottom: 40px;
         }
@@ -36,8 +69,8 @@
 
         /* --- HEADER / NAVBAR --- */
         header {
-            background-color: #0b1329;
-            border-bottom: 1px solid #1e293b;
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -47,50 +80,70 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 68px;
         }
 
+        /* --- LOGO SANG TRỌNG THEO MẪU ĐẦU VÀO --- */
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #60a5fa;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border-radius: 50%;
+        .brand-icon-wrapper {
+            position: relative;
+            width: 44px;
+            height: 44px;
+        }
+
+        .brand-icon-svg {
+            width: 44px;
+            height: 44px;
+        }
+
+        .brand-text {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
+            gap: 8px;
         }
 
-        .brand span.w12 {
-            font-size: 0.75rem;
-            background: #1e3a8a;
-            color: #93c5fd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 2px;
+        .brand-text .physi {
+            color: var(--text-primary);
         }
 
+        .brand-text .hub {
+            color: var(--brand-cyan);
+        }
+
+        .brand-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--brand-cyan);
+            border: 1.5px solid var(--brand-cyan);
+            padding: 2px 8px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            background: rgba(0, 188, 212, 0.08);
+            text-transform: uppercase;
+        }
+
+        /* NAV SEARCH */
         .nav-search {
             position: relative;
-            flex: 0 1 360px;
+            flex: 0 1 340px;
         }
 
         .nav-search input {
             width: 100%;
-            background-color: #090d16;
-            border: 1px solid #1e293b;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 8px 12px 8px 36px;
-            color: #94a3b8;
+            color: var(--text-primary);
             font-size: 0.875rem;
             outline: none;
         }
@@ -100,7 +153,7 @@
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748b;
+            color: var(--text-submuted);
         }
 
         .nav-links {
@@ -108,11 +161,11 @@
             align-items: center;
             gap: 24px;
             font-size: 0.9rem;
-            color: #cbd5e1;
+            color: var(--text-secondary);
         }
 
         .nav-links a:hover {
-            color: #60a5fa;
+            color: var(--brand-cyan);
         }
 
         .nav-actions {
@@ -126,15 +179,34 @@
             align-items: center;
             gap: 6px;
             font-size: 0.8rem;
-            background: #1e293b;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             padding: 4px 8px;
             border-radius: 6px;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
 
         .lang-switch span.active {
-            color: #fff;
+            color: var(--text-primary);
             font-weight: 600;
+        }
+
+        /* Nút chế độ Sáng/Tối */
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--brand-cyan);
+            background: var(--bg-input);
         }
 
         /* --- HERO SECTION --- */
@@ -150,7 +222,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(30, 58, 138, 0.4);
+            background: rgba(30, 58, 138, 0.2);
             border: 1px solid #1e40af;
             color: #60a5fa;
             padding: 6px 14px;
@@ -165,7 +237,7 @@
             font-size: 2.5rem;
             font-weight: 800;
             line-height: 1.15;
-            color: #ffffff;
+            color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: -0.5px;
         }
@@ -173,14 +245,14 @@
         .hero-title-en {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #94a3b8;
+            color: var(--text-muted);
             margin-top: 6px;
             margin-bottom: 20px;
             text-transform: uppercase;
         }
 
         .hero-desc {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             font-size: 1.05rem;
             max-width: 680px;
             margin-bottom: 28px;
@@ -191,25 +263,24 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #38bdf8;
-            color: #090d16;
+            background: var(--brand-cyan);
+            color: #ffffff;
             font-weight: 700;
             padding: 12px 24px;
             border-radius: 8px;
             border: none;
             cursor: pointer;
             font-size: 0.95rem;
-            transition: all 0.2s;
         }
 
         .btn-start:hover {
-            background: #0ea5e9;
+            opacity: 0.9;
         }
 
         /* --- SIDE CARD / BADGE --- */
         .source-card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 16px;
             font-size: 0.8rem;
@@ -219,17 +290,17 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #64748b;
+            color: var(--text-submuted);
             margin-bottom: 12px;
         }
 
         .source-header strong {
-            color: #38bdf8;
+            color: var(--brand-cyan);
         }
 
         .project-badge {
-            background: #070e1b;
-            border: 1px solid #1e293b;
+            background: var(--bg-card-inner);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 16px;
             position: relative;
@@ -239,14 +310,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #38bdf8;
+            color: var(--brand-cyan);
             font-weight: 700;
             font-size: 0.75rem;
             letter-spacing: 0.5px;
         }
 
         .badge-sub {
-            color: #64748b;
+            color: var(--text-submuted);
             font-size: 0.7rem;
             margin-left: 24px;
             margin-top: 2px;
@@ -256,7 +327,7 @@
             margin-top: 20px;
             font-size: 1.1rem;
             font-weight: 800;
-            color: #fff;
+            color: var(--text-primary);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -264,8 +335,8 @@
 
         /* --- MAIN SEARCH BAR --- */
         .main-search-box {
-            background: #090d16;
-            border: 1px solid #1e293b;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 14px 16px;
             display: flex;
@@ -278,7 +349,7 @@
             background: transparent;
             border: none;
             outline: none;
-            color: #94a3b8;
+            color: var(--text-primary);
             width: 100%;
             font-size: 0.95rem;
         }
@@ -290,12 +361,13 @@
             flex-wrap: wrap;
             margin-bottom: 40px;
             font-size: 0.8rem;
-            color: #64748b;
+            color: var(--text-submuted);
         }
 
         .tag {
-            background: #111c35;
-            color: #38bdf8;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--brand-cyan);
             padding: 4px 10px;
             border-radius: 4px;
             font-size: 0.75rem;
@@ -303,7 +375,7 @@
         }
 
         .tag:hover {
-            background: #1e293b;
+            background: var(--bg-input);
         }
 
         /* --- SECTION HEADING --- */
@@ -315,7 +387,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            color: #38bdf8;
+            color: var(--brand-cyan);
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -326,7 +398,7 @@
         .section-title {
             font-size: 1.75rem;
             font-weight: 800;
-            color: #ffffff;
+            color: var(--text-primary);
         }
 
         /* --- CHAPTER CARDS GRID --- */
@@ -338,14 +410,13 @@
         }
 
         .card {
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
         }
 
         .card-header {
@@ -358,17 +429,19 @@
         .icon-box {
             width: 44px;
             height: 44px;
-            background: #1e293b;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #38bdf8;
+            color: var(--brand-cyan);
         }
 
         .chapter-badge {
-            background: #1e293b;
-            color: #94a3b8;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
             font-size: 0.7rem;
             font-weight: 700;
             padding: 4px 8px;
@@ -377,7 +450,7 @@
         }
 
         .card-sub {
-            color: #64748b;
+            color: var(--text-submuted);
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -387,13 +460,13 @@
         .card-title {
             font-size: 1.15rem;
             font-weight: 800;
-            color: #ffffff;
+            color: var(--text-primary);
             margin-bottom: 12px;
             text-transform: uppercase;
         }
 
         .card-desc {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-size: 0.85rem;
             line-height: 1.5;
             margin-bottom: 24px;
@@ -416,19 +489,14 @@
             font-weight: 700;
             cursor: pointer;
             border: none;
-            transition: opacity 0.2s;
-        }
-
-        .btn-card:hover {
-            opacity: 0.9;
         }
 
         .btn-terms {
-            background: #1e293b;
-            color: #cbd5e1;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
         }
 
-        /* Color variations per chapter button */
         .btn-c1 { background: #fca5a5; color: #450a0a; }
         .btn-c2 { background: #7dd3fc; color: #0c4a6e; }
         .btn-c3 { background: #2563eb; color: #ffffff; }
@@ -436,8 +504,8 @@
 
         /* --- CONSTANTS SECTION --- */
         .constants-section {
-            background: #070e1b;
-            border: 1px solid #1e293b;
+            background: var(--bg-card-inner);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 24px;
             margin-bottom: 40px;
@@ -453,6 +521,7 @@
         .constants-header h3 {
             font-size: 1.35rem;
             font-weight: 800;
+            color: var(--text-primary);
         }
 
         .constants-grid {
@@ -463,14 +532,14 @@
         }
 
         .constant-item {
-            background: #0f172a;
-            border: 1px solid #1e293b;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-radius: 6px;
             padding: 12px 14px;
         }
 
         .c-name {
-            color: #64748b;
+            color: var(--text-submuted);
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -480,14 +549,14 @@
         .c-value {
             font-size: 0.85rem;
             font-weight: 700;
-            color: #e2e8f0;
+            color: var(--text-primary);
         }
 
         .constants-footer {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #64748b;
+            color: var(--text-submuted);
             font-size: 0.75rem;
             margin-top: 12px;
         }
@@ -495,17 +564,17 @@
         /* --- FOOTER --- */
         footer {
             margin-top: 40px;
-            border-top: 1px solid #1e293b;
+            border-top: 1px solid var(--border-color);
             padding-top: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #64748b;
+            color: var(--text-submuted);
             font-size: 0.8rem;
         }
 
         .footer-left strong {
-            color: #cbd5e1;
+            color: var(--text-secondary);
         }
 
         .footer-left p {
@@ -516,14 +585,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #cbd5e1;
+            color: var(--text-secondary);
             font-weight: 600;
         }
 
         .status-dot {
             width: 8px;
             height: 8px;
-            background: #38bdf8;
+            background: var(--brand-cyan);
             border-radius: 50%;
         }
 
@@ -532,6 +601,7 @@
             .hero { grid-template-columns: 1fr; }
             .chapters-grid { grid-template-columns: 1fr; }
             .constants-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-search { display: none; }
         }
     </style>
 </head>
@@ -540,12 +610,34 @@
     <!-- NAVBAR -->
     <header>
         <div class="container navbar">
-            <div class="brand">
-                <div class="brand-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <!-- LOGO CHUẨN THEO HÌNH ẢNH CUNG CẤP -->
+            <a href="#" class="brand">
+                <div class="brand-icon-wrapper">
+                    <svg class="brand-icon-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Nền Tròn Tối -->
+                        <circle cx="50" cy="50" r="46" fill="#040914" stroke="#00bcd4" stroke-width="3"/>
+                        <!-- Quỹ Đạo Điện Tử 1 -->
+                        <ellipse cx="50" cy="50" rx="36" ry="14" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="5 3" transform="rotate(-30 50 50)"/>
+                        <!-- Quỹ Đạo Điện Tử 2 -->
+                        <ellipse cx="50" cy="50" rx="36" ry="14" stroke="#00bcd4" stroke-width="2.5" stroke-dasharray="5 3" transform="rotate(30 50 50)"/>
+                        <!-- Hạt Nhân Trung Tâm -->
+                        <circle cx="50" cy="50" r="7" fill="#ffffff"/>
+                        <circle cx="50" cy="50" r="11" stroke="#00bcd4" stroke-width="2"/>
+                        <!-- Các Electron -->
+                        <circle cx="22" cy="34" r="3.5" fill="#10b981"/>
+                        <circle cx="80" cy="28" r="4" fill="#38bdf8"/>
+                        <!-- Thẻ Badge VI-EN Nằm Đè Trên Biểu Tượng -->
+                        <g transform="translate(42, 66)">
+                            <rect width="48" height="20" rx="5" fill="#0284c7" stroke="#00bcd4" stroke-width="1.5"/>
+                            <text x="24" y="14" fill="#ffffff" font-size="10" font-family="'Inter', sans-serif" font-weight="800" text-anchor="middle">VI-EN</text>
+                        </g>
+                    </svg>
                 </div>
-                PhysiHub
-            </div>
+                <div class="brand-text">
+                    <span class="physi">Physi</span><span class="hub">Hub</span>
+                    <span class="brand-badge">KNTT 12</span>
+                </div>
+            </a>
 
             <div class="nav-search">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -563,7 +655,13 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line></svg>
                     <span class="active">VI</span> | <span>EN</span>
                 </div>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #94a3b8; cursor: pointer;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                
+                <!-- NÚT BẬT TẮT SÁNG TỐI (LIGHT/DARK MODE TOGGLE) -->
+                <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ Sáng/Tối">
+                    <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -578,7 +676,7 @@
                 <h1 class="hero-title-vi">TỔNG ÔN TOÀN DIỆN<br>VẬT LÍ 12 (SONG NGỮ ANH-VIỆT)</h1>
                 <div class="hero-title-en">COMPREHENSIVE REVIEW OF PHYSICS 12 (BILINGUAL)</div>
                 <p class="hero-desc">
-                    Nền tảng tri thức vật lí bám sát từng bài học SGK Kết Nối Tri Thức. Tích hợp định nghĩa, thuật ngữ, đề ôn, trò chơi bằng song ngữ Anh-Việt.
+                    Nền tảng tri thức vật lí thực nghiệm & lý thuyết số hoá bám sát từng bài học SGK Kết Nối Tri Thức. Tích hợp định nghĩa, thuật ngữ, đề ôn, trò chơi bằng song ngữ Anh-Việt.
                 </p>
                 <button class="btn-start">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -608,7 +706,7 @@
 
         <!-- MAIN SEARCH & QUICK TAGS -->
         <div class="main-search-box">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input type="text" id="searchInput" placeholder="Gõ từ khóa định luật, công thức, ký hiệu (VD: pV=nRT, Định luật Boyle, Lực từ, E=mc², Chu kỳ bán rã)...">
         </div>
 
@@ -776,10 +874,27 @@
     <!-- JAVASCRIPT HARDWARE & INTERACTION LOGIC -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Sự kiện click Tag từ khóa nhanh
+            // --- CẤU HÌNH TÍNH NĂNG CHUYỂN ĐỔI CHẾ ĐỘ SÁNG / TỐI ---
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            // Icon Mặt Trăng (Dark) & Mặt Trời (Light)
+            const moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            const sunIcon = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                
+                if (document.body.classList.contains('light-mode')) {
+                    themeIcon.innerHTML = sunIcon;
+                } else {
+                    themeIcon.innerHTML = moonIcon;
+                }
+            });
+
+            // --- TÍNH NĂNG NHẤN TỪ KHÓA TÌM KIẾM NHANH ---
             const tags = document.querySelectorAll('.tag');
-            const searchInput = id => document.getElementById(id);
-            const mainSearch = searchInput('searchInput');
+            const mainSearch = document.getElementById('searchInput');
 
             tags.forEach(tag => {
                 tag.addEventListener('click', () => {
@@ -790,7 +905,7 @@
                 });
             });
 
-            // Hiệu ứng phản hồi khi ấn nút Xem lý thuyết / Thuật ngữ
+            // --- NÚT TƯƠNG TÁC XEM BÀI HỌC ---
             const buttons = document.querySelectorAll('.btn-card, .btn-start');
             buttons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
