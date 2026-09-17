@@ -7,6 +7,90 @@
     <!-- Google Font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+    /* ===================================================
+   1. CẤU HÌNH CƠ BẢN & RESET BỐ CỤC
+   =================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Khai báo độ rộng tối đa cho khung chứa nội dung */
+  --max-width: 1200px;
+  /* Khoảng cách đệm tự động co giãn theo thiết bị */
+  --site-padding: clamp(1rem, 4vw, 2.5rem);
+  /* Khoảng cách giữa các phần tử */
+  --gap-size: clamp(1rem, 3vw, 2rem);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* ===================================================
+   2. KHUNG CHỨA TRUNG TÂM (CENTERED CONTAINER)
+   Giúp nội dung không bị tràn màn hình to và tự căn giữa
+   =================================================== */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--site-padding);
+  padding-right: var(--site-padding);
+}
+
+/* ===================================================
+   3. BỐ CỤC LƯỚI TỰ CÂN BẰNG (AUTO-BALANCED GRID)
+   Tự động chia cột theo màn hình mà KHÔNG CẦN Media Queries
+   =================================================== */
+.auto-grid {
+  display: grid;
+  /* Tự co giãn các cột: tối thiểu 280px, tối đa 1fr */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap-size);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===================================================
+   4. TỐI ƯU HÌNH ẢNH & VIDEO (Chống vỡ giao diện)
+   =================================================== */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===================================================
+   5. BỐ CỤC CHÍNH (SIDEBAR + CONTENT)
+   Màn hình nhỏ xếp chồng, màn hình lớn nằm ngang cân đối
+   =================================================== */
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-size);
+}
+
+@media (min-width: 768px) {
+  .layout-wrapper {
+    flex-direction: row;
+  }
+  
+  .sidebar {
+    flex: 1; /* Chiếm 1 phần */
+    max-width: 300px;
+  }
+  
+  .main-content {
+    flex: 3; /* Chiếm 3 phần */
+  }
+}
         /* --- CSS VARIABLES FOR THEME SWITCHING --- */
         :root {
             --bg-body: #0b1329;
