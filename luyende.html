@@ -68,6 +68,7 @@
             z-index: 100;
         }
 
+        /* BRAND LOGO */
         .brand-logo {
             display: flex;
             align-items: center;
@@ -226,6 +227,56 @@
             width: 100%;
         }
 
+        /* START OVERLAY BANNER */
+        .start-banner {
+            background: linear-gradient(135deg, var(--card-bg), var(--input-bg));
+            border: 2px solid var(--primary-blue);
+            border-radius: 12px;
+            padding: 40px 20px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 163, 255, 0.15);
+        }
+
+        .start-banner h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 12px;
+        }
+
+        .start-banner p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .btn-start-exam {
+            background-color: var(--green-color);
+            color: #fff;
+            border: none;
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+            transition: transform 0.1s;
+        }
+
+        .btn-start-exam:hover {
+            transform: scale(1.03);
+            opacity: 0.95;
+        }
+
+        /* EXAM CONTENT WRAPPER - MẶC ĐỊNH ẨN */
+        .exam-content-area {
+            display: none;
+        }
+
         /* EXAM HEADER CARD */
         .exam-header {
             background-color: var(--card-bg);
@@ -315,13 +366,17 @@
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            display: flex;
+            display: none; /* Mặc định ẩn nút Nộp bài khi chưa làm */
             align-items: center;
             gap: 8px;
             box-shadow: 0 0 12px rgba(0, 163, 255, 0.3);
         }
 
-        .btn-submit:hover {
+        .btn-submit.active {
+            display: flex;
+        }
+
+        .btn-submit.active:hover {
             opacity: 0.9;
         }
 
@@ -833,9 +888,9 @@
             <input type="text" placeholder="Tìm kiếm đề, lý thuyết...">
         </div>
         <div class="nav-links">
-            <a href="../index.html" class="nav-link">Bài học</a>
-            <a href="luyende.html" class="nav-link active">Luyện đề</a>
-            <a href="g12.html" class="nav-link">Games</a>
+            <a class="nav-link">Bài học</a>
+            <a class="nav-link active">Luyện đề</a>
+            <a class="nav-link">Games</a>
         </div>
         <div class="header-actions">
             <div class="lang-switch">
@@ -849,8 +904,17 @@
     <!-- MAIN BODY CONTENT -->
     <div class="container">
 
-        <!-- EXAM TOP BANNER -->
-        <div class="exam-header">
+        <!-- BẢNG THÔNG BÁO BẮT ĐẦU LÀM BÀI (HIỂN THỊ KHI VỪA VÀO BÀI) -->
+        <div class="start-banner" id="start-banner">
+            <h3>Sẵn sàng bắt đầu làm bài thi?</h3>
+            <p>Thời gian làm bài là <b>50 phút</b>. Đề thi và đồng hồ đếm ngược sẽ kích hoạt ngay sau khi bạn bấm nút dưới đây.</p>
+            <button class="btn-start-exam" id="btn-start-exam" onclick="startExam()">
+                <i class="fa-solid fa-play"></i> BẮT ĐẦU LÀM BÀI
+            </button>
+        </div>
+
+        <!-- CỤM THÔNG TIN BÀI THI KHI CHƯA LÀM (CHỈ HIỂN THỊ TIMER ĐỢI) -->
+        <div class="exam-header" id="pre-exam-header">
             <div class="exam-info">
                 <div class="exam-icon">
                     <i class="fa-solid fa-graduation-cap"></i>
@@ -859,16 +923,12 @@
                     <h2>Luyện Đề Thi Chuẩn Cấu Trúc Bộ GD&ĐT 2026</h2>
                     <div class="exam-meta">Môn: Vật Lí 12 • Thời gian làm bài: 50 phút • 3 câu hỏi minh họa</div>
                 </div>
-                <div class="progress-badge" id="progress-badge">Đã làm 0 / 3 câu (0.0%)</div>
             </div>
             <div class="exam-timer-section">
                 <div class="timer-box">
                     <div class="timer-label"><i class="fa-regular fa-clock"></i> THỜI GIAN CÒN LẠI</div>
-                    <div class="timer-value" id="timer">50:00</div>
+                    <div class="timer-value">50:00</div>
                 </div>
-                <button class="btn-submit" id="btn-submit-exam">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> NỘP BÀI THI
-                </button>
             </div>
         </div>
 
@@ -882,205 +942,233 @@
             </div>
         </div>
 
-        <!-- NAVIGATOR PANEL -->
-        <div class="nav-panel">
-            <div class="nav-panel-header">
-                <div class="nav-panel-title">
-                    <i class="fa-solid fa-list-check" style="color: var(--primary-blue);"></i> Bảng Điều Hướng Câu Hỏi (Exam Navigator)
+        <!-- EXAM CONTENT AREA (ẨN TOÀN BỘ ĐỀ THI KHI CHƯA BẤM BẮT ĐẦU) -->
+        <div class="exam-content-area" id="exam-content-area">
+
+            <!-- EXAM TOP BANNER CHÍNH THỨC -->
+            <div class="exam-header">
+                <div class="exam-info">
+                    <div class="exam-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div class="exam-title">
+                        <h2>Luyện Đề Thi Chuẩn Cấu Trúc Bộ GD&ĐT 2026</h2>
+                        <div class="exam-meta">Môn: Vật Lí 12 • Thời gian làm bài: 50 phút • 3 câu hỏi minh họa</div>
+                    </div>
+                    <div class="progress-badge" id="progress-badge">Đã làm 0 / 3 câu (0.0%)</div>
                 </div>
-                <div class="nav-legend">
-                    <div class="legend-item"><div class="legend-dot dot-done"></div> Đã làm</div>
-                    <div class="legend-item"><div class="legend-dot dot-empty"></div> Chưa làm</div>
+                <div class="exam-timer-section">
+                    <div class="timer-box">
+                        <div class="timer-label"><i class="fa-regular fa-clock"></i> THỜI GIAN CÒN LẠI</div>
+                        <div class="timer-value" id="timer">50:00</div>
+                    </div>
+                    <button class="btn-submit active" id="btn-submit-exam">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> NỘP BÀI THI
+                    </button>
                 </div>
             </div>
 
-            <div class="nav-grid-container">
-                <div class="nav-section nav-section-1">
-                    <div class="sec-title">
-                        PHẦN I: TRẮC NGHIỆM (1)
-                        <span>0.25đ / câu</span>
+            <!-- NAVIGATOR PANEL -->
+            <div class="nav-panel">
+                <div class="nav-panel-header">
+                    <div class="nav-panel-title">
+                        <i class="fa-solid fa-list-check" style="color: var(--primary-blue);"></i> Bảng Điều Hướng Câu Hỏi (Exam Navigator)
                     </div>
-                    <div class="btn-grid">
-                        <div class="q-btn" id="nav-q1" onclick="scrollToQuestion('q-card-1')">1</div>
-                    </div>
-                </div>
-
-                <div class="nav-section nav-section-2">
-                    <div class="sec-title">
-                        PHẦN II: ĐÚNG / SAI (1)
-                        <span>Tối đa 1.0đ</span>
-                    </div>
-                    <div class="btn-grid">
-                        <div class="q-btn" id="nav-q2" onclick="scrollToQuestion('q-card-2')">2</div>
-                    </div>
-                </div>
-
-                <div class="nav-section nav-section-3">
-                    <div class="sec-title">
-                        PHẦN III: ĐIỀN SỐ (1)
-                        <span>0.25đ / câu</span>
-                    </div>
-                    <div class="btn-grid">
-                        <div class="q-btn" id="nav-q3" onclick="scrollToQuestion('q-card-3')">3</div>
+                    <div class="nav-legend">
+                        <div class="legend-item"><div class="legend-dot dot-done"></div> Đã làm</div>
+                        <div class="legend-item"><div class="legend-dot dot-empty"></div> Chưa làm</div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- CÂU HỎI 1: PHẦN I -->
-        <div class="part-header">PHẦN I &nbsp;|&nbsp; Câu trắc nghiệm nhiều phương án lựa chọn</div>
-        <div class="question-card" id="q-card-1">
-            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
-                <div class="question-title">
-                    <span class="q-number">CÂU 1:</span> Theo thuyết động học phân tử chất khí lý tưởng, phát biểu nào sau đây về chuyển động và tương tác của các phân tử là <span class="highlight-red">không chính xác</span>?
-                </div>
-                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
-            </div>
-
-            <div class="concept-box">
-                <div class="concept-title"><i class="fa-solid fa-atom"></i> MÔ HÌNH HẠT VÀ CHẠM ĐÀN HỒI (IDEAL GAS KINETICS)</div>
-                <div class="concept-content">
-                    Thể tích riêng của các phân tử khí là vô cùng nhỏ so với thể tích bình chứa; các phân tử chuyển động hỗn loạn không ngừng và chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình.
-                </div>
-            </div>
-
-            <div class="options-list">
-                <div class="option-item" onclick="selectOption('A')">
-                    <div class="radio-dot"></div>
-                    <div><span class="opt-label">A.</span> Các phân tử khí chuyển động hỗn loạn không ngừng; nhiệt độ càng cao thì chuyển động nhiệt càng nhanh.</div>
-                </div>
-                <div class="option-item" onclick="selectOption('B')">
-                    <div class="radio-dot"></div>
-                    <div><span class="opt-label">B.</span> Lực tương tác giữa các phân tử khí rất mạnh khi chúng ở xa nhau và giảm dần về không khi chúng lại gần nhau.</div>
-                </div>
-                <div class="option-item" onclick="selectOption('C')">
-                    <div class="radio-dot"></div>
-                    <div><span class="opt-label">C.</span> Kích thước của các phân tử chất khí là rất nhỏ so với khoảng cách trung bình giữa các phân tử đó.</div>
-                </div>
-                <div class="option-item" onclick="selectOption('D')">
-                    <div class="radio-dot"></div>
-                    <div><span class="opt-label">D.</span> Khi va chạm vào thành bình chứa, các phân tử khí tác dụng lực và gây ra áp suất lên thành bình.</div>
-                </div>
-            </div>
-
-            <div class="solution-box" id="sol-q1">
-                <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng: B (Phát biểu sai về tương tác phân tử)</div>
-                Theo mô hình khí lý tưởng: Ở khoảng cách trung bình giữa các phân tử (ở xa nhau), lực tương tác phân tử là <b>rất nhỏ, coi như bằng không</b>. Các phân tử chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình. Do đó, khẳng định B "lực tương tác rất mạnh khi ở xa nhau" là sai so với thuyết động học phân tử.
-                <div>
-                    <span class="sgk-tag">SGK Vật Lí 12 KNTT - Bài 9, Trang 42</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- CÂU HỎI 2: PHẦN II -->
-        <div class="part-header" style="background-color: var(--orange-color);">PHẦN II &nbsp;|&nbsp; Câu trắc nghiệm Đúng / Sai</div>
-        <div class="question-card" id="q-card-2">
-            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
-                <div class="question-title">
-                    <span class="q-number" style="color: var(--orange-color);">CÂU 2:</span> Khi nói về mô hình động học phân tử của chất, nhiệt độ và nội năng, hãy xác định tính đúng/sai của các phát biểu sau:
-                </div>
-                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">1 ý=0.1đ | 2 ý=0.25đ | 3 ý=0.5đ | 4 ý=1.0đ</div>
-            </div>
-
-            <div class="tf-item">
-                <div class="tf-text">a) Nhiệt độ của vật càng cao thì các phân tử cấu tạo nên vật chuyển động nhiệt càng nhanh và nội năng của vật càng lớn.</div>
-                <div class="tf-actions">
-                    <button class="btn-tf" id="tf-a-true" onclick="selectTF('a', true)">ĐÚNG (TRUE)</button>
-                    <button class="btn-tf" id="tf-a-false" onclick="selectTF('a', false)">SAI (FALSE)</button>
-                </div>
-            </div>
-
-            <div class="tf-item">
-                <div class="tf-text">b) Khi hai vật có nhiệt độ khác nhau tiếp xúc nhau, nhiệt lượng sẽ tự truyền từ vật có nhiệt độ cao hơn sang vật có nhiệt độ thấp hơn cho đến khi đạt cân bằng nhiệt.</div>
-                <div class="tf-actions">
-                    <button class="btn-tf" id="tf-b-true" onclick="selectTF('b', true)">ĐÚNG (TRUE)</button>
-                    <button class="btn-tf" id="tf-b-false" onclick="selectTF('b', false)">SAI (FALSE)</button>
-                </div>
-            </div>
-
-            <div class="tf-item">
-                <div class="tf-text">c) Nội năng của một khối khí lý tưởng xác định chỉ phụ thuộc vào nhiệt độ tuyệt đối của khối khí đó.</div>
-                <div class="tf-actions">
-                    <button class="btn-tf" id="tf-c-true" onclick="selectTF('c', true)">ĐÚNG (TRUE)</button>
-                    <button class="btn-tf" id="tf-c-false" onclick="selectTF('c', false)">SAI (FALSE)</button>
-                </div>
-            </div>
-
-            <div class="tf-item">
-                <div class="tf-text">d) Nếu nhiệt độ của một chất lỏng tăng thêm 15°C thì trong thang nhiệt độ Kelvin, nhiệt độ của nó cũng tăng thêm đúng 15 K.</div>
-                <div class="tf-actions">
-                    <button class="btn-tf" id="tf-d-true" onclick="selectTF('d', true)">ĐÚNG (TRUE)</button>
-                    <button class="btn-tf" id="tf-d-false" onclick="selectTF('d', false)">SAI (FALSE)</button>
-                </div>
-            </div>
-
-            <div class="solution-box" id="sol-q2">
-                <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng cả 4 ý: a) ĐÚNG | b) ĐÚNG | c) ĐÚNG | d) ĐÚNG</div>
-                - <b>a, b:</b> Kiến thức cơ bản về mô hình phân tử và sự truyền nhiệt.<br>
-                - <b>c:</b> Khí lý tưởng bỏ qua thế năng tương tác nên nội năng chỉ phụ thuộc nhiệt độ.<br>
-                - <b>d:</b> Độ biến thiên nhiệt độ trong thang Celsius bằng thang Kelvin (ΔT = Δt).
-            </div>
-        </div>
-
-        <!-- CÂU HỎI 3: PHẦN III -->
-        <div class="part-header" style="background-color: var(--purple-color);">PHẦN III &nbsp;|&nbsp; Câu trắc nghiệm trả lời ngắn (Điền số)</div>
-        <div class="question-card" id="q-card-3">
-            <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
-                <div class="question-title">
-                    <span class="q-number" style="color: var(--purple-color);">CÂU 3:</span> Một bình đun nước siêu tốc chứa <span style="color:var(--primary-blue)">0,5 kg</span> nước ở nhiệt độ ban đầu <span style="color:var(--primary-blue)">25°C</span>. Người ta bật ấm đun để làm nóng nước lên đến <span style="color:var(--primary-blue)">85°C</span>. Biết nhiệt dung riêng của nước là <span style="color:var(--primary-blue)">c = 4200 J/(kg·K)</span>. Bỏ qua nhiệt lượng làm nóng vỏ ấm và mất mát nhiệt ra môi trường. Hãy tính nhiệt lượng cần cung cấp cho khối nước theo đơn vị <span style="color:var(--primary-blue)">kilôjun (kJ)</span>.
-                </div>
-                <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
-            </div>
-
-            <div class="numeric-container">
-                <div class="num-input-box">
-                    <div>
-                        <div style="font-size:11px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">KẾT QUẢ ĐIỀN VÀO PHIẾU TRẢ LỜI</div>
-                        <div class="display-input">
-                            <span id="numeric-display"></span>
-                            <span class="unit-label">kJ</span>
+                <div class="nav-grid-container">
+                    <div class="nav-section nav-section-1">
+                        <div class="sec-title">
+                            PHẦN I: TRẮC NGHIỆM (1)
+                            <span>0.25đ / câu</span>
                         </div>
-                        <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Lưu ý: Nhập số nguyên hoặc số thập phân.</div>
+                        <div class="btn-grid">
+                            <div class="q-btn" id="nav-q1" onclick="scrollToQuestion('q-card-1')">1</div>
+                        </div>
                     </div>
-                    <div class="action-btns" style="margin-top: 15px;">
-                        <button class="btn-clear" onclick="clearInput()">Xóa nhập lại</button>
+
+                    <div class="nav-section nav-section-2">
+                        <div class="sec-title">
+                            PHẦN II: ĐÚNG / SAI (1)
+                            <span>Tối đa 1.0đ</span>
+                        </div>
+                        <div class="btn-grid">
+                            <div class="q-btn" id="nav-q2" onclick="scrollToQuestion('q-card-2')">2</div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="keypad">
-                    <button class="key-btn" onclick="pressKey('7')">7</button>
-                    <button class="key-btn" onclick="pressKey('8')">8</button>
-                    <button class="key-btn" onclick="pressKey('9')">9</button>
-                    <button class="key-btn" onclick="deleteLastKey()"><i class="fa-solid fa-delete-left"></i></button>
-
-                    <button class="key-btn" onclick="pressKey('4')">4</button>
-                    <button class="key-btn" onclick="pressKey('5')">5</button>
-                    <button class="key-btn" onclick="pressKey('6')">6</button>
-                    <button class="key-btn" onclick="pressKey('.')">.</button>
-
-                    <button class="key-btn" onclick="pressKey('1')">1</button>
-                    <button class="key-btn" onclick="pressKey('2')">2</button>
-                    <button class="key-btn" onclick="pressKey('3')">3</button>
-                    <button class="key-btn" onclick="pressKey('0')">0</button>
+                    <div class="nav-section nav-section-3">
+                        <div class="sec-title">
+                            PHẦN III: ĐIỀN SỐ (1)
+                            <span>0.25đ / câu</span>
+                        </div>
+                        <div class="btn-grid">
+                            <div class="q-btn" id="nav-q3" onclick="scrollToQuestion('q-card-3')">3</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="derivation-box" id="sol-q3">
-                <div class="derivation-title">
-                    <i class="fa-solid fa-flask"></i> Khung suy luận vật lý (Physics Derivation):
-                </div>
-                <div style="font-weight:700; font-size:12px; margin-bottom:6px;">1. Độ tăng nhiệt độ của lượng nước:</div>
-                <div class="step-box">
-                    ΔT = T₂ - T₁ = 85°C - 25°C = 60°C = 60 K
-                </div>
-
-                <div style="font-weight:700; font-size:12px; margin-bottom:6px;">2. Nhiệt lượng cần cung cấp cho khối nước:</div>
-                <div class="step-box">
-                    Q = m · c · ΔT = 0,5 × 4200 × 60 = 126 000 J = 126 kJ
+            <!-- CÂU HỎI 1: PHẦN I -->
+            <div class="part-header">PHẦN I &nbsp;|&nbsp; Câu trắc nghiệm nhiều phương án lựa chọn</div>
+            <div class="question-card" id="q-card-1">
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <div class="question-title">
+                        <span class="q-number">CÂU 1:</span> Theo thuyết động học phân tử chất khí lý tưởng, phát biểu nào sau đây về chuyển động và tương tác của các phân tử là <span class="highlight-red">không chính xác</span>?
+                    </div>
+                    <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
                 </div>
 
-                <div class="final-val">⇒ Giá trị điền vào phiếu trả lời đúng: 126</div>
+                <div class="concept-box">
+                    <div class="concept-title"><i class="fa-solid fa-atom"></i> MÔ HÌNH HẠT VÀ CHẠM ĐÀN HỒI (IDEAL GAS KINETICS)</div>
+                    <div class="concept-content">
+                        Thể tích riêng của các phân tử khí là vô cùng nhỏ so với thể tích bình chứa; các phân tử chuyển động hỗn loạn không ngừng và chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình.
+                    </div>
+                </div>
+
+                <div class="options-list">
+                    <div class="option-item" onclick="selectOption('A')">
+                        <div class="radio-dot"></div>
+                        <div><span class="opt-label">A.</span> Các phân tử khí chuyển động hỗn loạn không ngừng; nhiệt độ càng cao thì chuyển động nhiệt càng nhanh.</div>
+                    </div>
+                    <div class="option-item" onclick="selectOption('B')">
+                        <div class="radio-dot"></div>
+                        <div><span class="opt-label">B.</span> Lực tương tác giữa các phân tử khí rất mạnh khi chúng ở xa nhau và giảm dần về không khi chúng lại gần nhau.</div>
+                    </div>
+                    <div class="option-item" onclick="selectOption('C')">
+                        <div class="radio-dot"></div>
+                        <div><span class="opt-label">C.</span> Kích thước của các phân tử chất khí là rất nhỏ so với khoảng cách trung bình giữa các phân tử đó.</div>
+                    </div>
+                    <div class="option-item" onclick="selectOption('D')">
+                        <div class="radio-dot"></div>
+                        <div><span class="opt-label">D.</span> Khi va chạm vào thành bình chứa, các phân tử khí tác dụng lực và gây ra áp suất lên thành bình.</div>
+                    </div>
+                </div>
+
+                <div class="solution-box" id="sol-q1">
+                    <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng: B (Phát biểu sai về tương tác phân tử)</div>
+                    Theo mô hình khí lý tưởng: Ở khoảng cách trung bình giữa các phân tử (ở xa nhau), lực tương tác phân tử là <b>rất nhỏ, coi như bằng không</b>. Các phân tử chỉ tương tác khi va chạm trực tiếp với nhau hoặc với thành bình. Do đó, khẳng định B "lực tương tác rất mạnh khi ở xa nhau" là sai so với thuyết động học phân tử.
+                    <div>
+                        <span class="sgk-tag">SGK Vật Lí 12 KNTT - Bài 9, Trang 42</span>
+                    </div>
+                </div>
             </div>
+
+            <!-- CÂU HỎI 2: PHẦN II -->
+            <div class="part-header" style="background-color: var(--orange-color);">PHẦN II &nbsp;|&nbsp; Câu trắc nghiệm Đúng / Sai</div>
+            <div class="question-card" id="q-card-2">
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <div class="question-title">
+                        <span class="q-number" style="color: var(--orange-color);">CÂU 2:</span> Khi nói về mô hình động học phân tử của chất, nhiệt độ và nội năng, hãy xác định tính đúng/sai của các phát biểu sau:
+                    </div>
+                    <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">1 ý=0.1đ | 2 ý=0.25đ | 3 ý=0.5đ | 4 ý=1.0đ</div>
+                </div>
+
+                <div class="tf-item">
+                    <div class="tf-text">a) Nhiệt độ của vật càng cao thì các phân tử cấu tạo nên vật chuyển động nhiệt càng nhanh và nội năng của vật càng lớn.</div>
+                    <div class="tf-actions">
+                        <button class="btn-tf" id="tf-a-true" onclick="selectTF('a', true)">ĐÚNG (TRUE)</button>
+                        <button class="btn-tf" id="tf-a-false" onclick="selectTF('a', false)">SAI (FALSE)</button>
+                    </div>
+                </div>
+
+                <div class="tf-item">
+                    <div class="tf-text">b) Khi hai vật có nhiệt độ khác nhau tiếp xúc nhau, nhiệt lượng sẽ tự truyền từ vật có nhiệt độ cao hơn sang vật có nhiệt độ thấp hơn cho đến khi đạt cân bằng nhiệt.</div>
+                    <div class="tf-actions">
+                        <button class="btn-tf" id="tf-b-true" onclick="selectTF('b', true)">ĐÚNG (TRUE)</button>
+                        <button class="btn-tf" id="tf-b-false" onclick="selectTF('b', false)">SAI (FALSE)</button>
+                    </div>
+                </div>
+
+                <div class="tf-item">
+                    <div class="tf-text">c) Nội năng của một khối khí lý tưởng xác định chỉ phụ thuộc vào nhiệt độ tuyệt đối của khối khí đó.</div>
+                    <div class="tf-actions">
+                        <button class="btn-tf" id="tf-c-true" onclick="selectTF('c', true)">ĐÚNG (TRUE)</button>
+                        <button class="btn-tf" id="tf-c-false" onclick="selectTF('c', false)">SAI (FALSE)</button>
+                    </div>
+                </div>
+
+                <div class="tf-item">
+                    <div class="tf-text">d) Nếu nhiệt độ của một chất lỏng tăng thêm 15°C thì trong thang nhiệt độ Kelvin, nhiệt độ của nó cũng tăng thêm đúng 15 K.</div>
+                    <div class="tf-actions">
+                        <button class="btn-tf" id="tf-d-true" onclick="selectTF('d', true)">ĐÚNG (TRUE)</button>
+                        <button class="btn-tf" id="tf-d-false" onclick="selectTF('d', false)">SAI (FALSE)</button>
+                    </div>
+                </div>
+
+                <div class="solution-box" id="sol-q2">
+                    <div class="sol-title"><i class="fa-regular fa-circle-check"></i> Đáp án đúng cả 4 ý: a) ĐÚNG | b) ĐÚNG | c) ĐÚNG | d) ĐÚNG</div>
+                    - <b>a, b:</b> Kiến thức cơ bản về mô hình phân tử và sự truyền nhiệt.<br>
+                    - <b>c:</b> Khí lý tưởng bỏ qua thế năng tương tác nên nội năng chỉ phụ thuộc nhiệt độ.<br>
+                    - <b>d:</b> Độ biến thiên nhiệt độ trong thang Celsius bằng thang Kelvin (ΔT = Δt).
+                </div>
+            </div>
+
+            <!-- CÂU HỎI 3: PHẦN III -->
+            <div class="part-header" style="background-color: var(--purple-color);">PHẦN III &nbsp;|&nbsp; Câu trắc nghiệm trả lời ngắn (Điền số)</div>
+            <div class="question-card" id="q-card-3">
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <div class="question-title">
+                        <span class="q-number" style="color: var(--purple-color);">CÂU 3:</span> Một bình đun nước siêu tốc chứa <span style="color:var(--primary-blue)">0,5 kg</span> nước ở nhiệt độ ban đầu <span style="color:var(--primary-blue)">25°C</span>. Người ta bật ấm đun để làm nóng nước lên đến <span style="color:var(--primary-blue)">85°C</span>. Biết nhiệt dung riêng của nước là <span style="color:var(--primary-blue)">c = 4200 J/(kg·K)</span>. Bỏ qua nhiệt lượng làm nóng vỏ ấm và mất mát nhiệt ra môi trường. Hãy tính nhiệt lượng cần cung cấp cho khối nước theo đơn vị <span style="color:var(--primary-blue)">kilôjun (kJ)</span>.
+                    </div>
+                    <div style="font-size:11px; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">Câu 01 / 01 • 0.25 Điểm</div>
+                </div>
+
+                <div class="numeric-container">
+                    <div class="num-input-box">
+                        <div>
+                            <div style="font-size:11px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">KẾT QUẢ ĐIỀN VÀO PHIẾU TRẢ LỜI</div>
+                            <div class="display-input">
+                                <span id="numeric-display"></span>
+                                <span class="unit-label">kJ</span>
+                            </div>
+                            <div style="font-size:11px; color:var(--text-muted); margin-top:8px;">Lưu ý: Nhập số nguyên hoặc số thập phân.</div>
+                        </div>
+                        <div class="action-btns" style="margin-top: 15px;">
+                            <button class="btn-clear" onclick="clearInput()">Xóa nhập lại</button>
+                        </div>
+                    </div>
+
+                    <div class="keypad">
+                        <button class="key-btn" onclick="pressKey('7')">7</button>
+                        <button class="key-btn" onclick="pressKey('8')">8</button>
+                        <button class="key-btn" onclick="pressKey('9')">9</button>
+                        <button class="key-btn" onclick="deleteLastKey()"><i class="fa-solid fa-delete-left"></i></button>
+
+                        <button class="key-btn" onclick="pressKey('4')">4</button>
+                        <button class="key-btn" onclick="pressKey('5')">5</button>
+                        <button class="key-btn" onclick="pressKey('6')">6</button>
+                        <button class="key-btn" onclick="pressKey('.')">.</button>
+
+                        <button class="key-btn" onclick="pressKey('1')">1</button>
+                        <button class="key-btn" onclick="pressKey('2')">2</button>
+                        <button class="key-btn" onclick="pressKey('3')">3</button>
+                        <button class="key-btn" onclick="pressKey('0')">0</button>
+                    </div>
+                </div>
+
+                <div class="derivation-box" id="sol-q3">
+                    <div class="derivation-title">
+                        <i class="fa-solid fa-flask"></i> Khung suy luận vật lý (Physics Derivation):
+                    </div>
+                    <div style="font-weight:700; font-size:12px; margin-bottom:6px;">1. Độ tăng nhiệt độ của lượng nước:</div>
+                    <div class="step-box">
+                        ΔT = T₂ - T₁ = 85°C - 25°C = 60°C = 60 K
+                    </div>
+
+                    <div style="font-weight:700; font-size:12px; margin-bottom:6px;">2. Nhiệt lượng cần cung cấp cho khối nước:</div>
+                    <div class="step-box">
+                        Q = m · c · ΔT = 0,5 × 4200 × 60 = 126 000 J = 126 kJ
+                    </div>
+
+                    <div class="final-val">⇒ Giá trị điền vào phiếu trả lời đúng: 126</div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -1098,7 +1186,7 @@
 
     <!-- JS ENGINE -->
     <script>
-        // 1. Quản lý Chế độ Sáng/Tối
+        // 1. Quản lý Chế độ Sáng/Tối (Dark/Light Theme)
         const themeBtn = document.getElementById('theme-btn');
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
@@ -1122,27 +1210,45 @@
             q3: ''
         };
 
+        let isStarted = false;
         let isSubmitted = false;
-
-        // 3. Đếm ngược thời gian
         let totalSeconds = 50 * 60;
-        const timerEl = document.getElementById('timer');
-        const timerInterval = setInterval(() => {
-            if (totalSeconds > 0 && !isSubmitted) {
-                totalSeconds--;
-                let min = Math.floor(totalSeconds / 60);
-                let sec = totalSeconds % 60;
-                timerEl.innerText = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
-            }
-        }, 1000);
+        let timerInterval = null;
 
+        // 3. Hàm kích hoạt BẮT ĐẦU LÀM BÀI
+        function startExam() {
+            isStarted = true;
+            
+            // Ẩn bảng chờ & Header chờ
+            document.getElementById('start-banner').style.display = 'none';
+            document.getElementById('pre-exam-header').style.display = 'none';
+
+            // Hiển thị khu vực đề thi
+            document.getElementById('exam-content-area').style.display = 'block';
+
+            // Bắt đầu đếm ngược thời gian
+            const timerEl = document.getElementById('timer');
+            timerInterval = setInterval(() => {
+                if (totalSeconds > 0 && !isSubmitted) {
+                    totalSeconds--;
+                    let min = Math.floor(totalSeconds / 60);
+                    let sec = totalSeconds % 60;
+                    timerEl.innerText = `${min < 10 ? '0' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+                } else if (totalSeconds <= 0 && !isSubmitted) {
+                    alert('Hết giờ làm bài!');
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        // Cuộn mượt đến câu hỏi
         function scrollToQuestion(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 4. Chọn đáp án Câu 1
+        // 4. Xử lý Chọn đáp án Câu 1
         function selectOption(val) {
-            if (isSubmitted) return;
+            if (!isStarted || isSubmitted) return;
             userAnswers.q1 = val;
             
             const items = document.querySelectorAll('#q-card-1 .option-item');
@@ -1159,9 +1265,9 @@
             updateProgress();
         }
 
-        // 5. Chọn Đúng/Sai Câu 2
+        // 5. Xử lý Chọn Đúng/Sai Câu 2
         function selectTF(subKey, val) {
-            if (isSubmitted) return;
+            if (!isStarted || isSubmitted) return;
             userAnswers.q2[subKey] = val;
 
             const btnTrue = document.getElementById(`tf-${subKey}-true`);
@@ -1182,7 +1288,7 @@
         const display = document.getElementById('numeric-display');
 
         function pressKey(val) {
-            if (isSubmitted) return;
+            if (!isStarted || isSubmitted) return;
             if (val === '.' && userAnswers.q3.includes('.')) return;
             userAnswers.q3 += val;
             display.innerText = userAnswers.q3;
@@ -1190,20 +1296,20 @@
         }
 
         function deleteLastKey() {
-            if (isSubmitted) return;
+            if (!isStarted || isSubmitted) return;
             userAnswers.q3 = userAnswers.q3.slice(0, -1);
             display.innerText = userAnswers.q3;
             updateProgress();
         }
 
         function clearInput() {
-            if (isSubmitted) return;
+            if (!isStarted || isSubmitted) return;
             userAnswers.q3 = '';
             display.innerText = '';
             updateProgress();
         }
 
-        // 7. Cập nhật tiến trình
+        // 7. Cập nhật thanh tiến trình
         function updateProgress() {
             let doneCount = 0;
 
@@ -1214,7 +1320,7 @@
                 document.getElementById('nav-q1').classList.remove('done');
             }
 
-            const q2Done = Object.values(userAnswers.q2).some(v => v !== null);
+            const q2Done = Object.values(userAnswers.q2).every(v => v !== null);
             if (q2Done) {
                 doneCount++;
                 document.getElementById('nav-q2').classList.add('done');
@@ -1234,10 +1340,8 @@
         }
 
         // 8. Chức năng Nộp bài & Chấm điểm
-        document.getElementById('btn-submit-exam').addEventListener('click', function() {
-            if (isSubmitted) return;
-
-            if (!confirm('Bạn có chắc chắn muốn nộp bài thi?')) return;
+        function submitExam() {
+            if (!isStarted || isSubmitted) return;
 
             isSubmitted = true;
             clearInterval(timerInterval);
@@ -1245,7 +1349,7 @@
             let rawScore = 0;
             let correctCount = 0;
 
-            // Chấm Câu 1
+            // Chấm Câu 1 (0.25đ)
             const navQ1 = document.getElementById('nav-q1');
             const q1Items = document.querySelectorAll('#q-card-1 .option-item');
             const labels = ['A', 'B', 'C', 'D'];
@@ -1267,7 +1371,7 @@
             }
             document.getElementById('sol-q1').style.display = 'block';
 
-            // Chấm Câu 2
+            // Chấm Câu 2 (Tối đa 1.0đ)
             let q2CorrectCount = 0;
             ['a', 'b', 'c', 'd'].forEach(sub => {
                 const isUserCorrect = userAnswers.q2[sub] === correctAnswers.q2[sub];
@@ -1301,7 +1405,7 @@
             }
             document.getElementById('sol-q2').style.display = 'block';
 
-            // Chấm Câu 3
+            // Chấm Câu 3 (0.25đ)
             const navQ3 = document.getElementById('nav-q3');
             if (userAnswers.q3.trim() === correctAnswers.q3) {
                 rawScore += 0.25;
@@ -1310,13 +1414,12 @@
             } else {
                 navQ3.classList.add('wrong');
             }
-            // Sửa hiển thị khung lời giải câu 3
             document.getElementById('sol-q3').style.display = 'block';
 
-            // Quy đổi ra thang điểm 10 chuẩn
+            // Tính điểm thang 10
             let scaledScore = ((rawScore / 1.5) * 10).toFixed(2);
 
-            // Cập nhật Bảng kết quả
+            // Bảng kết quả
             document.getElementById('result-score').innerText = `${scaledScore} / 10`;
             document.getElementById('res-correct').innerText = correctCount;
 
@@ -1326,11 +1429,18 @@
             document.getElementById('res-time').innerText = `${m} phút ${s} giây`;
 
             document.getElementById('result-banner').style.display = 'block';
-            this.innerText = 'ĐÃ NỘP BÀI';
-            this.style.backgroundColor = '#64748b';
-            this.style.cursor = 'not-allowed';
+            const btnSub = document.getElementById('btn-submit-exam');
+            btnSub.innerText = 'ĐÃ NỘP BÀI';
+            btnSub.style.backgroundColor = '#64748b';
+            btnSub.style.cursor = 'not-allowed';
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('btn-submit-exam').addEventListener('click', function() {
+            if (confirm('Bạn có chắc chắn muốn nộp bài thi?')) {
+                submitExam();
+            }
         });
     </script>
 </body>
