@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài học — PhysiHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2e4a86">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .page-head h1 { margin: 6px 0 8px; }
+    .page-head p { color: var(--ink-2); max-width: 640px; }
+    .chapter-block { margin-top: 32px; scroll-margin-top: 80px; }
+    .chapter-block .head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+    .chapter-block .head h2 { font-size: 24px; }
+    .chapter-block .head .en { font-family: var(--font-serif); font-style: italic; font-size: 16px; }
+    .chapter-block .head .meta { margin-left: auto; font-size: 13px; color: var(--ink-3); }
+    .chapter-block .head .progress { width: 120px; }
+    .lesson-list { display: grid; gap: 10px; }
+    .lesson-row { display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 12px 16px; color: inherit; border-left: 4px solid var(--accent); }
+    .lesson-row .n { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); background: var(--accent-soft); }
+    .lesson-row .t { font-weight: 500; }
+    .lesson-row .t .en { display: block; font-size: 13px; }
+    .lesson-row.done .n { background: var(--accent); color: #fff; }
+    .lesson-row.soon { opacity: .6; }
+    .lesson-row.soon:hover { box-shadow: none; border-color: var(--line); cursor: default; }
+    @media (max-width: 600px) { .lesson-row { grid-template-columns: 40px 1fr; } .lesson-row .tag { grid-column: 2; justify-self: start; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="page-hero">
+        <div>
+          <span class="badge">Bài học</span>
+          <h1>Bốn chương · <span id="lessonCount">25</span> bài</h1>
+          <p>Thứ tự bài theo SGK Vật lí 12 – Kết nối tri thức với cuộc sống. Mỗi bài có tóm tắt lí thuyết, công thức, thuật ngữ song ngữ và câu hỏi tự kiểm tra.</p>
+        </div>
+        <span class="spacer"></span>
+        <div class="glass" style="padding:14px 18px;min-width:180px"><div class="small" style="color:#cfe0ff">Đã học</div><div style="font-family:var(--font-serif);font-size:32px;line-height:1.1"><span id="doneCount">0</span><span style="font-size:16px;color:#cfe0ff"> / <span id="totalCount">21</span> bài</span></div></div>
+      </div>
+      <div id="chapters"></div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    PH.mount({ active: 'lessons' });
+    const ICONS = {
+      1: '<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v6"/>',
+      2: '<circle cx="8" cy="9" r="2.2"/><circle cx="15.5" cy="7.5" r="2.2"/><circle cx="12" cy="15.5" r="2.2"/><circle cx="18" cy="15" r="1.6"/><path d="M4.5 16.5 6 14"/>',
+      3: '<path d="M6 3v8a6 6 0 0 0 12 0V3"/><path d="M6 3h4v5H6zM14 3h4v5h-4z"/>',
+      4: '<circle cx="12" cy="12" r="1.8"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-60 12 12)"/>'
+    };
+    const icon = c => `<span class="icon-tile sm tone-${c}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[c] || ''}</svg></span>`;
+    function render() {
+      const p = PH.progress();
+      document.getElementById('lessonCount').textContent = (PH.LESSONS || []).length || 25;
+      const withContent = (PH.LESSONS || []).filter(l => PH.hasContent(l.n));
+      document.getElementById('totalCount').textContent = withContent.length;
+      document.getElementById('doneCount').textContent = withContent.filter(l => p.lessons[l.n] && p.lessons[l.n].done).length;
+      document.getElementById('chapters').innerHTML = (PH.CHAPTERS || []).map(ch => {
+        const pr = PH.chapterProgress(ch.n); const pct = pr.total ? Math.round(pr.done / pr.total * 100) : 0;
+        const rows = ch.lessons.map(n => {
+          const l = PH.lesson(n); if (!l) return '';
+          const has = PH.hasContent(n); const st = p.lessons[n] || {};
+          const tag = st.done ? '<span class="tag green">đã học</span>' : has ? (st.visited ? '<span class="tag navy">đang học</span>' : '') : '<span class="tag">đang biên soạn</span>';
+          const inner = `<span class="n">${PH.pad2(l.n)}</span><span class="t">${PH.L({ vi: l.vi, en: l.en })}</span>${tag}`;
+          return has ? `<a class="card lesson-row ${st.done ? 'done' : ''}" href="bai.html?n=${n}">${inner}</a>` : `<div class="card lesson-row soon">${inner}</div>`;
+        }).join('');
+        return `<section class="chapter-block acc-${ch.n}" id="chuong-${ch.n}">
+          <div class="head">${icon(ch.n)}<div><h2>Chương ${PH.roman(ch.n)} · ${PH.esc(ch.vi)}</h2><span class="en">${PH.esc(ch.en)}</span></div><span class="meta">${pr.done} / ${pr.total} bài đã học</span><span class="progress"><i style="width:${pct}%;background:var(--accent)"></i></span></div>
+          <div class="lesson-list">${rows}</div></section>`;
+      }).join('') || '<div class="empty">Chưa có dữ liệu.</div>';
+    }
+    render(); PH.applyHash(); PH.onLang(render);
+    window.addEventListener('hashchange', PH.applyHash);
+  </script>
+</body>
+</html>

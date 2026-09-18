@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngân hàng thuật ngữ — PhysiHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2e4a86">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .head h1 { margin-bottom: 4px; }
+    .head .meta { color: var(--ink-2); font-size: 14px; }
+    .head .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .search { margin: 0 0 14px; border-radius: 999px; padding: 12px 18px; box-shadow: var(--shadow); }
+    .trow .tag { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+    .trow.active { border-left-color: var(--accent); background: var(--accent-soft); }
+    .detail .crumb { color: var(--accent); font-weight: 500; }
+    .detail .fbox { border-left: 4px solid var(--accent); }
+    .detail .btns .btn.outline { color: var(--accent); }
+    .layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; margin-top: 18px; }
+    .list { padding: 0; overflow: hidden; }
+    .list .thead { display: grid; grid-template-columns: 1fr auto; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--ink-3); }
+    .trow { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; }
+    .trow:hover { background: var(--surface-2); }
+    .trow.active { background: var(--navy-soft); border-left-color: var(--navy); }
+    .trow .vi { font-weight: 500; }
+    .trow .ipa { font-size: 12px; color: var(--ink-3); }
+    .trow .star { color: var(--gold); margin-left: 4px; }
+    .list .tfoot { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; font-size: 13px; color: var(--ink-3); }
+    .detail { position: sticky; top: calc(var(--header-h) + 16px); }
+    .detail .crumb { font-size: 12px; color: var(--ink-3); }
+    .detail h2 { margin-top: 4px; font-size: 26px; }
+    .detail .en-name { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--gold); }
+    .detail .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0; font-size: 13px; color: var(--ink-2); }
+    .detail .meta .speak-btn { margin-left: auto; }
+    .detail .def { font-size: 15px; line-height: 1.65; }
+    .detail .def.en { margin-top: 8px; padding-left: 12px; border-left: 3px solid var(--gold-soft); }
+    .detail .fbox { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; margin-top: 14px; }
+    .detail .fbox .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+    .detail .fbox .math { font-size: 22px; }
+    .detail .ex { margin-top: 14px; font-size: 14px; }
+    .detail .ex .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+    .detail .ex .en { font-style: italic; }
+    .detail .btns { display: flex; gap: 10px; margin-top: 16px; }
+    .detail .btns .btn { flex: 1; }
+    /* Flashcard & quiz (hộp thoại) */
+    .overlay { position: fixed; inset: 0; background: rgba(31, 41, 51, .45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 70; }
+    .overlay.show { display: flex; }
+    .dialog { width: min(560px, 100%); }
+    .dialog .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .fc { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; cursor: pointer; border: 1px solid var(--line-strong); border-radius: 12px; padding: 24px; background: var(--surface-2); }
+    .fc .big { font-family: var(--font-serif); font-size: 30px; }
+    .fc .lbl { font-size: 12px; color: var(--ink-3); }
+    .fc-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+    .qz .stem { font-weight: 500; margin: 6px 0 12px; font-size: 17px; }
+    .qz .opts { display: grid; gap: 8px; }
+    .qz .opt { text-align: left; padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    .qz .opt:hover { border-color: var(--navy); }
+    .qz .opt.right { border-color: var(--green); background: var(--green-soft); }
+    .qz .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .detail { position: static; order: -1; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="page-hero">
+        <div>
+          <span class="badge">Thuật ngữ</span>
+          <h1>Ngân hàng thuật ngữ Vật lí 12</h1>
+          <p class="meta" id="meta"></p>
+        </div>
+        <span class="spacer"></span>
+        <div class="actions">
+          <button class="btn outline" id="btnFlash">Ôn bằng flashcard</button>
+          <button class="btn glow" id="btnQuiz">Kiểm tra · 10 câu</button>
+        </div>
+      </div>
+
+      <label class="search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Tìm theo tiếng Việt hoặc tiếng Anh — ví dụ: đẳng nhiệt, flux, half-life" autocomplete="off"></label>
+      <div class="pills" id="chapterPills"></div>
+
+      <div class="layout">
+        <div class="card list">
+          <div class="thead"><span>Thuật ngữ · Term</span><span>Bài</span></div>
+          <div id="rows"></div>
+          <div class="tfoot"><span id="countText"></span><button class="btn ghost sm" id="btnMore">Xem thêm</button></div>
+        </div>
+        <aside class="card detail" id="detail"></aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="overlay" id="overlay"><div class="card dialog" id="dialog"></div></div>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    PH.mount({ active: 'terms' });
+    const TERMS = PH.TERMS || [];
+    const PAGE = 12;
+    // ?t=<id> mở sẵn một thuật ngữ · ?c=<1..4> mở sẵn một chương · ?q=<từ khoá> tìm sẵn
+    let chapter = +(PH.qs('c') || 0) || 0, query = PH.qs('q') || '', limit = PAGE, currentId = PH.qs('t') || (TERMS[0] && TERMS[0].id);
+    if (query) document.getElementById('q').value = query;
+
+    // Chỉ mục tìm kiếm chuẩn hoá sẵn
+    const index = TERMS.map(t => ({ t, key: PH.norm([t.vi, t.en, t.symbol, t.formula].join(' ')) }));
+    function filtered() {
+      const q = PH.norm(query);
+      return index.filter(x => (!chapter || x.t.chapter === chapter) && (!q || x.key.includes(q))).map(x => x.t);
+    }
+
+    function renderMeta() {
+      const added = TERMS.filter(t => t.added).length;
+      const lessons = new Set(TERMS.map(t => t.lesson)).size;
+      document.getElementById('meta').textContent = `${TERMS.length} thuật ngữ · 4 chương · ${lessons} bài` + (added ? ` · ${added} mục do nhóm bổ sung, đang chờ giáo viên thẩm định` : '');
+      document.getElementById('chapterPills').innerHTML = [`<button class="pill ${!chapter ? 'active' : ''}" data-c="0">Tất cả</button>`]
+        .concat((PH.CHAPTERS || []).map(c => `<button class="pill acc-${c.n} ${chapter === c.n ? 'active' : ''}" data-c="${c.n}">Chương ${PH.roman(c.n)} · ${PH.esc(c.vi)}</button>`)).join('');
+    }
+
+    function renderList() {
+      const all = filtered(); const shown = all.slice(0, limit); const stars = PH.progress().terms;
+      document.getElementById('rows').innerHTML = shown.map(t => `
+        <button type="button" class="trow acc-${t.chapter} ${t.id === currentId ? 'active' : ''}" data-id="${t.id}">
+          <span><span class="vi">${PH.esc(t.vi)}</span> · <span class="en">${PH.esc(t.en)}</span>${stars[t.id] && stars[t.id].star ? '<span class="star" title="đã thêm vào ôn tập">★</span>' : ''}<br><span class="ipa">${PH.esc(t.ipa)}</span></span>
+          <span class="tag">C.${PH.roman(t.chapter)} · Bài ${t.lesson}</span>
+        </button>`).join('') || '<div class="empty">Không có thuật ngữ nào khớp. Thử gõ theo tiếng Anh hoặc bỏ dấu.</div>';
+      document.getElementById('countText').textContent = `Đang xem ${shown.length} trong ${all.length} thuật ngữ`;
+      document.getElementById('btnMore').style.display = shown.length < all.length ? '' : 'none';
+    }
+
+    function renderDetail() {
+      const t = PH.termById(currentId) || filtered()[0]; const box = document.getElementById('detail');
+      if (!t) { box.innerHTML = '<div class="empty">Chọn một thuật ngữ để xem chi tiết.</div>'; return; }
+      currentId = t.id; const l = PH.lang(); const st = PH.progress().terms[t.id] || {};
+      box.className = `card detail acc-${t.chapter}`;
+      const lt = PH.lessonTitle(t.lesson);
+      const meta = [t.ipa, l === 'en' ? t.posEn : t.pos, t.unit && `đơn vị ${t.unit}`, t.symbol && `kí hiệu ${t.symbol}`].filter(Boolean);
+      const defs = (l === 'vi' ? [['vi', t.defVi]] : l === 'en' ? [['en', t.defEn]] : [['vi', t.defVi], ['en', t.defEn]]).filter(d => d[1]);
+      box.innerHTML = `
+        <div class="crumb">Chương ${PH.roman(t.chapter)} · ${PH.esc(lt.vi)}</div>
+        <h2>${PH.esc(t.vi)}</h2>
+        <div class="en-name">${PH.esc(t.en)}</div>
+        <div class="meta"><span>${meta.map(PH.esc).join(' · ')}</span><button class="speak-btn" type="button" title="Nghe phát âm" data-speak="${PH.esc(t.en)}">${PH.icon('speaker', 'sm')}</button></div>
+        ${defs.map(d => `<div class="def ${d[0]}">${PH.esc(d[1])}</div>`).join('')}
+        ${t.formula ? `<div class="fbox"><div class="lbl">Công thức liên quan</div><div class="math">${PH.esc(t.formula)}</div></div>` : ''}
+        ${(t.exampleEn || t.exampleVi) ? `<div class="ex"><div class="lbl">Ví dụ theo dạng đề thi</div>${l !== 'vi' && t.exampleEn ? `<div class="en">“${PH.esc(t.exampleEn)}”</div>` : ''}${l !== 'en' && t.exampleVi ? `<div class="vi">${PH.esc(t.exampleVi)}</div>` : ''}</div>` : ''}
+        ${t.added ? '<div class="small" style="margin-top:12px"><span class="tag gold">bổ sung · chờ thẩm định</span></div>' : ''}
+        <div class="btns">
+          <button class="btn outline" type="button" id="btnStar">${st.star ? '★ Đã thêm vào ôn tập' : 'Thêm vào ôn tập'}</button>
+          <a class="btn outline" href="bai.html?n=${t.lesson}">Mở bài ${t.lesson}</a>
+        </div>`;
+      document.getElementById('btnStar').addEventListener('click', () => {
+        PH.update(p => { const x = p.terms[t.id] || { seen: 0, wrong: 0 }; x.star = !x.star; p.terms[t.id] = x; });
+        renderDetail(); renderList();
+      });
+      PH.noteTerm(t.id, false);
+    }
+
+    function renderAll() { renderMeta(); renderList(); renderDetail(); }
+
+    document.getElementById('q').addEventListener('input', e => { query = e.target.value; limit = PAGE; renderList(); });
+    document.getElementById('chapterPills').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; chapter = +b.dataset.c; limit = PAGE; renderMeta(); renderList(); });
+    document.getElementById('rows').addEventListener('click', e => {
+      const b = e.target.closest('.trow'); if (!b) return; currentId = b.dataset.id; renderList(); renderDetail();
+      if (window.innerWidth <= 860) document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.getElementById('btnMore').addEventListener('click', () => { limit += PAGE; renderList(); });
+
+    /* ---- Flashcard ---- */
+    const overlay = document.getElementById('overlay'), dialog = document.getElementById('dialog');
+    function openDialog(html) { dialog.innerHTML = html; overlay.classList.add('show'); }
+    function closeDialog() { overlay.classList.remove('show'); dialog.innerHTML = ''; }
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeDialog(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDialog(); });
+
+    document.getElementById('btnFlash').addEventListener('click', () => {
+      const deck = PH.shuffle(filtered()); if (!deck.length) return;
+      let i = 0, flipped = false;
+      const draw = () => {
+        const t = deck[i];
+        const front = PH.lang() === 'en' ? { big: t.en, lbl: t.ipa } : { big: t.vi, lbl: 'Thuật ngữ tiếng Anh là gì?' };
+        const back = PH.lang() === 'en' ? { big: t.vi, lbl: t.defVi } : { big: t.en, lbl: t.ipa + ' — ' + t.defVi };
+        const s = flipped ? back : front;
+        dialog.innerHTML = `<div class="top"><b>Flashcard ${i + 1}/${deck.length}</b><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
+          <div class="fc" id="fc"><span class="lbl">${flipped ? 'Mặt sau · chạm để lật' : 'Mặt trước · chạm để lật'}</span><span class="big ${flipped ? 'en' : ''}">${PH.esc(s.big)}</span><span class="lbl">${PH.esc(s.lbl)}</span></div>
+          <div class="fc-nav"><button class="btn outline sm" type="button" data-prev>← Trước</button><button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe">${PH.icon('speaker', 'sm')}</button><button class="btn sm" type="button" data-next>Tiếp →</button></div>`;
+      };
+      draw(); overlay.classList.add('show');
+      dialog.onclick = e => {
+        if (e.target.closest('[data-close]')) return closeDialog();
+        if (e.target.closest('#fc')) { flipped = !flipped; draw(); }
+        if (e.target.closest('[data-next]')) { i = (i + 1) % deck.length; flipped = false; draw(); }
+        if (e.target.closest('[data-prev]')) { i = (i - 1 + deck.length) % deck.length; flipped = false; draw(); }
+      };
+    });
+
+    /* ---- Kiểm tra 10 câu (chọn nghĩa) ---- */
+    document.getElementById('btnQuiz').addEventListener('click', () => {
+      const pool = filtered(); if (pool.length < 4) { PH.toast('Cần ít nhất 4 thuật ngữ trong bộ lọc để tạo bài kiểm tra.'); return; }
+      const qs = PH.sample(pool, Math.min(10, pool.length)).map(t => {
+        const wrong = PH.sample(TERMS.filter(x => x.id !== t.id && x.chapter === t.chapter).concat(TERMS.filter(x => x.id !== t.id && x.chapter !== t.chapter)), 3);
+        return { t, opts: PH.shuffle([t].concat(wrong)) };
+      });
+      let i = 0, ok = 0, locked = false;
+      const askEn = PH.lang() !== 'vi'; // mức 2–3: cho thuật ngữ tiếng Anh, chọn nghĩa Việt; mức 1: ngược lại
+      const draw = () => {
+        const q = qs[i];
+        dialog.innerHTML = `<div class="top"><b>Câu ${i + 1}/${qs.length}</b><span class="small muted">Đúng ${ok}</span><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
+          <div class="qz"><div class="small muted">${askEn ? 'Chọn nghĩa tiếng Việt của' : 'Chọn thuật ngữ tiếng Anh của'}</div>
+          <div class="stem ${askEn ? 'en' : ''}">${PH.esc(askEn ? q.t.en : q.t.vi)} ${askEn ? `<button class="speak-btn" type="button" data-speak="${PH.esc(q.t.en)}" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>` : ''}</div>
+          <div class="opts">${q.opts.map(o => `<button type="button" class="opt ${askEn ? '' : 'en'}" data-id="${o.id}">${PH.esc(askEn ? o.vi : o.en)}</button>`).join('')}</div></div>`;
+        locked = false;
+      };
+      draw(); overlay.classList.add('show');
+      dialog.onclick = e => {
+        if (e.target.closest('[data-close]')) return closeDialog();
+        const b = e.target.closest('.opt'); if (!b || locked) return;
+        locked = true; const q = qs[i]; const right = b.dataset.id === q.t.id;
+        if (right) ok++; PH.noteTerm(q.t.id, !right);
+        dialog.querySelectorAll('.opt').forEach(o => { if (o.dataset.id === q.t.id) o.classList.add('right'); else if (o === b) o.classList.add('wrong'); });
+        setTimeout(() => {
+          if (++i < qs.length) draw();
+          else dialog.innerHTML = `<div class="top"><b>Kết quả</b><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
+            <div class="fc" style="cursor:default"><span class="big">${ok}/${qs.length}</span><span class="lbl">${ok === qs.length ? 'Xuất sắc!' : 'Những thuật ngữ trả lời sai đã được ghi vào phần “Ôn điểm yếu” trong Trò chơi.'}</span></div>`;
+        }, 900);
+      };
+    });
+
+    renderAll();
+    PH.onLang(() => { renderList(); renderDetail(); });
+  </script>
+</body>
+</html>

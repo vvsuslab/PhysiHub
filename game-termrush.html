@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Term Rush — PhysiHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2e4a86">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .top .name { font-family: var(--font-serif); font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+    .top .name .mark { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(90deg, var(--navy) 0 50%, var(--gold) 50% 100%); }
+    .top .sep { width: 1px; height: 22px; background: var(--line-strong); }
+    .top .scope { font-size: 14px; color: var(--ink-2); }
+    .top .exit { margin-left: auto; }
+    .layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+    .arena { position: relative; height: 340px; overflow: hidden; }
+    .arena .line { position: absolute; left: 0; right: 0; bottom: 56px; border-top: 2px dashed; }
+    .arena .line-lbl { position: absolute; left: 16px; bottom: 30px; font-size: 13px; }
+    .fall { position: absolute; top: 0; padding: 10px 18px; border: 1.5px solid; font-size: 18px; white-space: nowrap; transition: opacity .2s; will-change: transform; }
+    .fall.gone { opacity: 0; }
+    .arena .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 24px; z-index: 2; }
+    .arena .overlay h2 { font-size: 30px; }
+    .arena .overlay p { max-width: 460px; }
+    .stat .v.streak-v { display: flex; align-items: center; gap: 10px; }
+    .ask { margin: 16px 0 10px; font-size: 16px; }
+    .ask b { color: var(--gold-2); }
+    .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .opt { padding: 16px 18px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); font-size: 17px; font-weight: 500; text-align: center; }
+    .opt:hover { border-color: var(--navy); }
+    .opt.right { border-color: var(--green); background: var(--green-soft); }
+    .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+    .typebox { display: flex; gap: 10px; }
+    .typebox input { flex: 1; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: 10px; font-size: 18px; outline: 0; }
+    .typebox input:focus { border-color: var(--navy); }
+    .fb { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; min-height: 52px; }
+    .fb .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; }
+    .fb .dot.ok { background: var(--green); }
+    .fb .dot.no { background: var(--red); }
+    .fb a { margin-left: auto; white-space: nowrap; }
+    .hint { margin-top: 10px; font-size: 13px; color: var(--ink-3); }
+    .side { display: flex; flex-direction: column; gap: 14px; }
+    .stat { padding: 12px 0; border-top: 1px solid var(--line); }
+    .stat:first-child { border-top: 0; padding-top: 0; }
+    .stat .l { font-size: 13px; color: var(--ink-3); }
+    .stat .v { font-family: var(--font-serif); font-size: 30px; color: var(--navy); }
+    .stat .v.gold { color: var(--gold); }
+    .lives { display: flex; gap: 6px; margin-top: 6px; }
+    .lives i { width: 14px; height: 14px; border-radius: 50%; background: var(--navy); }
+    .lives i.off { background: transparent; border: 1.5px solid var(--line-strong); }
+    .modes button { display: block; width: 100%; text-align: left; padding: 6px 0; font-size: 14px; color: var(--ink-2); }
+    .modes button.active { color: var(--navy); font-weight: 600; }
+    .modes b { display: inline-block; width: 20px; }
+    .foot { margin-top: 18px; font-size: 13px; color: var(--ink-3); max-width: 640px; }
+    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .arena { height: 260px; } .opts { grid-template-columns: 1fr; } .opt { padding: 12px; font-size: 15px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="top">
+        <div class="name"><span class="mark"></span>Term Rush</div><span class="sep"></span>
+        <span class="scope">Phạm vi: <b id="scopeLabel"></b></span>
+        <span class="pill gold" id="langPill"></span>
+        <a class="exit" href="games.html">Thoát ván</a>
+      </div>
+
+      <div class="layout">
+        <div>
+          <div class="arena" id="arena"><div class="stars"></div><div class="line"></div><div class="line-lbl">chạm vạch này là mất một mạng</div></div>
+          <div class="ask" id="ask"></div>
+          <div id="answer"></div>
+          <div class="fb" id="fb"><span class="small muted">Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.</span></div>
+          <div class="hint" id="hint"></div>
+          <p class="foot">Điểm mỗi thuật ngữ = 10 × hệ số tốc độ × hệ số ngôn ngữ. Trả lời càng nhanh và ở mức ngôn ngữ càng cao thì điểm càng lớn.</p>
+        </div>
+        <aside class="side">
+          <div class="card">
+            <div class="stat"><div class="l">Thời gian còn lại</div><div class="v gold" id="time">60 giây</div><div class="timebar"><i id="timebar" style="width:100%"></i></div></div>
+            <div class="stat"><div class="l">Điểm</div><div class="v" id="score">0</div></div>
+            <div class="stat"><div class="l">Chuỗi đúng liên tiếp</div><div class="v streak-v"><span id="streak">0</span><span id="flame"></span></div></div>
+            <div class="stat"><div class="l">Mạng còn lại</div><div class="lives" id="lives"></div></div>
+          </div>
+          <div class="card modes"><div class="small muted" style="margin-bottom:6px">Chế độ chơi</div>
+            <button data-mode="choose"><b>A</b>· Chọn nghĩa</button>
+            <button data-mode="type"><b>B</b>· Gõ từ tiếng Anh</button>
+            <button data-mode="listen"><b>C</b>· Nghe rồi gõ</button>
+          </div>
+          <div class="notice">Hệ thống ghi lại thuật ngữ em hay sai để đưa vào phần “Ôn điểm yếu”.</div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    PH.mount({ active: 'games', noFooter: true });
+    const ROUND = 60, LIVES = 3, FALL_MS = 9000, SPAWN_MS = 3200, MAX_ON_SCREEN = 3;
+    const arena = document.getElementById('arena');
+    let mode = 'choose', pool = [], items = [], timer = null, endAt = 0, spawnAt = 0, raf = null;
+    let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, hintUsed = false;
+
+    const scope = PH.scope();
+    document.getElementById('scopeLabel').textContent = PH.scopeLabel(scope);
+    function langPill() { const l = PH.langInfo(); document.getElementById('langPill').textContent = `Mức ${l.long} · điểm ×${PH.num(l.mult)}`; }
+    langPill(); PH.onLang(() => { langPill(); if (running) renderAnswer(); });
+
+    function buildPool() {
+      let t = PH.scopeTerms(scope);
+      if (t.length < 4) { PH.toast('Phạm vi này có ít thuật ngữ, dùng toàn bộ ngân hàng.'); t = PH.TERMS || []; }
+      return PH.shuffle(t);
+    }
+
+    /* ----- vòng chơi ----- */
+    function start() {
+      pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true; hintUsed = false;
+      arena.querySelectorAll('.fall, .overlay').forEach(e => e.remove());
+      endAt = Date.now() + ROUND * 1000; spawnAt = 0;
+      clearInterval(timer); timer = setInterval(tickTime, 250); tickTime();
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(frame);
+      renderStats(); setFeedback(null);
+      spawn();
+    }
+    function tickTime() {
+      const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+      document.getElementById('time').textContent = left + ' giây';
+      document.getElementById('timebar').style.width = Math.max(0, Math.min(100, (endAt - Date.now()) / (ROUND * 1000) * 100)) + '%';
+      if (left === 0 && running) end('Hết giờ!');
+    }
+    function spawn() {
+      if (!running || items.length >= MAX_ON_SCREEN || !pool.length) return;
+      const term = pool.shift();
+      const el = document.createElement('div'); el.className = 'fall'; el.textContent = term.en;
+      const maxX = Math.max(0, arena.clientWidth - 260); el.style.left = (20 + Math.random() * maxX) + 'px';
+      arena.appendChild(el);
+      items.push({ term, el, born: performance.now(), hint: false });
+      spawnAt = Date.now() + SPAWN_MS;
+      renderAnswer();
+    }
+    function frame(now) {
+      if (!running) return;
+      const lineY = arena.clientHeight - 56 - 44;
+      items.forEach(it => {
+        const p = Math.min(1, (now - it.born) / FALL_MS); it.p = p;
+        it.el.style.transform = `translateY(${p * lineY}px)`;
+      });
+      const hit = items.find(it => it.p >= 1);
+      if (hit) miss(hit, 'chạm vạch');
+      if (Date.now() >= spawnAt) spawn();
+      if (!items.length && !pool.length) end('Em đã ôn hết thuật ngữ trong phạm vi này!');
+      markActive();
+      raf = requestAnimationFrame(frame);
+    }
+    const activeItem = () => items.slice().sort((a, b) => (b.p || 0) - (a.p || 0))[0];
+    function markActive() {
+      const a = activeItem();
+      items.forEach(it => it.el.classList.toggle('active', it === a));
+      if (a && a.term !== lastAsked) renderAnswer();
+    }
+
+    /* ----- câu hỏi & trả lời ----- */
+    function renderAnswer() {
+      const a = activeItem(); const ask = document.getElementById('ask'), box = document.getElementById('answer'), hint = document.getElementById('hint');
+      if (!a) { ask.innerHTML = ''; box.innerHTML = ''; hint.textContent = ''; return; }
+      lastAsked = a.term; const t = a.term; const l = PH.lang();
+      hint.textContent = '';
+      if (mode === 'choose') {
+        // Mức 1–2: chọn nghĩa tiếng Việt · Mức 3: chọn định nghĩa tiếng Anh
+        const en = l === 'en';
+        const others = PH.sample((PH.TERMS || []).filter(x => x.id !== t.id && (en ? x.defEn : x.vi)), 3);
+        const opts = PH.shuffle([t].concat(others));
+        ask.innerHTML = `Chọn ${en ? 'định nghĩa đúng' : 'nghĩa đúng'} của <b>${PH.esc(t.en)}</b> ${l !== 'vi' ? `<span class="small muted">${PH.esc(t.ipa)}</span>` : ''} <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>${en ? ` <button class="btn ghost sm" type="button" id="btnHint">Gợi ý tiếng Việt (×1,5)</button>` : ''}`;
+        box.innerHTML = `<div class="opts">${opts.map(o => `<button type="button" class="opt ${en ? 'en' : ''}" data-id="${o.id}" style="${en ? 'font-size:14px;font-weight:400;text-align:left' : ''}">${PH.esc(en ? o.defEn : o.vi)}</button>`).join('')}</div>`;
+        if (l === 'vi') hint.textContent = t.defVi;
+      } else {
+        const listen = mode === 'listen';
+        ask.innerHTML = listen
+          ? `Nghe và gõ thuật ngữ tiếng Anh <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe lại">${PH.icon('speaker', 'sm')}</button> <span class="small muted">(${PH.esc(t.vi)})</span>`
+          : `Gõ thuật ngữ tiếng Anh của <b class="vi" style="color:var(--ink)">${PH.esc(t.vi)}</b> ${l === 'vi' ? `<span class="small muted">— ${PH.esc(t.defVi)}</span>` : ''}`;
+        box.innerHTML = `<form class="typebox" id="typeForm"><input type="text" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${listen ? '…' : 'ví dụ: internal energy'}"><button class="btn" type="submit">Trả lời</button></form>`;
+        if (listen) PH.speak(t.en);
+        setTimeout(() => { const i = document.getElementById('typeIn'); if (i) i.focus(); }, 0);
+      }
+    }
+    function points(it) { const speed = 1 + (1 - (it.p || 0)); const mult = it.hint ? Math.min(PH.langInfo().mult, 1.5) : PH.langInfo().mult; return Math.round(10 * speed * mult); }
+    function hitOk(it) {
+      const pts = points(it); score += pts; streak++; correct++;
+      PH.noteTerm(it.term.id, false);
+      setFeedback(true, it.term, `+${pts} điểm`);
+      sparks(it.el);
+      const sc = document.getElementById('score'); sc.classList.remove('bump'); void sc.offsetWidth; sc.classList.add('bump');
+      remove(it, 'hit');
+    }
+    function miss(it, why) {
+      lives--; streak = 0; wrongIds.push(it.term.id); PH.noteTerm(it.term.id, true);
+      setFeedback(false, it.term, why === 'chạm vạch' ? 'chạm vạch — mất một mạng' : 'sai — mất một mạng');
+      remove(it, 'missed');
+      if (lives <= 0) end('Hết mạng!');
+    }
+    // Hiệu ứng: giữ nguyên vị trí rơi hiện tại rồi chạy animation "nổ" (đúng) hoặc "rung" (sai)
+    function remove(it, fx) {
+      items = items.filter(x => x !== it);
+      const m = /translateY\(([-\d.]+)px\)/.exec(it.el.style.transform || ''); it.el.style.setProperty('--y', (m ? m[1] : 0) + 'px');
+      it.el.classList.add(fx || 'gone'); setTimeout(() => it.el.remove(), 450);
+      renderStats(); lastAsked = null; renderAnswer();
+      if (running && !items.length) spawn(); // không bắt người chơi chờ thuật ngữ kế tiếp
+    }
+    // Tia sáng bắn ra từ thuật ngữ vừa trả lời đúng
+    function sparks(el) {
+      const r = el.getBoundingClientRect(), a = arena.getBoundingClientRect();
+      const cx = r.left - a.left + r.width / 2, cy = r.top - a.top + r.height / 2;
+      const colors = ['#f0d39a', '#e0663f', '#3cb3b8', '#fff'];
+      for (let i = 0; i < 12; i++) {
+        const s = document.createElement('span'); s.className = 'spark';
+        const ang = (Math.PI * 2 * i) / 12 + Math.random() * .4, d = 40 + Math.random() * 50;
+        s.style.left = cx + 'px'; s.style.top = cy + 'px'; s.style.background = colors[i % colors.length];
+        s.style.setProperty('--dx', Math.cos(ang) * d + 'px'); s.style.setProperty('--dy', Math.sin(ang) * d + 'px');
+        arena.appendChild(s); setTimeout(() => s.remove(), 700);
+      }
+    }
+    function setFeedback(ok, t, extra) {
+      const fb = document.getElementById('fb');
+      if (ok == null) { fb.innerHTML = '<span class="small muted">Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.</span>'; return; }
+      fb.innerHTML = `<span class="dot ${ok ? 'ok' : 'no'}">${PH.icon(ok ? 'check' : 'x', 'sm')}</span><span>${ok ? 'Đúng' : 'Chưa đúng'} — <b class="en">${PH.esc(t.en)}</b> là <b>${PH.esc(t.vi)}</b>${t.symbol ? `, kí hiệu ${PH.esc(t.symbol)}` : ''}. <span class="muted">${extra}</span></span><a class="small" href="bai.html?n=${t.lesson}">Xem Bài ${t.lesson}</a>`;
+    }
+    function renderStats() {
+      document.getElementById('score').textContent = score; document.getElementById('streak').textContent = streak;
+      document.getElementById('flame').innerHTML = streak >= 3 ? `<span class="flame" title="Chuỗi ${streak} câu đúng">${PH.icon('flame', 'sm')} nóng!</span>` : '';
+      document.getElementById('lives').innerHTML = Array.from({ length: LIVES }, (_, i) => `<i class="${i < lives ? '' : 'off'}"></i>`).join('');
+    }
+    function end(reason) {
+      if (!running) return; running = false; clearInterval(timer); cancelAnimationFrame(raf);
+      items.forEach(it => it.el.remove()); items = [];
+      const best = (PH.progress().games.termrush || {}).best || 0;
+      PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode });
+      const wrongTerms = [...new Set(wrongIds)].map(PH.termById).filter(Boolean);
+      const ov = document.createElement('div'); ov.className = 'overlay';
+      ov.innerHTML = `<div class="small muted">${PH.esc(reason)}</div><h2>${score} điểm</h2>
+        <p>Đúng ${correct}, sai ${wrongIds.length}${score > best ? ' · <b style="color:var(--gold-2)">Kỷ lục mới!</b>' : best ? ` · kỷ lục ${best}` : ''}</p>
+        ${wrongTerms.length ? `<p class="small">Cần ôn lại: ${wrongTerms.slice(0, 6).map(t => `<a href="thuatngu.html?t=${t.id}">${PH.esc(t.en)}</a>`).join(', ')}</p>` : ''}
+        <div class="row"><button class="btn" id="btnAgain">Chơi lại</button><a class="btn outline" href="games.html">Về Trò chơi</a></div>`;
+      arena.appendChild(ov);
+      document.getElementById('btnAgain').addEventListener('click', start);
+      document.getElementById('ask').innerHTML = ''; document.getElementById('answer').innerHTML = '';
+    }
+
+    /* ----- sự kiện ----- */
+    document.getElementById('answer').addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (!b || !running) return;
+      const it = activeItem(); if (!it) return;
+      const ok = b.dataset.id === it.term.id;
+      b.classList.add(ok ? 'right' : 'wrong');
+      if (ok) hitOk(it); else miss(it, 'sai');
+    });
+    document.getElementById('answer').addEventListener('submit', e => {
+      e.preventDefault(); if (!running) return;
+      const it = activeItem(); if (!it) return;
+      const v = PH.norm(document.getElementById('typeIn').value); const ok = v && v === PH.norm(it.term.en);
+      if (ok) hitOk(it); else miss(it, 'sai');
+    });
+    document.getElementById('ask').addEventListener('click', e => {
+      if (e.target.closest('#btnHint')) { const it = activeItem(); if (it) { it.hint = true; document.getElementById('hint').textContent = it.term.vi + ' — ' + it.term.defVi; e.target.closest('#btnHint').remove(); } }
+    });
+    document.querySelector('.modes').addEventListener('click', e => {
+      const b = e.target.closest('[data-mode]'); if (!b) return; mode = b.dataset.mode;
+      document.querySelectorAll('.modes button').forEach(x => x.classList.toggle('active', x === b));
+      lastAsked = null; if (running) renderAnswer();
+    });
+    document.querySelector('.modes button').classList.add('active');
+    window.addEventListener('resize', () => { items.forEach(it => { it.el.style.left = Math.min(parseFloat(it.el.style.left), Math.max(0, arena.clientWidth - 200)) + 'px'; }); });
+
+    // Màn hình bắt đầu
+    (function intro() {
+      const n = PH.scopeTerms(scope).length;
+      const ov = document.createElement('div'); ov.className = 'overlay';
+      ov.innerHTML = `<h2>Term Rush</h2><p>${n} thuật ngữ · 60 giây · 3 mạng. Thuật ngữ rơi từ trên xuống — trả lời thuật ngữ đang tô vàng trước khi nó chạm vạch. Chọn chế độ A, B hoặc C ở cột bên.</p><button class="btn" id="btnStart">Bắt đầu</button>`;
+      arena.appendChild(ov); renderStats();
+      document.getElementById('btnStart').addEventListener('click', start);
+    })();
+  </script>
+</body>
+</html>

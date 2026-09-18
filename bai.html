@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài học — PhysiHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2e4a86">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .layout { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
+    .crumb { font-size: 13px; color: var(--ink-3); }
+    .crumb a { color: var(--ink-3); }
+    h1.title { margin: 6px 0 2px; }
+    .title-en { font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--gold); margin-bottom: 18px; }
+    .level-note { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: var(--ink-2); padding: 12px 16px; }
+    .level-note .icon { color: var(--accent); margin-top: 2px; }
+    .crumb a:last-child { color: var(--accent); font-weight: 500; }
+    .formula { border-top: 5px solid var(--accent); }
+    .formula .math { color: var(--accent); }
+    .side .card.soft { background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%); }
+    .side .btn { background: var(--accent); border-color: var(--accent); }
+    .term-list button:hover { color: var(--accent); }
+    .opt.selected { border-color: var(--accent); background: var(--accent-soft); }
+    .opt.selected .k { background: var(--accent); border-color: var(--accent); }
+    .pager .nm { color: var(--accent); }
+    .content { margin-top: 22px; display: flex; flex-direction: column; gap: 18px; }
+    .prose { font-size: 17px; line-height: 1.75; }
+    .prose .bi .en { margin-top: 6px; }
+    .hint { font-size: 13px; color: var(--ink-3); }
+    .formula .label { font-size: 12px; color: var(--ink-3); margin-bottom: 8px; }
+    .formula .math { font-size: 30px; margin: 4px 0 14px; word-break: break-word; }
+    .vars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 24px; font-size: 14px; }
+    .vars .sym { font-family: var(--font-serif); font-style: italic; font-size: 17px; width: 26px; display: inline-block; }
+    .vars .unit { color: var(--ink-3); }
+    .formula .note { margin-top: 12px; font-size: 14px; color: var(--ink-2); }
+    .callout { border-left: 4px solid var(--gold); background: var(--gold-soft); }
+    .side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); }
+    .side h3 { font-family: var(--font-sans); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .term-list { display: flex; flex-direction: column; }
+    .term-list button { text-align: left; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; }
+    .term-list button:first-child { border-top: 0; }
+    .term-list button:hover { color: var(--navy); }
+    .term-list .en { font-size: 13px; }
+    .selfcheck { margin-top: 36px; scroll-margin-top: 80px; }
+    .q { margin-top: 16px; }
+    .q .stem { font-weight: 500; margin-bottom: 10px; }
+    .opts { display: grid; gap: 8px; }
+    .opt { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    .opt:hover { border-color: var(--navy); }
+    .opt .k { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+    .opt.selected { border-color: var(--navy); background: var(--navy-soft); }
+    .opt.selected .k { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .opt.right { border-color: var(--green); background: var(--green-soft); }
+    .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+    .why { margin-top: 10px; font-size: 14px; padding: 10px 14px; border-radius: 8px; background: var(--surface-2); display: none; }
+    .why.show { display: block; }
+    .result { margin-top: 16px; display: none; }
+    .result.show { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .pager a { display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; color: inherit; }
+    .pager a:hover { text-decoration: none; box-shadow: var(--shadow); }
+    .pager a.next { text-align: right; }
+    .pager .lbl { font-size: 12px; color: var(--ink-3); }
+    .pager .nm { font-weight: 500; }
+    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .side { position: static; } .pager { grid-template-columns: 1fr; } .pager a.next { text-align: left; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="layout">
+        <article>
+          <div class="crumb" id="crumb"></div>
+          <h1 class="title" id="title"></h1>
+          <div class="title-en" id="titleEn"></div>
+          <div class="card level-note" id="levelNote"></div>
+          <div class="content" id="content"></div>
+          <p class="hint" id="hint" style="margin-top:14px"></p>
+
+          <section class="selfcheck card" id="selfcheck">
+            <div class="row between">
+              <div><span class="badge">Sau khi đọc xong</span><h2 style="margin-top:8px">Tự kiểm tra</h2></div>
+              <span class="small muted" id="scMeta"></span>
+            </div>
+            <div id="questions"></div>
+            <div class="row" style="margin-top:18px">
+              <button class="btn" id="btnCheck">Chấm bài</button>
+              <button class="btn outline" id="btnRetry" style="display:none">Làm lại</button>
+            </div>
+            <div class="result" id="result"></div>
+          </section>
+
+          <nav class="pager" id="pager" aria-label="Bài trước / bài sau"></nav>
+        </article>
+
+        <aside class="side">
+          <div class="card">
+            <h3>Thuật ngữ trong bài</h3>
+            <div class="term-list" id="termList"></div>
+            <hr class="sep">
+            <a id="practiceLink" href="#" class="small">Luyện thuật ngữ của bài này →</a>
+          </div>
+          <div class="card soft">
+            <h3>Sau khi đọc xong</h3>
+            <a class="btn block" href="#selfcheck" id="toSelfcheck">Tự kiểm tra · 3 câu</a>
+            <div class="small muted" style="margin-top:10px" id="nextHint"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    PH.mount({ active: 'lessons' });
+    const n = parseInt(PH.qs('n'), 10) || 1;
+    const lesson = PH.lesson(n);
+    const data = PH.CONTENT && PH.CONTENT[String(n)];
+    const answers = {};
+    let checked = false;
+
+    const NOTES = {
+      vi: 'Mức 1 · Nội dung bằng tiếng Việt. Thuật ngữ tiếng Anh được tô sáng — chạm để xem nghĩa, phiên âm và nghe phát âm.',
+      bi: 'Mức 2 · Song ngữ. Mỗi đoạn có bản tiếng Việt và tiếng Anh; thuật ngữ ở cả hai ngôn ngữ đều chạm được.',
+      en: 'Mức 3 · Nội dung bằng tiếng Anh. Chạm vào thuật ngữ để xem nghĩa tiếng Việt.'
+    };
+
+    function block(b) {
+      if (b.type === 'text') return `<div class="prose hl">${PH.L(b)}</div>`;
+      if (b.type === 'callout') return `<div class="card callout hl">${PH.L(b)}</div>`;
+      if (b.type === 'formula') {
+        const vars = (b.vars || []).map(v => `<div class="hl"><span class="sym">${PH.esc(v.sym)}</span> ${PH.L({ vi: v.vi, en: v.en })}${v.unit ? ` <span class="unit">— ${PH.esc(v.unit)}</span>` : ''}</div>`).join('');
+        return `<div class="card formula"><div class="label">Công thức · Formula${b.title ? ' — ' + PH.esc(PH.T(b.title)) : ''}</div><div class="math">${PH.esc(b.math)}</div><div class="vars">${vars}</div>${b.note ? `<div class="note hl">${PH.L(b.note)}</div>` : ''}</div>`;
+      }
+      if (b.type === 'table') {
+        const head = (b.head || []).map(h => `<th>${PH.L(h)}</th>`).join('');
+        const rows = (b.rows || []).map(r => `<tr>${r.map(c => `<td class="hl">${PH.L(c)}</td>`).join('')}</tr>`).join('');
+        return `<div class="card" style="padding:0;overflow:auto"><table class="tbl"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      }
+      return '';
+    }
+
+    function renderQuestions() {
+      const qs = (data && data.selfcheck) || [];
+      document.getElementById('scMeta').textContent = qs.length ? `${qs.length} câu · không tính giờ` : '';
+      document.getElementById('questions').innerHTML = qs.map((q, qi) => `
+        <div class="q" data-q="${qi}">
+          <div class="stem hl">${qi + 1}. ${PH.L(q.q)}</div>
+          <div class="opts">${q.options.map((o, oi) => {
+            const sel = answers[qi] === oi; let cls = sel ? ' selected' : '';
+            if (checked) { if (oi === q.correct) cls = ' right'; else if (sel) cls = ' wrong'; }
+            return `<button type="button" class="opt${cls}" data-q="${qi}" data-o="${oi}"><span class="k">${'ABCD'[oi]}</span><span class="hl">${PH.L(o)}</span></button>`;
+          }).join('')}</div>
+          <div class="why${checked ? ' show' : ''} hl">${PH.L(q.why)}</div>
+        </div>`).join('') || '<p class="muted small">Bài này chưa có câu tự kiểm tra.</p>';
+      PH.highlight(document.getElementById('questions'));
+    }
+
+    function render() {
+      if (!lesson) { document.querySelector('article').innerHTML = '<div class="empty">Không tìm thấy bài học.</div>'; return; }
+      const ch = PH.chapter(lesson.chapter);
+      document.body.classList.add(`acc-${ch.n}`); // màu riêng của chương
+      document.title = `Bài ${n}. ${lesson.vi} — PhysiHub`;
+      document.getElementById('crumb').innerHTML = `<a href="baihoc.html">Bài học</a> · <a href="baihoc.html#chuong-${ch.n}">Chương ${PH.roman(ch.n)}. ${PH.esc(ch.vi)}</a>`;
+      document.getElementById('title').textContent = `Bài ${n}. ${lesson.vi}`;
+      document.getElementById('titleEn').textContent = lesson.en;
+      document.getElementById('levelNote').innerHTML = `${PH.icon('lang')}<span>${NOTES[PH.lang()]}${data && data.drafted ? ' <span class="tag gold" style="margin-left:6px">bản nháp · chờ giáo viên thẩm định</span>' : ''}</span>`;
+      const content = document.getElementById('content');
+      if (!data) {
+        content.innerHTML = '<div class="notice">Bài này đang được biên soạn. Em có thể xem thuật ngữ của bài ở cột bên.</div>';
+        document.getElementById('selfcheck').style.display = 'none';
+      } else {
+        content.innerHTML = (data.summary ? `<div class="prose hl" style="font-size:18px;color:var(--ink-2)">${PH.L(data.summary)}</div>` : '') + data.blocks.map(block).join('');
+        PH.highlight(content);
+        document.getElementById('hint').textContent = 'Chạm vào từ được tô sáng để xem nghĩa, phiên âm và nghe phát âm.';
+        renderQuestions();
+      }
+      // Thuật ngữ trong bài
+      const terms = PH.termsForLesson(n);
+      document.getElementById('termList').innerHTML = terms.map(t => `<button type="button" data-term="${t.id}"><span class="vi">${PH.esc(t.vi)}</span> · <span class="en">${PH.esc(t.en)}</span></button>`).join('') || '<span class="small muted">Chưa có thuật ngữ gắn với bài này.</span>';
+      document.getElementById('practiceLink').href = `game-termrush.html?lesson=${n}`;
+      document.getElementById('practiceLink').textContent = terms.length ? `Luyện ${terms.length} thuật ngữ này →` : 'Luyện thuật ngữ →';
+      // Bài trước / sau
+      const all = PH.LESSONS || []; const i = all.findIndex(l => l.n === n);
+      const prev = all[i - 1], next = all[i + 1];
+      const link = (l, cls, lbl) => l ? `<a class="card ${cls}" href="${PH.hasContent(l.n) ? 'bai.html?n=' + l.n : 'baihoc.html'}"><span class="lbl">${lbl}</span><span class="nm">${PH.L(PH.lessonTitle(l.n))}</span></a>` : '<span></span>';
+      document.getElementById('pager').innerHTML = link(prev, 'prev', '← Bài trước') + link(next, 'next', 'Bài tiếp theo →');
+      document.getElementById('nextHint').innerHTML = next ? `Tiếp theo: <a href="${PH.hasContent(next.n) ? 'bai.html?n=' + next.n : 'baihoc.html'}">${PH.esc(PH.T(PH.lessonTitle(next.n)))} →</a>` : 'Đây là bài cuối của chương trình.';
+    }
+
+    document.getElementById('questions').addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (!b || checked) return;
+      answers[+b.dataset.q] = +b.dataset.o; renderQuestions();
+    });
+    document.getElementById('btnCheck').addEventListener('click', () => {
+      const qs = data.selfcheck; if (!qs.length) return;
+      if (Object.keys(answers).length < qs.length) { PH.toast('Em hãy chọn đáp án cho tất cả các câu trước khi chấm.'); return; }
+      checked = true; renderQuestions();
+      const ok = qs.filter((q, i) => answers[i] === q.correct).length;
+      PH.finishLesson(n, ok / qs.length);
+      const r = document.getElementById('result'); r.className = 'result show';
+      r.innerHTML = `<span class="tag ${ok === qs.length ? 'green' : 'navy'}" style="font-size:14px;padding:6px 12px">Đúng ${ok}/${qs.length}</span><span class="small muted">${ok === qs.length ? 'Tuyệt vời — bài này đã được đánh dấu là đã học.' : 'Bài đã được đánh dấu là đã học. Đọc lại phần giải thích ở các câu sai nhé.'}</span>`;
+      document.getElementById('btnCheck').style.display = 'none'; document.getElementById('btnRetry').style.display = '';
+    });
+    document.getElementById('btnRetry').addEventListener('click', () => {
+      checked = false; Object.keys(answers).forEach(k => delete answers[k]); renderQuestions();
+      document.getElementById('result').className = 'result'; document.getElementById('btnCheck').style.display = ''; document.getElementById('btnRetry').style.display = 'none';
+    });
+    document.getElementById('termList').addEventListener('click', e => { const b = e.target.closest('button[data-term]'); if (b) PH.showTerm(b.dataset.term, b); });
+
+    if (lesson && data) PH.visitLesson(n); // chỉ ghi nhớ bài đã có nội dung để nút "Tiếp tục" không trỏ vào bài trống
+    render();
+    PH.onLang(render);
+  </script>
+</body>
+</html>

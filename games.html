@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trò chơi ôn tập — PhysiHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2e4a86">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .intro p { color: var(--ink-2); max-width: 640px; margin-top: 8px; }
+    .scope { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; padding: 14px 18px; }
+    .scope .lbl { font-weight: 600; margin-right: 6px; }
+    .scope select { padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); font-size: 14px; max-width: 100%; }
+    .games { margin-top: 20px; }
+    .game { display: flex; flex-direction: column; gap: 6px; }
+    .game .preview { margin-bottom: 10px; }
+    .game .preview.rush .chip { top: 0; }
+    .game.lift { position: relative; }
+    .game .t { font-family: var(--font-serif); font-size: 21px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .game .t-en { font-family: var(--font-serif); font-style: italic; color: var(--gold); }
+    .game .d { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+    .game .meta { font-size: 13px; color: var(--ink-3); margin-top: auto; padding-top: 10px; }
+    .game .btn { margin-top: 10px; }
+    .rules { margin-top: 24px; }
+    .rules p { color: var(--ink-2); font-size: 14px; max-width: 700px; margin-top: 6px; }
+    .lv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .lv button { text-align: left; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+    .lv button:hover { border-color: var(--line-strong); }
+    .lv button.active { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy-soft); }
+    .lv button.active[data-lang="en"] { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-soft); background: var(--gold-soft); }
+    .lv b { display: block; margin-bottom: 4px; }
+    .lv .d { font-size: 13px; color: var(--ink-2); min-height: 40px; }
+    .lv .m { font-family: var(--font-serif); font-size: 24px; color: var(--navy); margin-top: 8px; }
+    .lv button[data-lang="en"] .m { color: var(--gold); }
+    .bottom { margin-top: 20px; }
+    .rec { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
+    .rec:first-of-type { border-top: 0; }
+    .rec b { font-family: var(--font-serif); font-size: 18px; color: var(--navy); }
+    .task { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; font-size: 14px; }
+    .task i { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 1px solid var(--line-strong); display: grid; place-items: center; margin-top: 1px; }
+    .task.done i { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .task.done span { text-decoration: line-through; color: var(--ink-3); }
+    @media (max-width: 720px) { .lv { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="page-hero">
+        <div class="chips" aria-hidden="true"><span class="chip" style="left:58%;top:12%">flux</span><span class="chip" style="left:74%;top:60%">half-life</span><span class="chip" style="left:88%;top:28%">volume</span></div>
+        <div><span class="badge">Trò chơi</span><h1>Trò chơi ôn tập</h1><p>Ba trò chơi dùng chung cho cả 25 bài. Em chọn phạm vi muốn ôn trước khi chơi; nội dung được lấy từ ngân hàng thuật ngữ và bảng công thức.</p></div>
+        <span class="spacer"></span>
+        <div class="glass" style="padding:14px 18px;min-width:180px"><div class="small" style="color:#cfe0ff">Mức ngôn ngữ đang chơi</div><div style="font-family:var(--font-serif);font-size:26px;line-height:1.2" id="heroLang"></div></div>
+      </div>
+
+      <div class="card scope" id="scope"></div>
+
+      <div class="grid c3 games">
+        <div class="card game lift acc-2">
+          <div class="preview rush"><span class="chip" style="left:12%">flux</span><span class="chip" style="left:44%">half-life</span><span class="chip" style="left:70%">volume</span><span class="line"></span></div>
+          <div class="t">Term Rush</div><div class="t-en">Đua thuật ngữ</div>
+          <div class="d">Thuật ngữ rơi từ trên xuống. Chọn hoặc gõ nghĩa, kí hiệu hay đơn vị trước khi nó chạm đáy.</div>
+          <div class="meta">Nguồn: ngân hàng thuật ngữ<br>60 giây mỗi ván · 3 mạng</div>
+          <a class="btn glow block" href="game-termrush.html">Chơi ngay</a>
+        </div>
+        <div class="card game lift acc-3">
+          <div class="preview match"><i></i><i class="n"></i><i></i><i></i><i class="g"></i><i></i><i></i><i class="n"></i></div>
+          <div class="t">Ghép cặp Vật lí</div><div class="t-en">Physics Match Up</div>
+          <div class="d">Xoá sạch bảng 12 thẻ bằng cách ghép đúng cặp: thuật ngữ Việt – Anh, đại lượng – đơn vị, định luật – công thức.</div>
+          <div class="meta">Nguồn: thuật ngữ và bảng công thức<br>90 giây mỗi ván</div>
+          <a class="btn block" href="game-match.html" style="background:var(--violet);border-color:var(--violet)">Chơi ngay</a>
+        </div>
+        <div class="card game acc-4" style="opacity:.85">
+          <div class="preview arena"><i></i>vs<i class="g"></i></div>
+          <div class="t">Bilingual Arena <span class="tag gold">đang phát triển</span></div><div class="t-en">Đấu trường song ngữ</div>
+          <div class="d">Trả lời câu hỏi theo cấu trúc đề 2025. Luyện một mình, hoặc thách đấu một bạn cùng lớp trên cùng bộ 10 câu.</div>
+          <div class="meta">Nguồn: kho câu hỏi<br>10 câu mỗi trận · cần tài khoản</div>
+          <button class="btn block" disabled>Sắp mở</button>
+        </div>
+      </div>
+
+      <div class="card rules">
+        <span class="badge">Luật chơi</span>
+        <h2 style="margin-top:8px">Tiếng Anh nằm trong luật chơi</h2>
+        <p>Cùng một trò chơi, em chơi ở mức ngôn ngữ nào cũng được. Mức càng cao thì điểm càng được nhân nhiều, nên em sẽ tự muốn nâng mức khi đã quen. Chạm để đổi mức cho toàn trang.</p>
+        <div class="lv" id="levels"></div>
+      </div>
+
+      <div class="grid c2 bottom">
+        <div class="card"><div class="row between"><h3>Kỷ lục của em</h3><span class="small muted">lưu trên máy này</span></div><div id="records" style="margin-top:10px"></div>
+          <div class="notice" style="margin-top:14px">Bảng xếp hạng lớp sẽ mở khi có tài khoản học sinh (đang phát triển).</div></div>
+        <div class="card"><h3>Nhiệm vụ hôm nay</h3><div id="tasks" style="margin-top:8px"></div><hr class="sep"><div class="small muted" id="streak"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="data/pairs.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    PH.mount({ active: 'games' });
+
+    function renderScope() {
+      const s = PH.scope(); const weak = PH.weakTermIds().length;
+      const chapters = (PH.CHAPTERS || []).map(c => `<option value="${c.n}" ${s.chapter === c.n ? 'selected' : ''}>Chương ${PH.roman(c.n)} · ${PH.esc(c.vi)}</option>`).join('');
+      const lessons = (PH.LESSONS || []).filter(l => PH.termsForLesson(l.n).length).map(l => `<option value="${l.n}" ${s.lesson === l.n ? 'selected' : ''}>Bài ${l.n} · ${PH.esc(l.vi)}</option>`).join('');
+      document.getElementById('scope').innerHTML = `<span class="lbl">Phạm vi ôn</span>
+        <button class="pill ${s.type === 'all' ? 'active' : ''}" data-type="all">Tất cả ${(PH.LESSONS || []).length || 25} bài</button>
+        <button class="pill ${s.type === 'chapter' ? 'active' : ''}" data-type="chapter">Theo chương</button>
+        <button class="pill ${s.type === 'lesson' ? 'active' : ''}" data-type="lesson">Theo bài</button>
+        <button class="pill ${s.type === 'weak' ? 'active' : ''}" data-type="weak" ${weak ? '' : 'disabled title="Chưa có thuật ngữ nào trả lời sai"'}>Ôn điểm yếu của em${weak ? ` (${weak})` : ''}</button>
+        ${s.type === 'chapter' ? `<select id="selChapter">${chapters}</select>` : ''}${s.type === 'lesson' ? `<select id="selLesson">${lessons}</select>` : ''}
+        <span class="small muted" style="margin-left:auto">${PH.scopeTerms(s).length} thuật ngữ</span>`;
+    }
+    document.getElementById('scope').addEventListener('click', e => {
+      const b = e.target.closest('[data-type]'); if (!b) return;
+      const s = { type: b.dataset.type };
+      if (s.type === 'chapter') s.chapter = (PH.CHAPTERS || [{ n: 1 }])[0].n;
+      if (s.type === 'lesson') { const l = (PH.LESSONS || []).find(x => PH.termsForLesson(x.n).length); s.lesson = l ? l.n : 1; }
+      PH.setScope(s); renderScope();
+    });
+    document.getElementById('scope').addEventListener('change', e => {
+      if (e.target.id === 'selChapter') PH.setScope({ type: 'chapter', chapter: +e.target.value });
+      if (e.target.id === 'selLesson') PH.setScope({ type: 'lesson', lesson: +e.target.value });
+      renderScope();
+    });
+
+    function renderLevels() {
+      const cur = PH.lang();
+      const desc = { vi: 'Câu hỏi tiếng Việt, thuật ngữ tiếng Anh hiện kèm.', bi: 'Câu hỏi hiện cả hai thứ tiếng cùng lúc.', en: 'Chỉ tiếng Anh. Mở gợi ý tiếng Việt thì giảm hệ số.' };
+      document.getElementById('levels').innerHTML = PH.LANGS.map(l => `<button type="button" class="${l.id === cur ? 'active' : ''}" data-lang="${l.id}"><b>${l.long}</b><span class="d">${desc[l.id]}</span><span class="m">×${PH.num(l.mult)}</span></button>`).join('');
+    }
+    document.getElementById('levels').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) PH.setLang(b.dataset.lang); });
+
+    function renderRecords() {
+      const g = PH.progress().games; const tr = g.termrush || {}, mt = g.match || {};
+      document.getElementById('records').innerHTML = `
+        <div class="rec"><span>Term Rush · điểm cao nhất</span><b>${tr.best != null ? tr.best : '—'}</b></div>
+        <div class="rec"><span>Ghép cặp · ít lượt lật nhất</span><b>${mt.bestFlips ? mt.bestFlips : '—'}</b></div>
+        <div class="rec"><span>Ghép cặp · nhanh nhất</span><b>${mt.bestTime ? PH.mmss(mt.bestTime) : '—'}</b></div>
+        <div class="rec"><span>Số ván đã chơi</span><b>${(tr.plays || 0) + (mt.plays || 0)}</b></div>`;
+      const today = PH.gamesToday();
+      const tasks = [
+        { t: 'Chơi một ván Term Rush', done: today.some(e => e.game === 'termrush') },
+        { t: 'Ghép xong một bảng 12 thẻ', done: today.some(e => e.game === 'match' && e.won) },
+        { t: 'Chơi một ván ở mức English', done: today.some(e => e.lang === 'en') }
+      ];
+      document.getElementById('tasks').innerHTML = tasks.map(x => `<div class="task ${x.done ? 'done' : ''}"><i>${x.done ? PH.icon('check', 'sm') : ''}</i><span>${x.t}</span></div>`).join('');
+      const streak = PH.streakDays();
+      document.getElementById('streak').textContent = streak ? `Em đã chơi ${streak} ngày liên tiếp. Mỗi ngày chỉ cần khoảng 5 phút.` : 'Chơi một ván hôm nay để bắt đầu chuỗi ngày.';
+    }
+
+    function renderAll() { renderScope(); renderLevels(); renderRecords(); const l = PH.langInfo(); document.getElementById('heroLang').textContent = `${l.long} · ×${PH.num(l.mult)}`; }
+    renderAll(); PH.onLang(renderAll);
+  </script>
+</body>
+</html>
