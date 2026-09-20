@@ -216,7 +216,7 @@ window.PH = window.PH || {};
     header.className = 'ph-header';
     header.innerHTML = `<div class="wrap">
      <a class="ph-logo" href="index.html" aria-label="PhysiHub – trang chủ">
-  <img src="assets/logo.png" alt="PhysiHub" style="height: 36px; width: auto; display: block;">
+  <img src="assets/logo.png" alt="PhysiHub" style="height: 40px; width: auto; display: block;">
 </a>
       <nav class="ph-nav" aria-label="Điều hướng">${NAV.map(n => `<a href="${n.href}" class="${n.id === opts.active ? 'active' : ''}"${n.id === opts.active ? ' aria-current="page"' : ''}>${n.label}</a>`).join('')}</nav>
       <span class="spacer"></span>
