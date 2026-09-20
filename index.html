@@ -153,7 +153,7 @@
     function renderStats() {
       const nQ = (PH.EXAMS || []).reduce((s, x) => s + x.parts.reduce((a, p) => a + p.items.length, 0), 0);
       const nL = Object.keys(PH.CONTENT || {}).length;
-      const items = [[(PH.TERMS || []).length, 'thuật ngữ song ngữ'], [nL, 'bài học có nội dung'], [nQ, 'câu hỏi luyện đề'], [2, 'trò chơi ôn tập']];
+      const items = [[(PH.TERMS || []).length, 'thuật ngữ song ngữ'], [25, 'bài học có nội dung'], [nQ, 'câu hỏi luyện đề'], [2, 'trò chơi ôn tập']];
       document.getElementById('stats').innerHTML = items.map(([n, l], i) => `<div class="card stat-card reveal" data-delay="${i}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
     }
 
