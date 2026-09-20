@@ -83,6 +83,11 @@ main { flex: 1; padding: 36px 0 56px; }
 }
 .ph-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-family: var(--font-serif); font-weight: 700; font-size: 21px; }
 .ph-logo:hover { text-decoration: none; }
+.ph-logo-img {
+  height: 40px; /* Điều chỉnh số px theo ý muốn */
+  width: auto;
+  display: block;
+}
 .ph-logo .mark {
   width: 28px; height: 28px; border-radius: 8px; flex: none;
   background: linear-gradient(90deg, var(--navy) 0 50%, var(--gold) 50% 100%);
