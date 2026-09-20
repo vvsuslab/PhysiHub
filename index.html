@@ -48,6 +48,26 @@
       .continue { grid-template-columns: 1fr; gap: 12px; }
       .continue .bar { width: 100%; }
     }
+    /* Giao diện Chế độ Tối (Dark Mode) */
+body.dark-mode {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+body.dark-mode .card,
+body.dark-mode .hero-panel {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border-color: #334155;
+}
+
+body.dark-mode a {
+  color: #38bdf8;
+}
+
+body.dark-mode .meta {
+  color: #94a3b8;
+}
   </style>
 </head>
 <body>
@@ -69,11 +89,17 @@
             </div>
             <p style="margin-top:14px"><a class="small" href="lienket.html">Xem mục lục tất cả liên kết →</a></p>
           </div>
-          <div class="card glass levels" id="levels">
-            <div class="title">Cùng một nội dung, ba mức ngôn ngữ — chạm để đổi mức cho toàn trang</div>
-            <div id="levelRows"></div>
-          </div>
-        </div>
+          <!-- MÃ MỚI -->
+<div class="card glass levels" id="levels">
+  <div class="levels-header" style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px;">
+    <div class="title" style="margin-bottom: 0;">Cùng một nội dung, ba mức ngôn ngữ — chạm để đổi mức cho toàn trang</div>
+    <button type="button" id="btnThemeToggle" class="btn outline" style="padding: 4px 10px; font-size: 13px; white-space: nowrap; cursor: pointer;">
+      <span id="themeIcon">🌙</span> <span id="themeText">Tối</span>
+    </button>
+  </div>
+  <div id="levelRows"></div>
+</div>
+   </div>
       </section>
 
       <!-- SỐ LIỆU -->
@@ -215,6 +241,33 @@
     const showInstall = () => { btnInstall.hidden = !PH.canInstall(); };
     showInstall(); document.addEventListener('ph:installable', showInstall);
     btnInstall.addEventListener('click', async () => { const ok = await PH.install(); PH.toast(ok ? 'Đã cài PhysiHub lên màn hình chính.' : 'Em có thể cài sau từ menu trình duyệt: “Thêm vào màn hình chính”.'); showInstall(); });
+  // Xử lý bật/tắt chế độ Sáng / Tối
+const btnTheme = document.getElementById('btnThemeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const themeText = document.getElementById('themeText');
+
+// 1. Kiểm tra trạng thái đã lưu trước đó
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark-mode');
+  if (themeIcon) themeIcon.textContent = '☀️';
+  if (themeText) themeText.textContent = 'Sáng';
+}
+
+// 2. Bắt sự kiện khi chạm/click nút
+if (btnTheme) {
+  btnTheme.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    // Lưu lại thiết lập vào LocalStorage
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    // Cập nhật icon và nhãn nút
+    if (themeIcon) themeIcon.textContent = isDark ? '☀️' : '🌙';
+    if (themeText) themeText.textContent = isDark ? 'Sáng' : 'Tối';
+  });
+}
   </script>
 </body>
 </html>
