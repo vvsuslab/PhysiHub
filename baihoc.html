@@ -105,7 +105,7 @@
         const img = `assets/img/${IMG[ch.n]}`;
         return `<section class="chapter-block acc-${ch.n} reveal" data-delay="${Math.min(i, 3)}" id="chuong-${ch.n}">
           <div class="head"><span class="th"><img src="${img}-168x96.webp" width="168" height="96" loading="lazy" decoding="async" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"></span>
-            <div><p class="lb">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</p><h2>${PH.esc(en() ? ch.en : ch.vi)}</h2>${en() ? '' : `<span class="en" lang="en">${PH.esc(ch.en)}</span>`}</div>
+            <div><p class="lb">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</p><h2>${PH.esc(en() ? ch.en : ch.vi)}</h2>${PH.lang() === 'bi' ? `<span class="en" lang="en">${PH.esc(ch.en)}</span>` : ''}</div>
             <div class="meta">${PH.uiFmt(pr.done ? 'chDone' : 'chNone', { n: pr.total, d: pr.done })}<div class="progress"><i style="width:${pr.pct}%"></i></div></div></div>
           <div class="lesson-list">${rows}</div></section>`;
       }).join('') || '<div class="empty">—</div>';

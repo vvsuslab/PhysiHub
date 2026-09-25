@@ -201,7 +201,7 @@
 
     function renderHero() {
       const l = PH.langInfo(); const streak = PH.streakDays();
-      $('hero').innerHTML = `<div><p class="eyebrow">${PH.uiFmt('eyebrow')}</p><h1>${PH.uiFmt('h1')}</h1>${en() ? '' : `<p class="sub-en" lang="en">Play your way to the terms</p>`}<p class="lead">${PH.uiFmt('lead', { n: (PH.TERMS || []).length })}</p></div>
+      $('hero').innerHTML = `<div><p class="eyebrow">${PH.uiFmt('eyebrow')}</p><h1>${PH.uiFmt('h1')}</h1>${PH.lang() === 'bi' ? `<p class="sub-en" lang="en">Play your way to the terms</p>` : ''}<p class="lead">${PH.uiFmt('lead', { n: (PH.TERMS || []).length })}</p></div>
         <div class="g-lv panel orange has-label">${PH.label('lang', PH.uiFmt('playingAt'), 'orange', 'sm')}<p class="cur"><b>${PH.esc(langName(l.id))}</b><span class="x">${mult(l)}</span></p>
           <div class="streak">${PH.icon('fire')}<span>${streak ? PH.uiFmt('streak', { n: streak }) : PH.uiFmt('noStreak')}</span></div></div>`;
     }

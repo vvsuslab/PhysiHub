@@ -244,7 +244,7 @@
           <span class="body"><span class="icon-tile tone-${ch.n}">${PH.icon(PH.CH_ICON[ch.n])}</span>
             <span class="nhan">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</span>
             <span class="ten">${PH.esc(en() ? ch.en : ch.vi)}</span>
-            ${en() ? '' : `<span class="ten-en en" lang="en">${PH.esc(ch.en)}</span>`}
+            ${PH.lang() === 'bi' ? `<span class="ten-en en" lang="en">${PH.esc(ch.en)}</span>` : ''}
             <span class="progress"><i style="width:${pr.pct}%"></i></span>
             <span class="meta">${PH.esc(PH.dinh(meta))}</span></span>
           <span class="pill-mob">${pr.done}/${pr.total}</span></a>`;

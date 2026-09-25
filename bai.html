@@ -285,7 +285,7 @@
       const crumb = `<p class="crumb"><a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-${ch.n}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</a></p>`;
       const img = `assets/img/${IMG[ch.n]}`;
       return `<header class="banner"><div class="bar"><span class="bk">${PH.icon('book')}</span><h1>${PH.uiFmt('lesson')} ${n}. ${PH.esc(name(lesson))}</h1></div>
-        <div class="sub"><div style="min-width:0">${crumb}${en() ? '' : `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>`}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"><figcaption class="cap${ch.n === 1 ? ' orange' : ''}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</figcaption></figure></div></header>`;
+        <div class="sub"><div style="min-width:0">${crumb}${PH.lang() === 'bi' ? `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>` : ''}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"><figcaption class="cap${ch.n === 1 ? ' orange' : ''}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</figcaption></figure></div></header>`;
     }
     function renderPaper() {
       const paper = $('paper');

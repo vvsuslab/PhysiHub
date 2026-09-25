@@ -91,7 +91,7 @@
     const $ = id => document.getElementById(id);
     const en = () => PH.lang() === 'en';
     const lk = (href, num, title, sub, cls, enTxt) => {
-      const inner = `<span class="n">${num}</span><span class="t">${title}${enTxt && !en() ? `<span class="en" lang="en">${enTxt}</span>` : ''}${sub ? `<span class="sub">${sub}</span>` : ''}</span>`;
+      const inner = `<span class="n">${num}</span><span class="t">${title}${enTxt && PH.lang() === 'bi' ? `<span class="en" lang="en">${enTxt}</span>` : ''}${sub ? `<span class="sub">${sub}</span>` : ''}</span>`;
       return href ? `<a class="card o lk ${cls || ''}" href="${href}">${inner}<span class="go" aria-hidden="true">${PH.icon('arrow', 'sm')}</span></a>` : `<div class="card o lk off ${cls || ''}">${inner}</div>`;
     };
     const chName = c => PH.esc(en() ? c.en : c.vi);
@@ -113,7 +113,7 @@
       $('lessonLinks').innerHTML = (PH.CHAPTERS || []).map(ch => {
         const rows = ch.lessons.map(n => { const l = PH.lesson(n); if (!l) return ''; const can = PH.canOpen(n); return lk(`bai.html?n=${n}`, PH.pad2(n), PH.esc(PH.dinh(en() ? l.en : l.vi)), can ? '' : PH.uiFmt('noContent'), can ? '' : 'off-look', PH.esc(PH.dinh(l.en))); }).join('');
         const pr = PH.sampleProgress(ch.n);
-        return `<div class="chapter-links acc-${ch.n}"><div class="head"><h3>${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${chName(ch)}</h3>${en() ? '' : `<span class="tag acc" lang="en">${PH.esc(ch.en)}</span>`}<span class="meta">${PH.uiFmt(pr.done ? 'chDone' : 'chNone', { n: pr.total, d: pr.done })}</span></div><div class="links">${rows}</div></div>`;
+        return `<div class="chapter-links acc-${ch.n}"><div class="head"><h3>${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${chName(ch)}</h3>${PH.lang() === 'bi' ? `<span class="tag acc" lang="en">${PH.esc(ch.en)}</span>` : ''}<span class="meta">${PH.uiFmt(pr.done ? 'chDone' : 'chNone', { n: pr.total, d: pr.done })}</span></div><div class="links">${rows}</div></div>`;
       }).join('');
       const sample = PH.termById('boyles-law') || (PH.TERMS || [])[0];
       $('termLinks').innerHTML = [lk('thuatngu.html', 'ALL', PH.uiFmt('allTerms'), PH.uiFmt('items', { n: (PH.TERMS || []).length }))]

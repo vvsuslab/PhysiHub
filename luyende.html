@@ -186,7 +186,7 @@
           const best = p.exams[x.id] && p.exams[x.id].best;
           const draft = p.exams[x.id] && p.exams[x.id].draft && p.exams[x.id].draft.endTime > Date.now();
           return `<div class="card o exam-card acc-${x.chapter}"><div class="row between"><span class="tag acc">${PH.uiFmt('chapter')} ${PH.roman(x.chapter)}</span><span class="icon-tile sm tone-${x.chapter}">${PH.icon('exam')}</span></div>
-            <span class="t">${PH.esc(PH.dinh(en() ? x.title.en : x.title.vi))}</span>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(x.title.en))}</span>`}
+            <span class="t">${PH.esc(PH.dinh(en() ? x.title.en : x.title.vi))}</span>${PH.lang() === 'bi' ? `<span class="en" lang="en">${PH.esc(PH.dinh(x.title.en))}</span>` : ''}
             <span class="meta">${PH.uiFmt('meta', { n: countQ(x), m: x.minutes })} · ${x.parts.map(pt => PH.uiFmt(kindKey[pt.kind]) + ' ' + pt.items.length).join(' · ')}</span>
             <div class="foot"><span class="small muted">${best != null ? `${PH.uiFmt('best')}: <b style="color:var(--navy)">${num(best, 2)}/10</b>` : PH.uiFmt('notDone')}${draft ? ` · <span class="tag gold">${PH.uiFmt('inProgressTag')}</span>` : ''}</span>
             <a class="btn accent" href="luyende.html?exam=${x.id}">${PH.uiFmt(draft ? 'resume' : 'take')}${PH.icon('arrow', 'sm')}</a></div></div>`;

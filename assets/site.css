@@ -528,3 +528,9 @@ table.tbl td:first-child { font-weight: 600; }
   .ph-bar .wrap { padding: 0 12px; }
   .ph-bar-i { padding: 0 6px; gap: 4px; font-size: 16.5px; }
 }
+
+/* Mức 1 (Tiếng Việt) chỉ hiện tiếng Việt: ẩn dòng tiêu đề/tên dịch sang tiếng Anh.
+   Thuật ngữ tiếng Anh vẫn hiện kèm (đúng mô tả của mức 1) — các thẻ thuật ngữ không bị ảnh hưởng. */
+[data-lang="vi"] .sub-en,
+[data-lang="vi"] .h1-en,
+[data-lang="vi"] .ten-en { display: none; }
