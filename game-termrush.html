@@ -20,12 +20,12 @@
     .top .name { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
     .top .name .mark { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(90deg, var(--navy) 0 50%, var(--orange) 50% 100%); box-shadow: 0 0 0 3px var(--blue-soft); }
     .top .sep { width: 1px; height: 22px; background: var(--line-strong); }
-    .top .scope { font-size: 15.5px; color: var(--ink-2); }
+    .top .scope { font-size: 16.5px; color: var(--ink-2); }
     .top .exit { margin-left: auto; }
     .layout { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
     .arena { position: relative; height: 340px; overflow: hidden; }
     .arena .line { position: absolute; left: 0; right: 0; bottom: 56px; border-top: 2px dashed; }
-    .arena .line-lbl { position: absolute; left: 16px; bottom: 30px; font-size: 14.5px; }
+    .arena .line-lbl { position: absolute; left: 16px; bottom: 30px; font-size: 16px; }
     .fall { position: absolute; top: 0; padding: 10px 18px; border: 1.5px solid; font-size: 19px; white-space: nowrap; transition: opacity .2s; will-change: transform; }
     .fall.gone { opacity: 0; }
     .arena .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 24px; z-index: 2; }
@@ -42,27 +42,27 @@
     .typebox { display: flex; gap: 10px; }
     .typebox input { flex: 1; padding: 12px 16px; border: 1px solid var(--line-strong); border-radius: 10px; font-size: 19px; outline: 0; }
     .typebox input:focus { border-color: var(--navy); }
-    .fb { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 15.5px; min-height: 52px; }
+    .fb { margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 16.5px; min-height: 52px; }
     .fb .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; }
     .fb .dot.ok { background: var(--green); }
     .fb .dot.no { background: var(--red); }
     .fb a { margin-left: auto; white-space: nowrap; }
-    .hint { margin-top: 10px; font-size: 14.5px; color: var(--ink-3); }
+    .hint { margin-top: 10px; font-size: 16px; color: var(--ink-3); }
     .side { display: flex; flex-direction: column; gap: 14px; }
     .stat { padding: 12px 0; border-top: 1px solid var(--line); }
     .stat:first-child { border-top: 0; padding-top: 0; }
-    .stat .l { font-size: 14.5px; color: var(--ink-3); }
+    .stat .l { font-size: 16px; color: var(--ink-3); }
     .stat .v { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--navy); }
     .stat .v.gold { color: var(--gold); }
     .lives { display: flex; gap: 6px; margin-top: 6px; }
     .lives i { width: 14px; height: 14px; border-radius: 50%; background: var(--navy); }
     .lives i.off { background: transparent; border: 1.5px solid var(--line-strong); }
-    .modes button { display: block; width: 100%; text-align: left; padding: 6px 0; font-size: 15.5px; color: var(--ink-2); }
+    .modes button { display: block; width: 100%; text-align: left; padding: 6px 0; font-size: 16.5px; color: var(--ink-2); }
     .modes button.active { color: var(--navy); font-weight: 600; }
     .modes b { display: inline-block; width: 20px; }
-    .foot { margin-top: 18px; font-size: 14.5px; color: var(--ink-3); max-width: 640px; }
+    .foot { margin-top: 18px; font-size: 16px; color: var(--ink-3); max-width: 640px; }
     @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .arena { height: 260px; } .fall { font-size: 16.5px; padding: 9px 13px; } .opts { grid-template-columns: 1fr; } .opt { padding: 12px; font-size: 16.5px; } }
-    @media (max-width: 480px) { .fall { font-size: 15px; padding: 8px 10px; } .arena .line-lbl { font-size: 13px; } }
+    @media (max-width: 480px) { .fall { font-size: 16px; padding: 8px 10px; } .arena .line-lbl { font-size: 14px; } }
   </style>
 </head>
 <body>
@@ -219,7 +219,7 @@
         const others = PH.sample((PH.TERMS || []).filter(x => x.id !== t.id && (en ? x.defEn : x.vi)), 3);
         const opts = PH.shuffle([t].concat(others));
         ask.innerHTML = `${PH.uiFmt(en ? 'chooseDef' : 'chooseVi')} <b lang="en">${PH.esc(t.en)}</b> ${l !== 'vi' ? `<span class="small muted ipa" lang="en">${PH.esc(t.ipa)}</span>` : ''} ${PH.hasVoice() ? `<button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="${PH.uiFmt('listenMachine')}" aria-label="${PH.uiFmt('listenMachine')}" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>` : ''}${en ? ` <button class="btn ghost sm" type="button" id="btnHint">${PH.uiFmt('hintVi')}</button>` : ''}`;
-        box.innerHTML = `<div class="opts">${opts.map(o => `<button type="button" class="opt ${en ? 'en' : ''}" data-id="${o.id}" style="${en ? 'font-size:15.5px;font-weight:400;text-align:left' : ''}">${PH.esc(en ? o.defEn : o.vi)}</button>`).join('')}</div>`;
+        box.innerHTML = `<div class="opts">${opts.map(o => `<button type="button" class="opt ${en ? 'en' : ''}" data-id="${o.id}" style="${en ? 'font-size:16.5px;font-weight:400;text-align:left' : ''}">${PH.esc(en ? o.defEn : o.vi)}</button>`).join('')}</div>`;
         if (l === 'vi') hint.textContent = t.defVi;
       } else {
         const listen = mode === 'listen';

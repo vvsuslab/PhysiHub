@@ -22,17 +22,17 @@
   <style>
     .head { display: flex; align-items: flex-end; gap: 24px; }
     .head .txt { flex: 1; min-width: 0; }
-    .crumb { font-size: 14px; font-weight: 700; color: var(--navy-2); margin-bottom: 8px; }
+    .crumb { font-size: 15.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 8px; }
     .crumb a { color: inherit; }
     .head h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -.2px; color: var(--navy); text-transform: uppercase; }
     .head .ttl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .head .tag.lab { background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); padding: 6px 12px; font-size: 13.5px; }
+    .head .tag.lab { background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); padding: 6px 12px; font-size: 15px; }
     .head .en { font-size: 19px; margin-top: 2px; }
     .head .hd { margin-top: 8px; max-width: 860px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
     .tn-stage { position: relative; overflow: hidden; border-radius: 24px; padding: 20px; margin-top: 20px; color: var(--ink); background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
     .tn-stage .grid3 { display: grid; grid-template-columns: 290px 300px minmax(0, 1fr); gap: 18px; }
     .tn-panel { border-radius: 18px; background: #fff; border: 1.5px solid var(--blue-line); padding: 16px 16px 14px; min-width: 0; }
-    .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 13.5px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
+    .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 15px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
     .tn-kinh { position: relative; width: 250px; height: 250px; margin: 4px auto 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1A4A9E 0%, #072460 75%); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--blue-line), 0 10px 24px rgba(13, 71, 161, .2); }
     /* Không đặt transition cho background/box-shadow: màu đổi liên tục theo nhiệt độ,
        transition sẽ bị khởi động lại mỗi khung hình và làm phân tử nhấp nháy. */
@@ -52,12 +52,12 @@
     .tn-khoi { transform-box: fill-box; transform-origin: 50% 100%; animation: tn-khoi 2.6s ease-out infinite; }
     @keyframes tn-nhip { 0% { r: 8; opacity: .8; } 100% { r: 24; opacity: 0; } }
     .tn-nhip { animation: tn-nhip 1.4s ease-out infinite; }
-    .pha { display: grid; grid-template-columns: minmax(0, .88fr) minmax(0, 1.36fr) minmax(0, .9fr) minmax(0, .93fr) minmax(0, .93fr); gap: 5px; margin-top: 16px; }
-    .tn-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; white-space: nowrap; min-height: 42px; padding: 4px 3px; border-radius: 12px; font-size: 12.5px; font-weight: 700; background: var(--blue-soft); color: var(--ink-2); transition: all .35s ease; }
+    .pha { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.47fr) minmax(0, .88fr) minmax(0, .9fr) minmax(0, .9fr); gap: 5px; margin-top: 16px; }
+    .tn-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; white-space: nowrap; min-height: 42px; padding: 4px 3px; border-radius: 12px; font-size: 13.5px; font-weight: 700; background: var(--blue-soft); color: var(--ink-2); transition: all .35s ease; }
     .tn-chip.on { color: var(--ink); }
-    .tn-chip .en { font-size: 12px; opacity: .85; color: inherit; font-weight: 500; }
-    .legend { margin-top: 14px; font-size: 13px; line-height: 1.4; color: var(--ink-3); }
-    .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+    .tn-chip .en { font-size: 13.5px; opacity: .85; color: inherit; font-weight: 500; }
+    .legend { margin-top: 14px; font-size: 14px; line-height: 1.4; color: var(--ink-3); }
+    .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-3); margin-top: 6px; }
     .legend .bar i { flex: 1; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #6EA8FF, #5CD6FF, #2EE6B5, #F4D03F, #FFB547, #FF6B5A); }
     .readout { display: flex; gap: 12px; margin-top: 8px; }
     /* Ô nhiệt độ giữ bề rộng cố định và dùng chữ số đều nhau, nếu không cả hàng sẽ
@@ -65,7 +65,7 @@
     .readout .o { flex: none; padding: 10px 14px; border-radius: 14px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); white-space: nowrap; }
     .readout .o:first-child { min-width: 142px; }
     .readout .o.grow { flex: 1; min-width: 0; white-space: normal; }
-    .readout .l { font-size: 13px; font-weight: 600; color: var(--ink-3); }
+    .readout .l { font-size: 14px; font-weight: 600; color: var(--ink-3); }
     .readout .t { margin-top: 2px; font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
     /* chừa sẵn chỗ cho "−20,0" để chữ °C không nhích qua lại khi số đổi */
     .readout .t #tHien { display: inline-block; min-width: 5ch; text-align: right; }
@@ -78,10 +78,10 @@
     .tn-nut:active { transform: translateY(4px); box-shadow: 0 2px 0 #C25400, 0 8px 18px rgba(245, 124, 0, .28); }
     .tn-nut .ic { width: 26px; height: 26px; border-radius: 50%; background: rgba(15, 37, 72, .12); display: grid; place-items: center; }
     .controls .tua { flex: 1; min-width: 200px; }
-    .controls .tua label { display: block; margin-bottom: 8px; font-size: 14.5px; font-weight: 600; color: var(--ink-2); }
+    .controls .tua label { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 600; color: var(--ink-2); }
     .controls .toc { display: flex; align-items: center; gap: 6px; }
-    .controls .toc .lb { font-size: 14.5px; font-weight: 600; color: var(--ink-3); margin-right: 4px; }
-    .tn-toc { white-space: nowrap; min-height: 38px; min-width: 48px; border-radius: 19px; font-size: 15px; font-weight: 700; background: #fff; color: var(--ink-2); border: 1.5px solid var(--blue-line); transition: all .2s ease; }
+    .controls .toc .lb { font-size: 16px; font-weight: 600; color: var(--ink-3); margin-right: 4px; }
+    .tn-toc { white-space: nowrap; min-height: 38px; min-width: 48px; border-radius: 19px; font-size: 16px; font-weight: 700; background: #fff; color: var(--ink-2); border: 1.5px solid var(--blue-line); transition: all .2s ease; }
     .tn-toc.on { background: var(--navy-2); color: #fff; border-color: var(--navy-2); }
     input[type="range"].tn-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #6EA8FF 0%, #5CD6FF 14%, #2EE6B5 40%, #FFB547 70%, #FF7A59 100%); outline: none; }
     input[type="range"].tn-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); cursor: grab; }
@@ -91,17 +91,17 @@
     .below .panel.has-label { margin-top: 26px; }
     .thay { padding: 36px 24px 20px; }
     .thay p { font-size: 16px; line-height: 1.65; margin-bottom: 6px; }
-    .thay p.en { font-size: 15.5px; margin-bottom: 8px; }
-    .thay .hoi { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 15.5px; font-weight: 700; color: var(--c1-ink); }
+    .thay p.en { font-size: 16.5px; margin-bottom: 8px; }
+    .thay .hoi { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 16.5px; font-weight: 700; color: var(--c1-ink); }
     .tn-tn { padding: 34px 20px 18px; }
-    .day .lb { margin-bottom: 10px; font-size: 13.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
+    .day .lb { margin-bottom: 10px; font-size: 15px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
     .tn-tn .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tn-tn .tag { background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--ink); font-size: 14px; padding: 6px 11px; }
+    .tn-tn .tag { background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--ink); font-size: 15.5px; padding: 6px 11px; }
     .tn-tn .term-chip { cursor: pointer; } .tn-tn .term-chip:hover { border-color: var(--sky); }
-    .tn-tn .tag .en { font-size: 14px; }
+    .tn-tn .tag .en { font-size: 15.5px; }
     .day { margin-top: 14px; padding: 14px 18px; border-radius: 18px; background: var(--orange-soft); border: 1.5px dashed var(--orange-line); }
     .day .lb { margin-bottom: 4px; }
-    .day p { font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+    .day p { font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
     @media (max-width: 1080px) { .tn-stage .grid3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .tn-stage .grid3 > :last-child { grid-column: 1 / -1; } }
     @media (max-width: 900px) { .below { grid-template-columns: 1fr; } .head { flex-direction: column; align-items: flex-start; gap: 10px; } }
     @media (max-width: 720px) { .tn-stage { padding: 12px; border-radius: 20px; } .tn-stage .grid3 { grid-template-columns: 1fr; } .controls { padding: 14px 16px; gap: 12px; } .tn-nut { flex: 1; justify-content: center; min-width: 0; } .readout { flex-wrap: wrap; } .readout .t { font-size: 24px; }
@@ -117,7 +117,7 @@
     <div class="wrap">
       <div class="head">
         <div class="txt"><p class="crumb" id="crumb"></p><div class="ttl"><h1 id="h1"></h1><span class="tag lab" id="labTag"></span></div><p class="en" lang="en" id="h1en"></p><p class="hd" id="hd"></p></div>
-        <a href="bai.html?n=1" id="veBai" style="flex:none;display:inline-flex;align-items:center;gap:6px;font-size:15.5px;font-weight:600"></a>
+        <a href="bai.html?n=1" id="veBai" style="flex:none;display:inline-flex;align-items:center;gap:6px;font-size:16.5px;font-weight:600"></a>
       </div>
 
       <section class="tn-stage" aria-label="">
@@ -213,19 +213,19 @@
         <rect id="cot" x="200" y="300" width="6" height="6" rx="3" fill="#FF5A4E" style="transition:y .3s linear,height .3s linear"/>
         <circle cx="203" cy="308" r="10" fill="#FF5A4E" stroke="#FFD1CC" stroke-width="1.5"/>
         <path d="M210 ${t(20)} h8 M210 ${t(70)} h8 M210 ${t(120)} h8" stroke="#8FA3BF" stroke-width="2"/>
-        <text x="222" y="${(+t(20) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">0</text><text x="222" y="${(+t(70) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">50</text><text x="222" y="${(+t(120) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">100</text>
+        <text x="222" y="${(+t(20) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77">0</text><text x="222" y="${(+t(70) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77">50</text><text x="222" y="${(+t(120) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77">100</text>
         <circle cx="128" cy="276" r="20" fill="none" stroke="#F57C00" stroke-width="2.5" stroke-dasharray="5 4"/><path d="M148 276 H280" stroke="#F57C00" stroke-width="2" stroke-dasharray="5 5" stroke-opacity=".8"/></svg>`;
     }
     function buildGraph() {
-      const vach = [-20, 0, 50, 100].map(t => `<line x1="70" y1="${gy(t).toFixed(1)}" x2="500" y2="${gy(t).toFixed(1)}" stroke="#0F2548" stroke-opacity="${t === 0 || t === 100 ? .22 : .08}" ${t === 0 || t === 100 ? 'stroke-dasharray="4 5"' : ''}/><text x="60" y="${(gy(t) + 4).toFixed(1)}" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="12" fill="#4F5F77">${t < 0 ? '−' + (-t) : t}</text>`).join('');
+      const vach = [-20, 0, 50, 100].map(t => `<line x1="70" y1="${gy(t).toFixed(1)}" x2="500" y2="${gy(t).toFixed(1)}" stroke="#0F2548" stroke-opacity="${t === 0 || t === 100 ? .22 : .08}" ${t === 0 || t === 100 ? 'stroke-dasharray="4 5"' : ''}/><text x="60" y="${(gy(t) + 4).toFixed(1)}" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="13.5" fill="#4F5F77">${t < 0 ? '−' + (-t) : t}</text>`).join('');
       const du = 'M' + MOC.map(m => `${gx(m[0]).toFixed(1)} ${gy(m[1]).toFixed(1)}`).join(' L');
       $('doThi').innerHTML = `<svg class="dt" width="492" height="331" viewBox="0 0 520 350" aria-hidden="true"><defs>
           <linearGradient id="tnNhiet" gradientUnits="userSpaceOnUse" x1="0" y1="${gy(-20).toFixed(1)}" x2="0" y2="${gy(110).toFixed(1)}"><stop offset="0" stop-color="#1E88E5"/><stop offset=".154" stop-color="#00A5C8"/><stop offset=".462" stop-color="#17A589"/><stop offset=".769" stop-color="#F2A600"/><stop offset=".923" stop-color="#FB8C00"/><stop offset="1" stop-color="#F4511E"/></linearGradient>
           <filter id="tnGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
         <rect x="${gx(6).toFixed(1)}" y="30" width="${(gx(22) - gx(6)).toFixed(1)}" height="270" rx="8" fill="#5CD6FF" fill-opacity=".09"/><rect x="${gx(42).toFixed(1)}" y="30" width="${(gx(100) - gx(42)).toFixed(1)}" height="270" rx="8" fill="#FFB547" fill-opacity=".09"/>
         ${vach}
-        <text id="lbNC" x="${((gx(6) + gx(22)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" font-weight="700" fill="#0B7FA6"></text>
-        <text id="lbSoi" x="${((gx(42) + gx(100)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" font-weight="700" fill="#B54D00"></text>
+        <text id="lbNC" x="${((gx(6) + gx(22)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#0B7FA6"></text>
+        <text id="lbSoi" x="${((gx(42) + gx(100)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#B54D00"></text>
         <line x1="70" y1="30" x2="70" y2="304" stroke="#4F5F77" stroke-width="2"/><line x1="66" y1="300" x2="506" y2="300" stroke="#4F5F77" stroke-width="2"/><path d="M500 294 L510 300 L500 306" stroke="#4F5F77" stroke-width="2" fill="none"/>
         <text x="4" y="16" font-family="Lora, Georgia, serif" font-style="italic" font-size="15" fill="#0F2548">t (°C)</text>
         <text id="lbThoiGian" x="506" y="328" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77"></text>

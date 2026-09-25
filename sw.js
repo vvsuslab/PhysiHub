@@ -3,7 +3,7 @@
    font Google → lấy bản đã lưu trước, tải lại ngầm.
    Khi thay đổi file, không cần sửa gì: cache tự cập nhật mỗi lần có mạng.
    Đổi số phiên bản CACHE khi thêm/bớt tệp trong SHELL (bản 2: giao diện mới 23/9/2026). */
-const CACHE = 'physihub-v3-2';   // đổi số này mỗi lần cập nhật để máy đã cài lấy bản mới
+const CACHE = 'physihub-v3-3';   // đổi số này mỗi lần cập nhật để máy đã cài lấy bản mới
 const SHELL = [
   './', './index.html', './baihoc.html', './bai.html', './thuatngu.html', './luyende.html',
   './games.html', './game-termrush.html', './game-match.html', './thinghiem.html', './vedan.html', './lienket.html',

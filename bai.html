@@ -24,22 +24,22 @@
     /* Mục lục chương */
     .toc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
     .toc-head .icon-tile { width: 40px; height: 40px; border-radius: 12px; }
-    .toc-head .lb { font-size: 13.5px; font-weight: 700; color: var(--accent-ink); }
+    .toc-head .lb { font-size: 15px; font-weight: 700; color: var(--accent-ink); }
     .toc-head .nm { font-family: var(--font-display); font-size: 19px; font-weight: 800; line-height: 1.25; color: var(--navy); }
     .toc-item { display: block; padding: 10px 12px; margin-bottom: 4px; border-radius: 12px; border-left: 4px solid transparent; color: var(--ink-2); transition: background .2s ease; }
     a.toc-item:hover { background: #fff; color: var(--ink); }
-    .toc-item .so { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 13px; font-weight: 600; color: var(--ink-4); }
+    .toc-item .so { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 14px; font-weight: 600; color: var(--ink-4); }
     .toc-item .so .icon { width: 14px; height: 14px; color: var(--green); }
-    .toc-item .tn { display: block; font-size: 15.5px; line-height: 1.4; }
+    .toc-item .tn { display: block; font-size: 16.5px; line-height: 1.4; }
     .toc-item.cur { background: #fff; box-shadow: var(--shadow); border-left-color: var(--accent); color: var(--ink); }
     .toc-item.cur .so { color: var(--accent-ink); font-weight: 700; }
     .toc-item.cur .tn { font-weight: 700; }
     .toc-item.trong { opacity: .72; }
-    .toc-item .tag { padding: 2px 8px; font-size: 12px; }
+    .toc-item .tag { padding: 2px 8px; font-size: 13.5px; }
     .toc-foot { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
-    .toc-foot .lb { font-size: 14.5px; font-weight: 600; margin-bottom: 8px; }
+    .toc-foot .lb { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
     .toc-foot .progress { background: var(--accent-soft); }
-    .toc-foot .note { margin-top: 12px; font-size: 13.5px; line-height: 1.55; color: var(--ink-3); }
+    .toc-foot .note { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--ink-3); }
     /* Nội dung — kiểu slide: dải xanh đầu bài, khung xanh nhạt "Nội dung chính", khung cam "Trong đó" */
     .paper { padding: 0 0 30px; border-radius: 22px; overflow: hidden; }
     .paper > .in { padding: 0 34px; }
@@ -51,14 +51,14 @@
     .banner .bk svg { width: 26px; height: 26px; }
     .banner h1 { position: relative; z-index: 1; color: #fff; font-size: clamp(20px, 2.1vw, 25px); line-height: 1.22; text-transform: uppercase; letter-spacing: .2px; }
     .banner .sub { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 18px; align-items: center; padding: 16px 34px 0; }
-    .crumb { font-size: 14px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; letter-spacing: .2px; }
+    .crumb { font-size: 15.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; letter-spacing: .2px; }
     .crumb a { color: inherit; }
     .crumb a:hover { color: var(--navy); }
     .banner .h1-en { font-size: 18px; margin-top: 2px; }
     .banner .figure { height: 104px; border-radius: 14px; border: 1.5px solid var(--blue-line); box-shadow: 0 6px 16px rgba(13, 71, 161, .12); }
-    .banner .figure .cap { bottom: 6px; font-size: 12.5px; padding: 3px 10px; border-radius: 8px; }
+    .banner .figure .cap { bottom: 6px; font-size: 14px; white-space: normal; line-height: 1.25; padding: 3px 10px; border-radius: 8px; }
     .sec-h { display: inline-block; margin: 6px 0 14px; padding-bottom: 5px; font-size: 20px; font-weight: 800; color: var(--navy); background: linear-gradient(var(--orange), var(--orange)) left bottom / 100% 3px no-repeat; }
-    .lv-hint { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1.5px dashed var(--blue-line); font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+    .lv-hint { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1.5px dashed var(--blue-line); font-size: 16px; line-height: 1.5; color: var(--ink-2); }
     .prose { font-size: 17px; line-height: 1.75; }
     .prose .bi > .vi { display: block; }
     .prose .bi > .en, .prose > .en { display: block; }
@@ -70,32 +70,32 @@
     .item .prose { flex: 1; min-width: 0; }
     .summary { font-weight: 600; color: var(--ink); }
     .ct-math { margin: 4px 0 2px; padding: 12px 16px; border-radius: 14px; background: #fff; border: 1.5px solid var(--blue-line); text-align: center; }
-    .ct-math .ttl { font-size: 14px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; }
+    .ct-math .ttl { font-size: 15.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; }
     .ct-math .math { font-size: 24px; word-break: break-word; }
     .vars { display: flex; flex-direction: column; gap: 6px; font-size: 16px; color: var(--ink); }
     .vars .sym { font-family: var(--font-serif); font-style: italic; font-weight: 700; font-size: 18px; color: var(--navy); display: inline-block; min-width: 30px; }
     .vars .unit { color: var(--ink-3); }
-    .vars .en { font-size: 15px; }
+    .vars .en { font-size: 16px; }
     .vars .bi > .en { display: inline; margin: 0 0 0 4px; padding: 0; border: 0; }
     .vars .bi > .en::before { content: "· "; color: var(--ink-4); }
     .panel .prose { font-size: 16.5px; }
     .bang { overflow: auto; }
     .cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
-    .goi-y { margin-top: 12px; font-size: 14px; color: var(--ink-4); }
+    .goi-y { margin-top: 12px; font-size: 15.5px; color: var(--ink-4); }
     /* Tự kiểm tra */
     .selfcheck { scroll-margin-top: 130px; }
-    .selfcheck .meta { position: absolute; right: 18px; top: 12px; font-size: 14px; color: var(--ink-3); }
+    .selfcheck .meta { position: absolute; right: 18px; top: 12px; font-size: 15.5px; color: var(--ink-3); }
     .q { margin-top: 16px; }
     .q .stem { font-weight: 500; margin-bottom: 10px; }
     .opts { display: grid; gap: 8px; }
     .opt { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 10px 14px; border: 1.5px solid var(--blue-line); border-radius: 12px; background: var(--surface); transition: border-color .2s, background .2s; }
     .opt:hover { border-color: var(--accent); }
-    .opt .k { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--navy); display: grid; place-items: center; font-size: 14px; font-weight: 800; }
+    .opt .k { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--navy); display: grid; place-items: center; font-size: 15.5px; font-weight: 800; }
     .opt.selected { border-color: var(--accent); background: var(--accent-soft); }
     .opt.selected .k { background: var(--sky); color: #fff; border-color: var(--sky); }
     .opt.right { border-color: var(--green); background: var(--green-soft); }
     .opt.wrong { border-color: var(--red); background: var(--red-soft); }
-    .why { margin-top: 10px; font-size: 15.5px; padding: 10px 14px; border-radius: 12px; background: var(--orange-soft); border: 1px solid var(--orange-line); display: none; }
+    .why { margin-top: 10px; font-size: 16.5px; padding: 10px 14px; border-radius: 12px; background: var(--orange-soft); border: 1px solid var(--orange-line); display: none; }
     .why.show { display: block; }
     .result { margin-top: 16px; display: none; }
     .result.show { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -105,20 +105,20 @@
     .tn-card { padding: 13px 15px; margin-bottom: 10px; border-radius: 14px; border-left: 4px solid var(--sky); }
     .tn-card .top { display: flex; align-items: baseline; gap: 8px; }
     .tn-card .nm { flex: 1; font-size: 16.5px; line-height: 1.35; font-weight: 700; }
-    .tn-card .unit { font-size: 13.5px; color: var(--ink-4); white-space: nowrap; }
+    .tn-card .unit { font-size: 15px; color: var(--ink-4); white-space: nowrap; }
     .tn-card .en { display: block; margin-top: 2px; font-size: 16px; line-height: 1.35; }
     .tn-card .ipa-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; min-height: 32px; }
-    .tn-card .ipa { font-size: 15px; }
+    .tn-card .ipa { font-size: 16px; }
     .tn-card .speak-btn.ghost { width: 34px; height: 34px; margin-left: -4px; }
-    .tn-card .dict-links { margin-top: 2px; font-size: 13.5px; }
+    .tn-card .dict-links { margin-top: 2px; font-size: 15px; }
     .tn-card .tag { margin-top: 6px; }
     .hoc-tiep { margin-top: 36px; }
     .hoc-tiep .ph-mm-l { --accent-soft: #fff; --accent: var(--orange); --accent-ink: var(--ink); align-items: center; background: rgba(255, 255, 255, .8); border-color: var(--orange-line); }
     .hoc-tiep .ph-mm-l .rn { width: 30px; height: 30px; flex: none; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 2px 6px rgba(31, 41, 51, .1); color: var(--c1-ink); }
-    .hoc-tiep .ph-mm-l .lbl { display: block; font-size: 13px; color: var(--ink-4); }
-    .hoc-tiep .ph-mm-l .nm { display: block; font-size: 15px; font-weight: 600; line-height: 1.4; }
-    .hoc-tiep .next { margin: 12px 0 8px; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
-    .hoc-tiep .lab-link { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; color: var(--c1-ink); }
+    .hoc-tiep .ph-mm-l .lbl { display: block; font-size: 14px; color: var(--ink-4); }
+    .hoc-tiep .ph-mm-l .nm { display: block; font-size: 16px; font-weight: 600; line-height: 1.4; }
+    .hoc-tiep .next { margin: 12px 0 8px; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
+    .hoc-tiep .lab-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: var(--c1-ink); }
     /* Bài chưa có nội dung */
     .trong-box .in { padding-bottom: 6px; }
     .toc-mob { display: none; }
@@ -328,14 +328,14 @@
       else nextTxt = PH.uiFmt('nextEmpty', { n: nextAny });
       const prevHTML = prev != null ? `<a class="ph-mm-l" href="${lessonHref(prev)}"><span class="rn">${PH.icon('back', 'sm')}</span><span style="min-width:0"><span class="lbl">${PH.uiFmt('prevLbl')}</span><span class="nm">${PH.esc(PH.T(PH.lessonTitle(prev)).split(' — ')[0])}</span></span></a>` : '';
       $('side').innerHTML = `${PH.label('speaker', PH.uiFmt('termsInLesson'), '', 'sm')}<div class="tn-grid">${cards || `<p class="small muted">${PH.uiFmt('noTermsLesson')}</p>`}</div>
-        ${terms.length ? `<a href="game-termrush.html?lesson=${n}" style="display:inline-flex;align-items:center;gap:6px;margin:2px 0 6px 2px;font-size:15px;font-weight:600">${PH.uiFmt('practiseTerms', { n: terms.length })}${PH.icon('arrow', 'sm')}</a>` : ''}
+        ${terms.length ? `<a href="game-termrush.html?lesson=${n}" style="display:inline-flex;align-items:center;gap:6px;margin:2px 0 6px 2px;font-size:16px;font-weight:600">${PH.uiFmt('practiseTerms', { n: terms.length })}${PH.icon('arrow', 'sm')}</a>` : ''}
         <div class="panel orange has-label hoc-tiep">${PH.label('arrow', PH.uiFmt('keepGoing'), 'orange', 'sm')}${prevHTML}<p class="next">${nextTxt}</p><a class="lab-link" href="thinghiem.html">${PH.icon('flask', 'sm')}${PH.uiFmt('openLab')}</a></div>`;
     }
 
     function showResult() {
       const qs = data.selfcheck; const ok = qs.filter((q, i) => answers[i] === q.correct).length;
       const r = $('result'); if (!r) return; r.className = 'result show';
-      r.innerHTML = `<span class="tag ${ok === qs.length ? 'green' : 'navy'}" style="font-size:15.5px;padding:6px 12px">${PH.uiFmt('correctN', { k: ok, n: qs.length })}</span><span class="small muted">${PH.uiFmt(ok === qs.length ? 'perfect' : 'marked')}</span>`;
+      r.innerHTML = `<span class="tag ${ok === qs.length ? 'green' : 'navy'}" style="font-size:16.5px;padding:6px 12px">${PH.uiFmt('correctN', { k: ok, n: qs.length })}</span><span class="small muted">${PH.uiFmt(ok === qs.length ? 'perfect' : 'marked')}</span>`;
     }
     document.addEventListener('click', e => {
       const b = e.target.closest('.opt'); if (b && !checked) { answers[+b.dataset.q] = +b.dataset.o; renderQuestions(); return; }
