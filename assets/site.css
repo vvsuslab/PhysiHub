@@ -184,6 +184,9 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-bar-i:hover::after, .ph-mm:hover > .ph-bar-i::after, .ph-mm:focus-within > .ph-bar-i::after, .ph-bar-on::after { transform: scaleX(1); }
 .ph-bar-on { background: var(--blue-soft); color: var(--navy-2); }
 .ph-bar-i .lb { display: flex; flex-direction: column; line-height: 1.15; }
+/* Nút trang chủ chỉ có mỗi biểu tượng nên để cỡ 18px như icon trong chữ sẽ trông bé
+   so với thanh menu cao 48px — phóng to và làm nét đậm hơn cho cân. */
+.ph-bar .wrap > a:first-child .icon { width: 25px; height: 25px; stroke-width: 2.1; }
 .ph-bar-sub { display: none; font-family: var(--font-serif); font-style: italic; font-size: 11px; font-weight: 500; color: var(--gold); }
 [data-lang="bi"] .ph-bar-sub { display: block; }
 .ph-mm-v { display: flex; transition: transform .25s; color: var(--sky); }
