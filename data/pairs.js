@@ -1,4 +1,4 @@
-// PhysiHub — sinh từ pairs.json bằng tools/build-data.ps1. Sửa pairs.json rồi chạy lại.
+// PhysiHub — cặp thẻ trò chơi Ghép cặp. Sửa trực tiếp trong tệp này (không còn pairs.json nguồn).
 window.PH = window.PH || {};
 PH.PAIRS = [
   {

@@ -1,4 +1,4 @@
-// PhysiHub — sinh từ exams.json bằng tools/build-data.ps1. Sửa exams.json rồi chạy lại.
+// PhysiHub — dữ liệu đề ôn. Sửa trực tiếp trong tệp này (không còn exams.json nguồn).
 window.PH = window.PH || {};
 PH.EXAMS = [
   {
@@ -418,7 +418,7 @@ PH.EXAMS = [
               { "vi": "27 proton và 13 neutron.", "en": "27 protons and 13 neutrons." }
             ],
             "correct": 1,
-            "why": { "vi": "Trong kí hiệu hạt nhân, số ở dưới Z = 13 là số proton (điện tích hạt nhân), số ở trên A = 27 là số khối (tổng số nucleon). Số neutron N = A − Z = 27 − 13 = 14.",
+            "why": { "vi": "Trong kí hiệu hạt nhân, số ở dưới Z = 13 là số proton (điện tích hạt nhân), số ở trên A = 27 là số khối (tổng số nuclôn). Số neutron N = A − Z = 27 − 13 = 14.",
                      "en": "In the nuclear symbol the lower number Z = 13 is the number of protons (the atomic number) and the upper number A = 27 is the mass number (total number of nucleons). Number of neutrons N = A − Z = 27 − 13 = 14." } },
 
           { "id": "c4-m2", "lesson": 21,
@@ -457,7 +457,7 @@ PH.EXAMS = [
               { "vi": "càng bền vững.", "en": "the more stable it is." }
             ],
             "correct": 3,
-            "why": { "vi": "Năng lượng liên kết riêng ε = E/A (E là năng lượng liên kết) là năng lượng liên kết tính cho một nucleon, đặc trưng cho mức độ bền vững của hạt nhân: ε càng lớn thì hạt nhân càng bền. Các hạt nhân có số khối trung bình (50 < A < 95) có ε lớn nhất, cỡ 8,8 MeV/nucleon, nên bền vững nhất; ε không tỉ lệ với khối lượng hay số khối.",
+            "why": { "vi": "Năng lượng liên kết riêng ε = E/A (E là năng lượng liên kết) là năng lượng liên kết tính cho một nuclôn, đặc trưng cho mức độ bền vững của hạt nhân: ε càng lớn thì hạt nhân càng bền. Các hạt nhân có số khối trung bình (50 < A < 95) có ε lớn nhất, cỡ 8,8 MeV/nuclôn, nên bền vững nhất; ε không tỉ lệ với khối lượng hay số khối.",
                      "en": "The binding energy per nucleon ε = E/A (E the binding energy) measures how tightly the nucleus is bound: the larger ε, the more stable the nucleus. Nuclei of medium mass number (50 < A < 95) have the largest ε, about 8.8 MeV per nucleon, and are the most stable; ε is not proportional to the mass or the mass number." } },
 
           { "id": "c4-m5", "lesson": 23,
@@ -517,10 +517,10 @@ PH.EXAMS = [
       { "kind": "short", "points": 0.25,
         "items": [
           { "id": "c4-s1", "lesson": 22,
-            "q": { "vi": "Độ hụt khối của hạt nhân ⁵⁶₂₆Fe là Δm = 0,5285 u. Lấy 1 u = 931,5 MeV/c². Năng lượng liên kết riêng của hạt nhân ⁵⁶₂₆Fe bằng bao nhiêu MeV/nucleon (lấy đến một chữ số thập phân)?",
+            "q": { "vi": "Độ hụt khối của hạt nhân ⁵⁶₂₆Fe là Δm = 0,5285 u. Lấy 1 u = 931,5 MeV/c². Năng lượng liên kết riêng của hạt nhân ⁵⁶₂₆Fe bằng bao nhiêu MeV/nuclôn (lấy đến một chữ số thập phân)?",
                    "en": "The mass defect of the ⁵⁶₂₆Fe nucleus is Δm = 0.5285 u. Take 1 u = 931.5 MeV/c². What is the binding energy per nucleon of ⁵⁶₂₆Fe, in MeV/nucleon (to one decimal place)?" },
             "answer": 8.8, "tolerance": 0.05, "unit": "MeV/nucleon",
-            "solution": { "vi": "Năng lượng liên kết: E = Δm·c² = 0,5285 × 931,5 ≈ 492,3 MeV. Năng lượng liên kết riêng: ε = E/A = 492,3/56 ≈ 8,79 ≈ 8,8 MeV/nucleon (thuộc loại lớn nhất trong các hạt nhân, nên sắt rất bền vững). Điền: 8,8.",
+            "solution": { "vi": "Năng lượng liên kết: E = Δm·c² = 0,5285 × 931,5 ≈ 492,3 MeV. Năng lượng liên kết riêng: ε = E/A = 492,3/56 ≈ 8,79 ≈ 8,8 MeV/nuclôn (thuộc loại lớn nhất trong các hạt nhân, nên sắt rất bền vững). Điền: 8,8.",
                           "en": "Binding energy: E = Δm·c² = 0.5285 × 931.5 ≈ 492.3 MeV. Binding energy per nucleon: ε = E/A = 492.3/56 ≈ 8.79 ≈ 8.8 MeV/nucleon (among the highest of all nuclei, which is why iron is so stable). Answer: 8.8." } },
 
           { "id": "c4-s2", "lesson": 23,
@@ -532,5 +532,4 @@ PH.EXAMS = [
         ] }
     ]
   }
-]
-;
+];

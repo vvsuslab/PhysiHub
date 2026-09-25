@@ -1,4 +1,4 @@
-// PhysiHub — sinh từ terms.json bằng tools/build-data.ps1. Sửa terms.json rồi chạy lại.
+// PhysiHub — ngân hàng thuật ngữ. Sửa data/terms.json rồi chạy: node tools/build-data.mjs (hoặc sửa cả hai tệp cho khớp).
 window.PH = window.PH || {};
 PH.TERMS = [
   {
@@ -17,7 +17,8 @@ PH.TERMS = [
     "defEn": "The basic unit of matter, consisting of a central nucleus surrounded by a cloud of electrons.",
     "exampleEn": "Each atom of helium contains two protons in its nucleus.",
     "exampleVi": "Mỗi nguyên tử helium có hai proton trong hạt nhân.",
-    "added": false
+    "added": false,
+    "oxford": "atom"
   },
   {
     "id": "molecule",
@@ -35,7 +36,8 @@ PH.TERMS = [
     "defEn": "The smallest particle of a substance that keeps its chemical properties, made of one or more atoms bonded together.",
     "exampleEn": "The molecules of a gas move randomly and collide with the walls of the container.",
     "exampleVi": "Các phân tử khí chuyển động hỗn loạn và va chạm với thành bình.",
-    "added": false
+    "added": false,
+    "oxford": "molecule"
   },
   {
     "id": "change-of-state",
@@ -50,7 +52,7 @@ PH.TERMS = [
     "unit": "",
     "formula": "",
     "defVi": "Quá trình chất chuyển từ thể này sang thể khác (rắn, lỏng, khí) khi nhiệt độ hoặc áp suất thay đổi, ví dụ nóng chảy, đông đặc, hoá hơi, ngưng tụ.",
-    "defEn": "A process in which a substance passes from one state (solid, liquid or gas) to another, such as melting, freezing, vaporization or condensation.",
+    "defEn": "A process in which a substance passes from one state (solid, liquid or gas) to another, such as melting, freezing, vaporisation or condensation.",
     "exampleEn": "During a change of state, the temperature of a pure substance stays constant while heat is supplied.",
     "exampleVi": "Trong quá trình chuyển thể, nhiệt độ của chất tinh khiết không đổi trong khi vẫn nhận nhiệt lượng.",
     "added": true
@@ -60,7 +62,7 @@ PH.TERMS = [
     "chapter": 1,
     "lesson": 1,
     "vi": "Sự hoá hơi",
-    "en": "vaporization",
+    "en": "vaporisation",
     "ipa": "/ˌveɪpəraɪˈzeɪʃn/",
     "pos": "danh từ",
     "posEn": "noun",
@@ -71,7 +73,8 @@ PH.TERMS = [
     "defEn": "The change from the liquid state to the gaseous state, occurring either as evaporation at the surface or as boiling throughout the liquid.",
     "exampleEn": "Vaporization of water requires much more energy than melting the same mass of ice.",
     "exampleVi": "Sự hoá hơi của nước cần nhiều năng lượng hơn hẳn so với làm nóng chảy cùng khối lượng nước đá.",
-    "added": true
+    "added": true,
+    "oxford": "vaporization"
   },
   {
     "id": "work",
@@ -89,7 +92,8 @@ PH.TERMS = [
     "defEn": "Energy transferred to or from a system by a mechanical force, for example when a gas is compressed or expands; symbol A.",
     "exampleEn": "The work done on the gas is positive when the piston compresses it.",
     "exampleVi": "Công mà khối khí nhận được là dương khi pit-tông nén khí.",
-    "added": false
+    "added": false,
+    "oxford": "work"
   },
   {
     "id": "first-law-of-thermodynamics",
@@ -143,7 +147,8 @@ PH.TERMS = [
     "defEn": "The amount of internal energy transferred to or from a body during heat transfer; symbol Q, unit joule.",
     "exampleEn": "The heat absorbed by the water is 8400 J for a temperature rise of 2 K.",
     "exampleVi": "Nhiệt lượng nước thu vào là 8400 J khi nhiệt độ tăng thêm 2 K.",
-    "added": false
+    "added": false,
+    "oxford": "heat"
   },
   {
     "id": "internal-energy",
@@ -169,7 +174,7 @@ PH.TERMS = [
     "lesson": 2,
     "vi": "Thế năng",
     "en": "potential energy",
-    "ipa": "/pəˈtenʃl ˈenədʒi/",
+    "ipa": "/pəˌtenʃl ˈenədʒi/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "Wt",
@@ -179,7 +184,8 @@ PH.TERMS = [
     "defEn": "The energy of interaction between molecules, which depends on the distances between them.",
     "exampleEn": "When a solid melts, the potential energy of its molecules changes while their kinetic energy stays almost the same.",
     "exampleVi": "Khi chất rắn nóng chảy, thế năng của các phân tử thay đổi còn động năng gần như không đổi.",
-    "added": false
+    "added": false,
+    "oxford": "potential-energy"
   },
   {
     "id": "heat-transfer",
@@ -221,19 +227,20 @@ PH.TERMS = [
     "id": "absolute-zero",
     "chapter": 1,
     "lesson": 3,
-    "vi": "Không độ tuyệt đối",
+    "vi": "Độ không tuyệt đối",
     "en": "absolute zero",
-    "ipa": "/ˈæbsəluːt ˈzɪərəʊ/",
+    "ipa": "/ˌæbsəluːt ˈzɪərəʊ/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "0 K",
     "unit": "K",
     "formula": "0 K = −273,15 °C",
-    "defVi": "Không độ tuyệt đối (0 K hay −273,15 °C) là giới hạn nhiệt độ thấp nhất về lí thuyết, tại đó chuyển động nhiệt của các phân tử là nhỏ nhất.",
+    "defVi": "Độ không tuyệt đối (0 K hay −273,15 °C) là giới hạn nhiệt độ thấp nhất về lí thuyết, tại đó chuyển động nhiệt của các phân tử là nhỏ nhất.",
     "defEn": "The lowest possible temperature, 0 K or −273.15 °C, at which the thermal motion of molecules would be minimal.",
     "exampleEn": "At absolute zero the molecules of a substance have minimum kinetic energy.",
-    "exampleVi": "Ở không độ tuyệt đối, các phân tử của chất có động năng nhỏ nhất.",
-    "added": false
+    "exampleVi": "Ở độ không tuyệt đối, các phân tử của chất có động năng nhỏ nhất.",
+    "added": false,
+    "oxford": "absolute-zero"
   },
   {
     "id": "temperature",
@@ -251,7 +258,8 @@ PH.TERMS = [
     "defEn": "A physical quantity that describes how hot or cold a body is and the intensity of the thermal motion of its molecules.",
     "exampleEn": "Heat always flows from the body at higher temperature to the body at lower temperature.",
     "exampleVi": "Nhiệt lượng luôn truyền từ vật có nhiệt độ cao hơn sang vật có nhiệt độ thấp hơn.",
-    "added": false
+    "added": false,
+    "oxford": "temperature"
   },
   {
     "id": "absolute-temperature",
@@ -259,7 +267,7 @@ PH.TERMS = [
     "lesson": 3,
     "vi": "Nhiệt độ tuyệt đối",
     "en": "absolute temperature",
-    "ipa": "/ˈæbsəluːt ˈtemprətʃə(r)/",
+    "ipa": "/ˌæbsəluːt ˈtemprətʃə(r)/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "T",
@@ -269,7 +277,8 @@ PH.TERMS = [
     "defEn": "Temperature measured on the Kelvin scale, symbol T, unit kelvin (K); related to the Celsius temperature by T = t + 273.",
     "exampleEn": "A gas at 27 °C has an absolute temperature of 300 K.",
     "exampleVi": "Khối khí ở 27 °C có nhiệt độ tuyệt đối là 300 K.",
-    "added": true
+    "added": true,
+    "oxford": "absolute-temperature"
   },
   {
     "id": "thermometer",
@@ -287,7 +296,8 @@ PH.TERMS = [
     "defEn": "An instrument for measuring temperature, based on a physical property that changes with temperature, such as the volume of a liquid or an electrical resistance.",
     "exampleEn": "A mercury thermometer uses the expansion of liquid mercury to measure temperature.",
     "exampleVi": "Nhiệt kế thuỷ ngân dùng sự nở của thuỷ ngân lỏng để đo nhiệt độ.",
-    "added": true
+    "added": true,
+    "oxford": "thermometer"
   },
   {
     "id": "kelvin-scale",
@@ -301,7 +311,7 @@ PH.TERMS = [
     "symbol": "",
     "unit": "K",
     "formula": "T (K) = t (°C) + 273",
-    "defVi": "Thang nhiệt độ có gốc là không độ tuyệt đối, mỗi độ chia (1 K) bằng 1 °C; nhiệt độ đo theo thang này gọi là nhiệt độ tuyệt đối.",
+    "defVi": "Thang nhiệt độ có gốc là độ không tuyệt đối, mỗi độ chia (1 K) bằng 1 °C; nhiệt độ đo theo thang này gọi là nhiệt độ tuyệt đối.",
     "defEn": "The temperature scale whose zero is absolute zero and whose unit, the kelvin, equals one Celsius degree; temperatures on it are absolute temperatures.",
     "exampleEn": "On the Kelvin scale water freezes at 273 K and boils at 373 K.",
     "exampleVi": "Theo thang nhiệt độ Kelvin, nước đóng băng ở 273 K và sôi ở 373 K.",
@@ -313,7 +323,7 @@ PH.TERMS = [
     "lesson": 4,
     "vi": "Nhiệt dung",
     "en": "heat capacity",
-    "ipa": "/hiːt kəˈpæsəti/",
+    "ipa": "/ˈhiːt kəpæsəti/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "C",
@@ -323,7 +333,8 @@ PH.TERMS = [
     "defEn": "The heat needed to raise the temperature of a whole body by 1 K; equal to mass times specific heat capacity, C = mc.",
     "exampleEn": "A copper block of mass 2 kg has a heat capacity of 760 J/K.",
     "exampleVi": "Một khối đồng có khối lượng 2 kg có nhiệt dung 760 J/K.",
-    "added": true
+    "added": true,
+    "oxford": "heat-capacity"
   },
   {
     "id": "specific-heat-capacity",
@@ -359,7 +370,8 @@ PH.TERMS = [
     "defEn": "The definite temperature at which a crystalline solid melts at a given pressure; it stays constant while melting takes place.",
     "exampleEn": "The melting point of lead is 327 °C.",
     "exampleVi": "Nhiệt độ nóng chảy của chì là 327 °C.",
-    "added": true
+    "added": true,
+    "oxford": "melting-point"
   },
   {
     "id": "specific-latent-heat-of-fusion",
@@ -395,14 +407,15 @@ PH.TERMS = [
     "defEn": "The temperature at which a liquid boils at a given pressure; while boiling, the temperature of the liquid stays constant even though heat is supplied.",
     "exampleEn": "The boiling point of water is 100 °C at standard atmospheric pressure.",
     "exampleVi": "Nhiệt độ sôi của nước là 100 °C ở áp suất khí quyển chuẩn.",
-    "added": true
+    "added": true,
+    "oxford": "boiling-point"
   },
   {
     "id": "specific-latent-heat-of-vaporization",
     "chapter": 1,
     "lesson": 6,
     "vi": "Nhiệt hoá hơi riêng",
-    "en": "specific latent heat of vaporization",
+    "en": "specific latent heat of vaporisation",
     "ipa": "/spəˈsɪfɪk ˈleɪtnt hiːt əv ˌveɪpəraɪˈzeɪʃn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
@@ -410,8 +423,8 @@ PH.TERMS = [
     "unit": "J/kg",
     "formula": "Q = Lm",
     "defVi": "Nhiệt lượng cần cung cấp để 1 kg chất lỏng hoá hơi hoàn toàn ở nhiệt độ sôi xác định.",
-    "defEn": "The heat needed to vaporize 1 kg of a liquid completely at a definite temperature; symbol L, unit J/kg.",
-    "exampleEn": "The specific latent heat of vaporization of water is 2.26 × 10⁶ J/kg.",
+    "defEn": "The heat needed to vaporise 1 kg of a liquid completely at a definite temperature; symbol L, unit J/kg.",
+    "exampleEn": "The specific latent heat of vaporisation of water is 2.26 × 10⁶ J/kg.",
     "exampleVi": "Nhiệt hoá hơi riêng của nước là 2,26 × 10⁶ J/kg.",
     "added": false
   },
@@ -421,7 +434,7 @@ PH.TERMS = [
     "lesson": 8,
     "vi": "Áp suất",
     "en": "pressure",
-    "ipa": "/ˈpreʃ.ər/",
+    "ipa": "/ˈpreʃə(r)/",
     "pos": "danh từ",
     "posEn": "noun",
     "symbol": "p",
@@ -431,7 +444,8 @@ PH.TERMS = [
     "defEn": "The force acting perpendicularly on a unit area of the container wall; unit pascal (Pa).",
     "exampleEn": "The pressure of the gas doubles when its volume is halved at constant temperature.",
     "exampleVi": "Áp suất của khối khí tăng gấp đôi khi thể tích giảm một nửa ở nhiệt độ không đổi.",
-    "added": false
+    "added": false,
+    "oxford": "pressure"
   },
   {
     "id": "point-mass",
@@ -457,7 +471,7 @@ PH.TERMS = [
     "lesson": 8,
     "vi": "Chuyển động Brown",
     "en": "Brownian motion",
-    "ipa": "/ˈbraʊniən ˈməʊʃn/",
+    "ipa": "/ˌbraʊniən ˈməʊʃn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -467,7 +481,8 @@ PH.TERMS = [
     "defEn": "The ceaseless random motion of tiny particles suspended in a fluid, caused by uneven bombardment by the molecules of the fluid.",
     "exampleEn": "Brownian motion of pollen grains in water gives evidence that molecules move randomly.",
     "exampleVi": "Chuyển động Brown của các hạt phấn hoa trong nước là bằng chứng cho thấy các phân tử chuyển động hỗn loạn.",
-    "added": true
+    "added": true,
+    "oxford": "brownian-motion"
   },
   {
     "id": "ideal-gas",
@@ -493,7 +508,7 @@ PH.TERMS = [
     "lesson": 8,
     "vi": "Va chạm đàn hồi",
     "en": "elastic collision",
-    "ipa": "/ɪˈlæs.tɪk kəˈlɪʒ.ən/",
+    "ipa": "/ɪˈlæstɪk kəˈlɪʒn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -529,7 +544,7 @@ PH.TERMS = [
     "lesson": 9,
     "vi": "Quá trình đẳng nhiệt",
     "en": "isothermal process",
-    "ipa": "/ˌaɪ.səʊˈθɜː.məl ˈprəʊ.ses/",
+    "ipa": "/ˌaɪsəʊˈθɜːməl ˈprəʊses/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -565,7 +580,7 @@ PH.TERMS = [
     "lesson": 10,
     "vi": "Quá trình đẳng áp",
     "en": "isobaric process",
-    "ipa": "/ˌaɪ.səʊˈbær.ɪk ˈprəʊ.ses/",
+    "ipa": "/ˌaɪsəʊˈbærɪk ˈprəʊses/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -601,7 +616,7 @@ PH.TERMS = [
     "lesson": 11,
     "vi": "Phương trình trạng thái của khí lí tưởng",
     "en": "ideal gas law",
-    "ipa": "/aɪˈdɪəl ɡæs lɔː/",
+    "ipa": "/aɪˈdiːəl ɡæs lɔː/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -619,7 +634,7 @@ PH.TERMS = [
     "lesson": 11,
     "vi": "Quá trình đẳng tích",
     "en": "isochoric process",
-    "ipa": "/ˌaɪ.səʊˈkɒr.ɪk ˈprəʊ.ses/",
+    "ipa": "/ˌaɪsəʊˈkɒrɪk ˈprəʊses/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -629,7 +644,8 @@ PH.TERMS = [
     "defEn": "A change of state at constant volume V, in which the pressure p is proportional to the absolute temperature T.",
     "exampleEn": "Heating a gas in a rigid sealed container is an isochoric process.",
     "exampleVi": "Đun nóng khí trong bình kín cứng là một quá trình đẳng tích.",
-    "added": false
+    "added": false,
+    "ipaNote": "cần giáo viên tiếng Anh nghe lại (không có trong Oxford/Collins)"
   },
   {
     "id": "mean-translational-kinetic-energy",
@@ -655,7 +671,7 @@ PH.TERMS = [
     "lesson": 12,
     "vi": "Hằng số Boltzmann",
     "en": "Boltzmann constant",
-    "ipa": "/ˈbəʊlts.mən ˈkɒn.stənt/",
+    "ipa": "/ˈbəʊltsmən ˈkɒnstənt/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "k",
@@ -698,7 +714,7 @@ PH.TERMS = [
     "unit": "",
     "formula": "",
     "defVi": "Đường vẽ trong từ trường sao cho tiếp tuyến tại mỗi điểm trùng với phương của vectơ cảm ứng từ tại điểm đó; chiều đường sức là chiều của cảm ứng từ.",
-    "defEn": "A line drawn in a magnetic field so that its tangent at every point gives the direction of the magnetic induction vector there.",
+    "defEn": "A line drawn in a magnetic field so that its tangent at every point gives the direction of the magnetic flux density vector there.",
     "exampleEn": "Magnetic field lines outside a bar magnet run from the north pole to the south pole.",
     "exampleVi": "Bên ngoài nam châm thẳng, các đường sức từ đi ra từ cực Bắc và đi vào cực Nam.",
     "added": true
@@ -709,7 +725,7 @@ PH.TERMS = [
     "lesson": 14,
     "vi": "Từ trường",
     "en": "magnetic field",
-    "ipa": "/mæɡˈnet.ɪk fiːld/",
+    "ipa": "/mæɡˌnetɪk ˈfiːld/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -719,7 +735,8 @@ PH.TERMS = [
     "defEn": "A special form of matter surrounding moving charges and magnets, which exerts a magnetic force on other moving charges, currents or magnets placed in it.",
     "exampleEn": "A compass needle turns because the magnetic field of the Earth acts on it.",
     "exampleVi": "Kim la bàn quay vì từ trường của Trái Đất tác dụng lên nó.",
-    "added": false
+    "added": false,
+    "oxford": "magnetic-field"
   },
   {
     "id": "uniform-magnetic-field",
@@ -744,8 +761,8 @@ PH.TERMS = [
     "chapter": 3,
     "lesson": 15,
     "vi": "Cảm ứng từ",
-    "en": "magnetic induction",
-    "ipa": "/mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+    "en": "magnetic flux density",
+    "ipa": "/mæɡˈnetɪk flʌks ˈdensəti/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "B",
@@ -753,7 +770,7 @@ PH.TERMS = [
     "formula": "B = F/(IL·sinα)",
     "defVi": "Đại lượng vectơ đặc trưng cho từ trường về phương diện tác dụng lực từ (đơn vị: tesla, T).",
     "defEn": "The vector quantity that characterises a magnetic field by the force it exerts; unit tesla (T).",
-    "exampleEn": "The magnetic induction inside the solenoid is 0.02 T.",
+    "exampleEn": "The magnetic flux density inside the solenoid is 0.02 T.",
     "exampleVi": "Cảm ứng từ bên trong ống dây là 0,02 T.",
     "added": false
   },
@@ -806,7 +823,7 @@ PH.TERMS = [
     "unit": "T",
     "formula": "1 T = 1 N/(A·m)",
     "defVi": "Đơn vị cảm ứng từ trong hệ SI (kí hiệu T): từ trường đều 1 T tác dụng lực 1 N lên mỗi mét dây dẫn mang dòng 1 A vuông góc với đường sức từ.",
-    "defEn": "The SI unit of magnetic induction, symbol T; 1 T = 1 N/(A·m), the field that exerts 1 N on a 1 m wire carrying 1 A perpendicular to it.",
+    "defEn": "The SI unit of magnetic flux density, symbol T; 1 T = 1 N/(A·m), the field that exerts 1 N on a 1 m wire carrying 1 A perpendicular to it.",
     "exampleEn": "The magnetic field of the Earth at the surface is about 5 × 10⁻⁵ tesla.",
     "exampleVi": "Từ trường của Trái Đất ở mặt đất vào khoảng 5 × 10⁻⁵ tesla.",
     "added": true
@@ -817,7 +834,7 @@ PH.TERMS = [
     "lesson": 16,
     "vi": "Cảm ứng điện từ",
     "en": "electromagnetic induction",
-    "ipa": "/ɪˌlek.trəʊ.mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+    "ipa": "/ɪˌlektrəʊmæɡˈnetɪk ɪnˈdʌkʃn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -881,7 +898,8 @@ PH.TERMS = [
     "defEn": "The electromotive force that drives the induced current, produced whenever the flux through a circuit changes; its magnitude is proportional to the rate of change of flux.",
     "exampleEn": "The induced emf in the coil is greatest when the magnet moves fastest.",
     "exampleVi": "Suất điện động cảm ứng trong cuộn dây lớn nhất khi nam châm chuyển động nhanh nhất.",
-    "added": true
+    "added": true,
+    "oxford": "induce"
   },
   {
     "id": "magnetic-flux",
@@ -889,7 +907,7 @@ PH.TERMS = [
     "lesson": 16,
     "vi": "Từ thông",
     "en": "magnetic flux",
-    "ipa": "/mæɡˈnet.ɪk flʌks/",
+    "ipa": "/mæɡˌnetɪk ˈflʌks/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "Φ",
@@ -899,7 +917,8 @@ PH.TERMS = [
     "defEn": "A measure of the number of magnetic field lines passing through a surface: Φ = BS·cosα, unit weber (Wb).",
     "exampleEn": "The magnetic flux through the coil is zero when its plane is parallel to the field lines.",
     "exampleVi": "Từ thông qua khung dây bằng không khi mặt phẳng khung song song với các đường sức từ.",
-    "added": false
+    "added": false,
+    "oxford": "magnetic-flux"
   },
   {
     "id": "weber",
@@ -917,7 +936,8 @@ PH.TERMS = [
     "defEn": "The SI unit of magnetic flux, symbol Wb; 1 Wb is the flux through 1 m² placed perpendicular to a uniform field of 1 T.",
     "exampleEn": "A flux change of 2 weber in 0.5 s induces an emf of 4 V.",
     "exampleVi": "Từ thông biến thiên 2 weber trong 0,5 s tạo ra suất điện động cảm ứng 4 V.",
-    "added": true
+    "added": true,
+    "oxford": "weber"
   },
   {
     "id": "alternating-current",
@@ -925,7 +945,7 @@ PH.TERMS = [
     "lesson": 17,
     "vi": "Dòng điện xoay chiều",
     "en": "alternating current",
-    "ipa": "/ˈɒl.tə.neɪ.tɪŋ ˈkʌr.ənt/",
+    "ipa": "/ˌɔːltəneɪtɪŋ ˈkʌrənt/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "i",
@@ -935,7 +955,8 @@ PH.TERMS = [
     "defEn": "A current whose magnitude varies sinusoidally with time and whose direction reverses periodically: i = I₀cos(ωt + φ).",
     "exampleEn": "The alternating current in the mains supply has a frequency of 50 Hz.",
     "exampleVi": "Dòng điện xoay chiều trong mạng điện dân dụng có tần số 50 Hz.",
-    "added": false
+    "added": false,
+    "oxford": "alternating-current"
   },
   {
     "id": "effective-value",
@@ -979,7 +1000,7 @@ PH.TERMS = [
     "lesson": 18,
     "vi": "Dòng điện Foucault",
     "en": "eddy current",
-    "ipa": "/ˈed.i ˈkʌr.ənt/",
+    "ipa": "/ˈedi ˈkʌrənt/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -1007,7 +1028,8 @@ PH.TERMS = [
     "defEn": "A device using electromagnetic induction to change an alternating voltage without changing its frequency; the voltage ratio equals the turns ratio, U₁/U₂ = N₁/N₂.",
     "exampleEn": "A step-up transformer with 200 primary and 2000 secondary turns raises 22 V to 220 V.",
     "exampleVi": "Máy biến áp tăng áp có 200 vòng sơ cấp và 2000 vòng thứ cấp nâng điện áp từ 22 V lên 220 V.",
-    "added": true
+    "added": true,
+    "oxford": "transformer"
   },
   {
     "id": "electromagnetic-field",
@@ -1061,7 +1083,8 @@ PH.TERMS = [
     "defEn": "Nuclei with the same number of protons Z but different numbers of neutrons, and hence different mass numbers A; they belong to the same element.",
     "exampleEn": "Hydrogen has three isotopes: protium, deuterium and tritium.",
     "exampleVi": "Hydrogen có ba đồng vị: protium, deuterium và tritium.",
-    "added": true
+    "added": true,
+    "oxford": "isotope"
   },
   {
     "id": "nucleon",
@@ -1087,7 +1110,7 @@ PH.TERMS = [
     "lesson": 21,
     "vi": "Số hiệu nguyên tử",
     "en": "atomic number",
-    "ipa": "/əˈtɒmɪk ˈnʌmbə(r)/",
+    "ipa": "/əˌtɒmɪk ˈnʌmbə(r)/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "Z",
@@ -1097,7 +1120,8 @@ PH.TERMS = [
     "defEn": "The number of protons in a nucleus, symbol Z; it equals the number of electrons in the neutral atom and gives the nuclear charge +Ze.",
     "exampleEn": "All isotopes of oxygen share the same atomic number, 8.",
     "exampleVi": "Mọi đồng vị của oxygen đều có cùng số hiệu nguyên tử là 8.",
-    "added": true
+    "added": true,
+    "oxford": "atomic-number"
   },
   {
     "id": "mass-number",
@@ -1105,7 +1129,7 @@ PH.TERMS = [
     "lesson": 21,
     "vi": "Số khối",
     "en": "mass number",
-    "ipa": "/mæs ˈnʌmbə(r)/",
+    "ipa": "/ˈmæs nʌmbə(r)/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "A",
@@ -1115,7 +1139,8 @@ PH.TERMS = [
     "defEn": "The total number of nucleons (protons plus neutrons) in a nucleus, symbol A; a nucleus of element X is written as A_Z X.",
     "exampleEn": "Uranium-235 has mass number 235 and atomic number 92, so it has 143 neutrons.",
     "exampleVi": "Uranium-235 có số khối 235 và số hiệu nguyên tử 92 nên có 143 neutron.",
-    "added": true
+    "added": true,
+    "oxford": "mass-number"
   },
   {
     "id": "mass-defect",
@@ -1123,7 +1148,7 @@ PH.TERMS = [
     "lesson": 22,
     "vi": "Độ hụt khối",
     "en": "mass defect",
-    "ipa": "/mæs dɪˈfekt/",
+    "ipa": "/mæs ˈdiːfekt/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "Δm",
@@ -1177,11 +1202,12 @@ PH.TERMS = [
     "lesson": 22,
     "vi": "Năng lượng liên kết riêng",
     "en": "specific binding energy",
-    "ipa": "/spəˈsɪf.ɪk ˈbaɪn.dɪŋ ˈen.ə.dʒi/",
+    "ipa": "/spəˈsɪfɪk ˈbaɪndɪŋ ˈenədʒi/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "E_lk/A",
     "unit": "MeV/nuclôn",
+    "unitEn": "MeV/nucleon",
     "formula": "E_lkr = E_lk/A",
     "defVi": "Năng lượng liên kết tính trên một nuclôn; đại lượng đặc trưng trực tiếp cho mức độ bền vững của hạt nhân.",
     "defEn": "The binding energy per nucleon, E/A; the larger it is, the more stable the nucleus.",
@@ -1195,7 +1221,7 @@ PH.TERMS = [
     "lesson": 22,
     "vi": "Phản ứng dây chuyền",
     "en": "chain reaction",
-    "ipa": "/tʃeɪn riˈækʃn/",
+    "ipa": "/ˌtʃeɪn riˈækʃn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "k",
@@ -1205,7 +1231,8 @@ PH.TERMS = [
     "defEn": "A sequence of fissions in which neutrons released by one fission trigger further fissions; it is self-sustaining when the neutron multiplication factor k ≥ 1.",
     "exampleEn": "A controlled chain reaction with k = 1 keeps the reactor power constant.",
     "exampleVi": "Phản ứng dây chuyền được kiểm soát với k = 1 giữ công suất lò phản ứng không đổi.",
-    "added": true
+    "added": true,
+    "oxford": "chain-reaction"
   },
   {
     "id": "nuclear-reaction",
@@ -1231,7 +1258,7 @@ PH.TERMS = [
     "lesson": 22,
     "vi": "Phản ứng nhiệt hạch",
     "en": "nuclear fusion",
-    "ipa": "/ˈnjuː.kli.ər ˈfjuː.ʒən/",
+    "ipa": "/ˌnjuːkliə ˈfjuːʒn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -1241,7 +1268,8 @@ PH.TERMS = [
     "defEn": "A reaction in which two light nuclei combine into a heavier nucleus at extremely high temperature, releasing energy.",
     "exampleEn": "Nuclear fusion of hydrogen into helium powers the Sun.",
     "exampleVi": "Phản ứng nhiệt hạch tổng hợp hydrogen thành helium là nguồn năng lượng của Mặt Trời.",
-    "added": false
+    "added": false,
+    "oxford": "nuclear-fusion"
   },
   {
     "id": "nuclear-fission",
@@ -1249,7 +1277,7 @@ PH.TERMS = [
     "lesson": 22,
     "vi": "Phản ứng phân hạch",
     "en": "nuclear fission",
-    "ipa": "/ˈnjuː.kli.ər ˈfɪʃ.ən/",
+    "ipa": "/ˌnjuːkliə ˈfɪʃn/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -1259,7 +1287,8 @@ PH.TERMS = [
     "defEn": "A reaction in which a very heavy nucleus absorbs a slow neutron and splits into two lighter nuclei, releasing neutrons and energy.",
     "exampleEn": "Nuclear fission of one uranium-235 nucleus releases about 200 MeV.",
     "exampleVi": "Phản ứng phân hạch của một hạt nhân uranium-235 toả ra khoảng 200 MeV.",
-    "added": false
+    "added": false,
+    "oxford": "nuclear-fission"
   },
   {
     "id": "half-life",
@@ -1267,7 +1296,7 @@ PH.TERMS = [
     "lesson": 23,
     "vi": "Chu kì bán rã",
     "en": "half-life",
-    "ipa": "/ˈhɑːf.laɪf/",
+    "ipa": "/ˈhɑːf laɪf/",
     "pos": "danh từ",
     "posEn": "noun",
     "symbol": "T",
@@ -1277,7 +1306,8 @@ PH.TERMS = [
     "defEn": "The time taken for half of the radioactive nuclei in a sample to decay.",
     "exampleEn": "The half-life of iodine-131 is about 8 days.",
     "exampleVi": "Chu kì bán rã của iodine-131 khoảng 8 ngày.",
-    "added": false
+    "added": false,
+    "oxford": "half-life"
   },
   {
     "id": "radioactive-decay-law",
@@ -1313,7 +1343,8 @@ PH.TERMS = [
     "defEn": "The number of decays per unit time in a radioactive sample, H = λN; unit becquerel (Bq), 1 Bq = 1 decay per second.",
     "exampleEn": "The activity of the sample falls from 800 Bq to 100 Bq after three half-lives.",
     "exampleVi": "Độ phóng xạ của mẫu giảm từ 800 Bq xuống 100 Bq sau ba chu kì bán rã.",
-    "added": true
+    "added": true,
+    "oxford": "activity"
   },
   {
     "id": "decay-constant",
@@ -1339,7 +1370,7 @@ PH.TERMS = [
     "lesson": 23,
     "vi": "Phóng xạ",
     "en": "radioactivity",
-    "ipa": "/ˌreɪ.di.əʊ.ækˈtɪv.ə.ti/",
+    "ipa": "/ˌreɪdiəʊækˈtɪvəti/",
     "pos": "danh từ",
     "posEn": "noun",
     "symbol": "",
@@ -1349,7 +1380,8 @@ PH.TERMS = [
     "defEn": "The spontaneous decay of an unstable nucleus into another nucleus with the emission of radiation (alpha, beta or gamma).",
     "exampleEn": "Radioactivity is a random process that cannot be sped up or slowed down by heating or pressure.",
     "exampleVi": "Phóng xạ là quá trình ngẫu nhiên, không thể làm nhanh hay chậm bằng cách đun nóng hay nén.",
-    "added": false
+    "added": false,
+    "oxford": "radioactivity"
   },
   {
     "id": "alpha-decay",
@@ -1375,7 +1407,7 @@ PH.TERMS = [
     "lesson": 23,
     "vi": "Phóng xạ beta",
     "en": "beta decay",
-    "ipa": "/ˈbiːtə dɪˈkeɪ/",
+    "ipa": "/ˈbiːtə dɪkeɪ/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "β⁻, β⁺",
@@ -1385,7 +1417,8 @@ PH.TERMS = [
     "defEn": "Decay emitting an electron (β⁻) or a positron (β⁺): A is unchanged while Z rises by 1 (β⁻) or falls by 1 (β⁺); beta rays are deflected by electric and magnetic fields.",
     "exampleEn": "Carbon-14 undergoes beta decay, turning into nitrogen-14.",
     "exampleVi": "Carbon-14 phóng xạ beta trừ, biến thành nitrogen-14.",
-    "added": true
+    "added": true,
+    "oxford": "beta-decay"
   },
   {
     "id": "gamma-ray",
@@ -1393,7 +1426,7 @@ PH.TERMS = [
     "lesson": 23,
     "vi": "Tia gamma",
     "en": "gamma ray",
-    "ipa": "/ˈɡæm.ə reɪ/",
+    "ipa": "/ˈɡæmə reɪ/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "γ",
@@ -1411,7 +1444,7 @@ PH.TERMS = [
     "lesson": 24,
     "vi": "Lò phản ứng hạt nhân",
     "en": "nuclear reactor",
-    "ipa": "/ˈnjuːkliə riˈæktə(r)/",
+    "ipa": "/ˌnjuːkliə riˈæktə(r)/",
     "pos": "cụm danh từ",
     "posEn": "noun phrase",
     "symbol": "",
@@ -1421,6 +1454,7 @@ PH.TERMS = [
     "defEn": "A device that sustains a controlled fission chain reaction to release energy; it contains nuclear fuel, control rods, a moderator and a coolant.",
     "exampleEn": "Control rods absorb neutrons to regulate the power of a nuclear reactor.",
     "exampleVi": "Các thanh điều khiển hấp thụ neutron để điều chỉnh công suất của lò phản ứng hạt nhân.",
-    "added": true
+    "added": true,
+    "oxford": "nuclear-reactor"
   }
 ];
