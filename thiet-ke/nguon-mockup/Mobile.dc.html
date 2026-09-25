@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>PhysiHub — Trang chủ trên điện thoại</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&amp;family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;family=Charis+SIL:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+
+body { margin: 0; font-family: 'Be Vietnam Pro', system-ui, sans-serif; background: #F6F4EE; color: #1F2933; }
+a { color: #22376B; text-decoration: none; }
+a:hover { color: #1F2933; }
+.ph-nav { min-height: 46px; display: inline-flex; flex-direction: column; justify-content: center; padding: 0 14px; border-radius: 12px; color: #3E4A57; font-size: 15px; transition: background 0.25s ease, color 0.25s ease; }
+.ph-nav:hover { background: #EEF1F8; color: #1F2933; }
+.ph-nav-on { background: #E7ECF8; color: #1E3266; font-weight: 600; }
+.ph-sub { font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 11px; line-height: 1.1; color: #8A5A14; font-weight: 500; }
+.ph-en { font-family: 'Lora', Georgia, serif; font-style: italic; color: #8A5A14; }
+.ph-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 999px; background: linear-gradient(135deg, #F2B44A 0%, #EC7A4B 100%); color: #2B1406; font-weight: 700; font-size: 15px; box-shadow: 0 8px 20px rgba(236,122,75,0.32); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.ph-cta:hover { color: #2B1406; transform: translateY(-2px); box-shadow: 0 12px 26px rgba(236,122,75,0.42); }
+.ph-the { background: #FFFFFF; border-radius: 18px; box-shadow: 0 1px 2px rgba(31,41,51,0.05), 0 10px 28px rgba(31,41,51,0.06); }
+.ph-nhan { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 600; }
+.ph-nhan, .ph-cta, .ph-nav, .ph-nw { white-space: nowrap; }
+.ph-ft { display: inline-flex; align-items: center; min-height: 32px; font-size: 13px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #F2B44A; outline-offset: 2px; }
+@keyframes ph-noi { 0% { transform: translateY(0); } 50% { transform: translateY(-9px); } 100% { transform: translateY(0); } }
+@keyframes ph-sang { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+h1, h2, h3 { text-wrap: balance; }
+.ph-ipa { font-family: 'Charis SIL', 'Noto Sans', 'Segoe UI', 'Lucida Sans Unicode', sans-serif; letter-spacing: 0.1px; }
+p, li, a, span, button, td { text-wrap-style: pretty; }
+/* ô tìm kiếm */
+.ph-tim { position: relative; flex: 1 1 auto; min-width: 280px; max-width: 470px; }
+.ph-tim-o { display: block; width: 100%; box-sizing: border-box; height: 44px; padding: 0 52px 0 20px; border-radius: 999px; border: 1.5px solid #DCD3C1; background: #FAF8F3; font-family: inherit; font-size: 14.5px; color: #1F2933; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+.ph-tim-o:hover { border-color: #B9A77F; background: #FFFFFF; }
+.ph-tim-o:focus { border-color: #1C9A9C; background: #FFFFFF; box-shadow: 0 0 0 4px rgba(28,154,156,0.16); }
+.ph-tim-o:focus-visible { outline: none; }
+.ph-tim-o::placeholder { color: #6B7785; }
+.ph-tim-nut { position: absolute; right: 2px; top: 2px; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #34C3B8, #178C9C); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(23,140,156,0.3); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.ph-tim-nut:hover { transform: scale(1.08); box-shadow: 0 6px 14px rgba(23,140,156,0.42); }
+.ph-tim-xoa { position: absolute; right: 44px; top: 7px; width: 30px; height: 30px; border: 0; border-radius: 50%; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.ph-tim-xoa:hover { background: #EFEAE0; }
+.ph-tim-kq { position: absolute; left: 0; width: 600px; top: 52px; background: #FFFFFF; border-radius: 18px; border: 1px solid #E6E1D6; box-shadow: 0 22px 50px rgba(20,32,66,0.20); padding: 8px; z-index: 60; }
+.ph-kq { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 12px; border: 1px solid transparent; transition: background 0.2s ease, border-color 0.2s ease; }
+.ph-kq:hover { background: #E8F6F5; border-color: #9ED8D2; }
+/* thanh menu */
+.ph-bar { position: relative; height: 48px; box-sizing: border-box; padding: 0 36px; background: linear-gradient(90deg, #1B2D5E 0%, #22407A 60%, #1D5C78 100%); display: flex; align-items: stretch; }
+.ph-mm { display: flex; }
+.ph-bar-i { position: relative; box-sizing: border-box; height: 48px; display: inline-flex; align-items: center; gap: 7px; padding: 0 16px; color: #FFFFFF; font-size: 15px; font-weight: 600; white-space: nowrap; transition: background 0.2s ease, color 0.2s ease; }
+.ph-bar-i::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #F2B44A; transform: scaleX(0); transition: transform 0.25s ease; }
+.ph-bar-i:hover, .ph-mm:hover > .ph-bar-i, .ph-mm:focus-within > .ph-bar-i { background: rgba(255,255,255,0.14); color: #FFFFFF; }
+.ph-bar-i:hover::after, .ph-mm:hover > .ph-bar-i::after, .ph-mm:focus-within > .ph-bar-i::after, .ph-bar-on::after { transform: scaleX(1); }
+.ph-bar-on { background: rgba(255,255,255,0.18); }
+.ph-bar-sub { display: block; font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 11px; line-height: 1.1; font-weight: 500; color: #F4C878; }
+.ph-mm-v { display: flex; transition: transform 0.25s ease; }
+.ph-mm:hover .ph-mm-v, .ph-mm:focus-within .ph-mm-v { transform: rotate(180deg); }
+.ph-mm-p { position: absolute; left: 36px; right: 36px; top: 48px; box-sizing: border-box; background: #FFFFFF; border-radius: 0 0 22px 22px; border-top: 3px solid #F2B44A; box-shadow: 0 28px 60px rgba(20,32,66,0.24); padding: 22px 26px 20px 26px; opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s; z-index: 50; }
+.ph-mm:hover .ph-mm-p, .ph-mm:focus-within .ph-mm-p { opacity: 1; visibility: visible; transform: none; transition: opacity 0.22s ease 0.05s, transform 0.22s ease 0.05s, visibility 0s linear 0s; }
+.ph-mm-h { margin: 0 0 10px 0; font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8A5A14; }
+.ph-mm-l { display: flex; align-items: flex-start; gap: 10px; padding: 9px 10px; min-height: 40px; box-sizing: border-box; border-radius: 12px; border: 1px solid transparent; color: #1F2933; font-size: 13.5px; line-height: 1.45; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.ph-mm-l:hover { background: var(--o-nen, #EEF2FB); border-color: var(--o-vien, #B9C6E6); color: var(--o-chu, #1E3266); }
+/* ô đổi màu khi rê chuột, dùng chung */
+.ph-o { border: 1.5px solid transparent; transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
+.ph-o:hover { background: var(--o-nen, #EAF6EE); border-color: var(--o-vien, #7CC49A); transform: translateY(-3px); }
+.ph-ng[aria-pressed="false"]:hover { background: #EDE5D3 !important; color: #1F2933 !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+
+.mb-dong { box-sizing: border-box; display: flex; align-items: center; gap: 12px; background: #FFFFFF; transition: background 0.25s ease, transform 0.2s ease; border-radius: 16px; padding: 8px 12px 8px 8px; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(31,41,51,0.05), 0 6px 16px rgba(31,41,51,0.06); border-left: 4px solid var(--mau); }
+.mb-dong:hover { background: var(--nhat); }
+.mb-tiep { border: 1.5px solid transparent; transition: background 0.25s ease, border-color 0.25s ease; }
+.mb-tiep:hover { background: #FDF3EC; border-color: #EFA27F; }
+.mb-dong:active { transform: scale(0.98); }
+.mb-th { width: 84px; height: 48px; flex-shrink: 0; border-radius: 10px; overflow: hidden; background: #E9E4D8; }
+.mb-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.mb-tim { width: 44px; height: 44px; flex-shrink: 0; border: 0; border-radius: 50%; background: #E0F3F2; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; }
+.mb-tim:hover { background: #C9ECE8; }
+.mb-lang { white-space: nowrap; min-height: 40px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border: 0; border-radius: 19px; background: #8A5A14; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(138,90,20,0.3); }
+
+</style>
+</helmet>
+
+<div lang="{{maNN}}" style="width: 390px; height: 844px; box-sizing: border-box; background: #F6F4EE; display: flex; flex-direction: column; overflow: hidden;">
+
+  <header style="height: 56px; flex-shrink: 0; box-sizing: border-box; padding: 0 14px 0 16px; background: #FFFFFF; border-bottom: 1px solid #E6E1D6; display: flex; align-items: center; gap: 8px;">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 8px;">
+      <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden="true" style="flex-shrink: 0;">
+        <defs><radialGradient id="ph-logo-g" cx="38%" cy="32%" r="72%"><stop offset="0" stop-color="#2F5597"/><stop offset="1" stop-color="#0E1B38"/></radialGradient></defs>
+        <circle cx="20" cy="20" r="19" fill="url(#ph-logo-g)"/>
+        <g fill="none" stroke="#5FD3F3" stroke-width="1.5"><ellipse cx="20" cy="20" rx="13" ry="5"/><ellipse cx="20" cy="20" rx="13" ry="5" transform="rotate(60 20 20)"/><ellipse cx="20" cy="20" rx="13" ry="5" transform="rotate(120 20 20)"/></g>
+        <circle cx="20" cy="20" r="3.2" fill="#F2C14E"/>
+      </svg>
+      <span style="font-size: 19px; font-weight: 700; letter-spacing: -0.4px; color: #1F2933;">Physi<span style="color: #178AA3;">Hub</span></span>
+    </a>
+    <div style="flex-grow: 1;"></div>
+    <button type="button" class="mb-tim" onClick="{{batTim}}" aria-label="{{timNhan}}" aria-expanded="{{timMoS}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12706F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+    <button type="button" class="mb-lang" onClick="{{doiMuc}}" aria-label="{{nhanNutMuc}}">{{tenMuc}}
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h13"/><path d="m13 7 5 5-5 5"/></svg>
+    </button>
+  </header>
+
+  <sc-if value="{{timMo}}" hint-placeholder-val="{{false}}">
+    <div style="position: relative; z-index: 20; flex-shrink: 0; box-sizing: border-box; padding: 8px 12px; background: #FFFFFF; border-bottom: 1px solid #E6E1D6;">
+      <div class="ph-tim" role="search" style="max-width: none; min-width: 0;">
+        <input class="ph-tim-o" type="text" value="{{q}}" onChange="{{onQ}}" placeholder="{{timGoi}}" aria-label="{{timNhan}}" style="height: 44px; font-size: 15px;">
+        <sc-if value="{{coQ}}" hint-placeholder-val="{{false}}"><button type="button" class="ph-tim-xoa" onClick="{{xoaQ}}" aria-label="{{timXoa}}" style="right: 6px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#52606D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button></sc-if>
+        <sc-if value="{{coQ}}" hint-placeholder-val="{{false}}">
+          <div class="ph-tim-kq" style="width: auto; left: 0; right: 0; max-height: 520px; overflow: hidden;">
+            <sc-if value="{{coKQ}}" hint-placeholder-val="{{true}}">
+              <sc-for list="{{kq}}" as="r" hint-placeholder-count="4">
+                <a class="ph-kq" href="{{r.href}}" style="gap: 10px; padding: 9px 8px;">
+                  <span style="flex-grow: 1; min-width: 0;"><span style="display: block; font-size: 14px; font-weight: 600; color: #1F2933;">{{r.chinh}}</span><sc-if value="{{r.coPhu}}" hint-placeholder-val="{{true}}"><span lang="en" class="ph-en" style="display: block; font-size: 12.5px;">{{r.phu}}</span></sc-if><span style="display: block; margin-top: 2px; font-size: 11.5px; color: #52606D;">{{r.loai}} · {{r.noi}}</span></span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7785" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="m9 6 6 6-6 6"/></svg>
+                </a>
+              </sc-for>
+              <p style="margin: 4px 8px 4px 8px; font-size: 12px; color: #52606D;">{{kqDem}}</p>
+            </sc-if>
+            <sc-if value="{{khongKQ}}" hint-placeholder-val="{{false}}">
+              <p style="margin: 8px; font-size: 14px; font-weight: 600; color: #1F2933;">{{kqRong}}</p>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{timDong}}" hint-placeholder-val="{{true}}">
+  <a href="ThuatNgu.dc.html" style="height: 32px; flex-shrink: 0; box-sizing: border-box; padding: 0 16px; background: #FBF4E4; border-bottom: 1px solid #EFE3C6; display: flex; align-items: center; gap: 9px;">
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #8A5A14; white-space: nowrap;">{{lbChiSo}}</span>
+    <span style="font-family: 'Lora', Georgia, serif; font-size: 13.5px; color: #1F2933;"><strong>47</strong> / 79</span>
+    <span style="flex-grow: 1; height: 5px; border-radius: 3px; background: #EFE3C6; overflow: hidden;"><span style="display: block; width: 59%; height: 5px; background: linear-gradient(90deg, #F2B44A, #EC7A4B);"></span></span>
+  </a>
+  </sc-if>
+
+  <div style="flex-grow: 1; min-height: 0; box-sizing: border-box; padding: 14px 16px 0 16px; overflow: hidden;">
+
+    <section style="position: relative; overflow: hidden; border-radius: 22px; padding: 18px 18px 18px 18px; margin-bottom: 12px; background: linear-gradient(135deg, #1B2D5E 0%, #28498A 55%, #13707E 100%); box-shadow: 0 12px 28px rgba(27,45,94,0.25);">
+      <div style="position: absolute; width: 260px; height: 260px; right: -110px; top: -130px; border-radius: 50%; background: radial-gradient(circle, rgba(242,180,74,0.4), rgba(242,180,74,0) 68%);"></div>
+      <p style="position: relative; margin: 0 0 8px 0; font-size: 12px; color: #D6E2F5;">{{heroEyebrow}}</p>
+      <h1 style="position: relative; margin: 0; white-space: pre-line; font-family: 'Lora', Georgia, serif; font-size: 27px; line-height: 1.16; font-weight: 600; color: #FFFFFF;">{{heroH1}}</h1>
+      <sc-if value="{{coVi}}" hint-placeholder-val="{{true}}"><p lang="en" style="position: relative; margin: 5px 0 0 0; font-family: 'Lora', Georgia, serif; font-style: italic; font-size: 15px; color: #F4C878;">{{heroSub}}</p></sc-if>
+    </section>
+
+    <a href="BaiHoc.dc.html" class="ph-the mb-tiep" style="display: block; padding: 12px 14px; margin-bottom: 14px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; background: linear-gradient(135deg, #F59E5B, #E0553A); display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></svg></span>
+        <div style="flex-grow: 1; min-width: 0;">
+          <p style="margin: 0; font-size: 12px; font-weight: 700; color: #B84A22;">{{tiepNhan}}</p>
+          <p style="margin: 1px 0 0 0; font-family: 'Lora', Georgia, serif; font-size: 16px; font-weight: 600; color: #1F2933;">{{tiepTen}}</p>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+        <span style="flex-grow: 1; height: 6px; border-radius: 3px; background: #FDEEE7; overflow: hidden;"><span style="display: block; width: 60%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #F59E5B, #E0553A);"></span></span>
+        <span style="flex-shrink: 0; font-size: 12px; color: #52606D; white-space: nowrap;">{{tiepPhu}}</span>
+        <span class="ph-cta" style="flex-shrink: 0; min-height: 40px; padding: 0 16px; font-size: 13.5px; gap: 6px; white-space: nowrap;">{{ctaTiep}}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2B1406" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></span>
+      </div>
+    </a>
+
+    <div style="display: flex; align-items: baseline; margin-bottom: 9px;">
+      <p style="margin: 0; font-family: 'Lora', Georgia, serif; font-size: 18px; font-weight: 600; color: #1F2933;">{{chH2}}</p>
+      <div style="flex-grow: 1;"></div>
+      <a href="BaiHoc.dc.html" style="display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: flex-end; margin: -14px 0; font-size: 13px; font-weight: 600; white-space: nowrap;">{{tatCa}}</a>
+    </div>
+    
+    <a class="mb-dong" href="BaiHoc.dc.html" style="--mau: #E26A3F; --nhat: #FDEEE7;">
+      <span class="mb-th"><img class="mb-img" src="/_blob/6afcd80db1a1b5db86f54dc509262ce9" alt="{{ch1Alt}}"></span>
+      <div style="flex-grow: 1; min-width: 0;">
+        <p style="margin: 0 0 1px 0; font-size: 12px; font-weight: 700; color: #B84A22;">{{ch1Nhan}}</p>
+        <p style="margin: 0; font-size: 15px; font-weight: 700; color: #1F2933;">{{ch1Ten}}</p>
+        <sc-if value="{{coVi}}" hint-placeholder-val="{{true}}"><p lang="en" class="ph-en" style="margin: 0; font-size: 12.5px;">{{ch1TenEn}}</p></sc-if>
+      </div>
+      <span style="flex-shrink: 0; min-width: 40px; height: 26px; padding: 0 8px; box-sizing: border-box; border-radius: 13px; background: #FDEEE7; color: #B84A22; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">2/4</span>
+    </a>
+    
+    <a class="mb-dong" href="BaiHoc.dc.html" style="--mau: #1C9A9C; --nhat: #E0F3F2;">
+      <span class="mb-th"><img class="mb-img" src="/_blob/142b04b215f499b0d31c908fceb4ee2f" alt="{{ch2Alt}}"></span>
+      <div style="flex-grow: 1; min-width: 0;">
+        <p style="margin: 0 0 1px 0; font-size: 12px; font-weight: 700; color: #12706F;">{{ch2Nhan}}</p>
+        <p style="margin: 0; font-size: 15px; font-weight: 700; color: #1F2933;">{{ch2Ten}}</p>
+        <sc-if value="{{coVi}}" hint-placeholder-val="{{true}}"><p lang="en" class="ph-en" style="margin: 0; font-size: 12.5px;">{{ch2TenEn}}</p></sc-if>
+      </div>
+      <span style="flex-shrink: 0; min-width: 40px; height: 26px; padding: 0 8px; box-sizing: border-box; border-radius: 13px; background: #E0F3F2; color: #12706F; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">1/4</span>
+    </a>
+    
+    <a class="mb-dong" href="BaiHoc.dc.html" style="--mau: #6A5ACD; --nhat: #EEEBFB;">
+      <span class="mb-th"><img class="mb-img" src="/_blob/3a15a5d284b40e8275af84b8cc6a1ff9" alt="{{ch3Alt}}"></span>
+      <div style="flex-grow: 1; min-width: 0;">
+        <p style="margin: 0 0 1px 0; font-size: 12px; font-weight: 700; color: #5243B5;">{{ch3Nhan}}</p>
+        <p style="margin: 0; font-size: 15px; font-weight: 700; color: #1F2933;">{{ch3Ten}}</p>
+        <sc-if value="{{coVi}}" hint-placeholder-val="{{true}}"><p lang="en" class="ph-en" style="margin: 0; font-size: 12.5px;">{{ch3TenEn}}</p></sc-if>
+      </div>
+      <span style="flex-shrink: 0; min-width: 40px; height: 26px; padding: 0 8px; box-sizing: border-box; border-radius: 13px; background: #EEEBFB; color: #5243B5; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">0/4</span>
+    </a>
+    
+    <a class="mb-dong" href="BaiHoc.dc.html" style="--mau: #2E9E62; --nhat: #E3F4EA;">
+      <span class="mb-th"><img class="mb-img" src="/_blob/c5dd8f2d1ea9a635199ac1e72c1c5ce8" alt="{{ch4Alt}}"></span>
+      <div style="flex-grow: 1; min-width: 0;">
+        <p style="margin: 0 0 1px 0; font-size: 12px; font-weight: 700; color: #1F7A48;">{{ch4Nhan}}</p>
+        <p style="margin: 0; font-size: 15px; font-weight: 700; color: #1F2933;">{{ch4Ten}}</p>
+        <sc-if value="{{coVi}}" hint-placeholder-val="{{true}}"><p lang="en" class="ph-en" style="margin: 0; font-size: 12.5px;">{{ch4TenEn}}</p></sc-if>
+      </div>
+      <span style="flex-shrink: 0; min-width: 40px; height: 26px; padding: 0 8px; box-sizing: border-box; border-radius: 13px; background: #E3F4EA; color: #1F7A48; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;">0/4</span>
+    </a>
+  </div>
+
+  <nav style="height: 72px; flex-shrink: 0; box-sizing: border-box; border-top: 1px solid #E6E1D6; background: #FFFFFF; display: flex; align-items: stretch; padding: 0 6px;">
+    
+    <a href="BaiHoc.dc.html" style="flex-grow: 1; flex-basis: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #1E3266;">
+      <span style="width: 44px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: #E7ECF8;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1E3266" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg></span>
+      <span style="font-size: 12px; font-weight: 700;">{{tab1}}</span>
+      <sc-if value="{{bi}}" hint-placeholder-val="{{false}}"><span lang="en" class="ph-sub" style="font-size: 10px;">{{tab1En}}</span></sc-if>
+    </a>
+    
+    <a href="ThuatNgu.dc.html" style="flex-grow: 1; flex-basis: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #52606D;">
+      <span style="width: 44px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; "><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#52606D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg></span>
+      <span style="font-size: 12px; ">{{tab2}}</span>
+      <sc-if value="{{bi}}" hint-placeholder-val="{{false}}"><span lang="en" class="ph-sub" style="font-size: 10px;">{{tab2En}}</span></sc-if>
+    </a>
+    
+    <a href="LuyenDe.dc.html" style="flex-grow: 1; flex-basis: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #52606D;">
+      <span style="width: 44px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; "><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#52606D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h3"/></svg></span>
+      <span style="font-size: 12px; ">{{tab3}}</span>
+      <sc-if value="{{bi}}" hint-placeholder-val="{{false}}"><span lang="en" class="ph-sub" style="font-size: 10px;">{{tab3En}}</span></sc-if>
+    </a>
+    
+    <a href="TroChoi.dc.html" style="flex-grow: 1; flex-basis: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #52606D;">
+      <span style="width: 44px; height: 28px; border-radius: 14px; display: flex; align-items: center; justify-content: center; "><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#52606D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="2" y="6" width="20" height="12" rx="5"/><path d="M7 10v4"/><path d="M5 12h4"/><circle cx="15.5" cy="11" r="1"/><circle cx="18" cy="13.5" r="1"/></svg></span>
+      <span style="font-size: 12px; ">{{tab4}}</span>
+      <sc-if value="{{bi}}" hint-placeholder-val="{{false}}"><span lang="en" class="ph-sub" style="font-size: 10px;">{{tab4En}}</span></sc-if>
+    </a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"muc": {"editor": "enum", "options": [1, 2, 3], "default": 1, "section": "Mức ngôn ngữ"}, "$preview": {"width": 390, "height": 844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = Object.assign({ muc: null, q: '' }, {}); }
+
+  muc() { return this.state.muc !== null ? this.state.muc : (this.props.muc ?? 1); }
+
+  nut(d) {
+    var c = 'min-height: 40px; padding: 0 14px; border: 0; border-radius: 18px; font-family: inherit; font-size: 13px; white-space: nowrap; cursor: pointer; transition: background 0.25s ease, color 0.25s ease;';
+    return c + (d === this.muc()
+      ? 'background: #8A5A14; color: #FFFFFF; font-weight: 600; box-shadow: 0 2px 8px rgba(138,90,20,0.30);'
+      : 'background: transparent; color: #3E4A57;');
+  }
+
+  dinh(s) {
+    // giữ hai chữ cuối trên cùng một dòng để không "rơi chữ" (một chữ đứng trơ ở dòng cuối)
+    if (typeof s !== 'string' || /[;{}]/.test(s)) return s;
+    s = s.replace(/(\d) (?=[\dA-Za-zÀ-ỹ%°ΩΦλ])/g, '$1\u00a0');
+    if (s.length < 8) return s;
+    var w = s.split(' ');
+    if (w.length < 3 || w[w.length - 1].length > 14) return s;
+    return s.replace(/ (\S+)$/, ' $1');
+  }
+
+  chu(D) {
+    var m = this.muc(), o = {}, d = this.dinh;
+    for (var k in D) { o[k] = d(m === 3 ? D[k][1] : D[k][0]); o[k + 'En'] = d(D[k][1]); o[k + 'Vi'] = d(D[k][0]); }
+    return o;
+  }
+
+  dich(list) {
+    var m = this.muc(), d = this.dinh;
+    return list.map(function (it) {
+      var o = {};
+      for (var k in it) {
+        var v = it[k];
+        if (Array.isArray(v) && v.length === 2 && typeof v[0] === 'string' && typeof v[1] === 'string') {
+          o[k] = d(m === 3 ? v[1] : v[0]); o[k + 'En'] = d(v[1]); o[k + 'Vi'] = d(v[0]);
+        } else { o[k] = v; }
+      }
+      return o;
+    });
+  }
+
+  boDau(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+  }
+
+  timKiem(m) {
+    var q = (this.state.q || '').trim(), R = { 1: 'I', 2: 'II', 3: 'III', 4: 'IV' }, self = this;
+    if (!q) return { coQ: false, coKQ: false, khongKQ: false, kq: [], kqDem: '', kqRong: '', kqRongL: '', goiY: [], coGoiY: false, khongGoiY: false, kqGoiY: '', kqMeo: '' };
+    var qq = this.boDau(q), TIM = {"bai": [[1, 1, "Cấu trúc của chất. Sự chuyển thể", "Structure of matter. Changes of state"], [2, 1, "Nội năng. Định luật I của nhiệt động lực học", "Internal energy. The first law of thermodynamics"], [3, 1, "Nhiệt độ. Thang nhiệt độ – nhiệt kế", "Temperature. Temperature scales and thermometers"], [4, 1, "Nhiệt dung riêng", "Specific heat capacity"], [8, 2, "Mô hình động học phân tử chất khí", "Kinetic molecular model of gases"], [9, 2, "Định luật Boyle", "Boyle's law"], [10, 2, "Định luật Charles", "Charles's law"], [11, 2, "Phương trình trạng thái của khí lí tưởng", "Equation of state of an ideal gas"], [14, 3, "Từ trường", "Magnetic fields"], [15, 3, "Lực từ tác dụng lên dây dẫn mang dòng điện. Cảm ứng từ", "Magnetic force on a current-carrying conductor. Magnetic flux density"], [16, 3, "Từ thông. Hiện tượng cảm ứng điện từ", "Magnetic flux. Electromagnetic induction"], [17, 3, "Máy phát điện xoay chiều", "Alternating current generators"], [21, 4, "Cấu trúc hạt nhân", "Structure of the nucleus"], [22, 4, "Phản ứng hạt nhân và năng lượng liên kết", "Nuclear reactions and binding energy"], [23, 4, "Hiện tượng phóng xạ", "Radioactivity"], [24, 4, "Công nghiệp hạt nhân", "The nuclear industry"]], "tn": [[1, 1, "nguyên tử", "atom"], [1, 1, "phân tử", "molecule"], [1, 1, "sự chuyển thể", "change of state"], [1, 1, "sự hoá hơi", "vaporisation"], [1, 2, "công", "work"], [1, 2, "Định luật I của nhiệt động lực học", "first law of thermodynamics"], [1, 2, "động năng", "kinetic energy"], [1, 2, "nhiệt lượng", "heat"], [1, 2, "nội năng", "internal energy"], [1, 2, "thế năng", "potential energy"], [1, 2, "truyền nhiệt", "heat transfer"], [1, 3, "cân bằng nhiệt", "thermal equilibrium"], [1, 3, "không độ tuyệt đối", "absolute zero"], [1, 3, "nhiệt độ", "temperature"], [1, 3, "nhiệt độ tuyệt đối", "absolute temperature"], [1, 3, "nhiệt kế", "thermometer"], [1, 3, "Thang nhiệt độ Kelvin", "Kelvin scale"], [1, 4, "nhiệt dung", "heat capacity"], [1, 4, "nhiệt dung riêng", "specific heat capacity"], [1, 5, "nhiệt độ nóng chảy", "melting point"], [1, 5, "nhiệt nóng chảy riêng", "specific latent heat of fusion"], [1, 6, "nhiệt độ sôi", "boiling point"], [1, 6, "nhiệt hoá hơi riêng", "specific latent heat of vaporisation"], [2, 8, "áp suất", "pressure"], [2, 8, "chất điểm", "point mass"], [2, 8, "Chuyển động Brown", "Brownian motion"], [2, 8, "khí lí tưởng", "ideal gas"], [2, 8, "va chạm đàn hồi", "elastic collision"], [2, 9, "Định luật Boyle", "Boyle's law"], [2, 9, "quá trình đẳng nhiệt", "isothermal process"], [2, 10, "Định luật Charles", "Charles's law"], [2, 10, "quá trình đẳng áp", "isobaric process"], [2, 11, "hằng số khí", "gas constant"], [2, 11, "phương trình trạng thái của khí lí tưởng", "ideal gas law"], [2, 11, "quá trình đẳng tích", "isochoric process"], [2, 12, "động năng tịnh tiến trung bình", "mean translational kinetic energy"], [2, 12, "Hằng số Boltzmann", "Boltzmann constant"], [2, 12, "tốc độ căn quân phương", "root-mean-square speed"], [3, 14, "đường sức từ", "magnetic field line"], [3, 14, "từ trường", "magnetic field"], [3, 14, "từ trường đều", "uniform magnetic field"], [3, 15, "cảm ứng từ", "magnetic flux density"], [3, 15, "lực từ", "magnetic force"], [3, 15, "quy tắc bàn tay trái", "left-hand rule"], [3, 15, "Tesla", "tesla"], [3, 16, "cảm ứng điện từ", "electromagnetic induction"], [3, 16, "Định luật Faraday về cảm ứng điện từ", "Faraday's law of induction"], [3, 16, "Định luật Lenz", "Lenz's law"], [3, 16, "suất điện động cảm ứng", "induced emf"], [3, 16, "từ thông", "magnetic flux"], [3, 16, "Weber", "weber"], [3, 17, "dòng điện xoay chiều", "alternating current"], [3, 17, "giá trị hiệu dụng", "effective value"], [3, 17, "máy phát điện xoay chiều", "AC generator"], [3, 18, "Dòng điện Foucault", "eddy current"], [3, 18, "máy biến áp", "transformer"], [3, 19, "điện từ trường", "electromagnetic field"], [3, 19, "sóng điện từ", "electromagnetic wave"], [4, 21, "đồng vị", "isotope"], [4, 21, "Nuclôn", "nucleon"], [4, 21, "số hiệu nguyên tử", "atomic number"], [4, 21, "số khối", "mass number"], [4, 22, "độ hụt khối", "mass defect"], [4, 22, "Hệ thức Einstein", "mass-energy equivalence"], [4, 22, "năng lượng liên kết", "binding energy"], [4, 22, "năng lượng liên kết riêng", "specific binding energy"], [4, 22, "phản ứng dây chuyền", "chain reaction"], [4, 22, "phản ứng hạt nhân", "nuclear reaction"], [4, 22, "phản ứng nhiệt hạch", "nuclear fusion"], [4, 22, "phản ứng phân hạch", "nuclear fission"], [4, 23, "chu kì bán rã", "half-life"], [4, 23, "Định luật phóng xạ", "radioactive decay law"], [4, 23, "độ phóng xạ", "activity"], [4, 23, "hằng số phóng xạ", "decay constant"], [4, 23, "phóng xạ", "radioactivity"], [4, 23, "phóng xạ alpha", "alpha decay"], [4, 23, "phóng xạ beta", "beta decay"], [4, 23, "tia gamma", "gamma ray"], [4, 24, "lò phản ứng hạt nhân", "nuclear reactor"]]}, MAU = {"1": ["#E26A3F", "#B84A22", "#FDEEE7", "#F59E5B", "#E0553A"], "2": ["#1C9A9C", "#12706F", "#E0F3F2", "#34C3B8", "#178C9C"], "3": ["#6A5ACD", "#5243B5", "#EEEBFB", "#8E7CF0", "#5B48C8"], "4": ["#2E9E62", "#1F7A48", "#E3F4EA", "#4CC47E", "#23865A"]}, ra = [];
+    var chip = function (c) {
+      return 'flex-shrink: 0; min-width: 66px; box-sizing: border-box; text-align: center; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; background: ' + MAU[c][2] + '; color: ' + MAU[c][1] + ';';
+    };
+    TIM.bai.forEach(function (b) {
+      var hop = self.boDau(b[2]).indexOf(qq) >= 0 || self.boDau(b[3]).indexOf(qq) >= 0 || ('bai ' + b[0]) === qq || ('lesson ' + b[0]) === qq;
+      if (hop) ra.push({ loai: m === 3 ? 'Lesson' : 'Bài học', chip: chip(b[1]),
+        chinh: m === 3 ? 'Lesson ' + b[0] + '. ' + b[3] : 'Bài ' + b[0] + '. ' + b[2],
+        phu: b[3], coPhu: m === 2, noi: (m === 3 ? 'Chapter ' : 'Chương ') + R[b[1]], href: 'BaiHoc.dc.html' });
+    });
+    TIM.tn.forEach(function (t) {
+      var hop = self.boDau(t[2]).indexOf(qq) >= 0 || self.boDau(t[3]).indexOf(qq) >= 0;
+      if (hop) ra.push({ loai: m === 3 ? 'Term' : 'Thuật ngữ', chip: chip(t[0]),
+        chinh: m === 3 ? t[3] : t[2], phu: t[3], coPhu: m !== 3,
+        noi: m === 3 ? 'Ch. ' + R[t[0]] + ' · L' + t[1] : 'Chương ' + R[t[0]] + ' · Bài ' + t[1], href: 'ThuatNgu.dc.html' });
+    });
+    var n = ra.length, con = n - 6, goiY = [];
+    if (n === 0) {
+      var lev = function (a, b) {
+        var d = [], i, j; for (i = 0; i <= a.length; i++) { d[i] = [i]; }
+        for (j = 1; j <= b.length; j++) d[0][j] = j;
+        for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++)
+          d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        return d[a.length][b.length];
+      };
+      var ung = [];
+      TIM.tn.forEach(function (t) { ung.push({ ten: m === 3 ? t[3] : t[2], so: [t[2], t[3]], href: 'ThuatNgu.dc.html' }); });
+      TIM.bai.forEach(function (b) { ung.push({ ten: (m === 3 ? 'Lesson ' + b[0] + '. ' + b[3] : 'Bài ' + b[0] + '. ' + b[2]), so: [b[2], b[3]], href: 'BaiHoc.dc.html' }); });
+      ung.forEach(function (u) {
+        u.d = Math.min.apply(null, u.so.map(function (x) { var c = self.boDau(x); return lev(qq, c.slice(0, qq.length)); }));
+      });
+      var nguong = Math.max(2, Math.floor(qq.length / 3));
+      goiY = ung.filter(function (u) { return u.d <= nguong; }).sort(function (a, b) { return a.d - b.d; }).slice(0, 3);
+    }
+    return {
+      coQ: true, coKQ: n > 0, khongKQ: n === 0, kq: ra.slice(0, 6),
+      kqDem: con > 0 ? (m === 3 ? con + ' more results — press the magnifier to see them all' : 'Còn ' + con + ' kết quả nữa — bấm kính lúp để xem hết')
+                     : (m === 3 ? n + (n === 1 ? ' result' : ' results') : n + ' kết quả'),
+      kqRong: m === 3 ? 'Nothing matches “' + q + '” exactly.' : 'Không có kết quả khớp đúng với “' + q + '”.',
+      goiY: goiY, coGoiY: goiY.length > 0, khongGoiY: n === 0 && goiY.length === 0,
+      kqGoiY: m === 3 ? 'Did you mean:' : 'Có phải em muốn tìm:',
+      kqMeo: m === 3 ? 'Try the English name, or type fewer letters.' : 'Thử gõ tên tiếng Anh, hoặc gõ bớt chữ.',
+      kqRongL: m === 3 ? 'Open the glossary' : 'Mở kho thuật ngữ'
+    };
+  }
+
+  chung() {
+    var m = this.muc(), self = this;
+    return Object.assign(this.chu({"navBai": ["Bài học", "Lessons"], "navTn": ["Thuật ngữ", "Glossary"], "navLd": ["Luyện đề", "Exam practice"], "navTc": ["Trò chơi", "Games"], "lbChiSo": ["Thuật ngữ đã thuộc", "Terms mastered"], "gtChiSo": ["Một thuật ngữ tính là đã thuộc khi em trả lời đúng hai lần liên tiếp ở thẻ ghi nhớ, bài kiểm tra hoặc trò chơi.", "A term counts as mastered once you answer it correctly twice in a row in flashcards, quizzes or games."], "lbSong": ["Song ngữ", "Bilingual"], "ft1": ["Sản phẩm dự thi Khoa học kĩ thuật · Trường THPT Bùi Hữu Nghĩa, Cần Thơ · Năm học 2026–2027", "Science and engineering fair project · Bùi Hữu Nghĩa High School, Cần Thơ · School year 2026–2027"], "ft2": ["Nội dung bám SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoạ của Bộ GD&ĐT, dùng cho mục đích học tập.", "Content follows the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series) and the Ministry of Education’s sample exams, for learning purposes only."], "ftL1": ["Tất cả liên kết", "All links"], "ftL2": ["Về dự án", "About the project"], "ftL3": ["Nguồn học liệu", "Sources"], "ftL4": ["Góp ý cho nhóm", "Send feedback"], "navNha": ["Trang chủ", "Home"], "navTnA": ["Thí nghiệm ảo", "Virtual lab"], "navMenu": ["Menu chính", "Main menu"], "timGoi": ["Tìm bài học, thuật ngữ…", "Search lessons and terms…"], "timNhan": ["Tìm kiếm", "Search"], "timXoa": ["Xoá chữ đã gõ", "Clear search"], "coTN": ["Có thí nghiệm ảo", "Virtual lab inside"], "mmTnTen": ["Thí nghiệm ảo · Từ nước đá đến hơi nước", "Virtual lab · From ice to steam"], "mmTnMo": ["Chương I · Bài 1 — xem nước đá tan, nước sôi và đồ thị nhiệt độ chạy cùng lúc", "Chapter I · Lesson 1 — watch ice melt, water boil and the temperature graph at the same time"], "mmXemBai": ["Xem cả 16 bài mẫu", "See all 16 sample lessons"], "mmCon3": ["+ 3 bài chưa có nội dung", "+ 3 lessons not written yet"], "mmCon2": ["+ 2 bài chưa có nội dung", "+ 2 lessons not written yet"], "mmCon1": ["+ 1 bài chưa có nội dung", "+ 1 lesson not written yet"], "mmTnH1": ["Theo chương", "By chapter"], "mmTnH2": ["Ôn theo trạng thái", "Review by status"], "mmTnH3": ["Trong bài em đang học", "In your current lesson"], "mmTnChua": ["Chưa thuộc", "Not mastered yet"], "mmTnDa": ["Đã thuộc", "Mastered"], "mmTnKd": ["Cách nhóm kiểm tra một thuật ngữ", "How each term is checked"], "mmTnMoKho": ["Mở kho thuật ngữ", "Open the glossary"], "mmTnNghia": ["nhiệt dung riêng · c · J/(kg·K)", "symbol c · unit J/(kg·K)"], "mmLdH1": ["Đề theo cấu trúc 2025", "Tests in the 2025 format"], "mmLdH2": ["Luyện theo chương", "Practise by chapter"], "mmLdP1": ["Phần I · Trắc nghiệm nhiều lựa chọn", "Part I · Multiple choice"], "mmLdP1s": ["18 câu · 4,5 điểm", "18 questions · 4.5 points"], "mmLdP2": ["Phần II · Đúng – sai", "Part II · True or false"], "mmLdP2s": ["4 câu · 4,0 điểm", "4 questions · 4.0 points"], "mmLdP3": ["Phần III · Trả lời ngắn", "Part III · Short answer"], "mmLdP3s": ["6 câu · 1,5 điểm", "6 questions · 1.5 points"], "mmLdCta": ["Làm đề tổng hợp · 50 phút", "Take a full test · 50 minutes"], "mmLdGhiT": ["Đề cũng có ba mức ngôn ngữ", "Tests come in all three language levels"], "mmLdGhi": ["Chọn Tiếng Việt, Song ngữ hoặc English ở góc trên. Điểm luyện đề giữ nguyên, không nhân hệ số như trò chơi.", "Pick Vietnamese, Bilingual or English at the top. Test scores stay as they are; only games multiply points."], "mmG1Ten": ["Term Rush", "Term Rush"], "mmG1Phu": ["Đua với thuật ngữ đang rơi", "Beat the falling terms"], "mmG1M": ["60 giây · 3 mạng", "60 seconds · 3 lives"], "mmG2Ten": ["Ghép cặp Vật lí", "Physics Match Up"], "mmG2Phu": ["Lật thẻ, ghép đúng từng cặp", "Flip the cards, match the pairs"], "mmG2M": ["90 giây · 12 thẻ", "90 seconds · 12 cards"], "mmGH": ["Điểm nhân theo mức ngôn ngữ", "Points grow with your language level"], "mmGHuy": ["Huy hiệu chương", "Chapter badges"], "mmGKl": ["Kỉ lục của em", "Your records"], "lbTiengViet": ["Tiếng Việt", "Vietnamese"], "hsGiua": ["1,5", "1.5"], "b1": ["Cấu trúc của chất. Sự chuyển thể", "Structure of matter. Changes of state"], "b2": ["Nội năng. Định luật I của nhiệt động lực học", "Internal energy. The first law of thermodynamics"], "b3": ["Nhiệt độ. Thang nhiệt độ – nhiệt kế", "Temperature. Temperature scales and thermometers"], "b4": ["Nhiệt dung riêng", "Specific heat capacity"], "b5": ["Nhiệt nóng chảy riêng", "Specific latent heat of fusion"], "b6": ["Nhiệt hoá hơi riêng", "Specific latent heat of vaporisation"], "b7": ["Bài tập về vật lí nhiệt", "Problems in thermal physics"], "b8": ["Mô hình động học phân tử chất khí", "Kinetic molecular model of gases"], "b9": ["Định luật Boyle", "Boyle's law"], "b10": ["Định luật Charles", "Charles's law"], "b11": ["Phương trình trạng thái của khí lí tưởng", "Equation of state of an ideal gas"], "b12": ["Áp suất khí theo mô hình động học phân tử. Quan hệ giữa động năng phân tử và nhiệt độ", "Gas pressure in the kinetic model. Molecular kinetic energy and temperature"], "b13": ["Bài tập về khí lí tưởng", "Problems on ideal gases"], "b14": ["Từ trường", "Magnetic fields"], "b15": ["Lực từ tác dụng lên dây dẫn mang dòng điện. Cảm ứng từ", "Magnetic force on a current-carrying conductor. Magnetic flux density"], "b16": ["Từ thông. Hiện tượng cảm ứng điện từ", "Magnetic flux. Electromagnetic induction"], "b17": ["Máy phát điện xoay chiều", "Alternating current generators"], "b18": ["Ứng dụng hiện tượng cảm ứng điện từ", "Applications of electromagnetic induction"], "b19": ["Điện từ trường. Mô hình sóng điện từ", "Electromagnetic fields. The electromagnetic wave model"], "b20": ["Bài tập về từ trường", "Problems on magnetic fields"], "b21": ["Cấu trúc hạt nhân", "Structure of the nucleus"], "b22": ["Phản ứng hạt nhân và năng lượng liên kết", "Nuclear reactions and binding energy"], "b23": ["Hiện tượng phóng xạ", "Radioactivity"], "b24": ["Công nghiệp hạt nhân", "The nuclear industry"], "b25": ["Bài tập về vật lí hạt nhân", "Problems in nuclear physics"], "mmC1": ["Chương I", "Chapter I"], "mmC2": ["Chương II", "Chapter II"], "mmC3": ["Chương III", "Chapter III"], "mmC4": ["Chương IV", "Chapter IV"], "mmC1T": ["Vật lí nhiệt", "Thermal physics"], "mmC2T": ["Khí lí tưởng", "Ideal gases"], "mmC3T": ["Từ trường", "Magnetic fields"], "mmC4T": ["Vật lí hạt nhân", "Nuclear physics"], "mmTnSo1": ["23 thuật ngữ", "23 terms"], "mmTnSo2": ["15 thuật ngữ", "15 terms"], "mmTnSo3": ["20 thuật ngữ", "20 terms"], "mmTnSo4": ["21 thuật ngữ", "21 terms"], "mmTnSoChua": ["32 thuật ngữ", "32 terms"], "mmTnSoDa": ["47 thuật ngữ", "47 terms"]}), this.timKiem(m), {
+      q: this.state.q || '',
+      onQ: function (e) { self.setState({ q: e.target.value }); },
+      xoaQ: function () { self.setState({ q: '' }); },
+      s1: this.nut(1), s2: this.nut(2), s3: this.nut(3),
+      p1: m === 1 ? 'true' : 'false', p2: m === 2 ? 'true' : 'false', p3: m === 3 ? 'true' : 'false',
+      pick1: function () { self.setState({ muc: 1 }); },
+      pick2: function () { self.setState({ muc: 2 }); },
+      pick3: function () { self.setState({ muc: 3 }); },
+      vi: m === 1, bi: m === 2, en: m === 3, coVi: m !== 3, coEn: m !== 1, maNN: m === 3 ? 'en' : 'vi'
+    });
+  }
+
+  renderVals() {
+    var m = this.muc(), self = this;
+    var ten = m === 1 ? 'Tiếng Việt' : (m === 2 ? 'Song ngữ' : 'English');
+    return Object.assign(this.chung(), this.chu({"heroEyebrow": ["Vật lí 12 · Kết nối tri thức", "Physics 12 · Kết nối tri thức với cuộc sống"], "heroH1": ["Vật lí 12\nsong ngữ Việt –⁠ Anh", "Bilingual Physics 12"], "heroSub": ["Bilingual Physics 12", "Vietnamese – English"], "ctaTiep": ["Học tiếp", "Continue"], "tiepNhan": ["Đang học dở · Chương I", "In progress · Chapter I"], "tiepTen": ["Bài 4. Nhiệt dung riêng", "Lesson 4. Specific heat capacity"], "tiepPhu": ["Đã đọc 60 %", "60 % read"], "chH2": ["Bốn chương · 16 bài mẫu", "Four chapters · 16 sample lessons"], "tatCa": ["Tất cả", "All"], "ch1Nhan": ["Chương I · 4 bài mẫu", "Chapter I · 4 lessons"], "ch1Ten": ["Vật lí nhiệt", "Thermal physics"], "ch2Nhan": ["Chương II · 4 bài mẫu", "Chapter II · 4 lessons"], "ch2Ten": ["Khí lí tưởng", "Ideal gases"], "ch3Nhan": ["Chương III · 4 bài mẫu", "Chapter III · 4 lessons"], "ch3Ten": ["Từ trường", "Magnetic fields"], "ch4Nhan": ["Chương IV · 4 bài mẫu", "Chapter IV · 4 lessons"], "ch4Ten": ["Vật lí hạt nhân", "Nuclear physics"], "ch1Alt": ["Nước đá, nước và hơi nước trong ba cốc thuỷ tinh", "Ice, water and steam in three glasses"], "ch2Alt": ["Xi lanh có pit-tông chứa phân tử khí", "A cylinder with a piston holding gas molecules"], "ch3Alt": ["Thanh nam châm và đường sức từ hiện nhờ mạt sắt", "A bar magnet with field lines shown by iron filings"], "ch4Alt": ["Phản ứng phân hạch hạt nhân", "Nuclear fission"], "tab1": ["Bài học", "Lessons"], "tab2": ["Thuật ngữ", "Glossary"], "tab3": ["Luyện đề", "Exam practice"], "tab4": ["Trò chơi", "Games"]}), {
+      tenMuc: ten,
+      nhanNutMuc: m === 3 ? 'Change language level, now: English' : 'Đổi mức ngôn ngữ, đang chọn: ' + ten,
+      doiMuc: function () { self.setState({ muc: m === 3 ? 1 : m + 1 }); },
+      timMo: !!this.state.timMo, timDong: !this.state.timMo, timMoS: this.state.timMo ? 'true' : 'false',
+      batTim: function () { self.setState({ timMo: !self.state.timMo, q: '' }); }
+    });
+  }
+
+}
+</script>
+</body>
+</html>

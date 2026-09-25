@@ -1,0 +1,795 @@
+{
+ "ghi_chu": "Đề xuất phiên âm IPA (Anh – Anh) cho 79 thuật ngữ, đối chiếu ngày 23/9/2026. CHỈ sửa data/terms.json theo cột ipa_de_xuat ở những dòng có gv_xac_nhan = \"Đồng ý\" (giáo viên tiếng Anh điền trong tệp PhysiHub-Doi-chieu-IPA.xlsx rồi chép sang đây).",
+ "thuat_ngu": [
+  {
+   "id": "atom",
+   "en": "atom",
+   "ipa_hien_tai": "/ˈætəm/",
+   "ipa_de_xuat": "/ˈætəm/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/atom",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "molecule",
+   "en": "molecule",
+   "ipa_hien_tai": "/ˈmɒlɪkjuːl/",
+   "ipa_de_xuat": "/ˈmɒlɪkjuːl/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/molecule",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "change-of-state",
+   "en": "change of state",
+   "ipa_hien_tai": "/tʃeɪndʒ əv steɪt/",
+   "ipa_de_xuat": "/tʃeɪndʒ əv steɪt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: change, state",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "vaporization",
+   "en": "vaporization",
+   "ipa_hien_tai": "/ˌveɪpəraɪˈzeɪʃn/",
+   "ipa_de_xuat": "/ˌveɪpəraɪˈzeɪʃn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Nhóm đã chốt chính tả Anh – Anh \"vaporisation\"; phát âm giữ nguyên.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/vaporization",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "work",
+   "en": "work",
+   "ipa_hien_tai": "/wɜːk/",
+   "ipa_de_xuat": "/wɜːk/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/work",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "first-law-of-thermodynamics",
+   "en": "first law of thermodynamics",
+   "ipa_hien_tai": "/fɜːst lɔː əv ˌθɜːməʊdaɪˈnæmɪks/",
+   "ipa_de_xuat": "/fɜːst lɔː əv ˌθɜːməʊdaɪˈnæmɪks/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: first, law, thermodynamics",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "kinetic-energy",
+   "en": "kinetic energy",
+   "ipa_hien_tai": "/kɪˈnetɪk ˈenədʒi/",
+   "ipa_de_xuat": "/kɪˈnetɪk ˈenədʒi/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: kinetic, energy",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "heat",
+   "en": "heat",
+   "ipa_hien_tai": "/hiːt/",
+   "ipa_de_xuat": "/hiːt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/heat",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "internal-energy",
+   "en": "internal energy",
+   "ipa_hien_tai": "/ɪnˈtɜːnl ˈenədʒi/",
+   "ipa_de_xuat": "/ɪnˈtɜːnl ˈenədʒi/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: internal, energy",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "potential-energy",
+   "en": "potential energy",
+   "ipa_hien_tai": "/pəˈtenʃl ˈenədʒi/",
+   "ipa_de_xuat": "/pəˌtenʃl ˈenədʒi/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/potential-energy",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "heat-transfer",
+   "en": "heat transfer",
+   "ipa_hien_tai": "/hiːt ˈtrænsfɜː(r)/",
+   "ipa_de_xuat": "/hiːt ˈtrænsfɜː(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: heat, transfer",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "thermal-equilibrium",
+   "en": "thermal equilibrium",
+   "ipa_hien_tai": "/ˈθɜːml ˌiːkwɪˈlɪbriəm/",
+   "ipa_de_xuat": "/ˈθɜːml ˌiːkwɪˈlɪbriəm/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: thermal, equilibrium",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "absolute-zero",
+   "en": "absolute zero",
+   "ipa_hien_tai": "/ˈæbsəluːt ˈzɪərəʊ/",
+   "ipa_de_xuat": "/ˌæbsəluːt ˈzɪərəʊ/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/absolute-zero",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "temperature",
+   "en": "temperature",
+   "ipa_hien_tai": "/ˈtemprətʃə(r)/",
+   "ipa_de_xuat": "/ˈtemprətʃə(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/temperature",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "absolute-temperature",
+   "en": "absolute temperature",
+   "ipa_hien_tai": "/ˈæbsəluːt ˈtemprətʃə(r)/",
+   "ipa_de_xuat": "/ˌæbsəluːt ˈtemprətʃə(r)/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/absolute-temperature",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "thermometer",
+   "en": "thermometer",
+   "ipa_hien_tai": "/θəˈmɒmɪtə(r)/",
+   "ipa_de_xuat": "/θəˈmɒmɪtə(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/thermometer",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "kelvin-scale",
+   "en": "Kelvin scale",
+   "ipa_hien_tai": "/ˈkelvɪn skeɪl/",
+   "ipa_de_xuat": "/ˈkelvɪn skeɪl/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: kelvin, scale",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "heat-capacity",
+   "en": "heat capacity",
+   "ipa_hien_tai": "/hiːt kəˈpæsəti/",
+   "ipa_de_xuat": "/ˈhiːt kəpæsəti/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/heat-capacity",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "specific-heat-capacity",
+   "en": "specific heat capacity",
+   "ipa_hien_tai": "/spəˈsɪfɪk hiːt kəˈpæsəti/",
+   "ipa_de_xuat": "/spəˈsɪfɪk hiːt kəˈpæsəti/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: specific, heat, capacity",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "melting-point",
+   "en": "melting point",
+   "ipa_hien_tai": "/ˈmeltɪŋ pɔɪnt/",
+   "ipa_de_xuat": "/ˈmeltɪŋ pɔɪnt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/melting-point",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "specific-latent-heat-of-fusion",
+   "en": "specific latent heat of fusion",
+   "ipa_hien_tai": "/spəˈsɪfɪk ˈleɪtnt hiːt əv ˈfjuːʒn/",
+   "ipa_de_xuat": "/spəˈsɪfɪk ˈleɪtnt hiːt əv ˈfjuːʒn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: specific, latent, heat, fusion",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "boiling-point",
+   "en": "boiling point",
+   "ipa_hien_tai": "/ˈbɔɪlɪŋ pɔɪnt/",
+   "ipa_de_xuat": "/ˈbɔɪlɪŋ pɔɪnt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/boiling-point",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "specific-latent-heat-of-vaporization",
+   "en": "specific latent heat of vaporization",
+   "ipa_hien_tai": "/spəˈsɪfɪk ˈleɪtnt hiːt əv ˌveɪpəraɪˈzeɪʃn/",
+   "ipa_de_xuat": "/spəˈsɪfɪk ˈleɪtnt hiːt əv ˌveɪpəraɪˈzeɪʃn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Đổi chính tả thành \"vaporisation\"; phát âm giữ nguyên.",
+   "nguon": "Ghép từng từ: specific, latent, heat, vaporization",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "pressure",
+   "en": "pressure",
+   "ipa_hien_tai": "/ˈpreʃ.ər/",
+   "ipa_de_xuat": "/ˈpreʃə(r)/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/pressure",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "point-mass",
+   "en": "point mass",
+   "ipa_hien_tai": "/pɔɪnt mæs/",
+   "ipa_de_xuat": "/pɔɪnt mæs/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: point, mass",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "brownian-motion",
+   "en": "Brownian motion",
+   "ipa_hien_tai": "/ˈbraʊniən ˈməʊʃn/",
+   "ipa_de_xuat": "/ˌbraʊniən ˈməʊʃn/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/brownian-motion",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "ideal-gas",
+   "en": "ideal gas",
+   "ipa_hien_tai": "/aɪˈdiːəl ɡæs/",
+   "ipa_de_xuat": "/aɪˈdiːəl ɡæs/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: ideal, gas",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "elastic-collision",
+   "en": "elastic collision",
+   "ipa_hien_tai": "/ɪˈlæs.tɪk kəˈlɪʒ.ən/",
+   "ipa_de_xuat": "/ɪˈlæstɪk kəˈlɪʒn/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "Ghép từng từ: elastic, collision",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "boyles-law",
+   "en": "Boyle's law",
+   "ipa_hien_tai": "/bɔɪlz lɔː/",
+   "ipa_de_xuat": "/bɔɪlz lɔː/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Collins (Anh – Anh): Boyle's law /bɔɪlz/; OALD: law /lɔː/. Merriam-Webster cũng đọc ˈbȯilz.",
+   "nguon": "https://www.dictionary.com/browse/boyles-law · https://www.merriam-webster.com/dictionary/Boyle's%20law",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "isothermal-process",
+   "en": "isothermal process",
+   "ipa_hien_tai": "/ˌaɪ.səʊˈθɜː.məl ˈprəʊ.ses/",
+   "ipa_de_xuat": "/ˌaɪsəʊˈθɜːməl ˈprəʊses/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Collins (Anh – Anh): isothermal /ˌaɪsəʊˈθɜːməl/; OALD: process /ˈprəʊses/. Trang chỉ khác ở dấu chấm tách âm tiết.",
+   "nguon": "https://www.dictionary.com/browse/isothermal · https://www.oxfordlearnersdictionaries.com/definition/english/process1_1",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "charless-law",
+   "en": "Charles's law",
+   "ipa_hien_tai": "/ˈtʃɑːlzɪz lɔː/",
+   "ipa_de_xuat": "/ˈtʃɑːlzɪz lɔː/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: charles's, law",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "isobaric-process",
+   "en": "isobaric process",
+   "ipa_hien_tai": "/ˌaɪ.səʊˈbær.ɪk ˈprəʊ.ses/",
+   "ipa_de_xuat": "/ˌaɪsəʊˈbærɪk ˈprəʊses/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Collins (Anh – Anh): isobaric /ˌaɪsəʊˈbærɪk/; OALD: process /ˈprəʊses/.",
+   "nguon": "https://www.dictionary.com/browse/isobaric · https://www.oxfordlearnersdictionaries.com/definition/english/process1_1",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "gas-constant",
+   "en": "gas constant",
+   "ipa_hien_tai": "/ɡæs ˈkɒnstənt/",
+   "ipa_de_xuat": "/ɡæs ˈkɒnstənt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: gas, constant",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "ideal-gas-law",
+   "en": "ideal gas law",
+   "ipa_hien_tai": "/aɪˈdɪəl ɡæs lɔː/",
+   "ipa_de_xuat": "/aɪˈdiːəl ɡæs lɔː/",
+   "ket_luan": "Biến thể – thống nhất theo OALD",
+   "ghi_chu": "OALD ghi /aɪˈdiːəl/; Cambridge ghi /aɪˈdɪəl/. Cả hai đều đúng, nhưng trang đang dùng /aɪˈdiːəl/ ở \"ideal gas\" nên thống nhất một cách.",
+   "nguon": "Ghép từng từ: ideal, gas, law",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "isochoric-process",
+   "en": "isochoric process",
+   "ipa_hien_tai": "/ˌaɪ.səʊˈkɒr.ɪk ˈprəʊ.ses/",
+   "ipa_de_xuat": "/ˌaɪsəʊˈkɒrɪk ˈprəʊses/",
+   "ket_luan": "Cần GV nghe lại",
+   "ghi_chu": "Oxford, Longman, Collins không có mục này. Merriam-Webster (giọng Mỹ) ghi trọng âm rơi vào \"cho\" (¦ī-sə¦kȯr-ik), khớp với trang; nguyên âm /ɒ/ của giọng Anh chưa có từ điển nào xác nhận — GV tiếng Anh nghe lại.",
+   "nguon": "https://www.merriam-webster.com/dictionary/isochoric",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "mean-translational-kinetic-energy",
+   "en": "mean translational kinetic energy",
+   "ipa_hien_tai": "/miːn trænzˈleɪʃənl kɪˈnetɪk ˈenədʒi/",
+   "ipa_de_xuat": "/miːn trænzˈleɪʃənl kɪˈnetɪk ˈenədʒi/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "translational: Merriam-Webster ghi -ˈlā-shən-əl; từ gốc translation /trænzˈleɪʃn/ (OALD), /trænsˈleɪʃən, trænz-/ (Collins). Các từ còn lại theo OALD.",
+   "nguon": "https://www.merriam-webster.com/dictionary/translational · https://www.oxfordlearnersdictionaries.com/definition/english/translation",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "boltzmann-constant",
+   "en": "Boltzmann constant",
+   "ipa_hien_tai": "/ˈbəʊlts.mən ˈkɒn.stənt/",
+   "ipa_de_xuat": "/ˈbəʊltsmən ˈkɒnstənt/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Merriam-Webster: Boltzmann constant ˈbōlts-mən (ō tương ứng /əʊ/ giọng Anh); OALD: constant /ˈkɒnstənt/. Collins chỉ ghi cách đọc tiếng Đức của tên người /ˈbɔltsman/, không dùng cho thuật ngữ tiếng Anh.",
+   "nguon": "https://www.merriam-webster.com/dictionary/Boltzmann%20constant · https://www.dictionary.com/browse/boltzmann",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "root-mean-square-speed",
+   "en": "root-mean-square speed",
+   "ipa_hien_tai": "/ruːt miːn skweə spiːd/",
+   "ipa_de_xuat": "/ruːt miːn skweə spiːd/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Khớp: âm (r) không đọc khi đứng trước phụ âm.",
+   "nguon": "Ghép từng từ: root, mean, square, speed",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "magnetic-field-line",
+   "en": "magnetic field line",
+   "ipa_hien_tai": "/mæɡˈnetɪk fiːld laɪn/",
+   "ipa_de_xuat": "/mæɡˈnetɪk fiːld laɪn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: magnetic, field, line",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "magnetic-field",
+   "en": "magnetic field",
+   "ipa_hien_tai": "/mæɡˈnet.ɪk fiːld/",
+   "ipa_de_xuat": "/mæɡˌnetɪk ˈfiːld/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/magnetic-field",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "uniform-magnetic-field",
+   "en": "uniform magnetic field",
+   "ipa_hien_tai": "/ˈjuːnɪfɔːm mæɡˈnetɪk fiːld/",
+   "ipa_de_xuat": "/ˈjuːnɪfɔːm mæɡˈnetɪk fiːld/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: uniform, magnetic, field",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "magnetic-induction",
+   "en": "magnetic induction",
+   "ipa_hien_tai": "/mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+   "ipa_de_xuat": "/mæɡˈnetɪk flʌks ˈdensəti/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Nên đổi tên tiếng Anh thành \"magnetic flux density\" (đề cương Cambridge 9702 và SGK dùng B, đơn vị tesla). Phiên âm đề xuất ghép theo OALD: /mæɡˈnetɪk flʌks ˈdensəti/.",
+   "nguon": "Ghép từng từ: magnetic, induction",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "magnetic-force",
+   "en": "magnetic force",
+   "ipa_hien_tai": "/mæɡˈnetɪk fɔːs/",
+   "ipa_de_xuat": "/mæɡˈnetɪk fɔːs/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: magnetic, force",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "left-hand-rule",
+   "en": "left-hand rule",
+   "ipa_hien_tai": "/ˌleft hænd ˈruːl/",
+   "ipa_de_xuat": "/ˌleft hænd ˈruːl/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Từng từ khớp OALD (left-hand /ˈleft hænd/, rule /ruːl/); cụm này không có trong từ điển nên giữ trọng âm hiện tại.",
+   "nguon": "Ghép từng từ: left, hand, rule",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "tesla",
+   "en": "tesla",
+   "ipa_hien_tai": "/ˈteslə/",
+   "ipa_de_xuat": "/ˈteslə/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Collins (Anh – Anh) /ˈtɛslə/ — Collins viết ɛ, Oxford viết e, cùng một âm. Merriam-Webster: ˈte-slə.",
+   "nguon": "https://www.dictionary.com/browse/tesla · https://www.merriam-webster.com/dictionary/tesla",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "electromagnetic-induction",
+   "en": "electromagnetic induction",
+   "ipa_hien_tai": "/ɪˌlek.trəʊ.mæɡˈnet.ɪk ɪnˈdʌk.ʃən/",
+   "ipa_de_xuat": "/ɪˌlektrəʊmæɡˈnetɪk ɪnˈdʌkʃn/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "Ghép từng từ: electromagnetic, induction",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "faradays-law-of-induction",
+   "en": "Faraday's law of induction",
+   "ipa_hien_tai": "/ˈfærədeɪz lɔː əv ɪnˈdʌkʃn/",
+   "ipa_de_xuat": "/ˈfærədeɪz lɔː əv ɪnˈdʌkʃn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Collins (Anh – Anh): Faraday /ˈfærəˌdeɪ/; các từ còn lại theo OALD.",
+   "nguon": "https://www.dictionary.com/browse/faraday",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "lenzs-law",
+   "en": "Lenz's law",
+   "ipa_hien_tai": "/ˈlentsɪz lɔː/",
+   "ipa_de_xuat": "/ˈlentsɪz lɔː/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Collins (Anh – Anh): Lenz's law /ˈlɛntsɪz/. Merriam-Webster: ˈlen(t)səz.",
+   "nguon": "https://www.dictionary.com/browse/lenzs-law · https://www.merriam-webster.com/dictionary/Lenz's%20law",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "induced-emf",
+   "en": "induced emf",
+   "ipa_hien_tai": "/ɪnˈdjuːst ˌiː em ˈef/",
+   "ipa_de_xuat": "/ɪnˈdjuːst ˌiː em ˈef/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "induce /ɪnˈdjuːs/ (OALD, Collins). \"emf\" đọc từng chữ cái E – M – F; OALD ghi tên chữ cái e /iː/, m /em/, f /ef/. Merriam-Webster không ghi phiên âm riêng cho \"emf\".",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/induce · https://www.merriam-webster.com/dictionary/emf",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "magnetic-flux",
+   "en": "magnetic flux",
+   "ipa_hien_tai": "/mæɡˈnet.ɪk flʌks/",
+   "ipa_de_xuat": "/mæɡˌnetɪk ˈflʌks/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/magnetic-flux",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "weber",
+   "en": "weber",
+   "ipa_hien_tai": "/ˈveɪbə(r)/",
+   "ipa_de_xuat": "/ˈveɪbə(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/weber",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "alternating-current",
+   "en": "alternating current",
+   "ipa_hien_tai": "/ˈɒl.tə.neɪ.tɪŋ ˈkʌr.ənt/",
+   "ipa_de_xuat": "/ˌɔːltəneɪtɪŋ ˈkʌrənt/",
+   "ket_luan": "Biến thể – thống nhất theo OALD",
+   "ghi_chu": "OALD ghi /ˈɔːl-/, Cambridge ghi /ˈɒl-/ (đều là giọng Anh). Chọn một nguồn cho cả trang.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/alternating-current",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "effective-value",
+   "en": "effective value",
+   "ipa_hien_tai": "/ɪˈfektɪv ˈvæljuː/",
+   "ipa_de_xuat": "/ɪˈfektɪv ˈvæljuː/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: effective, value",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "ac-generator",
+   "en": "AC generator",
+   "ipa_hien_tai": "/ˌeɪ ˈsiː ˈdʒenəreɪtə(r)/",
+   "ipa_de_xuat": "/ˌeɪ ˈsiː ˈdʒenəreɪtə(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: ac, generator",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "eddy-current",
+   "en": "eddy current",
+   "ipa_hien_tai": "/ˈed.i ˈkʌr.ənt/",
+   "ipa_de_xuat": "/ˈedi ˈkʌrənt/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "Ghép từng từ: eddy, current",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "transformer",
+   "en": "transformer",
+   "ipa_hien_tai": "/trænsˈfɔːmə(r)/",
+   "ipa_de_xuat": "/trænsˈfɔːmə(r)/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/transformer",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "electromagnetic-field",
+   "en": "electromagnetic field",
+   "ipa_hien_tai": "/ɪˌlektrəʊmæɡˈnetɪk fiːld/",
+   "ipa_de_xuat": "/ɪˌlektrəʊmæɡˈnetɪk fiːld/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: electromagnetic, field",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "electromagnetic-wave",
+   "en": "electromagnetic wave",
+   "ipa_hien_tai": "/ɪˌlektrəʊmæɡˈnetɪk weɪv/",
+   "ipa_de_xuat": "/ɪˌlektrəʊmæɡˈnetɪk weɪv/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: electromagnetic, wave",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "isotope",
+   "en": "isotope",
+   "ipa_hien_tai": "/ˈaɪsətəʊp/",
+   "ipa_de_xuat": "/ˈaɪsətəʊp/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/isotope",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "nucleon",
+   "en": "nucleon",
+   "ipa_hien_tai": "/ˈnjuːkliɒn/",
+   "ipa_de_xuat": "/ˈnjuːkliɒn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Collins (Anh – Anh) /ˈnjuːklɪˌɒn/ — cùng cách đọc, khác kiểu ghi. Merriam-Webster: ˈnü-klē-ˌän, ˈnyü-.",
+   "nguon": "https://www.dictionary.com/browse/nucleon · https://www.merriam-webster.com/dictionary/nucleon",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "atomic-number",
+   "en": "atomic number",
+   "ipa_hien_tai": "/əˈtɒmɪk ˈnʌmbə(r)/",
+   "ipa_de_xuat": "/əˌtɒmɪk ˈnʌmbə(r)/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/atomic-number",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "mass-number",
+   "en": "mass number",
+   "ipa_hien_tai": "/mæs ˈnʌmbə(r)/",
+   "ipa_de_xuat": "/ˈmæs nʌmbə(r)/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/mass-number",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "mass-defect",
+   "en": "mass defect",
+   "ipa_hien_tai": "/mæs dɪˈfekt/",
+   "ipa_de_xuat": "/mæs ˈdiːfekt/",
+   "ket_luan": "SAI – phải sửa",
+   "ghi_chu": "Danh từ \"defect\" nhấn âm đầu /ˈdiːfekt/ (OALD); /dɪˈfekt/ là động từ \"đào ngũ, bỏ đi\".",
+   "nguon": "Ghép từng từ: mass, defect",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "mass-energy-equivalence",
+   "en": "mass-energy equivalence",
+   "ipa_hien_tai": "/mæs ˈenədʒi ɪˈkwɪvələns/",
+   "ipa_de_xuat": "/mæs ˈenədʒi ɪˈkwɪvələns/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: mass, energy, equivalence",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "binding-energy",
+   "en": "binding energy",
+   "ipa_hien_tai": "/ˈbaɪndɪŋ ˈenədʒi/",
+   "ipa_de_xuat": "/ˈbaɪndɪŋ ˈenədʒi/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: binding, energy",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "specific-binding-energy",
+   "en": "specific binding energy",
+   "ipa_hien_tai": "/spəˈsɪf.ɪk ˈbaɪn.dɪŋ ˈen.ə.dʒi/",
+   "ipa_de_xuat": "/spəˈsɪfɪk ˈbaɪndɪŋ ˈenədʒi/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "Ghép từng từ: specific, binding, energy",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "chain-reaction",
+   "en": "chain reaction",
+   "ipa_hien_tai": "/tʃeɪn riˈækʃn/",
+   "ipa_de_xuat": "/ˌtʃeɪn riˈækʃn/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/chain-reaction",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "nuclear-reaction",
+   "en": "nuclear reaction",
+   "ipa_hien_tai": "/ˈnjuːkliə riˈækʃn/",
+   "ipa_de_xuat": "/ˈnjuːkliə riˈækʃn/",
+   "ket_luan": "Khớp",
+   "ghi_chu": "Khớp: âm (r) không đọc khi đứng trước phụ âm.",
+   "nguon": "Ghép từng từ: nuclear, reaction",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "nuclear-fusion",
+   "en": "nuclear fusion",
+   "ipa_hien_tai": "/ˈnjuː.kli.ər ˈfjuː.ʒən/",
+   "ipa_de_xuat": "/ˌnjuːkliə ˈfjuːʒn/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/nuclear-fusion",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "nuclear-fission",
+   "en": "nuclear fission",
+   "ipa_hien_tai": "/ˈnjuː.kli.ər ˈfɪʃ.ən/",
+   "ipa_de_xuat": "/ˌnjuːkliə ˈfɪʃn/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/nuclear-fission",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "half-life",
+   "en": "half-life",
+   "ipa_hien_tai": "/ˈhɑːf.laɪf/",
+   "ipa_de_xuat": "/ˈhɑːf laɪf/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "OALD ghi có khoảng trắng /ˈhɑːf laɪf/.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/half-life",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "radioactive-decay-law",
+   "en": "radioactive decay law",
+   "ipa_hien_tai": "/ˌreɪdiəʊˈæktɪv dɪˈkeɪ lɔː/",
+   "ipa_de_xuat": "/ˌreɪdiəʊˈæktɪv dɪˈkeɪ lɔː/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: radioactive, decay, law",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "activity",
+   "en": "activity",
+   "ipa_hien_tai": "/ækˈtɪvəti/",
+   "ipa_de_xuat": "/ækˈtɪvəti/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/activity",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "decay-constant",
+   "en": "decay constant",
+   "ipa_hien_tai": "/dɪˈkeɪ ˈkɒnstənt/",
+   "ipa_de_xuat": "/dɪˈkeɪ ˈkɒnstənt/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: decay, constant",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "radioactivity",
+   "en": "radioactivity",
+   "ipa_hien_tai": "/ˌreɪ.di.əʊ.ækˈtɪv.ə.ti/",
+   "ipa_de_xuat": "/ˌreɪdiəʊækˈtɪvəti/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/radioactivity",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "alpha-decay",
+   "en": "alpha decay",
+   "ipa_hien_tai": "/ˈælfə dɪˈkeɪ/",
+   "ipa_de_xuat": "/ˈælfə dɪˈkeɪ/",
+   "ket_luan": "Khớp",
+   "ghi_chu": null,
+   "nguon": "Ghép từng từ: alpha, decay",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "beta-decay",
+   "en": "beta decay",
+   "ipa_hien_tai": "/ˈbiːtə dɪˈkeɪ/",
+   "ipa_de_xuat": "/ˈbiːtə dɪkeɪ/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/beta-decay",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "gamma-ray",
+   "en": "gamma ray",
+   "ipa_hien_tai": "/ˈɡæm.ə reɪ/",
+   "ipa_de_xuat": "/ˈɡæmə reɪ/",
+   "ket_luan": "Chỉ khác cách ghi",
+   "ghi_chu": "Trang ghi theo kiểu Cambridge (dấu chấm tách âm tiết, ər); đổi về một kiểu ghi cho cả trang.",
+   "nguon": "Ghép từng từ: gamma, ray",
+   "gv_xac_nhan": ""
+  },
+  {
+   "id": "nuclear-reactor",
+   "en": "nuclear reactor",
+   "ipa_hien_tai": "/ˈnjuːkliə riˈæktə(r)/",
+   "ipa_de_xuat": "/ˌnjuːkliə riˈæktə(r)/",
+   "ket_luan": "Khác trọng âm cụm từ",
+   "ghi_chu": "OALD có mục riêng cho cả cụm và ghi trọng âm của cả cụm; chép đúng như cột H.",
+   "nguon": "https://www.oxfordlearnersdictionaries.com/definition/english/nuclear-reactor",
+   "gv_xac_nhan": ""
+  }
+ ]
+}
