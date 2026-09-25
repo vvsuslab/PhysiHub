@@ -90,6 +90,15 @@ h3 { font-size: 18px; font-weight: 700; }
 p, li, td, dd { text-wrap: pretty; }
 
 .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+/* Màn hình rộng (máy bàn, máy chiếu): nới khung nội dung và phóng chữ nhẹ.
+   Nếu giữ nguyên 1200px thì trên màn 1790px nội dung chỉ chiếm 67%, nhìn rất nhỏ. */
+@media (min-width: 1500px) {
+  :root { --max: 1460px; }
+  body { font-size: 16px; }
+}
+@media (min-width: 1800px) {
+  :root { --max: 1600px; }
+}
 main { flex: 1; padding: 26px 0 48px; }
 
 /* ---------- Ngôn ngữ ---------- */
