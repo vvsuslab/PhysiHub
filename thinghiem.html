@@ -22,17 +22,17 @@
   <style>
     .head { display: flex; align-items: flex-end; gap: 24px; }
     .head .txt { flex: 1; min-width: 0; }
-    .crumb { font-size: 12.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 8px; }
+    .crumb { font-size: 14px; font-weight: 700; color: var(--navy-2); margin-bottom: 8px; }
     .crumb a { color: inherit; }
     .head h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -.2px; color: var(--navy); text-transform: uppercase; }
     .head .ttl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .head .tag.lab { background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); padding: 6px 12px; font-size: 12px; }
-    .head .en { font-size: 18px; margin-top: 2px; }
-    .head .hd { margin-top: 8px; max-width: 860px; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+    .head .tag.lab { background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); padding: 6px 12px; font-size: 13.5px; }
+    .head .en { font-size: 19px; margin-top: 2px; }
+    .head .hd { margin-top: 8px; max-width: 860px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
     .tn-stage { position: relative; overflow: hidden; border-radius: 24px; padding: 20px; margin-top: 20px; color: var(--ink); background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
     .tn-stage .grid3 { display: grid; grid-template-columns: 290px 300px minmax(0, 1fr); gap: 18px; }
     .tn-panel { border-radius: 18px; background: #fff; border: 1.5px solid var(--blue-line); padding: 16px 16px 14px; min-width: 0; }
-    .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 12px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
+    .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 13.5px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
     .tn-kinh { position: relative; width: 250px; height: 250px; margin: 4px auto 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1A4A9E 0%, #072460 75%); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--blue-line), 0 10px 24px rgba(13, 71, 161, .2); }
     /* Không đặt transition cho background/box-shadow: màu đổi liên tục theo nhiệt độ,
        transition sẽ bị khởi động lại mỗi khung hình và làm phân tử nhấp nháy. */
@@ -52,12 +52,12 @@
     .tn-khoi { transform-box: fill-box; transform-origin: 50% 100%; animation: tn-khoi 2.6s ease-out infinite; }
     @keyframes tn-nhip { 0% { r: 8; opacity: .8; } 100% { r: 24; opacity: 0; } }
     .tn-nhip { animation: tn-nhip 1.4s ease-out infinite; }
-    .pha { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr) minmax(0, .95fr) minmax(0, .85fr) minmax(0, .85fr); gap: 5px; margin-top: 16px; }
-    .tn-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; white-space: nowrap; min-height: 42px; padding: 4px 2px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--blue-soft); color: var(--ink-2); transition: all .35s ease; }
+    .pha { display: grid; grid-template-columns: minmax(0, .88fr) minmax(0, 1.36fr) minmax(0, .9fr) minmax(0, .93fr) minmax(0, .93fr); gap: 5px; margin-top: 16px; }
+    .tn-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; white-space: nowrap; min-height: 42px; padding: 4px 3px; border-radius: 12px; font-size: 12.5px; font-weight: 700; background: var(--blue-soft); color: var(--ink-2); transition: all .35s ease; }
     .tn-chip.on { color: var(--ink); }
-    .tn-chip .en { font-size: 10.5px; opacity: .85; color: inherit; font-weight: 500; }
-    .legend { margin-top: 14px; font-size: 11.5px; line-height: 1.4; color: var(--ink-3); }
-    .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); margin-top: 6px; }
+    .tn-chip .en { font-size: 12px; opacity: .85; color: inherit; font-weight: 500; }
+    .legend { margin-top: 14px; font-size: 13px; line-height: 1.4; color: var(--ink-3); }
+    .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
     .legend .bar i { flex: 1; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #6EA8FF, #5CD6FF, #2EE6B5, #F4D03F, #FFB547, #FF6B5A); }
     .readout { display: flex; gap: 12px; margin-top: 8px; }
     /* Ô nhiệt độ giữ bề rộng cố định và dùng chữ số đều nhau, nếu không cả hàng sẽ
@@ -65,23 +65,23 @@
     .readout .o { flex: none; padding: 10px 14px; border-radius: 14px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); white-space: nowrap; }
     .readout .o:first-child { min-width: 142px; }
     .readout .o.grow { flex: 1; min-width: 0; white-space: normal; }
-    .readout .l { font-size: 11.5px; font-weight: 600; color: var(--ink-3); }
+    .readout .l { font-size: 13px; font-weight: 600; color: var(--ink-3); }
     .readout .t { margin-top: 2px; font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
     /* chừa sẵn chỗ cho "−20,0" để chữ °C không nhích qua lại khi số đổi */
     .readout .t #tHien { display: inline-block; min-width: 5ch; text-align: right; }
-    .readout .t small { font-size: 16px; color: var(--ink-3); }
-    .readout .s { margin-top: 4px; font-size: 16px; font-weight: 700; line-height: 1.35; min-height: 44px; }
+    .readout .t small { font-size: 17px; color: var(--ink-3); }
+    .readout .s { margin-top: 4px; font-size: 17px; font-weight: 700; line-height: 1.35; min-height: 44px; }
     svg.dc, svg.dt { display: block; max-width: 100%; height: auto; margin: 0 auto; }
     .controls { margin-top: 18px; padding: 18px 24px; display: flex; align-items: center; gap: 22px; border-radius: 22px; flex-wrap: wrap; }
     /* min-width: giữ bề rộng khi chữ đổi "Đun" ↔ "Tạm dừng", nếu không cả hàng nút sẽ nhích */
-    .tn-nut { white-space: nowrap; min-height: 52px; min-width: 176px; justify-content: center; display: inline-flex; align-items: center; gap: 10px; padding: 0 26px; border-radius: 999px; font-size: 16px; font-weight: 800; background: var(--grad-cta); color: var(--ink); box-shadow: 0 6px 0 #C25400, 0 14px 28px rgba(245, 124, 0, .32); transition: transform .15s ease, box-shadow .15s ease; }
+    .tn-nut { white-space: nowrap; min-height: 52px; min-width: 176px; justify-content: center; display: inline-flex; align-items: center; gap: 10px; padding: 0 26px; border-radius: 999px; font-size: 17px; font-weight: 800; background: var(--grad-cta); color: var(--ink); box-shadow: 0 6px 0 #C25400, 0 14px 28px rgba(245, 124, 0, .32); transition: transform .15s ease, box-shadow .15s ease; }
     .tn-nut:active { transform: translateY(4px); box-shadow: 0 2px 0 #C25400, 0 8px 18px rgba(245, 124, 0, .28); }
     .tn-nut .ic { width: 26px; height: 26px; border-radius: 50%; background: rgba(15, 37, 72, .12); display: grid; place-items: center; }
     .controls .tua { flex: 1; min-width: 200px; }
-    .controls .tua label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+    .controls .tua label { display: block; margin-bottom: 8px; font-size: 14.5px; font-weight: 600; color: var(--ink-2); }
     .controls .toc { display: flex; align-items: center; gap: 6px; }
-    .controls .toc .lb { font-size: 13px; font-weight: 600; color: var(--ink-3); margin-right: 4px; }
-    .tn-toc { white-space: nowrap; min-height: 38px; min-width: 48px; border-radius: 19px; font-size: 13.5px; font-weight: 700; background: #fff; color: var(--ink-2); border: 1.5px solid var(--blue-line); transition: all .2s ease; }
+    .controls .toc .lb { font-size: 14.5px; font-weight: 600; color: var(--ink-3); margin-right: 4px; }
+    .tn-toc { white-space: nowrap; min-height: 38px; min-width: 48px; border-radius: 19px; font-size: 15px; font-weight: 700; background: #fff; color: var(--ink-2); border: 1.5px solid var(--blue-line); transition: all .2s ease; }
     .tn-toc.on { background: var(--navy-2); color: #fff; border-color: var(--navy-2); }
     input[type="range"].tn-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #6EA8FF 0%, #5CD6FF 14%, #2EE6B5 40%, #FFB547 70%, #FF7A59 100%); outline: none; }
     input[type="range"].tn-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); cursor: grab; }
@@ -90,18 +90,18 @@
     .below { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start; }
     .below .panel.has-label { margin-top: 26px; }
     .thay { padding: 36px 24px 20px; }
-    .thay p { font-size: 14.5px; line-height: 1.65; margin-bottom: 6px; }
-    .thay p.en { font-size: 14px; margin-bottom: 8px; }
-    .thay .hoi { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--c1-ink); }
+    .thay p { font-size: 16px; line-height: 1.65; margin-bottom: 6px; }
+    .thay p.en { font-size: 15.5px; margin-bottom: 8px; }
+    .thay .hoi { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 15.5px; font-weight: 700; color: var(--c1-ink); }
     .tn-tn { padding: 34px 20px 18px; }
-    .day .lb { margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
+    .day .lb { margin-bottom: 10px; font-size: 13.5px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
     .tn-tn .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tn-tn .tag { background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--ink); font-size: 12.5px; padding: 6px 11px; }
+    .tn-tn .tag { background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--ink); font-size: 14px; padding: 6px 11px; }
     .tn-tn .term-chip { cursor: pointer; } .tn-tn .term-chip:hover { border-color: var(--sky); }
-    .tn-tn .tag .en { font-size: 12.5px; }
+    .tn-tn .tag .en { font-size: 14px; }
     .day { margin-top: 14px; padding: 14px 18px; border-radius: 18px; background: var(--orange-soft); border: 1.5px dashed var(--orange-line); }
     .day .lb { margin-bottom: 4px; }
-    .day p { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); }
+    .day p { font-size: 14px; line-height: 1.55; color: var(--ink-2); }
     @media (max-width: 1080px) { .tn-stage .grid3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .tn-stage .grid3 > :last-child { grid-column: 1 / -1; } }
     @media (max-width: 900px) { .below { grid-template-columns: 1fr; } .head { flex-direction: column; align-items: flex-start; gap: 10px; } }
     @media (max-width: 720px) { .tn-stage { padding: 12px; border-radius: 20px; } .tn-stage .grid3 { grid-template-columns: 1fr; } .controls { padding: 14px 16px; gap: 12px; } .tn-nut { flex: 1; justify-content: center; min-width: 0; } .readout { flex-wrap: wrap; } .readout .t { font-size: 24px; }
@@ -117,7 +117,7 @@
     <div class="wrap">
       <div class="head">
         <div class="txt"><p class="crumb" id="crumb"></p><div class="ttl"><h1 id="h1"></h1><span class="tag lab" id="labTag"></span></div><p class="en" lang="en" id="h1en"></p><p class="hd" id="hd"></p></div>
-        <a href="bai.html?n=1" id="veBai" style="flex:none;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600"></a>
+        <a href="bai.html?n=1" id="veBai" style="flex:none;display:inline-flex;align-items:center;gap:6px;font-size:15.5px;font-weight:600"></a>
       </div>
 
       <section class="tn-stage" aria-label="">
