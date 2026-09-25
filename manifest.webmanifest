@@ -1,14 +1,14 @@
 {
-  "name": "PhysiHub — Học Vật lí 12 song ngữ",
+  "name": "PhysiHub — Vật lí 12 song ngữ Việt – Anh",
   "short_name": "PhysiHub",
-  "description": "Tổng ôn Vật lí 12 (SGK Kết nối tri thức) song ngữ Việt – Anh: bài học, thuật ngữ, luyện đề, trò chơi.",
+  "description": "Vật lí 12 (SGK Kết nối tri thức với cuộc sống) song ngữ Việt – Anh: bài học, thuật ngữ có phiên âm, luyện đề, trò chơi, thí nghiệm ảo.",
   "lang": "vi",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f5f4ef",
-  "theme_color": "#2e4a86",
+  "background_color": "#F4F8FD",
+  "theme_color": "#0D47A1",
   "icons": [
     { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

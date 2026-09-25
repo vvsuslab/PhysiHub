@@ -3,87 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luyện đề — PhysiHub</title>
+  <title>Luyện đề · PhysiHub</title>
+  <meta name="description" content="Luyện đề Vật lí 12 theo cấu trúc đề thi tốt nghiệp THPT từ 2025: nhiều lựa chọn, đúng/sai, trả lời ngắn — câu hỏi song ngữ Việt – Anh, chấm điểm tự động.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luyện đề · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
     /* Danh sách đề */
-    .exam-card { display: flex; flex-direction: column; gap: 6px; }
-    .exam-card .t { font-family: var(--font-serif); font-size: 21px; font-weight: 600; }
-    .exam-card .t-en { font-family: var(--font-serif); font-style: italic; color: var(--gold); }
+    .exam-card { display: flex; flex-direction: column; gap: 6px; border-top: 4px solid var(--accent); }
+    .exam-card .t { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--navy); }
     .exam-card .meta { font-size: 13px; color: var(--ink-3); }
-    .exam-card .foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .exam-card .foot { margin-top: auto; padding-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .stat { padding: 14px 18px; min-width: 170px; border-radius: 18px; background: var(--orange-soft); border: 1.5px solid var(--orange-line); color: var(--ink); }
+    .stat .lb { font-size: 12px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--gold); }
+    .stat .n { font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1.15; color: var(--navy); }
+    .three { margin-top: 20px; padding: 16px 20px; display: flex; gap: 14px; align-items: center; background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
     /* Làm bài */
-    .exam-top { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 20px; }
-    .exam-top .t { font-weight: 600; }
-    .exam-top .meta { font-size: 13px; color: var(--ink-3); }
-    .exam-top .exit { margin-left: auto; }
-    .layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
-    .qcard { scroll-margin-top: 84px; }
-    .qcard + .qcard { margin-top: 16px; }
-    .qhead { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); margin-bottom: 8px; }
-    .qhead b { color: var(--navy); }
-    .stem { font-size: 17px; line-height: 1.6; margin-bottom: 14px; }
-    .stem .bi .en { margin-top: 6px; }
-    .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); line-height: 1.45; }
-    .opt:hover { border-color: var(--navy); }
-    .opt .k { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
-    .opt.selected { border-color: var(--navy); background: var(--navy-soft); }
-    .opt.selected .k { background: var(--navy); border-color: var(--navy); color: #fff; }
-    .opt.right { border-color: var(--green); background: var(--green-soft); }
-    .opt.wrong { border-color: var(--red); background: var(--red-soft); }
-    .opt .bi .en { margin-top: 2px; }
-    .tf { display: flex; gap: 14px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); }
-    .tf + .tf { margin-top: 10px; }
-    .tf .k { flex: none; font-weight: 600; color: var(--ink-2); width: 20px; }
-    .tf .txt { flex: 1; line-height: 1.5; }
-    .tf .sw { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; flex: none; }
-    .tf .sw button { padding: 7px 14px; font-size: 13px; font-weight: 500; background: var(--surface); }
-    .tf .sw button.on { background: var(--navy); color: #fff; }
-    .tf .sw button.on.f { background: var(--gold); }
-    .tf.right { border-color: var(--green); background: var(--green-soft); }
-    .tf.wrong { border-color: var(--red); background: var(--red-soft); }
-    .short { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .short .box { display: inline-flex; align-items: center; border: 1px solid var(--navy); border-radius: 9px; overflow: hidden; background: var(--surface); }
-    .short input { width: 110px; padding: 10px 14px; border: 0; outline: 0; font-family: var(--font-serif); font-size: 26px; text-align: center; background: transparent; }
-    .short .unit { padding: 0 12px; font-size: 13px; color: var(--ink-3); border-left: 1px solid var(--line); align-self: stretch; display: flex; align-items: center; }
-    .short .note { font-size: 13px; color: var(--ink-3); }
-    .short.right .box { border-color: var(--green); background: var(--green-soft); }
-    .short.wrong .box { border-color: var(--red); background: var(--red-soft); }
-    .why { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 8px; background: var(--surface-2); font-size: 14px; line-height: 1.6; }
-    .why.show { display: block; }
-    .why .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
-    .side { position: sticky; top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; gap: 14px; }
-    .timer { text-align: center; }
-    .timer .lbl { font-size: 13px; color: var(--ink-3); }
-    .timer .val { font-family: var(--font-serif); font-size: 40px; font-weight: 500; letter-spacing: .02em; }
+    .strip { position: relative; overflow: hidden; display: flex; align-items: center; gap: 18px; padding: 12px 18px; border-radius: 18px; background: var(--grad-bar); color: #fff; box-shadow: 0 10px 24px rgba(13, 71, 161, .16); flex-wrap: wrap; }
+    .strip .icon-tile { background: #fff; color: var(--navy-2); width: 52px; height: 52px; border-radius: 50%; box-shadow: 0 0 0 3px #90CAF9; }
+    .strip .txt { flex: 1; min-width: 220px; }
+    .strip .eyebrow { color: #DCE8FA; text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 12.5px; }
+    .strip h1 { font-size: clamp(20px, 2.3vw, 26px); color: #fff; text-transform: uppercase; }
+    .strip h1 small { text-transform: none; }
+    .strip h1 small { font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: #DCE8FA; }
+    .timer { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 14px; background: #fff; border: 0; color: var(--orange); }
+    .timer .val { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--navy); }
     .timer .val.low { color: var(--red); }
-    .navp { font-size: 13px; }
-    .navp .grp { font-weight: 600; color: var(--ink-2); margin: 10px 0 6px; }
-    .navp .grp:first-child { margin-top: 0; }
-    .nums { display: flex; flex-wrap: wrap; gap: 6px; }
-    .nums button { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface); font-size: 13px; font-weight: 500; }
+    .timer .lb { font-size: 12px; color: var(--ink-3); }
+    .lv-note { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 16px; border-radius: 14px; background: var(--orange-soft); border: 1.5px solid var(--orange-line); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+    .layout { display: grid; grid-template-columns: 276px minmax(0, 1fr); gap: 22px; align-items: start; margin-top: 18px; }
+    .side { position: sticky; top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; gap: 16px; }
+    .side .lb { font-size: 12px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
+    .map { padding: 18px 18px 20px; }
+    .map .ph-label, .tn-de .ph-label { margin: 0 0 4px -6px; }
+    .map .ph-label .t, .tn-de .ph-label .t { font-size: 14.5px; }
+    .tn-de .ph-label.orange .t { font-size: 19px; }
+    .map .grp { margin: 14px 0 2px; font-size: 13px; font-weight: 700; }
+    .map .grpd { margin-bottom: 8px; font-size: 12px; color: var(--ink-3); }
+    .nums { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+    .nums button { height: 30px; border-radius: 9px; font-size: 12px; font-weight: 700; background: #fff; color: var(--ink-3); border: 1.5px solid var(--blue-line); }
     .nums button.done { background: var(--navy); border-color: var(--navy); color: #fff; }
-    .nums button.cur { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-soft); }
+    .nums button.flag { background: var(--orange-soft); color: var(--gold); border-color: var(--orange); }
+    .nums button.cur { box-shadow: 0 0 0 2px var(--amber); }
     .nums button.ok { background: var(--green); border-color: var(--green); color: #fff; }
     .nums button.bad { background: var(--red); border-color: var(--red); color: #fff; }
-    .legend { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-2); }
-    .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--line-strong); margin-right: 8px; vertical-align: -1px; }
-    .result { border-left: 4px solid var(--navy); margin-bottom: 20px; display: grid; grid-template-columns: auto 1fr; gap: 6px 28px; align-items: center; }
-    .result .score { font-family: var(--font-serif); font-size: 48px; font-weight: 600; color: var(--navy); grid-row: span 2; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 12px; height: 12px; border-radius: 4px; border: 1.5px solid var(--blue-line); }
+    .tn-de { padding: 16px 18px; }
+    .tn-de .r { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+    .tn-de .r b { font-weight: 600; }
+    .tn-de .note { margin-top: 10px; font-size: 12px; line-height: 1.5; color: var(--ink-3); }
+    .qcard { padding: 20px 24px 22px; scroll-margin-top: 130px; }
+    .qcard + .qcard { margin-top: 16px; }
+    .qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .qhead .spacer { flex: 1; }
+    .qhead .pts { font-size: 12.5px; color: var(--ink-3); }
+    .flag-btn { min-height: 36px; display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; border-radius: 18px; font-size: 13px; color: var(--ink-3); }
+    .flag-btn .icon { color: var(--orange); }
+    .flag-btn.on { background: var(--orange-soft); color: var(--gold); }
+    .stem { font-size: 16.5px; line-height: 1.7; }
+    .stem .bi > .en { margin-top: 4px; font-size: 15.5px; }
+    .hd { margin: 8px 0 6px; font-size: 12.5px; color: var(--ink-3); }
+    .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; min-height: 52px; padding: 11px 16px; border-radius: 14px; border: 1.5px solid var(--blue-line); background: #fff; font-size: 15.5px; line-height: 1.45; transition: border-color .2s, background .2s, box-shadow .2s; }
+    .opt:hover { border-color: var(--navy-2); background: var(--blue-soft); }
+    .opt .k { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 800; background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--navy); }
+    .opt.selected { border-color: var(--navy-2); background: var(--blue-soft); box-shadow: 0 0 0 3px rgba(21, 101, 192, .12); }
+    .opt.selected .k { background: var(--sky); border-color: var(--sky); color: #fff; }
+    .opt.selected .k { background: var(--navy); color: #fff; }
+    .opt.right { border-color: var(--green); background: var(--green-soft); }
+    .opt.right .k { background: var(--green); color: #fff; }
+    .opt.wrong { border-color: var(--red); background: var(--red-soft); }
+    .opt.wrong .k { background: var(--red); color: #fff; }
+    .tf { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-top: 1px solid var(--line); }
+    .tf .k { width: 28px; height: 28px; flex: none; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+    .tf .txt { flex: 1; min-width: 0; font-size: 15px; line-height: 1.55; }
+    .tf .txt .bi > .en { font-size: 14px; }
+    .tf .sw { display: flex; gap: 6px; flex: none; }
+    .tf .sw button { white-space: nowrap; min-height: 40px; min-width: 76px; padding: 0 14px; border-radius: 20px; border: 1.5px solid var(--blue-line); background: #fff; font-size: 13.5px; font-weight: 600; color: var(--ink-2); transition: all .2s; }
+    .tf .sw button.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .tf.right { background: var(--green-soft); margin: 0 -12px; padding: 10px 12px; border-radius: 12px; }
+    .tf.wrong { background: var(--red-soft); margin: 0 -12px; padding: 10px 12px; border-radius: 12px; }
+    .short { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; }
+    .short label { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+    .short .box { display: inline-flex; align-items: center; border: 1.5px solid var(--blue-line); border-radius: 12px; overflow: hidden; background: #fff; }
+    .short input { width: 120px; height: 46px; padding: 0 14px; border: 0; outline: 0; font-family: var(--font-display); font-weight: 700; font-size: 18px; text-align: center; background: transparent; }
+    .short .unit { padding: 0 12px; font-size: 13px; color: var(--ink-3); border-left: 1px solid var(--line); align-self: stretch; display: flex; align-items: center; }
+    .short .note { font-size: 12.5px; color: var(--ink-3); }
+    .short.right .box { border-color: var(--green); background: var(--green-soft); }
+    .short.wrong .box { border-color: var(--red); background: var(--red-soft); }
+    .why { display: none; margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); font-size: 14px; line-height: 1.6; }
+    .why.show { display: block; }
+    .why .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+    .why .go { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 13px; font-weight: 600; }
+    .result { border-left: 4px solid var(--navy); margin-top: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 28px; align-items: center; }
+    .result .score { font-family: var(--font-display); font-size: 46px; font-weight: 800; color: var(--navy); grid-row: span 2; }
     .result .l { font-size: 13px; color: var(--ink-3); }
     .autosave { font-size: 13px; color: var(--ink-3); margin-top: 14px; }
-    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .side { position: static; order: -1; } .opts { grid-template-columns: 1fr; } .tf { flex-wrap: wrap; } .result { grid-template-columns: 1fr; } .result .score { grid-row: auto; } }
+    .confirm { padding: 14px 16px; }
+    .confirm p { font-size: 13.5px; margin-bottom: 10px; }
+    @media (max-width: 1080px) { .layout { grid-template-columns: 240px minmax(0, 1fr); } .nums { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .side { position: static; } .tn-de { display: none; } .nums { grid-template-columns: repeat(9, minmax(0, 1fr)); } }
+    @media (max-width: 720px) { .strip { padding: 16px; gap: 12px; } .strip .icon-tile { display: none; } .opts { grid-template-columns: 1fr; } .tf { flex-wrap: wrap; } .tf .sw { width: 100%; justify-content: flex-end; } .qcard { padding: 16px; } .result { grid-template-columns: 1fr; } .result .score { grid-row: auto; } .nums { grid-template-columns: repeat(6, minmax(0, 1fr)); } .grid.c2 { grid-template-columns: 1fr; } }
+    @media print { .side, .strip .btn, .lv-note, .flag-btn { display: none !important; } .layout { display: block; } }
   </style>
 </head>
 <body>
@@ -96,47 +130,91 @@
   <script src="data/exams.js"></script>
   <script src="assets/site.js"></script>
   <script>
+    Object.assign(PH.UI, {
+      eyebrow: ['Luyện đề · cấu trúc đề thi tốt nghiệp THPT từ năm 2025', 'Exam practice · the national graduation exam format from 2025'],
+      heroEyebrow: ['Luyện đề · cấu trúc 2025', 'Exam practice · 2025 format'],
+      h1: ['Đề ôn theo cấu trúc 2025', 'Practice tests in the 2025 format'],
+      lead: ['Ba dạng câu hỏi như đề thi tốt nghiệp THPT: nhiều lựa chọn, đúng – sai, trả lời ngắn. Câu hỏi có cả tiếng Việt và tiếng Anh; đổi mức ngôn ngữ không làm thay đổi điểm.', 'Three question types, as in the national graduation exam: multiple choice, true or false and short answer. Every question comes in Vietnamese and English; changing the language level never changes the score.'],
+      attempts: ['Số lần làm đề', 'Tests taken'], best: ['Điểm cao nhất', 'Best score'], notDone: ['Chưa làm', 'Not taken yet'], inProgressTag: ['đang làm dở', 'in progress'],
+      take: ['Làm đề', 'Take the test'], resume: ['Làm tiếp', 'Resume'], noExams: ['Chưa có đề nào.', 'No tests yet.'],
+      kindMcq: ['nhiều lựa chọn', 'multiple choice'], kindTf: ['đúng – sai', 'true or false'], kindShort: ['trả lời ngắn', 'short answer'],
+      meta: ['{n} câu · {m} phút · thang điểm 10', '{n} questions · {m} minutes · marked out of 10'],
+      submit: ['Nộp bài', 'Submit'], submitted: ['Đã nộp bài', 'Submitted'], left: ['còn lại', 'left'], exit: ['Thoát', 'Exit'],
+      lvNote: ['Điểm luyện đề không nhân hệ số theo mức ngôn ngữ. Đề thi thật ra bằng tiếng Việt, nên trước khi thi em hãy làm ít nhất một đề ở mức Tiếng Việt.', 'Practice-test scores are not multiplied by the language level. The real exam is set in Vietnamese, so do at least one test at the Vietnamese level before the exam.'],
+      map: ['Bản đồ câu hỏi', 'Question map'],
+      p1: ['Phần I · Trắc nghiệm nhiều lựa chọn', 'Part I · Multiple choice'], p2: ['Phần II · Đúng – sai', 'Part II · True or false'], p3: ['Phần III · Trả lời ngắn', 'Part III · Short answer'],
+      p1d: ['{n} câu · {p} điểm', '{n} questions · {p} points'], p2d: ['{n} câu, mỗi câu 4 ý · {p} điểm', '{n} questions, 4 statements each · {p} points'], p3d: ['{n} câu · {p} điểm', '{n} questions · {p} points'],
+      lgDone: ['đã làm', 'answered'], lgFlag: ['đánh dấu xem lại', 'flagged'], lgNot: ['chưa làm', 'not answered'], lgOk: ['đúng', 'correct'], lgBad: ['sai', 'wrong'],
+      termsInTest: ['Thuật ngữ xuất hiện trong đề', 'Terms used in this test'],
+      termsNote: ['Nộp bài xong, em xem được lời giải của từng câu và chạm vào thuật ngữ để xem nghĩa.', 'After you submit, you can read each solution and tap a term to see its meaning.'],
+      partQ: ['Phần {p} · Câu {i}', 'Part {p} · Question {i}'], ptsOne: ['{p} điểm', '{p} points'],
+      tfPts: ['1 ý 0,1 – 2 ý 0,25 – 3 ý 0,5 – 4 ý 1,0 điểm', '1 right 0.1 – 2 right 0.25 – 3 right 0.5 – 4 right 1.0 points'],
+      flag: ['Đánh dấu xem lại', 'Flag for review'], flagged: ['Đã đánh dấu', 'Flagged'],
+      tfHint: ['Chọn Đúng hoặc Sai cho từng ý.', 'Choose True or False for each statement.'], tru: ['Đúng', 'True'], fal: ['Sai', 'False'],
+      yourAnswer: ['Câu trả lời của em', 'Your answer'], shortHint: ['Ghi kết quả là một số, tối đa 4 kí tự; không ghi đơn vị.', 'Write a number of up to 4 characters, without a unit.'], answerIs: ['Đáp án: {a}', 'Answer: {a}'],
+      explain: ['Giải thích', 'Explanation'], solution: ['Lời giải', 'Solution'], toLesson: ['Xem lại Bài {n}', 'Review Lesson {n}'],
+      autosave: ['Bài làm được lưu tự động sau mỗi câu. Nếu mất mạng, em mở lại trang là làm tiếp được.', 'Your answers are saved automatically after every question. If you lose the connection, just reopen the page and continue.'],
+      submitN: ['Nộp bài ({d}/{n} câu)', 'Submit ({d}/{n} answered)'],
+      confirmLeft: ['Em còn {k} câu chưa làm. Nộp bài ngay?', 'You have {k} unanswered questions. Submit now?'], confirmAll: ['Nộp bài và xem kết quả?', 'Submit and see your result?'],
+      submitNow: ['Nộp ngay', 'Submit now'], keepDoing: ['Làm tiếp', 'Keep going'],
+      timeUp: ['Hết giờ — bài đã được nộp tự động.', 'Time is up — your test was submitted automatically.'],
+      resultLbl: ['Kết quả', 'Result'], resultTxt: ['Đúng trọn vẹn {ok}/{n} câu · {raw}/{max} điểm thô · thời gian {m} phút {s} giây', '{ok}/{n} fully correct · raw {raw}/{max} · time {m} min {s} s'],
+      quyDoi: ['Điểm từng câu ghi trên đề là điểm thô (tổng {max}); điểm bên cạnh đã quy về thang 10.', 'The marks shown on each question are raw marks (total {max}); the score beside them is converted to a 10-point scale.'],
+      lamLaiDe: ['Làm lại đề này', 'Take this exam again'],
+      retry: ['Làm lại đề này', 'Retake this test'], backList: ['Về danh sách đề', 'Back to the tests'],
+      wrongLead: ['Làm sai câu nào, em bấm “Xem lại bài” để về đúng bài học chứa kiến thức của câu đó.', 'For any question you got wrong, press “Review the lesson” to go straight to the lesson that covers it.'],
+      notFound: ['Không tìm thấy đề.', 'Test not found.']
+    });
     const examId = PH.qs('exam');
-    PH.mount({ active: 'exams', noFooter: !!examId });
+    const EXAMS = PH.EXAMS || []; const exam = EXAMS.find(x => x.id === examId);
+    PH.mount({ active: 'exams', noFooter: !!exam, title: exam ? exam.title : { vi: 'Luyện đề', en: 'Exam practice' } });
     const app = document.getElementById('app');
-    const EXAMS = PH.EXAMS || [];
+    const en = () => PH.lang() === 'en';
+    const num = (x, d) => en() ? (d == null ? String(+(+x).toFixed(4)) : (+x).toFixed(d)) : PH.num(x, d);
+    const kindKey = { mcq: 'kindMcq', tf: 'kindTf', short: 'kindShort' };
+    const partRoman = { mcq: 'I', tf: 'II', short: 'III' };
+    const partKey = { mcq: 'p1', tf: 'p2', short: 'p3' };
+    const countQ = x => x.parts.reduce((s, pt) => s + pt.items.length, 0);
 
     /* =============== DANH SÁCH ĐỀ =============== */
     function renderList() {
       const p = PH.progress();
       const attempts = Object.values(p.exams).reduce((s, x) => s + (x.attempts || 0), 0);
-      app.innerHTML = `<div class="page-hero"><div><span class="badge">Luyện đề</span><h1>Đề ôn theo cấu trúc đề thi 2025</h1>
-        <p>Ba dạng câu hỏi như đề thi tốt nghiệp THPT: nhiều phương án lựa chọn, đúng/sai, trả lời ngắn. Câu hỏi có cả tiếng Việt và tiếng Anh; đổi mức ngôn ngữ không làm thay đổi điểm.</p></div>
-        <span class="spacer"></span><div class="glass" style="padding:14px 18px;min-width:170px"><div class="small" style="color:#cfe0ff">Số lần làm đề</div><div style="font-family:var(--font-serif);font-size:32px;line-height:1.1">${attempts}</div></div></div>
-        <div class="grid c2">${EXAMS.map(x => {
-          const count = x.parts.reduce((s, pt) => s + pt.items.length, 0);
+      app.innerHTML = `<section class="page-hero light"><div style="flex:1;min-width:240px"><p class="eyebrow">${PH.uiFmt('heroEyebrow')}</p><h1>${PH.uiFmt('h1')}</h1><p class="lead" style="max-width:640px">${PH.uiFmt('lead')}</p></div>
+        <div class="stat"><div class="lb">${PH.uiFmt('attempts')}</div><div class="n">${attempts}</div></div></section>
+        <div class="grid c2">${EXAMS.map((x, i) => {
           const best = p.exams[x.id] && p.exams[x.id].best;
           const draft = p.exams[x.id] && p.exams[x.id].draft && p.exams[x.id].draft.endTime > Date.now();
-          return `<div class="card exam-card topbar lift acc-${x.chapter}" style="padding-top:26px"><div class="row" style="justify-content:space-between"><span class="tag acc">Chương ${PH.roman(x.chapter)}</span><span class="icon-tile sm tone-${x.chapter}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h6l1 2h3v13H5V7h3z"/><path d="m9 13 2 2 4-4"/></svg></span></div>
-            <span class="t">${PH.esc(x.title.vi)}</span><span class="t-en">${PH.esc(x.title.en)}</span>
-            <span class="meta">${count} câu · ${x.minutes} phút · ${x.parts.map(pt => ({ mcq: 'nhiều lựa chọn', tf: 'đúng/sai', short: 'trả lời ngắn' }[pt.kind] + ' ' + pt.items.length)).join(' · ')}</span>
-            <div class="foot"><span class="small muted">${best != null ? `Điểm cao nhất: <b style="color:var(--navy)">${PH.num(best, 2)}/10</b>` : 'Chưa làm'}${draft ? ' · <span class="tag gold">đang làm dở</span>' : ''}</span>
-            <a class="btn accent" href="luyende.html?exam=${x.id}">${draft ? 'Làm tiếp' : 'Làm đề'}</a></div></div>`;
-        }).join('') || '<div class="empty">Chưa có đề nào.</div>'}</div>`;
+          return `<div class="card o exam-card acc-${x.chapter}"><div class="row between"><span class="tag acc">${PH.uiFmt('chapter')} ${PH.roman(x.chapter)}</span><span class="icon-tile sm tone-${x.chapter}">${PH.icon('exam')}</span></div>
+            <span class="t">${PH.esc(PH.dinh(en() ? x.title.en : x.title.vi))}</span>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(x.title.en))}</span>`}
+            <span class="meta">${PH.uiFmt('meta', { n: countQ(x), m: x.minutes })} · ${x.parts.map(pt => PH.uiFmt(kindKey[pt.kind]) + ' ' + pt.items.length).join(' · ')}</span>
+            <div class="foot"><span class="small muted">${best != null ? `${PH.uiFmt('best')}: <b style="color:var(--navy)">${num(best, 2)}/10</b>` : PH.uiFmt('notDone')}${draft ? ` · <span class="tag gold">${PH.uiFmt('inProgressTag')}</span>` : ''}</span>
+            <a class="btn accent" href="luyende.html?exam=${x.id}">${PH.uiFmt(draft ? 'resume' : 'take')}${PH.icon('arrow', 'sm')}</a></div></div>`;
+        }).join('') || `<div class="empty">${PH.uiFmt('noExams')}</div>`}</div>
+        <div class="card three"><span class="icon-tile tone-navy">${PH.icon('exam')}</span><div><p style="font-weight:700;color:var(--navy)">${PH.uiFmt('threeLevels')}</p><p class="small" style="color:var(--ink-2)">${PH.uiFmt('threeLevelsNote')}</p></div></div>`;
     }
 
     /* =============== LÀM BÀI =============== */
-    const exam = EXAMS.find(x => x.id === examId);
     let state = null, timerId = null, submitted = false, current = null;
-    const flat = [];        // danh sách câu theo thứ tự hiển thị
+    const flat = [];
     if (exam) exam.parts.forEach(pt => pt.items.forEach((it, i) => flat.push({ part: pt, item: it, idx: i })));
 
+    // Nạp lại bài đang làm dở. Nếu bản nháp đã quá giờ (đóng máy giữa chừng rồi mở lại sau),
+    // KHÔNG được xoá bài làm: nạp lại rồi chấm luôn, coi như nộp khi hết giờ.
+    let napNhapHetGio = false, khoiPhucKetQua = false;
     function loadState() {
       const p = PH.progress(); const d = p.exams[exam.id] && p.exams[exam.id].draft;
-      if (d && d.endTime > Date.now()) return d;
-      return { answers: {}, endTime: Date.now() + exam.minutes * 60000, startedAt: Date.now() };
+      if (d && d.endTime > Date.now()) return Object.assign({ flags: {} }, d);
+      if (d && d.answers && Object.keys(d.answers).length) { napNhapHetGio = true; return Object.assign({ flags: {} }, d); }
+      // Đã nộp rồi mà mở lại trang: hiện lại bài đã chấm (đáp án, lời giải) thay vì bắt làm lại từ đầu
+      const x = p.exams[exam.id];
+      if (x && x.lastState && x.lastState.result) { khoiPhucKetQua = true; return Object.assign({ flags: {} }, x.lastState); }
+      return { answers: {}, flags: {}, endTime: Date.now() + exam.minutes * 60000, startedAt: Date.now() };
     }
     const saveDraft = () => PH.update(p => { p.exams[exam.id] = Object.assign({}, p.exams[exam.id], { draft: state }); });
     const clearDraft = () => PH.update(p => { if (p.exams[exam.id]) delete p.exams[exam.id].draft; });
-
-    const partLabel = { mcq: 'Trắc nghiệm nhiều lựa chọn', tf: 'Trắc nghiệm đúng/sai', short: 'Trắc nghiệm trả lời ngắn' };
-    const partRoman = { mcq: 'I', tf: 'II', short: 'III' };
     const tfPoints = n => [0, 0.1, 0.25, 0.5, 1][n] || 0;
+    const partMax = pt => pt.kind === 'tf' ? pt.items.length : pt.items.length * pt.points;
 
     function isDone(f) {
       const a = state.answers[f.item.id];
@@ -151,78 +229,90 @@
       const v = PH.parseNum(a); const ok = !isNaN(v) && Math.abs(v - it.answer) <= (it.tolerance != null ? it.tolerance : 1e-6);
       return { pts: ok ? f.part.points : 0, max: f.part.points, ok };
     }
+    // Thuật ngữ xuất hiện trong đề (dò theo tên tiếng Việt / tiếng Anh trong đề)
+    function termsInExam() {
+      const text = flat.map(f => JSON.stringify(f.item)).join(' ').toLowerCase();
+      return (PH.TERMS || []).filter(t => text.includes(t.vi.toLowerCase()) || text.includes(t.en.toLowerCase())).slice(0, 10);
+    }
 
     function qHTML(f, n) {
       const it = f.item, kind = f.part.kind, a = state.answers[it.id], g = submitted ? grade(f) : null;
-      const pts = kind === 'tf' ? '1 ý 0,1 – 2 ý 0,25 – 3 ý 0,5 – 4 ý 1,0 điểm' : `${PH.num(f.part.points)} điểm`;
+      const pts = kind === 'tf' ? PH.uiFmt('tfPts') : PH.uiFmt('ptsOne', { p: num(f.part.points) });
+      const flagged = !!state.flags[it.id];
       let body = '';
       if (kind === 'mcq') {
         body = `<div class="opts">${it.options.map((o, i) => {
           let cls = a === i ? ' selected' : '';
           if (submitted) { if (i === it.correct) cls = ' right'; else if (a === i) cls = ' wrong'; }
-          return `<button type="button" class="opt${cls}" data-mcq="${it.id}" data-i="${i}" ${submitted ? 'disabled' : ''}><span class="k">${'ABCD'[i]}</span><span>${PH.L(o)}</span></button>`;
+          return `<button type="button" class="opt${cls}" data-mcq="${it.id}" data-i="${i}" ${submitted ? 'disabled' : ''}><span class="k">${'ABCD'[i]}</span><span class="hl nokem" style="min-width:0">${PH.L(o)}</span></button>`;
         }).join('')}</div>`;
       } else if (kind === 'tf') {
-        body = it.statements.map((s, i) => {
+        body = `<p class="hd">${PH.uiFmt('tfHint')}</p>` + it.statements.map((s, i) => {
           const v = a ? a[i] : null; let cls = '';
           if (submitted) cls = v === s.answer ? ' right' : ' wrong';
-          return `<div class="tf${cls}"><span class="k">${'abcd'[i]})</span><span class="txt">${PH.L(s)}</span>
-            <span class="sw"><button type="button" class="${v === true ? 'on' : ''}" data-tf="${it.id}" data-i="${i}" data-v="1" ${submitted ? 'disabled' : ''}>Đúng</button><button type="button" class="${v === false ? 'on f' : ''}" data-tf="${it.id}" data-i="${i}" data-v="0" ${submitted ? 'disabled' : ''}>Sai</button></span>
-            ${submitted ? `<span class="tag ${s.answer ? 'green' : 'gold'}">${s.answer ? 'Đúng' : 'Sai'}</span>` : ''}</div>`;
+          return `<div class="tf${cls}"><span class="k">${'abcd'[i]}</span><span class="txt hl nokem">${PH.L(s)}</span>
+            <span class="sw"><button type="button" class="${v === true ? 'on' : ''}" data-tf="${it.id}" data-i="${i}" data-v="1" ${submitted ? 'disabled' : ''}>${PH.uiFmt('tru')}</button><button type="button" class="${v === false ? 'on' : ''}" data-tf="${it.id}" data-i="${i}" data-v="0" ${submitted ? 'disabled' : ''}>${PH.uiFmt('fal')}</button></span>
+            ${submitted ? `<span class="tag ${s.answer ? 'green' : 'gold'}">${PH.uiFmt(s.answer ? 'tru' : 'fal')}</span>` : ''}</div>`;
         }).join('');
       } else {
-        body = `<div class="short${submitted ? (g.ok ? ' right' : ' wrong') : ''}"><span class="box"><input type="text" inputmode="decimal" maxlength="5" value="${PH.esc(a || '')}" data-short="${it.id}" placeholder="?" ${submitted ? 'disabled' : ''}><span class="unit">${PH.esc(it.unit || '')}</span></span>
-          <span class="note">Nhập số nguyên hoặc số thập phân, dùng dấu phẩy. Tối đa 4 kí tự.${submitted ? ` Đáp án: <b>${PH.num(it.answer)}</b>` : ''}</span></div>`;
+        body = `<div class="short${submitted ? (g.ok ? ' right' : ' wrong') : ''}"><label for="in-${it.id}">${PH.uiFmt('yourAnswer')}</label><span class="box"><input id="in-${it.id}" type="text" inputmode="decimal" maxlength="5" value="${PH.esc(a || '')}" data-short="${it.id}" placeholder="?" ${submitted ? 'disabled' : ''}><span class="unit">${PH.esc(it.unit || '')}</span></span>
+          <span class="note">${PH.uiFmt('shortHint')}${submitted ? ` <b>${PH.uiFmt('answerIs', { a: num(it.answer) })}</b>` : ''}</span></div>`;
       }
       const why = it.why || it.solution;
-      return `<div class="card qcard part-${partRoman[kind]}" id="q-${it.id}" data-n="${n}">
-        <div class="qhead"><b>Phần ${partRoman[kind]} · Câu ${f.idx + 1}</b><span>${partLabel[kind]} · ${pts}</span>${it.lesson ? `<a class="small" href="bai.html?n=${it.lesson}" style="margin-left:auto">Bài ${it.lesson}</a>` : ''}</div>
+      return `<div class="card qcard acc-${exam.chapter}" id="q-${it.id}" data-n="${n}">
+        <div class="qhead"><span class="tag acc">${PH.uiFmt('partQ', { p: partRoman[kind], i: f.idx + 1 })}</span><span class="pts">${pts}</span><span class="spacer"></span>${submitted ? '' : `<button type="button" class="flag-btn${flagged ? ' on' : ''}" data-flag="${it.id}" aria-pressed="${flagged}">${PH.icon('star', 'sm')}${PH.uiFmt(flagged ? 'flagged' : 'flag')}</button>`}</div>
         <div class="stem hl">${PH.L(kind === 'tf' ? it.stem : it.q)}</div>${body}
-        <div class="why${submitted ? ' show' : ''}"><div class="lbl">${kind === 'short' ? 'Lời giải' : 'Giải thích'}</div>${PH.L(why)}</div></div>`;
+        <div class="why${submitted ? ' show' : ''}"><div class="lbl">${PH.uiFmt(kind === 'short' ? 'solution' : 'explain')}</div><div class="hl">${PH.L(why)}</div>${submitted && g && !g.ok && it.lesson ? `<a class="go" href="${PH.canOpen(it.lesson) ? 'bai.html?n=' + it.lesson : 'baihoc.html'}">${PH.uiFmt('toLesson', { n: it.lesson })}${PH.icon('arrow', 'sm')}</a>` : ''}</div></div>`;
     }
 
-    function navHTML() {
+    function mapHTML() {
       const groups = exam.parts.map(pt => {
         const btns = pt.items.map((it, i) => {
           const f = flat.find(x => x.item.id === it.id); let cls = '';
-          if (submitted) cls = grade(f).ok ? 'ok' : 'bad'; else if (isDone(f)) cls = 'done';
+          if (submitted) cls = grade(f).ok ? 'ok' : 'bad'; else if (state.flags[it.id]) cls = 'flag'; else if (isDone(f)) cls = 'done';
           if (current === it.id) cls += ' cur';
-          return `<button type="button" class="${cls}" data-go="${it.id}">${i + 1}</button>`;
+          return `<button type="button" class="${cls}" data-go="${it.id}" aria-label="${PH.uiFmt('partQ', { p: partRoman[pt.kind], i: i + 1 })}">${i + 1}</button>`;
         }).join('');
-        return `<div class="grp">Phần ${partRoman[pt.kind]} · ${partLabel[pt.kind].replace('Trắc nghiệm ', '')}</div><div class="nums">${btns}</div>`;
+        return `<p class="grp">${PH.uiFmt(partKey[pt.kind])}</p><p class="grpd">${PH.uiFmt(partKey[pt.kind] + 'd', { n: pt.items.length, p: num(partMax(pt), 2) })}</p><div class="nums">${btns}</div>`;
       }).join('');
-      return `<div class="card navp">${groups}<div class="legend"><span><i style="background:var(--navy);border-color:var(--navy)"></i>đã làm</span><span><i style="border-color:var(--gold)"></i>đang xem</span><span><i></i>chưa làm</span></div></div>`;
+      const legend = submitted
+        ? `<span><i style="background:var(--green);border-color:var(--green)"></i>${PH.uiFmt('lgOk')}</span><span><i style="background:var(--red);border-color:var(--red)"></i>${PH.uiFmt('lgBad')}</span>`
+        : `<span><i style="background:var(--navy);border-color:var(--navy)"></i>${PH.uiFmt('lgDone')}</span><span><i style="background:var(--orange-soft);border-color:var(--orange)"></i>${PH.uiFmt('lgFlag')}</span><span><i></i>${PH.uiFmt('lgNot')}</span>`;
+      return `${PH.label('exam', PH.uiFmt('map'), '', 'sm')}${groups}<div class="legend">${legend}</div>`;
     }
 
     function renderExam() {
       const done = flat.filter(isDone).length;
-      app.innerHTML = `<div class="exam-top"><span class="icon-tile tone-${exam.chapter}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h6l1 2h3v13H5V7h3z"/><path d="m9 13 2 2 4-4"/></svg></span><div><div class="t">${PH.esc(exam.title.vi)}</div><div class="meta">${flat.length} câu · ${exam.minutes} phút · cấu trúc đề thi 2025</div></div><a class="exit btn outline sm" href="luyende.html">Thoát</a></div>
+      const terms = termsInExam();
+      const lv = PH.lang() === 'vi' ? 1 : PH.lang() === 'bi' ? 2 : 3;
+      app.innerHTML = `<section class="strip"><span class="icon-tile">${PH.icon('exam')}</span><div class="txt"><p class="eyebrow">${PH.uiFmt('eyebrow')}</p><h1>${PH.esc(en() ? exam.title.en : exam.title.vi)} <small>· ${PH.uiFmt('meta', { n: flat.length, m: exam.minutes })}</small></h1></div>
+          <div class="timer">${PH.icon('clock')}<span class="val" id="timer">--:--</span><span class="lb">${PH.uiFmt('left')}</span></div>
+          ${submitted ? `<a class="btn outline" href="luyende.html">${PH.uiFmt('backList')}</a>` : `<button type="button" class="btn gold" id="btnSubmit">${PH.uiFmt('submitN', { d: done, n: flat.length })}</button>`}</section>
+        <div class="lv-note"><span class="num-dot">${lv}</span><p>${PH.uiFmt('lvNote')}</p></div>
         <div id="resultBox"></div>
-        <div class="layout"><div id="qs">${flat.map((f, i) => qHTML(f, i)).join('')}<p class="autosave">Bài làm được lưu tự động sau mỗi câu. Nếu mất mạng, em mở lại trang là làm tiếp được.</p></div>
-        <aside class="side"><div class="card timer"><div class="lbl">Thời gian còn lại</div><div class="val" id="timer">--:--</div></div><div id="nav">${navHTML()}</div>
-          <div class="notice">Đổi mức ngôn ngữ không làm thay đổi điểm bài thi. Hệ số theo mức ngôn ngữ chỉ áp dụng trong phần Trò chơi.</div>
-          <button class="btn block" id="btnSubmit" ${submitted ? 'disabled' : ''}>${submitted ? 'Đã nộp bài' : `Nộp bài (${done}/${flat.length} câu)`}</button></aside></div>`;
-      PH.highlight(document.getElementById('qs'));
+        <div class="layout"><aside class="side"><div class="card map" id="map">${mapHTML()}</div><div id="confirmBox"></div>
+            ${terms.length ? `<div class="card tn-de">${PH.label('speaker', PH.uiFmt('termsInTest'), 'orange', 'sm')}<div style="height:8px"></div>${terms.map(t => `<div class="r"><b>${PH.esc(PH.dinh(en() ? t.en : t.vi))}</b>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(t.en))}</span>`}</div>`).join('')}<p class="note">${PH.uiFmt('termsNote')}</p></div>` : ''}
+            ${submitted ? '' : `<a class="btn ghost sm" href="luyende.html" style="align-self:flex-start">${PH.icon('back', 'sm')}${PH.uiFmt('exit')}</a>`}</aside>
+          <div><div id="qs">${flat.map((f, i) => qHTML(f, i)).join('')}</div><p class="autosave">${PH.uiFmt(submitted ? 'wrongLead' : 'autosave')}</p></div></div>`;
+      if (submitted) PH.highlight(document.getElementById('qs'));
       if (submitted) renderResult();
-      tick();
-      observe();
+      tick(); observe();
     }
-    function refreshNav() {
-      document.getElementById('nav').innerHTML = navHTML();
-      const done = flat.filter(isDone).length; const b = document.getElementById('btnSubmit'); if (!submitted) b.textContent = `Nộp bài (${done}/${flat.length} câu)`;
+    function refreshMap() {
+      document.getElementById('map').innerHTML = mapHTML();
+      const done = flat.filter(isDone).length; const b = document.getElementById('btnSubmit'); if (b && !submitted) b.textContent = PH.ui('submitN', { d: done, n: flat.length });
     }
     function observe() {
+      if (!('IntersectionObserver' in window)) return;
       const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { current = e.target.id.slice(2); document.querySelectorAll('.nums button').forEach(b => b.classList.toggle('cur', b.dataset.go === current)); } }); }, { rootMargin: '-40% 0px -55% 0px' });
       document.querySelectorAll('.qcard').forEach(c => io.observe(c));
     }
-
     function tick() {
-      if (!state || submitted) return;
+      if (!state || submitted) { const el = document.getElementById('timer'); if (el && state && state.result) el.textContent = PH.mmss(state.result.spent); return; }
       const left = Math.max(0, Math.ceil((state.endTime - Date.now()) / 1000));
       const el = document.getElementById('timer'); if (el) { el.textContent = PH.mmss(left); el.classList.toggle('low', left < 120); }
-      if (left === 0) { submit(true); }
+      if (left === 0) submit(true);
     }
-
     function submit(auto) {
       if (submitted) return;
       submitted = true; clearInterval(timerId);
@@ -231,39 +321,57 @@
       const score = max ? raw / max * 10 : 0;
       const spent = Math.min(exam.minutes * 60, Math.round((Date.now() - state.startedAt) / 1000));
       state.result = { score, raw, max, ok, spent, at: Date.now() };
-      PH.update(p => { const x = p.exams[exam.id] || {}; delete x.draft; x.last = state.result; x.best = Math.max(x.best || 0, score); x.attempts = (x.attempts || 0) + 1; p.exams[exam.id] = x; });
+      PH.update(p => {
+        const x = p.exams[exam.id] || {}; delete x.draft;
+        x.last = state.result; x.best = Math.max(x.best || 0, score); x.attempts = (x.attempts || 0) + 1;
+        x.lastState = { answers: state.answers, flags: state.flags, result: state.result };   // để mở lại còn xem được bài đã chấm
+        p.exams[exam.id] = x;
+      });
       renderExam(); window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (auto) PH.toast('Hết giờ — bài đã được nộp tự động.', 3000);
+      if (auto) PH.toast(PH.ui('timeUp'), 3000);
     }
     function renderResult() {
       const r = state.result; if (!r) return;
-      document.getElementById('resultBox').innerHTML = `<div class="card result"><div class="score">${PH.num(r.score, 2)}<span style="font-size:20px;color:var(--ink-3)"> / 10</span></div>
-        <div><div class="l">Kết quả</div><div>Đúng trọn vẹn <b>${r.ok}/${flat.length}</b> câu · ${PH.num(r.raw, 2)}/${PH.num(r.max, 2)} điểm thô · thời gian ${Math.floor(r.spent / 60)} phút ${r.spent % 60} giây</div></div>
-        <div class="row"><button class="btn outline sm" id="btnRetry">Làm lại đề này</button><a class="btn ghost sm" href="luyende.html">Về danh sách đề</a></div></div>`;
-      document.getElementById('btnRetry').addEventListener('click', () => { clearDraft(); state = null; submitted = false; start(); window.scrollTo(0, 0); });
+      document.getElementById('resultBox').innerHTML = `<div class="card result"><div class="score">${num(r.score, 2)}<span style="font-size:20px;color:var(--ink-3)"> / 10</span></div>
+        <div><div class="l">${PH.uiFmt('resultLbl')}</div><div>${PH.uiFmt('resultTxt', { ok: r.ok, n: flat.length, raw: num(r.raw, 2), max: num(r.max, 2), m: Math.floor(r.spent / 60), s: r.spent % 60 })}</div>
+        <div class="small muted" style="margin-top:4px">${PH.uiFmt('quyDoi', { max: num(r.max, 2) })}</div></div>
+        <div class="row"><button type="button" class="btn outline sm" id="btnRetry">${PH.uiFmt('retry')}</button><a class="btn ghost sm" href="luyende.html">${PH.uiFmt('backList')}</a></div></div>`;
+      document.getElementById('btnRetry').addEventListener('click', () => {
+        PH.update(p => { const x = p.exams[exam.id]; if (x) { delete x.draft; delete x.lastState; } });   // làm lại: bỏ cả bài cũ đã chấm
+        state = null; submitted = false; start(); window.scrollTo(0, 0);
+      });
     }
-
     function start() {
-      state = loadState(); saveDraft(); renderExam();
-      clearInterval(timerId); timerId = setInterval(tick, 500);
+      napNhapHetGio = khoiPhucKetQua = false;
+      state = loadState();
+      if (napNhapHetGio) { renderExam(); submit(true); return; }   // bài dở đã hết giờ: chấm ngay, không mất bài
+      if (khoiPhucKetQua) { submitted = true; clearInterval(timerId); renderExam(); return; }   // xem lại bài đã nộp
+      submitted = false;
+      saveDraft(); renderExam(); clearInterval(timerId); timerId = setInterval(tick, 500);
     }
 
-    if (exam) {
+    if (examId && !exam) {
+      app.innerHTML = `<div class="empty"><p>${PH.uiFmt('notFound')}</p><a class="btn outline" href="luyende.html" style="margin-top:14px">${PH.uiFmt('backList')}</a></div>`;
+    } else if (exam) {
       start();
       app.addEventListener('click', e => {
         const go = e.target.closest('[data-go]'); if (go) { document.getElementById('q-' + go.dataset.go).scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
         if (submitted) return;
-        const m = e.target.closest('[data-mcq]'); if (m) { state.answers[m.dataset.mcq] = +m.dataset.i; saveDraft(); m.parentElement.querySelectorAll('.opt').forEach(o => o.classList.toggle('selected', o === m)); refreshNav(); return; }
+        const fl = e.target.closest('[data-flag]'); if (fl) { state.flags[fl.dataset.flag] = !state.flags[fl.dataset.flag]; saveDraft(); fl.classList.toggle('on', state.flags[fl.dataset.flag]); fl.setAttribute('aria-pressed', !!state.flags[fl.dataset.flag]); fl.innerHTML = PH.icon('star', 'sm') + PH.uiFmt(state.flags[fl.dataset.flag] ? 'flagged' : 'flag'); refreshMap(); return; }
+        const m = e.target.closest('[data-mcq]'); if (m) { state.answers[m.dataset.mcq] = +m.dataset.i; saveDraft(); m.parentElement.querySelectorAll('.opt').forEach(o => o.classList.toggle('selected', o === m)); refreshMap(); return; }
         const t = e.target.closest('[data-tf]'); if (t) {
           const arr = state.answers[t.dataset.tf] || [null, null, null, null]; arr[+t.dataset.i] = t.dataset.v === '1'; state.answers[t.dataset.tf] = arr; saveDraft();
-          const sw = t.parentElement; sw.children[0].className = arr[+t.dataset.i] === true ? 'on' : ''; sw.children[1].className = arr[+t.dataset.i] === false ? 'on f' : ''; refreshNav(); return;
+          const sw = t.parentElement; sw.children[0].className = arr[+t.dataset.i] === true ? 'on' : ''; sw.children[1].className = arr[+t.dataset.i] === false ? 'on' : ''; refreshMap(); return;
         }
-        if (e.target.id === 'btnSubmit') {
-          const done = flat.filter(isDone).length;
-          if (confirm(done < flat.length ? `Em còn ${flat.length - done} câu chưa làm. Nộp bài ngay?` : 'Nộp bài và xem kết quả?')) submit(false);
+        if (e.target.closest('#btnSubmit')) {
+          const done = flat.filter(isDone).length; const box = document.getElementById('confirmBox');
+          box.innerHTML = `<div class="card confirm"><p>${PH.uiFmt(done < flat.length ? 'confirmLeft' : 'confirmAll', { k: flat.length - done })}</p><div class="row"><button type="button" class="btn gold sm" id="btnYes">${PH.uiFmt('submitNow')}</button><button type="button" class="btn outline sm" id="btnNo">${PH.uiFmt('keepDoing')}</button></div></div>`;
+          box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); return;
         }
+        if (e.target.closest('#btnYes')) { submit(false); return; }
+        if (e.target.closest('#btnNo')) { document.getElementById('confirmBox').innerHTML = ''; }
       });
-      app.addEventListener('input', e => { const s = e.target.closest('[data-short]'); if (s && !submitted) { s.value = s.value.replace(/[^0-9.,\-]/g, '').slice(0, 5); state.answers[s.dataset.short] = s.value; saveDraft(); refreshNav(); } });
+      app.addEventListener('input', e => { const s = e.target.closest('[data-short]'); if (s && !submitted) { s.value = s.value.replace(/[^0-9.,\-]/g, '').slice(0, 5); state.answers[s.dataset.short] = s.value; saveDraft(); refreshMap(); } });
       PH.onLang(() => { const y = window.scrollY; renderExam(); window.scrollTo(0, y); });
     } else {
       renderList(); PH.onLang(renderList);

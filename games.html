@@ -3,165 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trò chơi ôn tập — PhysiHub</title>
+  <title>Trò chơi ôn tập · PhysiHub</title>
+  <meta name="description" content="Trò chơi ôn thuật ngữ Vật lí 12 song ngữ: Term Rush, Ghép cặp Vật lí — chơi ở mức tiếng Anh càng cao, điểm nhân càng nhiều.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Trò chơi ôn tập · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    .intro p { color: var(--ink-2); max-width: 640px; margin-top: 8px; }
-    .scope { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; padding: 14px 18px; }
-    .scope .lbl { font-weight: 600; margin-right: 6px; }
-    .scope select { padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); font-size: 14px; max-width: 100%; }
-    .games { margin-top: 20px; }
-    .game { display: flex; flex-direction: column; gap: 6px; }
-    .game .preview { margin-bottom: 10px; }
-    .game .preview.rush .chip { top: 0; }
-    .game.lift { position: relative; }
-    .game .t { font-family: var(--font-serif); font-size: 21px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .game .t-en { font-family: var(--font-serif); font-style: italic; color: var(--gold); }
-    .game .d { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
-    .game .meta { font-size: 13px; color: var(--ink-3); margin-top: auto; padding-top: 10px; }
-    .game .btn { margin-top: 10px; }
-    .rules { margin-top: 24px; }
-    .rules p { color: var(--ink-2); font-size: 14px; max-width: 700px; margin-top: 6px; }
-    .lv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
-    .lv button { text-align: left; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
-    .lv button:hover { border-color: var(--line-strong); }
-    .lv button.active { border-color: var(--navy); box-shadow: 0 0 0 2px var(--navy-soft); }
-    .lv button.active[data-lang="en"] { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-soft); background: var(--gold-soft); }
-    .lv b { display: block; margin-bottom: 4px; }
-    .lv .d { font-size: 13px; color: var(--ink-2); min-height: 40px; }
-    .lv .m { font-family: var(--font-serif); font-size: 24px; color: var(--navy); margin-top: 8px; }
-    .lv button[data-lang="en"] .m { color: var(--gold); }
-    .bottom { margin-top: 20px; }
-    .rec { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; }
-    .rec:first-of-type { border-top: 0; }
-    .rec b { font-family: var(--font-serif); font-size: 18px; color: var(--navy); }
-    .task { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; font-size: 14px; }
-    .task i { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 1px solid var(--line-strong); display: grid; place-items: center; margin-top: 1px; }
+    /* ---------- Khối mở đầu: dải tiêu đề mảnh dùng chung (.page-hero) + khung cam "mức đang chơi" ---------- */
+    .g-lv { width: 340px; margin-top: 26px; padding: 30px 22px 18px; }
+    .g-lv .cur { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .g-lv .cur b { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--navy); }
+    .g-lv .x { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--c1-ink); }
+    .g-lv .streak { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1.5px dashed var(--orange-line); font-size: 14px; color: var(--ink-2); }
+    .g-lv .streak .icon { color: var(--orange); }
+
+    /* ---------- Hệ số ---------- */
+    .hs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .hs button { position: relative; width: 100%; display: flex; align-items: center; gap: 16px; padding: 16px 18px; border-radius: 18px; text-align: left; background: #fff; border: 1.5px solid #DCE7F3; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease; }
+    .hs button:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #B8D7F3; }
+    .hs .x { flex: none; min-width: 60px; height: 60px; padding: 0 8px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-display); font-size: 20px; font-weight: 800; background: #fff; color: var(--navy-2); border: 3px solid var(--blue-line); }
+    .hs .t { display: block; font-size: 15px; font-weight: 700; }
+    .hs .d { display: block; margin-top: 3px; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+    .hs button.on { background: var(--blue-soft); border: 2px solid var(--sky); color: var(--ink); box-shadow: 0 10px 24px rgba(30, 136, 229, .16); }
+    .hs button.on .x { background: var(--sky); border-color: #90CAF9; color: #fff; }
+    .hs button.on .t { color: var(--navy); }
+    .hs button.on::after { content: ""; position: absolute; left: 18px; right: 18px; top: 0; height: 3px; border-radius: 0 0 3px 3px; background: var(--grad-cta); }
+
+    /* ---------- Phạm vi ---------- */
+    .pv { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .pv .lb { font-size: 14px; font-weight: 700; color: var(--ink-2); margin-right: 4px; }
+    .pv select { min-height: 40px; padding: 0 14px; border: 1.5px solid var(--line-strong); border-radius: 20px; background: #fff; font-size: 13.5px; font-weight: 600; color: var(--ink-2); max-width: 100%; }
+    .pv .cnt { margin-left: auto; font-size: 13px; color: var(--ink-3); }
+
+    /* ---------- Thẻ trò chơi ---------- */
+    .g-card { display: flex; flex-direction: column; background: #fff; border: 1.5px solid #DCE7F3; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); transition: transform .35s cubic-bezier(.2, .7, .3, 1), box-shadow .35s ease; }
+    .g-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+    .g-card .art { position: relative; height: 250px; overflow: hidden; }
+    .g-card .body { padding: 22px 26px 26px; display: flex; flex-direction: column; flex: 1; }
+    .g-card .ttl { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .g-card .ttl b { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--navy); }
+    .g-card .ttl .en { font-size: 16px; }
+    .g-card .desc { margin: 8px 0 14px; font-size: 14.5px; line-height: 1.65; color: var(--ink-2); }
+    .g-card .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .g-card .tags .tag { padding: 6px 12px; font-size: 12px; background: var(--surface-2); border: 1px solid #DCE7F3; color: var(--ink-2); }
+    .g-card .tags .tag.rec { background: var(--gold-soft); border-color: #F6C995; color: var(--gold); }
+    .g-card .btn { margin-top: auto; align-self: flex-start; min-width: 200px; }
+    /* Term Rush: bầu trời đêm, các thuật ngữ rơi chậm */
+    .art.rush { background: radial-gradient(520px 260px at 85% -10%, rgba(255, 183, 77, .18), transparent 70%), linear-gradient(180deg, #F5F9FE 0%, #E3EEFA 100%); border-bottom: 1.5px solid var(--blue-line); }
+    .art .hud { position: absolute; left: 20px; right: 20px; top: 16px; display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); z-index: 2; }
+    .art .hud .spacer { flex: 1; }
+    .art .hud .hchip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--blue-line); }
+    .art .hud .hchip.gold { background: var(--orange-soft); border-color: var(--orange-line); color: var(--c1-ink); font-family: var(--font-display); font-weight: 800; font-size: 13.5px; }
+    .art .lives { display: inline-flex; gap: 5px; }
+    .art .lives i { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+    .art .lives i.off { background: #C9D8EA; }
+    .art.rush .field { position: absolute; left: 24px; right: 24px; top: 52px; height: 130px; overflow: hidden; }
+    .roi { position: absolute; top: 0; white-space: nowrap; padding: 6px 14px; border-radius: 999px; background: #fff; border: 1.5px solid var(--blue-line); color: var(--navy); font-family: var(--font-serif); font-size: 14.5px; box-shadow: 0 8px 18px -10px rgba(13, 71, 161, .55); animation: g-roi linear infinite; }
+    .roi.hot { background: var(--grad-cta); border-color: #EF6C00; color: var(--ink); box-shadow: 0 0 0 4px rgba(255, 167, 38, .25), 0 10px 22px -8px rgba(245, 124, 0, .55); }
+    @keyframes g-roi { 0% { transform: translateY(-40px); opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { transform: translateY(120px); opacity: 0; } }
+    .art.rush .line { position: absolute; left: 24px; right: 24px; top: 186px; border-top: 1.5px dashed var(--orange); }
+    .art.rush .line span { position: absolute; right: 0; top: -20px; font-size: 10.5px; letter-spacing: .8px; text-transform: uppercase; font-weight: 700; color: var(--c1-ink); }
+    .art.rush .ans { position: absolute; left: 20px; right: 20px; bottom: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .art.rush .ans span { min-height: 38px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 6px; border-radius: 10px; background: #fff; border: 1px solid var(--blue-line); color: var(--ink-2); font-size: 12.5px; font-weight: 600; }
+    .art.rush .ans span.pick { background: var(--orange-soft); border: 1.5px solid var(--orange); color: var(--c1-ink); }
+    /* Ghép cặp: bàn xanh rất nhạt, mặt sau thẻ xanh nhạt viền xanh */
+    .art.match { background: linear-gradient(180deg, #FFFBF5 0%, #FFF3E3 100%); border-bottom: 1.5px solid var(--orange-line); }
+    .art.match .hud { color: var(--ink-2); }
+    .art.match .hud .hchip { background: #fff; border-color: #DCE7F3; }
+    .art.match .hud .hchip.gold { background: var(--grad-label); border-color: transparent; color: #fff; }
+    .art.match .board { position: absolute; left: 28px; right: 28px; top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; perspective: 700px; }
+    .the { position: relative; height: 54px; border-radius: 10px; transform-style: preserve-3d; }
+    .the .f { position: absolute; inset: 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4px 6px; backface-visibility: hidden; font-size: 12.5px; font-weight: 600; }
+    .the .f.back { background: linear-gradient(150deg, #EAF3FD, #D4E6F9); border: 1.5px solid var(--blue-line); color: var(--navy-2); box-shadow: 0 4px 10px -6px rgba(13, 71, 161, .45); }
+    .the .f.back svg { width: 18px; height: 18px; opacity: .85; }
+    .the .f.front { background: #fff; border: 1.5px solid var(--blue-line); color: var(--ink); transform: rotateY(180deg); }
+    .the .f.front.en { font-family: var(--font-serif); font-style: italic; color: var(--gold); }
+    .the.up { transform: rotateY(180deg); }
+    .the.pair .f.front { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255, 167, 38, .25); }
+    .the.flip { animation: g-flip 5s ease-in-out infinite; }
+    @keyframes g-flip { 0%, 30% { transform: rotateY(0); } 42%, 78% { transform: rotateY(180deg); } 90%, 100% { transform: rotateY(0); } }
+    /* Bilingual Arena */
+    .g-card.arena { display: grid; grid-template-columns: 320px minmax(0, 1fr); }
+    .g-card.arena .art { height: 100%; min-height: 190px; background: linear-gradient(90deg, var(--blue-soft) 0 50%, var(--orange-soft) 50% 100%); border-right: 1.5px solid var(--line); }
+    .g-card.arena .body { padding: 24px 28px; }
+    .g-card.arena .soon { align-self: flex-start; margin-top: auto; }
+    .art.vs .two { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 22px; }
+    .art.vs .p { width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 3px solid var(--sky); color: var(--navy-2); box-shadow: 0 6px 14px rgba(13, 71, 161, .14); }
+    .art.vs .p + .v + .p { border-color: var(--orange); color: #E65100; }
+    .art.vs .p svg { width: 26px; height: 26px; }
+    .art.vs .v { font-family: var(--font-display); font-weight: 800; font-size: 22px; color: var(--navy); }
+    .art.vs .lock { position: absolute; right: 16px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: #fff; border: 1px solid var(--line-strong); color: var(--ink-3); font-size: 11.5px; font-weight: 600; }
+    .soon { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 999px; background: var(--surface-2); border: 1.5px solid #DCE7F3; color: var(--ink-3); font-weight: 700; font-size: 14px; }
+
+    /* ---------- Nhiệm vụ · Huy hiệu · Kỉ lục ---------- */
+    .bottom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px; margin-top: 24px; }
+    .bottom .panel { padding: 30px 22px 22px; scroll-margin-top: 130px; }
+    .bottom .panel.has-label { margin-top: 26px; }
+    .bottom .panel.white { background: #fff; }
+    .hh .b { background: #fff !important; }
+    .kl .o { background: #fff !important; }
+    .bottom h2 { font-size: 20px; }
+    .task { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+    .task i { width: 24px; height: 24px; flex: none; border-radius: 50%; border: 1.5px solid var(--line-strong); display: grid; place-items: center; }
     .task.done i { background: var(--navy); border-color: var(--navy); color: #fff; }
-    .task.done span { text-decoration: line-through; color: var(--ink-3); }
-    @media (max-width: 720px) { .lv { grid-template-columns: 1fr; } }
+    .task.done span { font-weight: 400; color: var(--ink-3); text-decoration: line-through; text-decoration-color: #B8C4D4; }
+    .task-bar { margin-top: 14px; }
+    .task-txt { margin-top: 8px; font-size: 12.5px; font-weight: 600; color: var(--navy); }
+    .hh { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .hh .b { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: 16px; background: var(--surface-2); border: 1px solid #DCE7F3; }
+    .hh .medal { position: relative; width: 48px; height: 48px; flex: none; border-radius: 50%; display: grid; place-items: center; color: #fff; background: linear-gradient(145deg, var(--accent-g1), var(--accent-g2)); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .85), 0 0 0 1.5px var(--accent), 0 6px 14px rgba(31, 41, 51, .14); }
+    .hh .medal svg { width: 20px; height: 20px; }
+    .hh .khoa .medal { background: linear-gradient(145deg, #B8C4D4, #93A1B5); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .85), 0 0 0 1.5px #B8C4D4; }
+    .hh .medal .lock { position: absolute; right: -5px; bottom: -3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; display: grid; place-items: center; color: var(--ink-4); box-shadow: 0 2px 5px rgba(0, 0, 0, .15); }
+    .hh .medal .lock svg { width: 11px; height: 11px; }
+    .hh .nm { display: block; font-size: 13px; font-weight: 700; line-height: 1.3; text-wrap: balance; }
+    .hh .st { display: block; font-size: 12px; color: var(--ink-3); }
+    .hh .b:not(.khoa) .st { color: var(--green); }
+    .kl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .kl .o { padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid #DCE7F3; }
+    .kl .g { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--gold); }
+    .kl .l { font-size: 12px; color: var(--ink-3); }
+    .kl .v { margin-top: 2px; font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--navy); }
+    .note { margin-top: 12px; font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+    @media (max-width: 1080px) { .bottom { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 900px) { .g-lv { width: auto; } .hs { grid-template-columns: 1fr; } .grid.c2 { grid-template-columns: 1fr; } .g-card.arena { grid-template-columns: 1fr; } .g-card.arena .art { min-height: 150px; } }
+    @media (max-width: 720px) { .g-lv { margin-top: 26px; } .bottom { grid-template-columns: 1fr; } .pv .cnt { margin-left: 0; width: 100%; } .g-card .art { height: 220px; } .art.rush .field { height: 104px; } .art.rush .line { top: 158px; } .g-card .body { padding: 18px; } .g-card .btn { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .roi, .the.flip { animation: none !important; } }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
-      <div class="page-hero">
-        <div class="chips" aria-hidden="true"><span class="chip" style="left:58%;top:12%">flux</span><span class="chip" style="left:74%;top:60%">half-life</span><span class="chip" style="left:88%;top:28%">volume</span></div>
-        <div><span class="badge">Trò chơi</span><h1>Trò chơi ôn tập</h1><p>Ba trò chơi dùng chung cho cả 25 bài. Em chọn phạm vi muốn ôn trước khi chơi; nội dung được lấy từ ngân hàng thuật ngữ và bảng công thức.</p></div>
-        <span class="spacer"></span>
-        <div class="glass" style="padding:14px 18px;min-width:180px"><div class="small" style="color:#cfe0ff">Mức ngôn ngữ đang chơi</div><div style="font-family:var(--font-serif);font-size:26px;line-height:1.2" id="heroLang"></div></div>
-      </div>
-
-      <div class="card scope" id="scope"></div>
-
-      <div class="grid c3 games">
-        <div class="card game lift acc-2">
-          <div class="preview rush"><span class="chip" style="left:12%">flux</span><span class="chip" style="left:44%">half-life</span><span class="chip" style="left:70%">volume</span><span class="line"></span></div>
-          <div class="t">Term Rush</div><div class="t-en">Đua thuật ngữ</div>
-          <div class="d">Thuật ngữ rơi từ trên xuống. Chọn hoặc gõ nghĩa, kí hiệu hay đơn vị trước khi nó chạm đáy.</div>
-          <div class="meta">Nguồn: ngân hàng thuật ngữ<br>60 giây mỗi ván · 3 mạng</div>
-          <a class="btn glow block" href="game-termrush.html">Chơi ngay</a>
-        </div>
-        <div class="card game lift acc-3">
-          <div class="preview match"><i></i><i class="n"></i><i></i><i></i><i class="g"></i><i></i><i></i><i class="n"></i></div>
-          <div class="t">Ghép cặp Vật lí</div><div class="t-en">Physics Match Up</div>
-          <div class="d">Xoá sạch bảng 12 thẻ bằng cách ghép đúng cặp: thuật ngữ Việt – Anh, đại lượng – đơn vị, định luật – công thức.</div>
-          <div class="meta">Nguồn: thuật ngữ và bảng công thức<br>90 giây mỗi ván</div>
-          <a class="btn block" href="game-match.html" style="background:var(--violet);border-color:var(--violet)">Chơi ngay</a>
-        </div>
-        <div class="card game acc-4" style="opacity:.85">
-          <div class="preview arena"><i></i>vs<i class="g"></i></div>
-          <div class="t">Bilingual Arena <span class="tag gold">đang phát triển</span></div><div class="t-en">Đấu trường song ngữ</div>
-          <div class="d">Trả lời câu hỏi theo cấu trúc đề 2025. Luyện một mình, hoặc thách đấu một bạn cùng lớp trên cùng bộ 10 câu.</div>
-          <div class="meta">Nguồn: kho câu hỏi<br>10 câu mỗi trận · cần tài khoản</div>
-          <button class="btn block" disabled>Sắp mở</button>
-        </div>
-      </div>
-
-      <div class="card rules">
-        <span class="badge">Luật chơi</span>
-        <h2 style="margin-top:8px">Tiếng Anh nằm trong luật chơi</h2>
-        <p>Cùng một trò chơi, em chơi ở mức ngôn ngữ nào cũng được. Mức càng cao thì điểm càng được nhân nhiều, nên em sẽ tự muốn nâng mức khi đã quen. Chạm để đổi mức cho toàn trang.</p>
-        <div class="lv" id="levels"></div>
-      </div>
-
-      <div class="grid c2 bottom">
-        <div class="card"><div class="row between"><h3>Kỷ lục của em</h3><span class="small muted">lưu trên máy này</span></div><div id="records" style="margin-top:10px"></div>
-          <div class="notice" style="margin-top:14px">Bảng xếp hạng lớp sẽ mở khi có tài khoản học sinh (đang phát triển).</div></div>
-        <div class="card"><h3>Nhiệm vụ hôm nay</h3><div id="tasks" style="margin-top:8px"></div><hr class="sep"><div class="small muted" id="streak"></div></div>
+      <section class="page-hero" id="hero"></section>
+      <section class="section" style="margin-top:24px"><h2 id="hsH" class="sec-title" style="margin-bottom:14px;font-size:22px"></h2><div class="hs" id="hs"></div></section>
+      <div class="pv" id="scope"></div>
+      <div class="grid c2" style="margin-top:20px;gap:24px" id="games"></div>
+      <div class="g-card arena" id="arena" style="margin-top:24px"></div>
+      <div class="bottom">
+        <div class="panel has-label" id="nhiemvu"></div>
+        <div class="panel orange has-label" id="huyhieu"></div>
+        <div class="panel has-label" id="kiluc"></div>
       </div>
     </div>
   </main>
 
   <script src="data/lessons.js"></script>
   <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
   <script src="data/pairs.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: 'games' });
+    Object.assign(PH.UI, {
+      eyebrow: ['Trò chơi ôn tập', 'Review games'], h1: ['Chơi vui, nhớ lâu thuật ngữ', 'Play your way to the terms'],
+      lead: ['Hai trò chơi dùng chung kho {n} thuật ngữ. Chơi ở mức tiếng Anh càng cao, điểm càng được nhân nhiều.', 'Both games share the {n}-term glossary. The higher your English level, the bigger your score multiplier.'],
+      playingAt: ['Mức ngôn ngữ đang chơi', 'Language level in play'],
+      streak: ['Chuỗi {n} ngày liên tiếp', '{n}-day streak'], noStreak: ['Chơi một ván hôm nay để bắt đầu chuỗi ngày', 'Play a round today to start a streak'],
+      hsH: ['Tiếng Anh nằm trong luật chơi', 'English is part of the rules'],
+      hs1: ['Câu hỏi tiếng Việt, thuật ngữ tiếng Anh hiện kèm', 'Vietnamese questions with English terms alongside'],
+      hs2: ['Câu hỏi hiện cả hai thứ tiếng', 'Questions shown in both languages'],
+      hs3: ['Chỉ tiếng Anh; mở gợi ý tiếng Việt thì giảm hệ số', 'English only; opening a Vietnamese hint lowers the multiplier'],
+      scope: ['Phạm vi ôn', 'Review scope'], pvAll: ['Tất cả thuật ngữ', 'All terms'], pvCh: ['Theo chương', 'By chapter'], pvL: ['Theo bài', 'By lesson'], pvWeak: ['Ôn điểm yếu của em', 'My weak spots'],
+      noWeak: ['Chưa có thuật ngữ nào trả lời sai', 'No wrong answers yet'], nTermsScope: ['{n} thuật ngữ', '{n} terms'],
+      g1Sub: ['Đua thuật ngữ', 'Beat the falling terms'], g1Desc: ['Thuật ngữ rơi từ trên xuống. Chọn đúng nghĩa, kí hiệu hoặc đơn vị trước khi nó chạm vạch.', 'Terms fall from the top. Pick the right meaning, symbol or unit before each one hits the ground.'],
+      g1M1: ['60 giây mỗi ván', '60 seconds a round'], g1M2: ['3 mạng', '3 lives'], bestPts: ['Kỉ lục của em: {n} điểm', 'Your best: {n} points'], noBest: ['Chưa có kỉ lục', 'No record yet'],
+      g2Name: ['Ghép cặp Vật lí', 'Physics Match Up'], g2Sub: ['Physics Match Up', 'Clear the board in pairs'],
+      g2Desc: ['Lật và ghép đúng từng cặp để xoá sạch bảng 12 thẻ: thuật ngữ Việt – Anh, đại lượng – đơn vị, định luật – công thức.', 'Flip and match pairs to clear a 12-card board: quantity and unit, law and formula, term and symbol.'],
+      g2M1: ['90 giây mỗi ván', '90 seconds a round'], g2M2: ['12 thẻ · 6 cặp', '12 cards · 6 pairs'], fastest: ['Nhanh nhất: {t}', 'Fastest: {t}'],
+      g3Sub: ['Đấu trường song ngữ', 'Bilingual arena'], dev: ['đang phát triển', 'in development'],
+      g3Desc: ['Trả lời câu hỏi theo cấu trúc đề 2025. Luyện một mình, hoặc thách đấu một bạn cùng lớp trên cùng bộ 10 câu. Cần tài khoản học sinh, nên trò này mở sau khi có phần đăng nhập.', 'Answer questions in the 2025 exam format — alone, or challenge a classmate on the same set of 10. It needs student accounts, so it opens once sign-in exists.'],
+      g3M1: ['10 câu mỗi trận', '10 questions a round'], g3M2: ['cần tài khoản', 'needs an account'], soon: ['Sắp mở', 'Coming soon'],
+      play: ['Chơi ngay', 'Play now'], pairs: ['cặp', 'pairs'], lineLbl: ['vạch', 'line'],
+      missions: ['Nhiệm vụ hôm nay', 'Today’s missions'], nv1: ['Chơi một ván Term Rush', 'Play one round of Term Rush'], nv2: ['Ghép xong một bảng 12 thẻ', 'Clear one 12-card board'], nv3: ['Chơi một ván ở mức English', 'Play one round at the English level'],
+      nvDone: ['Đã xong {d} / 3 nhiệm vụ', '{d} of 3 missions done'],
+      badges: ['Huy hiệu chương', 'Chapter badges'], hh1: ['Nhà nhiệt học', 'Heat hero'], hh2: ['Bậc thầy chất khí', 'Gas master'], hh3: ['Nam châm vàng', 'Golden magnet'], hh4: ['Hạt nhân bền', 'Stable nucleus'],
+      unlocked: ['Đã mở', 'Unlocked'], locked: ['Chưa mở · {m}/{n} từ', 'Locked · {m}/{n} terms'], badgeNote: ['Thuộc hết thuật ngữ của một chương để mở huy hiệu.', 'Master every term in a chapter to unlock its badge.'],
+      records: ['Kỉ lục của em', 'Your records'], onDevice: ['lưu trên máy này', 'saved on this device'],
+      kl1: ['Điểm cao nhất', 'Best score'], kl2: ['Ít lượt lật nhất', 'Fewest flips'], kl3: ['Nhanh nhất', 'Fastest'], kl4: ['Số ván đã chơi', 'Rounds played'], both: ['Cả hai trò', 'Both games'], matchShort: ['Ghép cặp', 'Match Up'],
+      leaderboard: ['Bảng xếp hạng lớp sẽ mở khi có tài khoản học sinh.', 'A class leaderboard will open once student accounts exist.']
+    });
+    PH.mount({ active: 'games', title: { vi: 'Trò chơi ôn tập', en: 'Review games' } });
+    const $ = id => document.getElementById(id);
+    const en = () => PH.lang() === 'en';
+    const mult = l => '×' + (en() ? l.mult : PH.num(l.mult));
+    const langName = id => id === 'vi' ? 'Tiếng Việt' : id === 'bi' ? PH.ui('bilingual') : 'English';
+
+    function renderHero() {
+      const l = PH.langInfo(); const streak = PH.streakDays();
+      $('hero').innerHTML = `<div><p class="eyebrow">${PH.uiFmt('eyebrow')}</p><h1>${PH.uiFmt('h1')}</h1>${en() ? '' : `<p class="sub-en" lang="en">Play your way to the terms</p>`}<p class="lead">${PH.uiFmt('lead', { n: (PH.TERMS || []).length })}</p></div>
+        <div class="g-lv panel orange has-label">${PH.label('lang', PH.uiFmt('playingAt'), 'orange', 'sm')}<p class="cur"><b>${PH.esc(langName(l.id))}</b><span class="x">${mult(l)}</span></p>
+          <div class="streak">${PH.icon('fire')}<span>${streak ? PH.uiFmt('streak', { n: streak }) : PH.uiFmt('noStreak')}</span></div></div>`;
+    }
+    function renderHs() {
+      $('hsH').textContent = PH.ui('hsH');
+      $('hs').innerHTML = PH.LANGS.map((l, i) => `<button type="button" class="${l.id === PH.lang() ? 'on' : ''}" data-lang="${l.id}" aria-pressed="${l.id === PH.lang()}"><span class="x">${mult(l)}</span><span><span class="t">${PH.esc(langName(l.id))}</span><span class="d">${PH.uiFmt('hs' + (i + 1))}</span></span></button>`).join('');
+    }
+    $('hs').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) PH.setLang(b.dataset.lang); });
 
     function renderScope() {
       const s = PH.scope(); const weak = PH.weakTermIds().length;
-      const chapters = (PH.CHAPTERS || []).map(c => `<option value="${c.n}" ${s.chapter === c.n ? 'selected' : ''}>Chương ${PH.roman(c.n)} · ${PH.esc(c.vi)}</option>`).join('');
-      const lessons = (PH.LESSONS || []).filter(l => PH.termsForLesson(l.n).length).map(l => `<option value="${l.n}" ${s.lesson === l.n ? 'selected' : ''}>Bài ${l.n} · ${PH.esc(l.vi)}</option>`).join('');
-      document.getElementById('scope').innerHTML = `<span class="lbl">Phạm vi ôn</span>
-        <button class="pill ${s.type === 'all' ? 'active' : ''}" data-type="all">Tất cả ${(PH.LESSONS || []).length || 25} bài</button>
-        <button class="pill ${s.type === 'chapter' ? 'active' : ''}" data-type="chapter">Theo chương</button>
-        <button class="pill ${s.type === 'lesson' ? 'active' : ''}" data-type="lesson">Theo bài</button>
-        <button class="pill ${s.type === 'weak' ? 'active' : ''}" data-type="weak" ${weak ? '' : 'disabled title="Chưa có thuật ngữ nào trả lời sai"'}>Ôn điểm yếu của em${weak ? ` (${weak})` : ''}</button>
-        ${s.type === 'chapter' ? `<select id="selChapter">${chapters}</select>` : ''}${s.type === 'lesson' ? `<select id="selLesson">${lessons}</select>` : ''}
-        <span class="small muted" style="margin-left:auto">${PH.scopeTerms(s).length} thuật ngữ</span>`;
+      const chapters = (PH.CHAPTERS || []).map(c => `<option value="${c.n}" ${s.chapter === c.n ? 'selected' : ''}>${PH.uiFmt('chapter')} ${PH.roman(c.n)} · ${PH.esc(en() ? c.en : c.vi)}</option>`).join('');
+      const lessons = (PH.LESSONS || []).filter(l => PH.termsForLesson(l.n).length).map(l => `<option value="${l.n}" ${s.lesson === l.n ? 'selected' : ''}>${PH.uiFmt('lesson')} ${l.n} · ${PH.esc(en() ? l.en : l.vi)}</option>`).join('');
+      $('scope').innerHTML = `<span class="lb">${PH.uiFmt('scope')}</span>
+        <button type="button" class="pill ${s.type === 'all' ? 'active' : ''}" data-type="all">${PH.uiFmt('pvAll')}</button>
+        <button type="button" class="pill ${s.type === 'chapter' ? 'active' : ''}" data-type="chapter">${PH.uiFmt('pvCh')}</button>
+        <button type="button" class="pill ${s.type === 'lesson' ? 'active' : ''}" data-type="lesson">${PH.uiFmt('pvL')}</button>
+        <button type="button" class="pill ${s.type === 'weak' ? 'active' : ''}" data-type="weak" ${weak ? '' : `disabled title="${PH.uiFmt('noWeak')}"`}>${PH.uiFmt('pvWeak')}${weak ? ` (${weak})` : ''}</button>
+        ${s.type === 'chapter' ? `<select id="selChapter" aria-label="${PH.uiFmt('pvCh')}">${chapters}</select>` : ''}${s.type === 'lesson' ? `<select id="selLesson" aria-label="${PH.uiFmt('pvL')}">${lessons}</select>` : ''}
+        <span class="cnt">${PH.uiFmt('nTermsScope', { n: PH.scopeTerms(s).length })}</span>`;
     }
-    document.getElementById('scope').addEventListener('click', e => {
+    $('scope').addEventListener('click', e => {
       const b = e.target.closest('[data-type]'); if (!b) return;
       const s = { type: b.dataset.type };
       if (s.type === 'chapter') s.chapter = (PH.CHAPTERS || [{ n: 1 }])[0].n;
       if (s.type === 'lesson') { const l = (PH.LESSONS || []).find(x => PH.termsForLesson(x.n).length); s.lesson = l ? l.n : 1; }
       PH.setScope(s); renderScope();
     });
-    document.getElementById('scope').addEventListener('change', e => {
+    $('scope').addEventListener('change', e => {
       if (e.target.id === 'selChapter') PH.setScope({ type: 'chapter', chapter: +e.target.value });
       if (e.target.id === 'selLesson') PH.setScope({ type: 'lesson', lesson: +e.target.value });
       renderScope();
     });
 
-    function renderLevels() {
-      const cur = PH.lang();
-      const desc = { vi: 'Câu hỏi tiếng Việt, thuật ngữ tiếng Anh hiện kèm.', bi: 'Câu hỏi hiện cả hai thứ tiếng cùng lúc.', en: 'Chỉ tiếng Anh. Mở gợi ý tiếng Việt thì giảm hệ số.' };
-      document.getElementById('levels').innerHTML = PH.LANGS.map(l => `<button type="button" class="${l.id === cur ? 'active' : ''}" data-lang="${l.id}"><b>${l.long}</b><span class="d">${desc[l.id]}</span><span class="m">×${PH.num(l.mult)}</span></button>`).join('');
+    function rushArt(l) {
+      const roi = [['magnetic flux', 44, 7.5, 0, true], ['pressure', 5, 8.5, 2.6, false], ['half-life', 26, 7, 4.4, false], ['isothermal', 12, 9, 6.2, false]]
+        .map(r => `<span class="roi${r[4] ? ' hot' : ''}" style="left:${r[1]}%;animation-duration:${r[2]}s;animation-delay:-${r[3]}s">${r[0]}</span>`).join('');
+      const DA = en() ? ['Wb', 'T', 'Pa', 'J'] : ['từ thông', 'cảm ứng từ', 'từ trường', 'điện từ trường'];
+      return `<div class="art rush" aria-hidden="true"><div class="hud"><span class="lives"><i></i><i></i><i class="off"></i></span><span class="spacer"></span><span class="hchip">${PH.icon('clock', 'sm')}42 s</span><span class="hchip gold">1 240 · ${mult(l)}</span></div>
+        <div class="field">${roi}</div><div class="line"><span>${PH.uiFmt('lineLbl')}</span></div>
+        <div class="ans">${DA.map((t, i) => `<span class="${i === 0 ? 'pick' : ''}">${PH.esc(t)}</span>`).join('')}</div></div>`;
     }
-    document.getElementById('levels').addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) PH.setLang(b.dataset.lang); });
+    function matchArt() {
+      const p1 = en() ? ['pressure', 'Pa'] : ['áp suất', 'pressure'], p2 = en() ? ['half-life', 'T'] : ['chu kì bán rã', 'half-life'], p3 = en() ? ['magnetic flux', 'Wb'] : ['từ thông', 'magnetic flux'];
+      const back = `<div class="f back">${PH.icon('atom')}</div>`;
+      const S = [['pair', p1[0], false], ['', null], ['flip', p3[0], en()], ['', null], ['', null], ['pair', p1[1], true], ['', null], ['flip', p3[1], true], ['up', p2[0], false], ['', null], ['', null], ['up', p2[1], true]];
+      const cards = S.map(s => s[1] == null ? `<div class="the">${back}</div>` : `<div class="the ${s[0] === 'flip' ? 'flip' : 'up ' + s[0]}">${back}<div class="f front${s[2] ? ' en' : ''}">${PH.esc(s[1])}</div></div>`).join('');
+      return `<div class="art match" aria-hidden="true"><div class="hud"><span class="hchip">${PH.icon('clock', 'sm')}01:12</span><span class="spacer"></span><span class="hchip gold">4 / 6 ${PH.uiFmt('pairs')}</span></div><div class="board">${cards}</div></div>`;
+    }
+    function renderGames() {
+      const g = PH.progress().games; const tr = g.termrush || {}, mt = g.match || {}; const l = PH.langInfo();
+      $('games').innerHTML = `<article class="g-card">${rushArt(l)}
+          <div class="body"><div class="ttl"><b>Term Rush</b><span class="en" lang="en">${PH.uiFmt('g1Sub')}</span></div><p class="desc">${PH.uiFmt('g1Desc')}</p>
+            <div class="tags"><span class="tag">${PH.icon('clock', 'sm')}${PH.uiFmt('g1M1')}</span><span class="tag">${PH.icon('shield', 'sm')}${PH.uiFmt('g1M2')}</span><span class="tag rec">${PH.icon('cup', 'sm')}${tr.best != null ? PH.uiFmt('bestPts', { n: tr.best }) : PH.uiFmt('noBest')}</span></div>
+            <a class="btn" href="game-termrush.html">${PH.icon('play', 'sm')}${PH.uiFmt('play')}</a></div></article>
+        <article class="g-card">${matchArt()}
+          <div class="body"><div class="ttl"><b>${PH.uiFmt('g2Name')}</b><span class="en" lang="en">${PH.uiFmt('g2Sub')}</span></div><p class="desc">${PH.uiFmt('g2Desc')}</p>
+            <div class="tags"><span class="tag">${PH.icon('clock', 'sm')}${PH.uiFmt('g2M1')}</span><span class="tag">${PH.icon('cards2', 'sm')}${PH.uiFmt('g2M2')}</span><span class="tag rec">${PH.icon('cup', 'sm')}${mt.bestTime ? PH.uiFmt('fastest', { t: PH.mmss(mt.bestTime) }) : PH.uiFmt('noBest')}</span></div>
+            <a class="btn" href="game-match.html">${PH.icon('play', 'sm')}${PH.uiFmt('play')}</a></div></article>`;
+      $('arena').innerHTML = `<div class="art vs" aria-hidden="true"><div class="two"><span class="p">${PH.icon('book')}</span><span class="v">vs</span><span class="p">${PH.icon('book')}</span></div><span class="lock">${PH.icon('lock', 'sm')}${PH.uiFmt('g3M2')}</span></div>
+        <div class="body"><div class="ttl"><b>Bilingual Arena</b><span class="en" lang="en">${PH.uiFmt('g3Sub')}</span><span class="tag gold">${PH.uiFmt('dev')}</span></div><p class="desc">${PH.uiFmt('g3Desc')}</p>
+          <div class="tags"><span class="tag">${PH.icon('clock', 'sm')}${PH.uiFmt('g3M1')}</span><span class="tag">${PH.icon('exam', 'sm')}2025</span></div>
+          <span class="soon" aria-disabled="true">${PH.uiFmt('soon')}</span></div>`;
+    }
 
-    function renderRecords() {
+    function renderBottom() {
       const g = PH.progress().games; const tr = g.termrush || {}, mt = g.match || {};
-      document.getElementById('records').innerHTML = `
-        <div class="rec"><span>Term Rush · điểm cao nhất</span><b>${tr.best != null ? tr.best : '—'}</b></div>
-        <div class="rec"><span>Ghép cặp · ít lượt lật nhất</span><b>${mt.bestFlips ? mt.bestFlips : '—'}</b></div>
-        <div class="rec"><span>Ghép cặp · nhanh nhất</span><b>${mt.bestTime ? PH.mmss(mt.bestTime) : '—'}</b></div>
-        <div class="rec"><span>Số ván đã chơi</span><b>${(tr.plays || 0) + (mt.plays || 0)}</b></div>`;
       const today = PH.gamesToday();
-      const tasks = [
-        { t: 'Chơi một ván Term Rush', done: today.some(e => e.game === 'termrush') },
-        { t: 'Ghép xong một bảng 12 thẻ', done: today.some(e => e.game === 'match' && e.won) },
-        { t: 'Chơi một ván ở mức English', done: today.some(e => e.lang === 'en') }
-      ];
-      document.getElementById('tasks').innerHTML = tasks.map(x => `<div class="task ${x.done ? 'done' : ''}"><i>${x.done ? PH.icon('check', 'sm') : ''}</i><span>${x.t}</span></div>`).join('');
-      const streak = PH.streakDays();
-      document.getElementById('streak').textContent = streak ? `Em đã chơi ${streak} ngày liên tiếp. Mỗi ngày chỉ cần khoảng 5 phút.` : 'Chơi một ván hôm nay để bắt đầu chuỗi ngày.';
+      const tasks = [['nv1', today.some(e => e.game === 'termrush')], ['nv2', today.some(e => e.game === 'match' && e.won)], ['nv3', today.some(e => e.lang === 'en')]];
+      const d = tasks.filter(t => t[1]).length;
+      $('nhiemvu').innerHTML = PH.label('target', PH.uiFmt('missions'), '', 'sm') + tasks.map(t => `<div class="task${t[1] ? ' done' : ''}"><i>${t[1] ? PH.icon('check', 'sm') : ''}</i><span>${PH.uiFmt(t[0])}</span></div>`).join('') + `<div class="progress task-bar"><i style="width:${Math.round(d / 3 * 100)}%"></i></div><p class="task-txt">${PH.uiFmt('nvDone', { d })}</p>`;
+      $('huyhieu').innerHTML = PH.label('star', PH.uiFmt('badges'), 'orange', 'sm') + `<div class="hh">` + (PH.CHAPTERS || []).map(c => {
+        const terms = PH.termsForChapter(c.n); const m = terms.filter(t => PH.isMastered(t.id)).length; const open = terms.length && m === terms.length;
+        return `<div class="b acc-${c.n}${open ? '' : ' khoa'}"><span class="medal">${PH.icon(PH.CH_ICON[c.n])}${open ? '' : `<span class="lock">${PH.icon('lock')}</span>`}</span><span style="min-width:0"><span class="nm">${PH.uiFmt('hh' + c.n)}</span><span class="st">${open ? PH.uiFmt('unlocked') : PH.uiFmt('locked', { m, n: terms.length })}</span></span></div>`;
+      }).join('') + `</div><p class="note">${PH.uiFmt('badgeNote')}</p>`;
+      const box = (g, l, v) => `<div class="o"><p class="g">${g}</p><p class="l">${l}</p><p class="v">${v}</p></div>`;
+      $('kiluc').innerHTML = PH.label('cup', PH.uiFmt('records'), '', 'sm') + `<p class="small muted" style="margin:-6px 0 10px">${PH.uiFmt('onDevice')}</p><div class="kl">
+        ${box('Term Rush', PH.uiFmt('kl1'), tr.best != null ? tr.best : '—')}${box(PH.uiFmt('matchShort'), PH.uiFmt('kl2'), mt.bestFlips || '—')}
+        ${box(PH.uiFmt('matchShort'), PH.uiFmt('kl3'), mt.bestTime ? PH.mmss(mt.bestTime) : '—')}${box(PH.uiFmt('both'), PH.uiFmt('kl4'), (tr.plays || 0) + (mt.plays || 0))}</div>
+        <p class="note">${PH.uiFmt('leaderboard')}</p>`;
     }
-
-    function renderAll() { renderScope(); renderLevels(); renderRecords(); const l = PH.langInfo(); document.getElementById('heroLang').textContent = `${l.long} · ×${PH.num(l.mult)}`; }
-    renderAll(); PH.onLang(renderAll);
+    function renderAll() { renderHero(); renderHs(); renderScope(); renderGames(); renderBottom(); }
+    renderAll(); PH.onLang(renderAll); document.addEventListener('ph:progress', renderBottom);
+    PH.applyHash(); window.addEventListener('hashchange', PH.applyHash);
   </script>
 </body>
 </html>

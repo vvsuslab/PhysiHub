@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thí nghiệm ảo · PhysiHub</title>
+  <meta name="description" content="Thí nghiệm ảo Vật lí 12: từ nước đá đến hơi nước — cốc nước, phân tử bên trong và đồ thị nhiệt độ chạy cùng lúc, song ngữ Việt – Anh.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thí nghiệm ảo · Từ nước đá đến hơi nước · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0D47A1">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .head { display: flex; align-items: flex-end; gap: 24px; }
+    .head .txt { flex: 1; min-width: 0; }
+    .crumb { font-size: 12.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 8px; }
+    .crumb a { color: inherit; }
+    .head h1 { font-size: clamp(26px, 3vw, 36px); letter-spacing: -.2px; color: var(--navy); text-transform: uppercase; }
+    .head .ttl { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .head .tag.lab { background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); padding: 6px 12px; font-size: 12px; }
+    .head .en { font-size: 18px; margin-top: 2px; }
+    .head .hd { margin-top: 8px; max-width: 860px; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+    .tn-stage { position: relative; overflow: hidden; border-radius: 24px; padding: 20px; margin-top: 20px; color: var(--ink); background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
+    .tn-stage .grid3 { display: grid; grid-template-columns: 290px 300px minmax(0, 1fr); gap: 18px; }
+    .tn-panel { border-radius: 18px; background: #fff; border: 1.5px solid var(--blue-line); padding: 16px 16px 14px; min-width: 0; }
+    .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 12px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
+    .tn-kinh { position: relative; width: 250px; height: 250px; margin: 4px auto 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1A4A9E 0%, #072460 75%); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--blue-line), 0 10px 24px rgba(13, 71, 161, .2); }
+    /* Không đặt transition cho background/box-shadow: màu đổi liên tục theo nhiệt độ,
+       transition sẽ bị khởi động lại mỗi khung hình và làm phân tử nhấp nháy. */
+    .tn-pt { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; transition: left 1.2s cubic-bezier(.3, .7, .3, 1), top 1.2s cubic-bezier(.3, .7, .3, 1); }
+    @keyframes tn-rung { from { transform: translate(-1.6px, 1px); } to { transform: translate(1.6px, -1.2px); } }
+    @keyframes tn-troi1 { 0% { transform: translate(0, 0); } 33% { transform: translate(7px, -5px); } 66% { transform: translate(-6px, 4px); } 100% { transform: translate(3px, 3px); } }
+    @keyframes tn-troi2 { 0% { transform: translate(0, 0); } 33% { transform: translate(-7px, -3px); } 66% { transform: translate(5px, 6px); } 100% { transform: translate(-3px, 2px); } }
+    @keyframes tn-troi3 { 0% { transform: translate(0, 0); } 50% { transform: translate(4px, -7px); } 100% { transform: translate(-6px, 3px); } }
+    @keyframes tn-bay1 { 0% { transform: translate(0, 0); } 25% { transform: translate(30px, -20px); } 50% { transform: translate(-8px, -34px); } 75% { transform: translate(-30px, 10px); } 100% { transform: translate(6px, 18px); } }
+    @keyframes tn-bay2 { 0% { transform: translate(0, 0); } 25% { transform: translate(-26px, 22px); } 50% { transform: translate(18px, 30px); } 75% { transform: translate(28px, -16px); } 100% { transform: translate(-10px, -24px); } }
+    @keyframes tn-bay3 { 0% { transform: translate(0, 0); } 30% { transform: translate(20px, 26px); } 60% { transform: translate(-30px, 6px); } 100% { transform: translate(12px, -30px); } }
+    @keyframes tn-lua { 0%, 100% { transform: scaleY(1) scaleX(1); } 50% { transform: scaleY(1.14) scaleX(.94); } }
+    .tn-lua { transform-box: fill-box; transform-origin: 50% 100%; animation: tn-lua .45s ease-in-out infinite; }
+    @keyframes tn-len { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .95; } 100% { transform: translateY(var(--len, -70px)); opacity: 0; } }
+    .tn-bot { animation: tn-len 1.3s linear infinite; }
+    @keyframes tn-khoi { 0% { transform: translateY(10px) scaleX(.9); opacity: 0; } 30% { opacity: .85; } 100% { transform: translateY(-46px) scaleX(1.25); opacity: 0; } }
+    .tn-khoi { transform-box: fill-box; transform-origin: 50% 100%; animation: tn-khoi 2.6s ease-out infinite; }
+    @keyframes tn-nhip { 0% { r: 8; opacity: .8; } 100% { r: 24; opacity: 0; } }
+    .tn-nhip { animation: tn-nhip 1.4s ease-out infinite; }
+    .pha { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr) minmax(0, .95fr) minmax(0, .85fr) minmax(0, .85fr); gap: 5px; margin-top: 16px; }
+    .tn-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; white-space: nowrap; min-height: 42px; padding: 4px 2px; border-radius: 12px; font-size: 11px; font-weight: 700; background: var(--blue-soft); color: var(--ink-2); transition: all .35s ease; }
+    .tn-chip.on { color: var(--ink); }
+    .tn-chip .en { font-size: 10.5px; opacity: .85; color: inherit; font-weight: 500; }
+    .legend { margin-top: 14px; font-size: 11.5px; line-height: 1.4; color: var(--ink-3); }
+    .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--ink-3); margin-top: 6px; }
+    .legend .bar i { flex: 1; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #6EA8FF, #5CD6FF, #2EE6B5, #F4D03F, #FFB547, #FF6B5A); }
+    .readout { display: flex; gap: 12px; margin-top: 8px; }
+    /* Ô nhiệt độ giữ bề rộng cố định và dùng chữ số đều nhau, nếu không cả hàng sẽ
+       co giãn mỗi lần con số đổi (−20,0 → 0,0) và trông như bị giật. */
+    .readout .o { flex: none; padding: 10px 14px; border-radius: 14px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); white-space: nowrap; }
+    .readout .o:first-child { min-width: 142px; }
+    .readout .o.grow { flex: 1; min-width: 0; white-space: normal; }
+    .readout .l { font-size: 11.5px; font-weight: 600; color: var(--ink-3); }
+    .readout .t { margin-top: 2px; font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+    /* chừa sẵn chỗ cho "−20,0" để chữ °C không nhích qua lại khi số đổi */
+    .readout .t #tHien { display: inline-block; min-width: 5ch; text-align: right; }
+    .readout .t small { font-size: 16px; color: var(--ink-3); }
+    .readout .s { margin-top: 4px; font-size: 16px; font-weight: 700; line-height: 1.35; min-height: 44px; }
+    svg.dc, svg.dt { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+    .controls { margin-top: 18px; padding: 18px 24px; display: flex; align-items: center; gap: 22px; border-radius: 22px; flex-wrap: wrap; }
+    /* min-width: giữ bề rộng khi chữ đổi "Đun" ↔ "Tạm dừng", nếu không cả hàng nút sẽ nhích */
+    .tn-nut { white-space: nowrap; min-height: 52px; min-width: 176px; justify-content: center; display: inline-flex; align-items: center; gap: 10px; padding: 0 26px; border-radius: 999px; font-size: 16px; font-weight: 800; background: var(--grad-cta); color: var(--ink); box-shadow: 0 6px 0 #C25400, 0 14px 28px rgba(245, 124, 0, .32); transition: transform .15s ease, box-shadow .15s ease; }
+    .tn-nut:active { transform: translateY(4px); box-shadow: 0 2px 0 #C25400, 0 8px 18px rgba(245, 124, 0, .28); }
+    .tn-nut .ic { width: 26px; height: 26px; border-radius: 50%; background: rgba(15, 37, 72, .12); display: grid; place-items: center; }
+    .controls .tua { flex: 1; min-width: 200px; }
+    .controls .tua label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+    .controls .toc { display: flex; align-items: center; gap: 6px; }
+    .controls .toc .lb { font-size: 13px; font-weight: 600; color: var(--ink-3); margin-right: 4px; }
+    .tn-toc { white-space: nowrap; min-height: 38px; min-width: 48px; border-radius: 19px; font-size: 13.5px; font-weight: 700; background: #fff; color: var(--ink-2); border: 1.5px solid var(--blue-line); transition: all .2s ease; }
+    .tn-toc.on { background: var(--navy-2); color: #fff; border-color: var(--navy-2); }
+    input[type="range"].tn-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #6EA8FF 0%, #5CD6FF 14%, #2EE6B5 40%, #FFB547 70%, #FF7A59 100%); outline: none; }
+    input[type="range"].tn-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); box-shadow: 0 2px 8px rgba(0, 0, 0, .3); cursor: grab; }
+    input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 4px solid var(--navy); cursor: grab; }
+    input[type="range"].tn-range:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    .below { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+    .below .panel.has-label { margin-top: 26px; }
+    .thay { padding: 36px 24px 20px; }
+    .thay p { font-size: 14.5px; line-height: 1.65; margin-bottom: 6px; }
+    .thay p.en { font-size: 14px; margin-bottom: 8px; }
+    .thay .hoi { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--c1-ink); }
+    .tn-tn { padding: 34px 20px 18px; }
+    .day .lb { margin-bottom: 10px; font-size: 12px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; color: var(--gold); }
+    .tn-tn .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tn-tn .tag { background: var(--blue-soft); border: 1px solid var(--blue-line); color: var(--ink); font-size: 12.5px; padding: 6px 11px; }
+    .tn-tn .term-chip { cursor: pointer; } .tn-tn .term-chip:hover { border-color: var(--sky); }
+    .tn-tn .tag .en { font-size: 12.5px; }
+    .day { margin-top: 14px; padding: 14px 18px; border-radius: 18px; background: var(--orange-soft); border: 1.5px dashed var(--orange-line); }
+    .day .lb { margin-bottom: 4px; }
+    .day p { font-size: 12.5px; line-height: 1.55; color: var(--ink-2); }
+    @media (max-width: 1080px) { .tn-stage .grid3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .tn-stage .grid3 > :last-child { grid-column: 1 / -1; } }
+    @media (max-width: 900px) { .below { grid-template-columns: 1fr; } .head { flex-direction: column; align-items: flex-start; gap: 10px; } }
+    @media (max-width: 720px) { .tn-stage { padding: 12px; border-radius: 20px; } .tn-stage .grid3 { grid-template-columns: 1fr; } .controls { padding: 14px 16px; gap: 12px; } .tn-nut { flex: 1; justify-content: center; min-width: 0; } .readout { flex-wrap: wrap; } .readout .t { font-size: 24px; }
+      /* Thẻ dài (nowrap trong site.css) đẩy rộng cả cột và làm trang tràn ngang */
+      .tn-tn .tag, .head .tag.lab { white-space: normal; text-align: left; }
+      .below > div, .below .panel { min-width: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .tn-pt, .tn-lua, .tn-bot, .tn-khoi, .tn-nhip { animation: none !important; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <div class="head">
+        <div class="txt"><p class="crumb" id="crumb"></p><div class="ttl"><h1 id="h1"></h1><span class="tag lab" id="labTag"></span></div><p class="en" lang="en" id="h1en"></p><p class="hd" id="hd"></p></div>
+        <a href="bai.html?n=1" id="veBai" style="flex:none;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600"></a>
+      </div>
+
+      <section class="tn-stage" aria-label="">
+        <div class="grid3">
+          <div class="tn-panel"><p class="tn-h" id="lbDungCu"></p><div id="dungCu"></div></div>
+          <div class="tn-panel"><p class="tn-h" id="lbPhanTu"></p>
+            <div class="tn-kinh" id="kinh"><svg width="250" height="250" viewBox="0 0 250 250" aria-hidden="true" style="position:absolute;left:0;top:0"><path id="luoi" d="" stroke="#9FD8FF" stroke-width="2" stroke-opacity=".35" fill="none" style="transition:stroke-opacity .8s ease"/></svg></div>
+            <div class="pha" id="pha"></div>
+            <div class="legend"><span id="lbMau"></span><div class="bar"><span id="cham"></span><i></i><span id="nhanh"></span></div></div></div>
+          <div class="tn-panel"><p class="tn-h" id="lbDoThi"></p><div id="doThi"></div>
+            <div class="readout"><div class="o"><p class="l" id="lbNhietDo"></p><p class="t"><span id="tHien">—</span> <small>°C</small></p></div><div class="o grow"><p class="l" id="lbTrangThai"></p><p class="s" id="moTaPha"></p></div></div></div>
+        </div>
+      </section>
+
+      <div class="card controls">
+        <button type="button" class="tn-nut" id="btnDun"><span class="ic" id="icDun"></span><span id="nhanDun"></span></button>
+        <button type="button" class="btn outline" id="btnLai"></button>
+        <div class="tua"><label for="tua" id="lbKeo"></label><input id="tua" class="tn-range" type="range" min="0" max="100" step="0.5" value="0"></div>
+        <div class="toc" role="group" aria-labelledby="lbToc"><span class="lb" id="lbToc"></span><button type="button" class="tn-toc on" data-toc="1" aria-pressed="true">×1</button><button type="button" class="tn-toc" data-toc="2" aria-pressed="false">×2</button><button type="button" class="tn-toc" data-toc="4" aria-pressed="false">×4</button></div>
+      </div>
+
+      <div class="below">
+        <div class="panel has-label thay" id="thay"></div>
+        <div><div class="panel white has-label tn-tn" id="tnTn"></div><div class="day" id="day"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    Object.assign(PH.UI, {
+      h1: ['Từ nước đá đến hơi nước', 'From ice to steam'],
+      labTag: ['Thí nghiệm ảo · không tính điểm, không đếm giờ', 'Virtual lab · no score, no timer'],
+      hd: ['Bấm Đun để cấp nhiệt cho 0,5 kg nước đá ở −20 °C. Quan sát ba chỗ cùng lúc: cốc nước, các phân tử bên trong và đồ thị nhiệt độ.', 'Press Heat to warm 0.5 kg of ice that starts at −20 °C. Watch three things at once: the beaker, the molecules inside and the temperature graph.'],
+      lbDungCu: ['Dụng cụ', 'Apparatus'], lbPhanTu: ['Nhìn vào bên trong', 'Inside the water'], lbDoThi: ['Đồ thị nhiệt độ theo thời gian đun', 'Temperature against heating time'],
+      lbThoiGian: ['thời gian đun', 'heating time'], lbNC: ['Nóng chảy · 0 °C', 'Melting · 0 °C'], lbSoi: ['Sôi · 100 °C', 'Boiling · 100 °C'],
+      lbMau: ['Màu phân tử cho biết tốc độ chuyển động trung bình', 'Colour shows the average speed of the molecules'], cham: ['chậm', 'slow'], nhanh: ['nhanh', 'fast'],
+      lbNhietDo: ['Nhiệt độ', 'Temperature'], lbTrangThai: ['Đang diễn ra', 'What is happening'], lbKeo: ['Kéo để tua lại hoặc tua nhanh', 'Drag to rewind or skip ahead'],
+      lamLai: ['Làm lại', 'Reset'], lbToc: ['Tốc độ', 'Speed'], dun: ['Đun', 'Heat'], dunLai: ['Đun lại', 'Heat again'], tamDung: ['Tạm dừng', 'Pause'],
+      lbThay: ['Em thấy gì?', 'What do you notice?'],
+      thay1: ['Trong lúc nước đá tan (0 °C) và lúc nước sôi (100 °C), nhiệt độ đứng yên dù vẫn đang đun.', 'While the ice is melting (0 °C) and while the water is boiling (100 °C), the temperature stays the same even though heating continues.'],
+      thay2: ['Màu các phân tử cũng không đổi trong hai đoạn đó: nhiệt lượng nhận được dùng để phá vỡ liên kết giữa các phân tử, làm chất chuyển thể, chứ không làm chúng chuyển động nhanh hơn.', 'The colour of the molecules does not change in those two stretches either: the energy supplied breaks the bonds between molecules and changes the state, instead of making them move faster.'],
+      hoi: ['Thử nghĩ: vì sao đoạn sôi dài hơn hẳn đoạn nóng chảy?', 'Think about it: why is the boiling stretch so much longer than the melting one?'],
+      lbTnTn: ['Thuật ngữ trong thí nghiệm', 'Terms in this lab'], lbDayLaGi: ['Đây là gì', 'What this is'],
+      dayLaGi: ['Mô phỏng theo mô hình đơn giản; đồ thị vẽ dạng định tính, không đúng tỉ lệ thời gian. Thực tế với cùng công suất đun, làm hoá hơi hết một lượng nước mất thời gian gấp khoảng 7 lần làm tan hết cùng lượng nước đá (nhiệt hoá hơi riêng của nước ≈ 2,26·10⁶ J/kg, nhiệt nóng chảy riêng của nước đá ≈ 3,34·10⁵ J/kg).', 'A simplified model; the graph is qualitative and not to scale in time. In reality, with the same heating power, boiling away a mass of water takes about 7 times as long as melting the same mass of ice (specific latent heat of vaporisation of water ≈ 2.26 × 10⁶ J/kg; specific latent heat of fusion of ice ≈ 3.34 × 10⁵ J/kg).'],
+      veBai: ['Về Bài 1', 'Back to Lesson 1'], stageLbl: ['Mô phỏng: cốc nước, phân tử và đồ thị', 'Simulation: beaker, molecules and graph'],
+      pha0: ['Rắn', 'Solid'], pha1: ['Nóng chảy', 'Melting'], pha2: ['Lỏng', 'Liquid'], pha3: ['Sôi', 'Boiling'], pha4: ['Khí', 'Gas'],
+      mo0: ['Thể rắn · nước đá đang nóng lên', 'Solid · the ice is warming up'], mo1: ['Đang nóng chảy · đã tan {p} %', 'Melting · {p} % melted'],
+      mo2: ['Thể lỏng · nước đang nóng lên', 'Liquid · the water is warming up'], mo3: ['Đang sôi · đã hoá hơi {p} %', 'Boiling · {p} % turned to steam'],
+      mo4: ['Đã hoá hơi hết · hơi nước bay ra khỏi cốc', 'All boiled away · the steam has left the beaker']
+    });
+    PH.mount({ active: 'lab', title: { vi: 'Thí nghiệm ảo · Từ nước đá đến hơi nước', en: 'Virtual lab · From ice to steam' } });
+    const $ = id => document.getElementById(id);
+    const en = () => PH.lang() === 'en';
+    const PT = [{"r":[50,80],"l":[41.7,123.3],"k":[207.2,112.7],"o":22},{"r":[80,80],"l":[76.7,119.1],"k":[86.9,173.2],"o":8},{"r":[110,80],"l":[103.1,121.0],"k":[94.2,47.1],"o":4},{"r":[140,80],"l":[138.7,124.5],"k":[162.3,157.4],"o":10},{"r":[170,80],"l":[175.9,122.8],"k":[151.6,58.0],"o":0},{"r":[200,80],"l":[207.6,123.3],"k":[58.5,156.2],"o":11},{"r":[50,110],"l":[50.5,148.5],"k":[136.6,190.7],"o":17},{"r":[80,110],"l":[83.6,152.2],"k":[26.2,139.8],"o":20},{"r":[110,110],"l":[115.6,151.6],"k":[173.6,210.2],"o":12},{"r":[140,110],"l":[148.7,150.5],"k":[124.1,27.6],"o":1},{"r":[170,110],"l":[184.4,148.2],"k":[177.8,127.2],"o":15},{"r":[200,110],"l":[222.4,145.1],"k":[125.5,134.5],"o":7},{"r":[50,140],"l":[40.1,177.8],"k":[202.7,145.0],"o":3},{"r":[80,140],"l":[75.1,172.7],"k":[85.2,206.3],"o":2},{"r":[110,140],"l":[112.9,179.6],"k":[117.1,223.9],"o":16},{"r":[140,140],"l":[137.1,175.4],"k":[157.3,99.7],"o":18},{"r":[170,140],"l":[170.4,174.5],"k":[111.7,79.7],"o":9},{"r":[200,140],"l":[208.2,173.3],"k":[50.0,95.4],"o":14},{"r":[50,170],"l":[57.0,198.3],"k":[212.6,76.8],"o":21},{"r":[80,170],"l":[83.7,205.5],"k":[84.5,140.0],"o":13},{"r":[110,170],"l":[119.0,202.4],"k":[181.9,51.4],"o":23},{"r":[140,170],"l":[154.0,202.8],"k":[51.9,186.2],"o":19},{"r":[170,170],"l":[184.8,199.2],"k":[192.6,175.6],"o":6},{"r":[200,170],"l":[201.2,189.7],"k":[50.2,58.3],"o":5}];
+    const LUOI = "M50 80 L80 80 M50 80 L50 110 M80 80 L110 80 M80 80 L80 110 M110 80 L140 80 M110 80 L110 110 M140 80 L170 80 M140 80 L140 110 M170 80 L200 80 M170 80 L170 110 M200 80 L200 110 M50 110 L80 110 M50 110 L50 140 M80 110 L110 110 M80 110 L80 140 M110 110 L140 110 M110 110 L110 140 M140 110 L170 110 M140 110 L140 140 M170 110 L200 110 M170 110 L170 140 M200 110 L200 140 M50 140 L80 140 M50 140 L50 170 M80 140 L110 140 M80 140 L80 170 M110 140 L140 140 M110 140 L110 170 M140 140 L170 140 M140 140 L140 170 M170 140 L200 140 M170 140 L170 170 M200 140 L200 170 M50 170 L80 170 M80 170 L110 170 M110 170 L140 170 M140 170 L170 170 M170 170 L200 170";
+    const PHA_MAU = ['#6EA8FF', '#5CD6FF', '#2EE6B5', '#FFB547', '#FF7A59'];
+    const PHA_CHU = ['#1565C0', '#0B6F94', '#0F7A5F', '#B54D00', '#C62828'];   // cùng pha, đủ tương phản trên nền trắng
+    const MOC = [[0, -20], [6, 0], [22, 0], [42, 100], [100, 100]];
+    const gx = q => 70 + q * 4.3, gy = t => 300 - (t + 20) * (270 / 130);
+    const DA = [[88, 284, -6], [126, 287, 4], [164, 283, -3], [104, 250, 8], [144, 249, -5], [182, 254, 6], [124, 216, -2]];
+    const BOT_X = [98, 116, 134, 152, 170, 188, 108, 160];
+    const KHOI = ['M112 142 C 102 124, 122 112, 112 94 C 104 80, 118 70, 114 58', 'M140 140 C 150 122, 130 110, 142 92 C 150 78, 136 68, 144 54', 'M168 142 C 158 126, 176 114, 166 96 C 160 84, 172 74, 168 62', 'M126 146 C 134 130, 118 118, 128 102'];
+    const TN_IDS = ['change-of-state', 'melting-point', 'boiling-point', 'vaporization', 'specific-latent-heat-of-fusion', 'specific-latent-heat-of-vaporization', 'molecule', 'temperature'];
+    const TN_STATIC = [['thể rắn', 'solid'], ['thể lỏng', 'liquid'], ['thể khí', 'gas'], ['sự nóng chảy', 'melting'], ['sự sôi', 'boiling']];
+    let p = Math.min(100, Math.max(0, +(PH.qs('p') || 0))), chay = false, toc = 1, timer = null, moc = 0;
+
+    /* ---------- dựng SVG một lần ---------- */
+    function buildApparatus() {
+      const da = DA.map((d, i) => `<g id="da${i}" style="transition:opacity .6s ease"><rect x="${d[0]}" y="${d[1]}" width="34" height="32" rx="7" transform="rotate(${d[2]} ${d[0] + 17} ${d[1] + 16})" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity=".8" stroke-width="1.5"/><path d="M${d[0] + 7} ${d[1] + 8} h12" stroke="#FFFFFF" stroke-opacity=".85" stroke-width="3" stroke-linecap="round" transform="rotate(${d[2]} ${d[0] + 17} ${d[1] + 16})"/></g>`).join('');
+      const bot = BOT_X.map((x, i) => `<circle class="tn-bot" cx="${x}" cy="318" r="${3 + (i % 3)}" fill="#FFFFFF" fill-opacity=".75" style="animation-delay:-${(i * .17).toFixed(2)}s"/>`).join('');
+      const khoi = KHOI.map((d, i) => `<path class="tn-khoi" d="${d}" stroke="#B8CCE4" stroke-width="${7 - i}" stroke-linecap="round" fill="none" style="animation-delay:-${(i * .65).toFixed(2)}s"/>`).join('');
+      const t = v => (300 - v * 230 / 140).toFixed(1);
+      $('dungCu').innerHTML = `<svg class="dc" width="256" height="392" viewBox="16 0 268 410" aria-hidden="true"><defs>
+          <linearGradient id="tnNuoc" x1="0" y1="0" x2="0" y2="1"><stop id="nuocTren" offset="0" stop-color="#8FE0F7"/><stop offset="1" stop-color="#1B6FB8"/></linearGradient>
+          <linearGradient id="tnDa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2FBFF"/><stop offset=".5" stop-color="#BFE6FF"/><stop offset="1" stop-color="#86C8F2"/></linearGradient>
+          <linearGradient id="tnLua" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FFE08A"/><stop offset=".5" stop-color="#FF9A3D"/><stop offset="1" stop-color="#FF5A3D" stop-opacity=".2"/></linearGradient>
+          <radialGradient id="tnSang" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFB547" stop-opacity=".55"/><stop offset="1" stop-color="#FFB547" stop-opacity="0"/></radialGradient></defs>
+        <g id="hoi" opacity="0" style="transition:opacity .8s ease">${khoi}</g>
+        <path d="M84 334 L62 404 M216 334 L238 404" stroke="#7D8AA6" stroke-width="5" stroke-linecap="round"/>
+        <ellipse id="sang" cx="150" cy="352" rx="70" ry="26" fill="url(#tnSang)" opacity=".15"/>
+        <g id="lua" opacity=".15" style="transition:opacity .4s ease"><path class="tn-lua" d="M150 300 C 128 322, 128 344, 150 358 C 172 344, 172 322, 150 300 Z" fill="url(#tnLua)"/><path class="tn-lua" d="M150 322 C 140 334, 141 348, 150 356 C 159 348, 160 334, 150 322 Z" fill="#7FB8FF" style="animation-delay:-.2s"/></g>
+        <rect x="132" y="358" width="36" height="46" rx="6" fill="#56627A"/><rect x="124" y="398" width="52" height="8" rx="4" fill="#44506A"/><rect x="60" y="328" width="180" height="8" rx="4" fill="#8B97B1"/>
+        <path d="M78 146 V308 Q78 326 96 326 H204 Q222 326 222 308 V146" fill="#CFE6FF" fill-opacity=".25" stroke="#6F8DB3" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M72 146 H84 M216 146 H228" stroke="#6F8DB3" stroke-width="3" stroke-linecap="round"/>
+        <rect id="nuoc" x="81" y="323" width="138" height="0" rx="4" fill="url(#tnNuoc)" fill-opacity=".9" style="transition:y .6s ease,height .6s ease"/>
+        ${da}<g id="bot" opacity="0">${bot}</g>
+        <path d="M88 160 V300" stroke="#FFFFFF" stroke-opacity=".6" stroke-width="5" stroke-linecap="round"/>
+        <rect x="196" y="40" width="14" height="266" rx="7" fill="#FFFFFF" stroke="#8FA3BF" stroke-width="1.5"/>
+        <rect id="cot" x="200" y="300" width="6" height="6" rx="3" fill="#FF5A4E" style="transition:y .3s linear,height .3s linear"/>
+        <circle cx="203" cy="308" r="10" fill="#FF5A4E" stroke="#FFD1CC" stroke-width="1.5"/>
+        <path d="M210 ${t(20)} h8 M210 ${t(70)} h8 M210 ${t(120)} h8" stroke="#8FA3BF" stroke-width="2"/>
+        <text x="222" y="${(+t(20) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">0</text><text x="222" y="${(+t(70) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">50</text><text x="222" y="${(+t(120) + 4).toFixed(1)}" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#4F5F77">100</text>
+        <circle cx="128" cy="276" r="20" fill="none" stroke="#F57C00" stroke-width="2.5" stroke-dasharray="5 4"/><path d="M148 276 H280" stroke="#F57C00" stroke-width="2" stroke-dasharray="5 5" stroke-opacity=".8"/></svg>`;
+    }
+    function buildGraph() {
+      const vach = [-20, 0, 50, 100].map(t => `<line x1="70" y1="${gy(t).toFixed(1)}" x2="500" y2="${gy(t).toFixed(1)}" stroke="#0F2548" stroke-opacity="${t === 0 || t === 100 ? .22 : .08}" ${t === 0 || t === 100 ? 'stroke-dasharray="4 5"' : ''}/><text x="60" y="${(gy(t) + 4).toFixed(1)}" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="12" fill="#4F5F77">${t < 0 ? '−' + (-t) : t}</text>`).join('');
+      const du = 'M' + MOC.map(m => `${gx(m[0]).toFixed(1)} ${gy(m[1]).toFixed(1)}`).join(' L');
+      $('doThi').innerHTML = `<svg class="dt" width="492" height="331" viewBox="0 0 520 350" aria-hidden="true"><defs>
+          <linearGradient id="tnNhiet" gradientUnits="userSpaceOnUse" x1="0" y1="${gy(-20).toFixed(1)}" x2="0" y2="${gy(110).toFixed(1)}"><stop offset="0" stop-color="#1E88E5"/><stop offset=".154" stop-color="#00A5C8"/><stop offset=".462" stop-color="#17A589"/><stop offset=".769" stop-color="#F2A600"/><stop offset=".923" stop-color="#FB8C00"/><stop offset="1" stop-color="#F4511E"/></linearGradient>
+          <filter id="tnGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+        <rect x="${gx(6).toFixed(1)}" y="30" width="${(gx(22) - gx(6)).toFixed(1)}" height="270" rx="8" fill="#5CD6FF" fill-opacity=".09"/><rect x="${gx(42).toFixed(1)}" y="30" width="${(gx(100) - gx(42)).toFixed(1)}" height="270" rx="8" fill="#FFB547" fill-opacity=".09"/>
+        ${vach}
+        <text id="lbNC" x="${((gx(6) + gx(22)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" font-weight="700" fill="#0B7FA6"></text>
+        <text id="lbSoi" x="${((gx(42) + gx(100)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" font-weight="700" fill="#B54D00"></text>
+        <line x1="70" y1="30" x2="70" y2="304" stroke="#4F5F77" stroke-width="2"/><line x1="66" y1="300" x2="506" y2="300" stroke="#4F5F77" stroke-width="2"/><path d="M500 294 L510 300 L500 306" stroke="#4F5F77" stroke-width="2" fill="none"/>
+        <text x="4" y="16" font-family="Lora, Georgia, serif" font-style="italic" font-size="15" fill="#0F2548">t (°C)</text>
+        <text id="lbThoiGian" x="506" y="328" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77"></text>
+        <path d="${du}" stroke="#0F2548" stroke-opacity=".18" stroke-width="3" fill="none" stroke-dasharray="2 6" stroke-linecap="round"/>
+        <path id="duong" d="" stroke="url(#tnNhiet)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#tnGlow)"/>
+        <line id="ngang" x1="70" y1="300" x2="70" y2="300" stroke="#0F2548" stroke-opacity=".3" stroke-dasharray="3 4"/>
+        <circle id="nhip" class="tn-nhip" cx="70" cy="300" r="8" fill="none" stroke="#6EA8FF" stroke-width="3"/><circle id="diem" cx="70" cy="300" r="8" fill="#6EA8FF" stroke="#FFFFFF" stroke-width="3"/></svg>`;
+    }
+    function buildMolecules() {
+      $('luoi').setAttribute('d', LUOI);
+      $('kinh').insertAdjacentHTML('beforeend', PT.map((q, i) => `<span class="tn-pt" id="pt${i}"></span>`).join(''));
+    }
+
+    /* ---------- tính toán và cập nhật ---------- */
+    const nhietDo = q => { for (let i = 1; i < MOC.length; i++) if (q <= MOC[i][0]) { const a = MOC[i - 1], b = MOC[i]; return a[1] + (b[1] - a[1]) * (q - a[0]) / (b[0] - a[0]); } return 100; };
+    const STOP = [[-20, [110, 168, 255]], [0, [92, 214, 255]], [40, [46, 230, 181]], [80, [244, 208, 63]], [100, [255, 181, 71]], [120, [255, 107, 90]]];
+    const mau = t => { for (let i = 1; i < STOP.length; i++) if (t <= STOP[i][0]) { const a = STOP[i - 1], b = STOP[i], k = (t - a[0]) / (b[0] - a[0]); return [0, 1, 2].map(j => Math.round(a[1][j] + (b[1][j] - a[1][j]) * k)); } return STOP[STOP.length - 1][1]; };
+    let lastPha = -1, lastLang = null, lastKey = '', lastHex = '', lastCao = -1, lastIcon = '';
+    // Chỉ chạm vào DOM khi giá trị thật sự đổi. Nếu ghi đè mỗi khung hình, trình duyệt
+    // phải dựng lại phần tử liên tục -> nút và số liệu bị nháy/giật.
+    const setTxt = (el, v) => { if (el.__v !== v) { el.__v = v; el.textContent = v; } };
+    const setAttr = (el, k, v) => { const s = String(v); if (el.getAttribute(k) !== s) el.setAttribute(k, s); };
+    function update() {
+      const T = nhietDo(p);
+      const f = p < 6 ? 0 : (p < 22 ? (p - 6) / 16 : 1), g = p < 42 ? 0 : (p < 100 ? (p - 42) / 58 : 1);
+      const pha = p < 6 ? 0 : (p < 22 ? 1 : (p < 42 ? 2 : (p < 100 ? 3 : 4)));
+      // làm tròn màu để không phải ghi lại 24 phân tử ở mỗi khung hình
+      const c = mau(T).map(v => Math.round(v / 4) * 4);
+      const hex = `rgb(${c.join(',')})`, dam = `rgb(${c.map(x => Math.round(x * .72)).join(',')})`, toi = `rgb(${c.map(x => Math.round(x * .45 + 11 * .55)).join(',')})`, nhanhK = (T + 20) / 140;
+      const nTan = Math.round(f * PT.length), nHoi = Math.round(g * PT.length);
+      const key = `${pha}|${nTan}|${nHoi}`, doiCho = key !== lastKey, doiMau = hex !== lastHex;
+      if (doiCho || doiMau) {
+        PT.forEach((q, i) => {
+          const the = pha === 0 ? 'r' : pha === 1 ? (q.o < nTan ? 'l' : 'r') : pha === 2 ? 'l' : pha === 3 ? (q.o < nHoi ? 'k' : 'l') : 'k';
+          const el = $('pt' + i);
+          if (doiCho) { const xy = q[the]; el.style.left = xy[0] + 'px'; el.style.top = xy[1] + 'px'; }
+          if (doiMau) { el.style.background = `radial-gradient(circle at 35% 30%, #FFFFFF 0%, ${hex} 42%, ${toi} 100%)`; el.style.boxShadow = `0 0 12px ${hex}`; }
+          let ten, dur, ease = 'ease-in-out';
+          if (the === 'r') { ten = 'tn-rung'; dur = (.26 - .1 * nhanhK).toFixed(2); } else if (the === 'l') { ten = 'tn-troi' + (i % 3 + 1); dur = (2.2 - .9 * nhanhK).toFixed(1); } else { ten = 'tn-bay' + (i % 3 + 1); dur = (1.5 - .6 * nhanhK).toFixed(1); ease = 'linear'; }
+          const anim = `${ten} ${dur}s ${ease} -${(i * .17).toFixed(2)}s infinite alternate`;
+          if (el.dataset.anim !== anim) { el.style.animation = anim; el.dataset.anim = anim; }
+        });
+        lastKey = key; lastHex = hex;
+      }
+      // đồ thị
+      let d = `M${gx(0).toFixed(1)} ${gy(-20).toFixed(1)}`;
+      for (let i = 1; i < MOC.length; i++) { if (p >= MOC[i][0]) d += ` L${gx(MOC[i][0]).toFixed(1)} ${gy(MOC[i][1]).toFixed(1)}`; else { d += ` L${gx(p).toFixed(1)} ${gy(T).toFixed(1)}`; break; } }
+      setAttr($('duong'), 'd', d);
+      const cx = gx(p).toFixed(1), cy = gy(T).toFixed(1);
+      ['nhip', 'diem'].forEach(id => { const e = $(id); setAttr(e, 'cx', cx); setAttr(e, 'cy', cy); setAttr(e, id === 'nhip' ? 'stroke' : 'fill', dam); });
+      const ng = $('ngang'); setAttr(ng, 'x2', cx); setAttr(ng, 'y1', cy); setAttr(ng, 'y2', cy);
+      // cốc nước
+      const mucNuoc = pha === 0 ? 0 : pha === 1 ? f : pha === 2 ? 1 : pha === 3 ? 1 - g : 0; const cao = Math.round(mucNuoc * 100);
+      const nuoc = $('nuoc'); setAttr(nuoc, 'y', 323 - cao); setAttr(nuoc, 'height', cao);
+      setAttr($('nuocTren'), 'stop-color', pha >= 2 ? (T > 60 ? '#5FB4E8' : '#6FD3F0') : '#8FE0F7');
+      const soDa = pha === 0 ? 7 : pha === 1 ? Math.ceil(7 * (1 - f)) : 0;
+      for (let k = 0; k < 7; k++) setAttr($('da' + k), 'opacity', k < soDa ? 1 : 0);
+      setAttr($('bot'), 'opacity', pha === 3 ? 1 : (pha === 2 && p > 36 ? .45 : 0));
+      if (cao !== lastCao) { lastCao = cao; $('bot').querySelectorAll('.tn-bot').forEach(b => b.style.setProperty('--len', '-' + Math.max(12, cao - 8) + 'px')); }
+      setAttr($('hoi'), 'opacity', pha === 3 ? (.45 + .55 * g).toFixed(2) : pha === 4 ? 1 : (pha === 2 && p > 34 ? .25 : 0));
+      const lua = p >= 100 ? 0 : ((chay || p > 0) ? 1 : .15); setAttr($('lua'), 'opacity', lua); setAttr($('sang'), 'opacity', lua);
+      const cot = $('cot'); setAttr(cot, 'height', ((T + 20) / 140 * 230 + 6).toFixed(1)); setAttr(cot, 'y', (300 - (T + 20) / 140 * 230).toFixed(1));
+      setAttr($('luoi'), 'stroke-opacity', pha === 0 ? .35 : pha === 1 ? (.35 * (1 - f)).toFixed(2) : 0);
+      // số liệu, trạng thái
+      setTxt($('tHien'), (Math.round(T * 10) / 10).toFixed(1).replace('.', en() ? '.' : ',').replace('-', '−'));
+      const phan = Math.round((pha === 1 ? f : g) * 100);
+      setTxt($('moTaPha'), PH.ui('mo' + pha, { p: phan }));
+      if (pha !== lastPha || lastLang !== PH.lang()) {
+        lastPha = pha; lastLang = PH.lang();
+        $('moTaPha').style.color = PHA_CHU[pha];
+        $('pha').innerHTML = [0, 1, 2, 3, 4].map(i => `<span class="tn-chip${i === pha ? ' on' : ''}" style="${i === pha ? `background:${PHA_MAU[i]};box-shadow:0 0 18px ${PHA_MAU[i]}` : ''}">${PH.uiFmt('pha' + i)}${PH.lang() === 'bi' ? `<span class="en" lang="en">${PH.esc(PH.UI['pha' + i][1])}</span>` : ''}</span>`).join('');
+      }
+      setTxt($('nhanDun'), chay ? PH.ui('tamDung') : (p >= 100 ? PH.ui('dunLai') : PH.ui('dun')));
+      const ico = chay ? 'dung' : 'chay';
+      if (ico !== lastIcon) {
+        lastIcon = ico;
+        $('icDun').innerHTML = chay ? '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0F2548" stroke-width="3" stroke-linecap="round"><path d="M8 5v14M16 5v14"/></svg>' : '<svg viewBox="0 0 24 24" width="15" height="15" fill="#0F2548" stroke="#0F2548" stroke-width="2" stroke-linejoin="round"><path d="M7 5v14l11-7z"/></svg>';
+      }
+      // không ghi đè thanh kéo khi học sinh đang cầm nó
+      const tua = $('tua');
+      if (document.activeElement !== tua && +tua.value !== p) tua.value = p;
+      setAttr(tua, 'aria-valuetext', $('tHien').textContent + ' °C');
+    }
+
+    /* ---------- chữ tĩnh theo mức ---------- */
+    function renderText() {
+      const l1 = PH.lessonTitle(1);
+      $('crumb').innerHTML = `<a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-1">${PH.uiFmt('chapter')} I</a> · <a href="bai.html?n=1">${PH.esc(en() ? l1.en : l1.vi)}</a>`;
+      $('h1').textContent = PH.ui('h1'); $('labTag').innerHTML = PH.icon('flask', 'sm') + PH.uiFmt('labTag');
+      $('h1en').textContent = PH.lang() === 'bi' ? PH.UI.h1[1] : ''; $('h1en').hidden = PH.lang() !== 'bi';
+      $('hd').textContent = PH.dinh(PH.ui('hd')); $('veBai').innerHTML = PH.uiFmt('veBai') + PH.icon('arrow', 'sm');
+      document.querySelector('.tn-stage').setAttribute('aria-label', PH.ui('stageLbl'));
+      ['lbDungCu', 'lbPhanTu', 'lbDoThi', 'lbMau', 'cham', 'nhanh', 'lbNhietDo', 'lbTrangThai', 'lbKeo', 'lbToc', 'lbNC', 'lbSoi'].forEach(k => { $(k).textContent = PH.ui(k); });
+      $('lbThoiGian').textContent = PH.ui('lbThoiGian') + ' →';
+      $('btnLai').innerHTML = PH.icon('refresh', 'sm') + PH.uiFmt('lamLai');
+      const bi = PH.lang() === 'bi';
+      $('thay').innerHTML = `${PH.label('eye', PH.uiFmt('lbThay'))}<p>${PH.uiFmt('thay1')}</p>${bi ? `<p class="en" lang="en">${PH.esc(PH.dinh(PH.UI.thay1[1]))}</p>` : ''}<p>${PH.uiFmt('thay2')}</p>${bi ? `<p class="en" lang="en">${PH.esc(PH.dinh(PH.UI.thay2[1]))}</p>` : ''}<p class="hoi">${PH.icon('star', 'sm')}${PH.uiFmt('hoi')}</p>`;
+      const terms = TN_IDS.map(id => PH.termById(id)).filter(Boolean);
+      const chips = terms.map(t => `<button type="button" class="tag term-chip" data-term="${t.id}">${PH.esc(en() ? t.en : t.vi)}${en() ? '' : ` <span class="en" lang="en">· ${PH.esc(t.en)}</span>`}</button>`).join('')
+        + TN_STATIC.map(t => `<span class="tag">${PH.esc(en() ? t[1] : t[0])}${en() ? '' : ` <span class="en" lang="en">· ${PH.esc(t[1])}</span>`}</span>`).join('');
+      $('tnTn').innerHTML = `${PH.label('book', PH.uiFmt('lbTnTn'), 'orange', 'sm')}<div class="chips">${chips}</div>`;
+      $('day').innerHTML = `<p class="lb">${PH.uiFmt('lbDayLaGi')}</p><p>${PH.uiFmt('dayLaGi')}</p>`;
+      lastPha = -1; update();
+    }
+    $('tnTn').addEventListener('click', e => { const b = e.target.closest('[data-term]'); if (b) PH.showTerm(b.dataset.term, b); });
+
+    /* ---------- điều khiển ---------- */
+    // Nhịp chạy: 30 lần/giây cho mượt, nhưng mỗi bước tính theo THỜI GIAN THẬT đã trôi qua,
+    // nên tốc độ đun như nhau trên máy nhanh lẫn máy chậm.
+    // Dùng setInterval chứ không dùng requestAnimationFrame: một số trình duyệt trong ứng dụng
+    // (Facebook, Zalo, trình duyệt nhúng) không chạy requestAnimationFrame và thí nghiệm sẽ đứng im.
+    const TOC_GOC = 3.75;  // đơn vị tiến trình mỗi giây ở mức ×1 (bằng đúng nhịp cũ)
+    function buoc() {
+      const now = performance.now();
+      if (!chay) { moc = now; return; }
+      const dt = Math.min(.12, (now - moc) / 1000); moc = now;   // chặn bước nhảy khi quay lại tab
+      p = Math.min(100, p + TOC_GOC * toc * dt);
+      if (p >= 100) { p = 100; chay = false; }
+      update();
+    }
+    $('btnDun').addEventListener('click', () => { if (chay) chay = false; else { if (p >= 100) p = 0; chay = true; } update(); });
+    $('btnLai').addEventListener('click', () => { chay = false; p = 0; update(); });
+    $('tua').addEventListener('input', e => { p = +e.target.value; chay = false; update(); });
+    document.querySelectorAll('[data-toc]').forEach(b => b.addEventListener('click', () => {
+      toc = +b.dataset.toc;
+      document.querySelectorAll('[data-toc]').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+    }));
+
+    buildApparatus(); buildGraph(); buildMolecules(); renderText();
+    moc = performance.now();
+    timer = setInterval(buoc, 33);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) chay = false; });
+    PH.onLang(renderText);
+  </script>
+</body>
+</html>

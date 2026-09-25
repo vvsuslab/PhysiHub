@@ -11,14 +11,14 @@
   <link rel="stylesheet" href="assets/lively.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
     .top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-    .top .name { font-family: var(--font-serif); font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-    .top .name .mark { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(90deg, var(--navy) 0 50%, var(--gold) 50% 100%); }
+    .top .name { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+    .top .name .mark { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(90deg, var(--navy) 0 50%, var(--orange) 50% 100%); box-shadow: 0 0 0 3px var(--blue-soft); }
     .top .sep { width: 1px; height: 22px; background: var(--line-strong); }
     .top .scope { font-size: 14px; color: var(--ink-2); }
     .top .exit { margin-left: auto; }
@@ -27,8 +27,9 @@
     .cardx { aspect-ratio: 4 / 3; perspective: 800px; }
     .cardx .in { position: relative; width: 100%; height: 100%; transition: transform .35s; transform-style: preserve-3d; }
     .cardx.up .in, .cardx.done .in { transform: rotateY(180deg); }
-    .face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; border: 1px solid var(--line-strong); }
-    .face.back { color: #fff; font-family: var(--font-serif); font-size: 28px; cursor: pointer; }
+    /* overflow: hidden — câu dài trên thẻ (ví dụ phát biểu định luật) không được tràn đè thẻ bên cạnh */
+    .face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; border: 1px solid var(--line-strong); overflow: hidden; }
+    .face.back { color: var(--navy-2); font-family: var(--font-display); font-weight: 800; font-size: 28px; cursor: pointer; }
     .face.front { background: var(--surface); transform: rotateY(180deg); }
     .face.front .k { font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
     .face.front .t { font-size: 15px; font-weight: 500; line-height: 1.3; word-break: break-word; }
@@ -36,39 +37,47 @@
     .face.front .t.en { color: var(--gold-2); }
     .cardx.bad .face.front { border-color: var(--red); background: var(--red-soft); }
     .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: rgba(255,255,255,.94); backdrop-filter: blur(3px); border-radius: 22px; text-align: center; padding: 24px; z-index: 2; }
-    .overlay h2 { color: var(--violet); }
+    .overlay h2 { color: var(--navy); }
     .overlay h2 { font-size: 30px; }
     .overlay p { color: var(--ink-2); max-width: 460px; }
     .side { display: flex; flex-direction: column; gap: 14px; }
     .stat { padding: 12px 0; border-top: 1px solid var(--line); }
     .stat:first-child { border-top: 0; padding-top: 0; }
     .stat .l { font-size: 13px; color: var(--ink-3); }
-    .stat .v { font-family: var(--font-serif); font-size: 30px; color: var(--navy); }
+    .stat .v { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--navy); }
     .stat .v.gold { color: var(--gold); }
     .stat .progress { margin-top: 8px; }
     @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .board { grid-template-columns: repeat(3, 1fr); } .face.front .t { font-size: 13px; } }
+    /* Điện thoại: 2 cột cho thẻ đủ rộng chứa câu dài; thẻ cao hơn một chút */
+    @media (max-width: 600px) {
+      .board { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .cardx { aspect-ratio: 5 / 4; }
+      .face.front { padding: 8px 6px; }
+      .face.front .t { font-size: 12.5px; line-height: 1.25; }
+      .face.front .t.math { font-size: 15px; }
+    }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
       <div class="top">
-        <div class="name"><span class="mark"></span>Ghép cặp Vật lí</div><span class="sep"></span>
-        <span class="scope">Phạm vi: <b id="scopeLabel"></b></span>
+        <div class="name"><span class="mark"></span><span id="gameName">Ghép cặp Vật lí</span></div><span class="sep"></span>
+        <span class="scope"><span id="scopeLbl"></span> <b id="scopeLabel"></b></span>
         <span class="pill gold" id="langPill"></span>
-        <a class="exit" href="games.html">Thoát ván</a>
+        <a class="exit" href="games.html" id="exitLink"></a>
       </div>
       <div class="layout">
         <div class="board" id="board"></div>
         <aside class="side">
           <div class="card">
-            <div class="stat"><div class="l">Thời gian còn lại</div><div class="v gold" id="time">90 giây</div></div>
-            <div class="stat"><div class="l">Lượt lật</div><div class="v" id="flips">0</div></div>
-            <div class="stat"><div class="l">Đã ghép</div><div class="v" id="matched">0 / 6</div><div class="progress"><i id="bar" style="width:0%"></i></div></div>
-            <div class="stat"><div class="l">Kỷ lục của em</div><div class="small" id="best">—</div></div>
+            <div class="stat"><div class="l" id="lTime"></div><div class="v gold" id="time">90</div></div>
+            <div class="stat"><div class="l" id="lFlips"></div><div class="v" id="flips">0</div></div>
+            <div class="stat"><div class="l" id="lMatched"></div><div class="v" id="matched">0 / 6</div><div class="progress"><i id="bar" style="width:0%"></i></div></div>
+            <div class="stat"><div class="l" id="lBest"></div><div class="small" id="best">—</div></div>
           </div>
-          <div class="notice">Mỗi cặp là hai mặt của cùng một kiến thức: thuật ngữ Việt – Anh, hoặc công thức – định luật/đơn vị. Lật hai thẻ; ghép đúng thì cặp đó ở lại.</div>
-          <button class="btn outline block" id="btnNew" style="color:var(--violet)">Ván mới</button>
+          <div class="notice" id="noteRule"></div>
+          <button class="btn outline block" id="btnNew"></button>
         </aside>
       </div>
     </div>
@@ -79,28 +88,51 @@
   <script src="data/pairs.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: 'games', noFooter: true });
+    Object.assign(PH.UI, {
+      gameName: ['Ghép cặp Vật lí', 'Physics Match Up'], scopeLbl: ['Phạm vi:', 'Scope:'], levelPill: ['Mức {l} · điểm ×{m}', 'Level {l} · points ×{m}'], exitRound: ['Thoát ván', 'Leave the round'],
+      lTime: ['Thời gian còn lại', 'Time left'], secs: ['{n} giây', '{n} s'], lFlips: ['Lượt lật', 'Flips'], lMatched: ['Đã ghép', 'Matched'], lBest: ['Kỉ lục của em', 'Your record'],
+      bestTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], noBest: ['Chưa có — hoàn thành một ván để lập kỉ lục.', 'None yet — finish a board to set one.'],
+      noteRule: ['Mỗi cặp là hai mặt của cùng một kiến thức: thuật ngữ Việt – Anh, hoặc công thức – định luật/đơn vị. Lật hai thẻ; ghép đúng thì cặp đó ở lại.', 'Each pair is two sides of the same idea: a term and its symbol or unit. Flip two cards; a correct pair stays face up.'],
+      newBoard: ['Ván mới', 'New board'], kTerm: ['thuật ngữ', 'term'], kTermEn: ['term', 'term'], kSym: ['kí hiệu · đơn vị', 'symbol · unit'],
+      done: ['Xong bảng!', 'Board cleared!'], doneTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], newRecord: ['Kỉ lục mới!', 'New record!'],
+      timeUp: ['Hết giờ', 'Time is up'], timeUpTxt: ['Em đã ghép {m}/{n} cặp. Thử lại nhé — các thẻ sẽ được xáo lại.', 'You matched {m}/{n} pairs. Try again — the cards will be reshuffled.'],
+      again: ['Chơi lại', 'Play again'], backGames: ['Về Trò chơi', 'Back to Games'],
+      intro: ['12 thẻ · 6 cặp · 90 giây. Lật hai thẻ một lượt và ghép đúng cặp với số lượt lật ít nhất.', '12 cards · 6 pairs · 90 seconds. Flip two cards at a time and clear the board in as few flips as you can.'],
+      startBtn2: ['Bắt đầu', 'Start']
+    });
+    PH.mount({ active: 'games', noFooter: true, title: { vi: 'Ghép cặp Vật lí', en: 'Physics Match Up' } });
+    const $ = id => document.getElementById(id);
+    function renderStatic() { ['gameName', 'scopeLbl', 'lTime', 'lFlips', 'lMatched', 'lBest', 'noteRule'].forEach(k => { $(k).textContent = PH.ui(k); }); $('exitLink').textContent = PH.ui('exitRound'); $('btnNew').textContent = PH.ui('newBoard'); $('scopeLabel').textContent = PH.scopeLabel(scope); }
     const ROUND = 90, PAIRS_PER_GAME = 6;
     const board = document.getElementById('board');
     const scope = PH.scope();
-    document.getElementById('scopeLabel').textContent = PH.scopeLabel(scope);
-    const langPill = () => { const l = PH.langInfo(); document.getElementById('langPill').textContent = `Mức ${l.long} · điểm ×${PH.num(l.mult)}`; };
-    langPill(); PH.onLang(langPill);
+    const langPill = () => { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); };
+    renderStatic(); langPill(); PH.onLang(() => { langPill(); renderStatic(); renderStats(); });
 
-    let cards = [], open = [], lock = false, flips = 0, matched = 0, timer = null, endAt = 0, startedAt = 0, running = false;
+    // 'van' đánh số ván chơi: mọi setTimeout đang chờ của ván cũ phải tự huỷ khi bắt đầu ván mới,
+    // nếu không ván mới sẽ được cộng sẵn cặp đã ghép của ván trước và ghi kỉ lục giả.
+    let cards = [], open = [], lock = false, flips = 0, matched = 0, timer = null, endAt = 0, startedAt = 0, running = false, van = 0;
 
     function buildPairs() {
       const terms = PH.scopeTerms(scope);
+      if (PH.lang() === 'en') { // mức English: thuật ngữ ↔ kí hiệu · đơn vị, không dùng cặp công thức tiếng Việt
+        const withSym = terms.filter(t => t.symbol || t.unit); const pool0 = withSym.length >= PAIRS_PER_GAME ? withSym : (PH.TERMS || []).filter(t => t.symbol || t.unit);
+        // Bỏ các thuật ngữ cho ra cùng một mặt thẻ "kí hiệu · đơn vị" (ví dụ melting point và
+        // boiling point đều ra "°C, K"): nếu để lọt, học sinh lật đúng nội dung mà vẫn bị báo sai.
+        const daCo = new Set();
+        const pool = PH.shuffle(pool0).filter(t => { const k = [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '); if (!k || daCo.has(k)) return false; daCo.add(k); return true; });
+        return PH.sample(pool, PAIRS_PER_GAME).map(t => ({ id: t.id, a: { k: PH.ui('kTermEn'), t: t.en, en: true }, b: { k: PH.ui('kSym'), t: [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '), math: true } }));
+      }
       const chapters = new Set(terms.map(t => t.chapter));
       let formula = (PH.PAIRS || []).filter(p => scope.type === 'all' || chapters.has(p.chapter));
       if (scope.type === 'lesson' || scope.type === 'weak') formula = [];
       const fPick = PH.sample(formula, Math.min(3, formula.length));
       const tPick = PH.sample(terms, Math.max(0, PAIRS_PER_GAME - fPick.length));
       let pairs = fPick.map(p => ({ id: p.id, a: { k: p.a.kind, t: p.a.title, math: true }, b: { k: p.b.kind, t: p.b.title, math: false } }))
-        .concat(tPick.map(t => ({ id: t.id, a: { k: 'thuật ngữ', t: t.vi }, b: { k: 'term', t: t.en, en: true } })));
+        .concat(tPick.map(t => ({ id: t.id, a: { k: PH.ui('kTerm'), t: t.vi }, b: { k: 'term', t: t.en, en: true } })));
       if (pairs.length < PAIRS_PER_GAME) { // thiếu thì bù từ toàn bộ ngân hàng
         const used = new Set(pairs.map(p => p.id));
-        PH.shuffle((PH.TERMS || []).filter(t => !used.has(t.id))).slice(0, PAIRS_PER_GAME - pairs.length).forEach(t => pairs.push({ id: t.id, a: { k: 'thuật ngữ', t: t.vi }, b: { k: 'term', t: t.en, en: true } }));
+        PH.shuffle((PH.TERMS || []).filter(t => !used.has(t.id))).slice(0, PAIRS_PER_GAME - pairs.length).forEach(t => pairs.push({ id: t.id, a: { k: PH.ui('kTerm'), t: t.vi }, b: { k: 'term', t: t.en, en: true } }));
       }
       return pairs;
     }
@@ -108,14 +140,14 @@
     function start() {
       const pairs = buildPairs();
       cards = PH.shuffle(pairs.flatMap(p => [{ pid: p.id, ...p.a }, { pid: p.id, ...p.b }]));
-      open = []; lock = false; flips = 0; matched = 0; running = true; startedAt = Date.now(); endAt = startedAt + ROUND * 1000;
+      van++; open = []; lock = false; flips = 0; matched = 0; running = true; startedAt = Date.now(); endAt = startedAt + ROUND * 1000;
       board.innerHTML = cards.map((c, i) => `<div class="cardx" data-i="${i}"><div class="in"><div class="face back">?</div><div class="face front"><span class="k">${PH.esc(c.k)}</span><span class="t ${c.math ? 'math' : ''} ${c.en ? 'en' : ''}">${PH.esc(c.t)}</span></div></div></div>`).join('');
       clearInterval(timer); timer = setInterval(tick, 250); tick(); renderStats();
     }
     function tick() {
       if (!running) return;
       const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-      document.getElementById('time').textContent = left + ' giây';
+      document.getElementById('time').textContent = PH.ui('secs', { n: left });
       if (left === 0) finish(false);
     }
     function renderStats() {
@@ -123,9 +155,10 @@
       document.getElementById('matched').textContent = `${matched} / ${PAIRS_PER_GAME}`;
       document.getElementById('bar').style.width = (matched / PAIRS_PER_GAME * 100) + '%';
       const b = PH.progress().games.match || {};
-      document.getElementById('best').textContent = b.bestFlips ? `${b.bestFlips} lượt lật · ${PH.mmss(b.bestTime || 0)}` : 'Chưa có — hoàn thành một ván để lập kỷ lục.';
+      document.getElementById('best').textContent = b.bestFlips ? PH.ui('bestTxt', { f: b.bestFlips, t: PH.mmss(b.bestTime || 0) }) : PH.ui('noBest');
     }
     function finish(won) {
+      if (!running) return;   // tránh chạy hai lần (vừa hết giờ vừa ghép xong) làm chồng hai bảng kết quả
       running = false; clearInterval(timer);
       const time = Math.round((Date.now() - startedAt) / 1000);
       const prev = PH.progress().games.match || {};
@@ -133,8 +166,8 @@
       const record = won && (!prev.bestFlips || flips < prev.bestFlips);
       const ov = document.createElement('div'); ov.className = 'overlay';
       ov.innerHTML = won
-        ? `<h2>Xong bảng!</h2><p>${flips} lượt lật · ${PH.mmss(time)}${record ? ' · <b style="color:var(--gold-2)">Kỷ lục mới!</b>' : ''}</p><div class="row"><button class="btn" id="btnAgain">Ván mới</button><a class="btn outline" href="games.html">Về Trò chơi</a></div>`
-        : `<h2>Hết giờ</h2><p>Em đã ghép ${matched}/${PAIRS_PER_GAME} cặp. Thử lại nhé — các thẻ sẽ được xáo lại.</p><div class="row"><button class="btn" id="btnAgain">Chơi lại</button><a class="btn outline" href="games.html">Về Trò chơi</a></div>`;
+        ? `<h2>${PH.uiFmt('done')}</h2><p>${PH.uiFmt('doneTxt', { f: flips, t: PH.mmss(time) })}${record ? ` · <b style="color:var(--gold-2)">${PH.uiFmt('newRecord')}</b>` : ''}</p><div class="row"><button class="btn" id="btnAgain">${PH.uiFmt('newBoard')}</button><a class="btn outline" href="games.html">${PH.uiFmt('backGames')}</a></div>`
+        : `<h2>${PH.uiFmt('timeUp')}</h2><p>${PH.uiFmt('timeUpTxt', { m: matched, n: PAIRS_PER_GAME })}</p><div class="row"><button class="btn" id="btnAgain">${PH.uiFmt('again')}</button><a class="btn outline" href="games.html">${PH.uiFmt('backGames')}</a></div>`;
       board.appendChild(ov); renderStats();
       if (won) confetti();
       document.getElementById('btnAgain').addEventListener('click', start);
@@ -142,7 +175,7 @@
     // Mưa giấy màu khi ghép xong bảng
     function confetti() {
       const box = document.createElement('div'); box.className = 'confetti';
-      const colors = ['#2e4a86', '#a9782a', '#e0663f', '#178a8f', '#6a5acd', '#3d9a5c'];
+      const colors = ['#0D47A1', '#1E88E5', '#F57C00', '#FFB547', '#1C9A9C', '#90CAF9'];
       for (let i = 0; i < 48; i++) {
         const s = document.createElement('span');
         s.style.left = Math.random() * 100 + '%'; s.style.background = colors[i % colors.length];
@@ -159,11 +192,16 @@
       if (open.length === 2) {
         lock = true;
         const [a, b] = open; const ca = cards[+a.dataset.i], cb = cards[+b.dataset.i];
+        const vanNay = van;   // chụp lại số ván; nếu người chơi bấm "Ván mới" trong lúc chờ thì bỏ qua
         if (ca.pid === cb.pid) {
-          setTimeout(() => { a.classList.add('done'); b.classList.add('done'); a.classList.remove('up'); b.classList.remove('up'); open = []; lock = false; matched++; renderStats(); if (matched === PAIRS_PER_GAME) finish(true); }, 350);
+          setTimeout(() => {
+            if (vanNay !== van) return;
+            a.classList.add('done'); b.classList.add('done'); a.classList.remove('up'); b.classList.remove('up');
+            open = []; lock = false; matched++; renderStats(); if (matched === PAIRS_PER_GAME) finish(true);
+          }, 350);
         } else {
           a.classList.add('bad'); b.classList.add('bad');
-          setTimeout(() => { a.classList.remove('up', 'bad'); b.classList.remove('up', 'bad'); open = []; lock = false; }, 900);
+          setTimeout(() => { if (vanNay !== van) return; a.classList.remove('up', 'bad'); b.classList.remove('up', 'bad'); open = []; lock = false; }, 900);
         }
       }
     });
@@ -172,7 +210,7 @@
     (function intro() {
       board.innerHTML = Array.from({ length: 12 }, () => '<div class="cardx"><div class="in"><div class="face back">?</div></div></div>').join('');
       const ov = document.createElement('div'); ov.className = 'overlay';
-      ov.innerHTML = `<h2>Ghép cặp Vật lí</h2><p>12 thẻ · 6 cặp · 90 giây. Lật hai thẻ một lượt và ghép đúng cặp với số lượt lật ít nhất.</p><button class="btn" id="btnStart">Bắt đầu</button>`;
+      ov.innerHTML = `<h2>${PH.uiFmt('gameName')}</h2><p>${PH.uiFmt('intro')}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
       board.appendChild(ov); renderStats();
       document.getElementById('btnStart').addEventListener('click', start);
     })();

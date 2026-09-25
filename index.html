@@ -3,120 +3,169 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhysiHub — Học Vật lí 12 song ngữ Anh-Việt</title>
+  <title>PhysiHub — Vật lí 12 song ngữ Việt – Anh</title>
+  <meta name="description" content="Học liệu số song ngữ Việt – Anh cho Vật lí 12 (SGK Kết nối tri thức với cuộc sống): bài học, thuật ngữ có phiên âm, luyện đề theo cấu trúc 2025, trò chơi và thí nghiệm ảo.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PhysiHub — Vật lí 12 song ngữ Việt – Anh">
+  <meta property="og:description" content="Bài học, thuật ngữ có phiên âm, luyện đề theo cấu trúc 2025, trò chơi và thí nghiệm ảo — mỗi nội dung đều có bản tiếng Việt và tiếng Anh.">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <meta property="og:url" content="https://vvsuslab.github.io/PhysiHub/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
- 
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    .hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 36px; align-items: center; }
-    .hero h1 { margin: 10px 0 6px; }
-    .hero .sub-en { font-family: var(--font-serif); font-style: italic; font-size: 22px; margin-bottom: 14px; }
-    .hero p.lead { font-size: 16px; max-width: 520px; margin-bottom: 24px; }
-    .hero .actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .levels { padding: 18px 20px; }
-    .levels .title { font-size: 13px; margin-bottom: 10px; }
-    .level { display: flex; gap: 12px; width: 100%; text-align: left; padding: 12px 10px; border-radius: 10px; border-top: 1px solid var(--line); line-height: 1.5; }
-    .level:first-of-type { border-top: 0; }
-    .level .n { flex: none; width: 22px; height: 22px; border-radius: 6px; font-size: 12px; font-weight: 600; display: grid; place-items: center; margin-top: 2px; }
-    .level .txt { font-size: 14px; }
-    .level .txt .en { display: block; margin-top: 2px; }
-    .level .txt .term { pointer-events: none; }
-    .section { margin-top: 44px; }
-    .section .section-head h2 { margin-top: 8px; }
-    .continue { display: grid; grid-template-columns: auto 1fr auto auto; gap: 20px; align-items: center; margin-top: 28px; }
-    .continue .bar { width: 160px; }
-    .continue .meta { font-size: 13px; color: var(--ink-3); }
-    .continue .lesson-name { font-family: var(--font-serif); font-size: 21px; font-weight: 600; margin: 2px 0; }
-    .chapter { display: flex; flex-direction: column; gap: 4px; color: inherit; }
-    .chapter .num { font-size: 12px; font-weight: 600; }
-    .chapter .name { font-family: var(--font-serif); font-size: 21px; font-weight: 600; margin-top: 8px; }
-    .chapter .name-en { font-family: var(--font-serif); font-style: italic; color: var(--gold); font-size: 15px; }
-    .chapter .progress { margin: 14px 0 8px; }
-    .chapter .meta { font-size: 13px; color: var(--ink-3); }
-    .about ul { padding-left: 18px; color: var(--ink-2); font-size: 14px; }
-    .about li + li { margin-top: 4px; }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; gap: 20px; }
-      .continue { grid-template-columns: 1fr; gap: 12px; }
-      .continue .bar { width: 100%; }
+    /* Khối mở đầu */
+    .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 44px; align-items: center; }
+    .hero h1 { white-space: pre-line; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.14; letter-spacing: -.6px; margin-top: 16px; }
+    .tiep { display: flex; align-items: center; gap: 14px; margin-top: 26px; padding: 14px 14px 14px 16px; border-radius: 20px; background: var(--orange-soft); border: 1.5px solid var(--orange-line); color: var(--ink); transition: background .25s ease, border-color .25s ease; }
+    .tiep:hover { background: #FFEFD9; border-color: var(--orange); color: var(--ink); }
+    .tiep:hover .btn { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(245, 124, 0, .35); }
+    .tiep .ic { width: 46px; height: 46px; border-radius: 14px; flex: none; display: grid; place-items: center; color: #fff; box-shadow: 0 6px 14px rgba(31, 41, 51, .18); }
+    .tiep .txt { flex: 1; min-width: 0; }
+    .tiep .lbl { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--c1-ink); }
+    .tiep .ten { display: block; margin-top: 2px; font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--navy); text-wrap: balance; }
+    .tiep .dong { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+    .tiep .bar { width: 110px; height: 6px; flex: none; border-radius: 3px; background: #FDE3C4; overflow: hidden; }
+    .tiep .bar i { display: block; height: 100%; border-radius: 3px; background: var(--grad-cta); }
+    .tiep .phu { font-size: 12.5px; color: var(--ink-3); }
+    .tiep .btn { flex: none; min-height: 46px; padding: 0 20px; }
+    .demo.panel.has-label { align-self: center; margin-top: 34px; padding: 34px 16px 14px; }
+        .demo-row { display: flex; gap: 12px; width: 100%; text-align: left; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1.5px solid var(--blue-line); color: var(--ink); transition: background .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    .demo-row + .demo-row { margin-top: 6px; }
+    .demo-row:hover { border-color: var(--sky); }
+    .demo-row.on { background: #fff; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255, 167, 38, .22); }
+    .demo-row .so { width: 28px; height: 28px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 13.5px; font-weight: 800; background: var(--sky); color: #fff; }
+    .demo-row.on .so { background: var(--grad-cta); color: var(--ink); }
+    .demo-row .nhan { margin: 0 0 3px; font-size: 12px; font-weight: 700; color: var(--navy-2); }
+    .demo-row.on .nhan { color: var(--c1-ink); }
+    .demo-row p { font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+    .demo-row p.en { margin-top: 2px; font-family: var(--font-serif); font-style: italic; color: var(--gold); }
+    .demo .ghi { margin: 8px 4px 0; font-size: 12px; line-height: 1.5; color: var(--ink-3); }
+    .tiep-mob { display: none; }
+    .section-head a .short { display: none; }
+    #installBox[hidden] { display: none; }
+
+    /* Năm lối vào */
+    .loi-vao { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+    .lv { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 14px 18px; border-radius: 18px; background: #fff; border: 1.5px solid var(--line); box-shadow: 0 1px 2px rgba(31, 41, 51, .04); color: var(--ink); transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
+    .lv:hover { background: var(--o-nen); border-color: var(--o-vien); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(31, 41, 51, .1); color: var(--ink); }
+    .lv .ic { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 3px solid; box-shadow: 0 6px 16px rgba(13, 71, 161, .14); transition: transform .3s ease; }
+    .lv:hover .ic { transform: scale(1.08) rotate(-3deg); }
+    .lv .ic svg { width: 30px; height: 30px; }
+    .lv .t { display: block; margin-top: 12px; font-size: 16px; font-weight: 700; }
+    .lv .t-en { display: none; font-size: 13px; }
+    [data-lang="bi"] .lv .t-en { display: block; }
+    .lv .m { display: block; margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+
+    /* Bốn chương */
+    .the-chuong { display: block; position: relative; background: #fff; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--line); border-top: 4px solid var(--accent); box-shadow: var(--shadow); color: var(--ink); transition: transform .4s cubic-bezier(.2, .7, .3, 1), box-shadow .4s ease, background .3s ease, border-color .3s ease; }
+    .the-chuong:hover { transform: translateY(-6px); background: var(--accent-soft); border-color: var(--accent); box-shadow: var(--shadow-hover); color: var(--ink); }
+    .the-chuong .band { display: block; position: relative; aspect-ratio: 840 / 454; overflow: hidden; background: #DCE7F3; }
+    .the-chuong .band img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2, .7, .3, 1); }
+    .the-chuong:hover .band img { transform: scale(1.07); }
+    .the-chuong .lab { position: absolute; right: 12px; top: 12px; background: #fff; color: var(--accent-ink); box-shadow: 0 4px 12px rgba(0, 0, 0, .15); }
+    .the-chuong .body { display: block; position: relative; padding: 0 20px 18px; }
+    .the-chuong .nhan, .the-chuong .ten, .the-chuong .ten-en, .the-chuong .progress, .the-chuong .meta { display: block; }
+    .the-chuong .icon-tile { margin-top: -24px; border: 3px solid #fff; }
+    .the-chuong .nhan { margin: 10px 0 2px; font-size: 12px; font-weight: 700; letter-spacing: .4px; color: var(--accent-ink); }
+    .the-chuong .ten { font-family: var(--font-display); font-size: 20px; font-weight: 800; transition: color .3s ease; }
+    .the-chuong:hover .ten { color: var(--accent-ink); }
+    .the-chuong .ten-en { font-size: 14.5px; margin-top: 1px; }
+    .the-chuong .progress { margin-top: 12px; background: var(--accent-soft); }
+    .the-chuong .meta { margin-top: 8px; font-size: 12.5px; color: var(--ink-3); }
+    .the-chuong .pill-mob { display: none; }
+
+    @media (max-width: 1080px) {
+      .hero { gap: 28px; }
+      .loi-vao { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .demo { max-width: 620px; }
+      .grid.c4.chuong { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .hero-panel { padding: 18px; border-radius: 22px; }
+      .hero h1 { font-size: 27px; margin-top: 8px; }
+      .hero .sub-en { font-size: 15px; margin-top: 5px; }
+      .hero p.lead, .demo, .tiep.desk { display: none; }
+      .tiep-mob { display: block; margin-top: 12px; padding: 12px 14px; border: 1.5px solid transparent; transition: background .25s ease, border-color .25s ease; }
+      .tiep-mob:hover { background: var(--orange-soft); border-color: var(--orange-line); }
+      .tiep-mob .top { display: flex; align-items: center; gap: 12px; }
+      .tiep-mob .ic { width: 40px; height: 40px; border-radius: 12px; flex: none; display: grid; place-items: center; color: #fff; }
+      .tiep-mob .lbl { font-size: 12px; font-weight: 700; color: var(--accent-ink); }
+      .tiep-mob .ten { margin-top: 1px; font-family: var(--font-display); font-size: 15.5px; font-weight: 800; }
+      .tiep-mob .dong { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+      .tiep-mob .progress { flex: 1; background: var(--accent-soft); }
+      .tiep-mob .phu { flex: none; font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+      .tiep-mob .btn { flex: none; min-height: 40px; padding: 0 16px; font-size: 13.5px; }
+      .loi-vao { display: flex; gap: 10px; margin: 14px -16px 0; padding: 4px 16px 8px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .loi-vao::-webkit-scrollbar { display: none; }
+      .lv { flex: none; width: 138px; scroll-snap-align: start; padding: 14px 10px 12px; }
+      .lv .ic { width: 48px; height: 48px; border-radius: 14px; }
+      .lv .ic svg { width: 24px; height: 24px; }
+      .lv .t { font-size: 14px; margin-top: 8px; }
+      .lv .m { font-size: 12px; }
+      .section-head { flex-direction: row; align-items: baseline; }
+      .section-head h2 { font-size: 18px; }
+      .section-head a { white-space: nowrap; font-size: 13px; flex: none; }
+      .section-head a .long { display: none; }
+      .grid.c4.chuong { display: flex; flex-direction: column; gap: 8px; }
+      .the-chuong { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; border-radius: 16px; border-top-width: 1.5px; border-left: 4px solid var(--accent); }
+      .the-chuong:hover { transform: none; }
+      .the-chuong .band { width: 84px; height: 48px; aspect-ratio: auto; flex: none; border-radius: 10px; }
+      .the-chuong .lab { display: none; }
+      .the-chuong .body { flex: 1; min-width: 0; padding: 0; }
+      .the-chuong .icon-tile, .the-chuong .progress, .the-chuong .meta { display: none; }
+      .the-chuong .nhan { margin: 0 0 1px; }
+      .the-chuong .ten { font-family: var(--font-sans); font-size: 15px; font-weight: 700; }
+      .the-chuong .ten-en { font-size: 12.5px; margin: 0; }
+      .the-chuong .pill-mob { display: flex; align-items: center; justify-content: center; flex: none; min-width: 40px; height: 26px; padding: 0 8px; border-radius: 13px; background: var(--accent-soft); color: var(--accent-ink); font-size: 12px; font-weight: 700; }
     }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
-      <!-- HERO -->
+      <!-- KHỐI MỞ ĐẦU: một nút duy nhất để học tiếp -->
       <section class="hero-panel reveal in">
-        <div class="chips" aria-hidden="true"><span class="chip" style="left:56%;top:10%">flux</span><span class="chip" style="left:78%;top:26%">half-life</span><span class="chip" style="left:62%;top:78%">isothermal</span><span class="chip" style="left:88%;top:70%">volume</span></div>
         <div class="hero">
           <div>
-            <div class="eyebrow">Vật lí 12 · Kết nối tri thức với cuộc sống</div>
-            <h1>Học Vật lí 12 song ngữ Anh-Việt</h1>
-            <div class="sub-en">Learn Physics 12 in two languages</div>
-            <p class="lead">Mỗi bài học, mỗi thuật ngữ và mỗi câu hỏi đều có phiên bản tiếng Việt và tiếng Anh. Hãy chọn mức ngôn ngữ vừa sức, rồi nâng dần lên khi đã quen.</p>
-            <div class="actions">
-              <a class="btn glow" id="btnStart" href="baihoc.html">Bắt đầu học <span aria-hidden="true">→</span></a>
-              <a class="btn outline" href="games.html">Chơi thử một ván</a>
-              <button class="btn outline" id="btnInstall" type="button" hidden>Cài lên màn hình chính</button>
-            </div>
-            <p style="margin-top:14px"><a class="small" href="lienket.html">Xem mục lục tất cả liên kết →</a></p>
+            <span class="eyebrow" id="heroEyebrow"></span>
+            <h1 id="heroH1"></h1>
+            <p class="sub-en" lang="en" id="heroSub"></p>
+            <p class="lead" id="heroLead"></p>
+            <a class="tiep desk" id="tiepDesk" href="bai.html?n=1"></a>
           </div>
-          <div class="card glass levels" id="levels">
-            <div class="title">Cùng một nội dung, ba mức ngôn ngữ — chạm để đổi mức cho toàn trang</div>
-            <div id="levelRows"></div>
-          </div>
+          <div class="panel has-label demo" id="demo"></div>
         </div>
       </section>
 
-      <!-- SỐ LIỆU -->
-      <div class="stats" id="stats"></div>
+      <!-- Thẻ "học tiếp" cho điện thoại (trên máy tính nằm trong khối mở đầu) -->
+      <a class="card tiep-mob" id="tiepMob" href="bai.html?n=1"></a>
 
-      <!-- ĐIỂM NỔI BẬT -->
-      <section class="section">
-        <span class="badge">Điểm nổi bật</span>
-        <div class="grid c3" style="margin-top:14px">
-          <a class="card feature lift reveal" href="thuatngu.html"><span class="icon-tile tone-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><div><h3>Thuật ngữ song ngữ có phát âm</h3><p>Chạm vào từ được tô sáng trong bài để xem nghĩa, phiên âm IPA và nghe đọc tiếng Anh.</p><span class="arrow">Mở ngân hàng thuật ngữ →</span></div></a>
-          <a class="card feature lift reveal" data-delay="1" href="luyende.html"><span class="icon-tile tone-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5h6l1 2h3v13H5V7h3z"/><path d="m9 13 2 2 4-4"/></svg></span><div><h3>Luyện đề đúng cấu trúc 2025</h3><p>Ba dạng câu hỏi như đề thi tốt nghiệp, chấm điểm tự động, lời giải song ngữ, tự lưu bài làm.</p><span class="arrow">Làm một đề →</span></div></a>
-          <a class="card feature lift reveal" data-delay="2" href="games.html"><span class="icon-tile tone-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="11" rx="4"/><path d="M8 12h.01M11 12h.01M15 11v2M14 12h2"/><path d="M8 10v4"/></svg></span><div><h3>Trò chơi nhân điểm theo mức tiếng Anh</h3><p>Term Rush và Ghép cặp dùng chung kho thuật ngữ; chơi ở mức English được nhân đôi điểm.</p><span class="arrow">Vào trò chơi →</span></div></a>
-        </div>
-      </section>
-
-      <!-- TIẾP TỤC HỌC -->
-      <section class="card continue reveal" id="continueCard"></section>
+      <!-- NĂM LỐI VÀO -->
+      <nav class="loi-vao" id="loiVao" aria-label=""></nav>
 
       <!-- BỐN CHƯƠNG -->
-      <section class="section">
+      <section class="section" style="margin-top: 30px">
         <div class="section-head">
-          <div><span class="badge">Bài học</span><h2 id="chaptersTitle">Bốn chương · 25 bài</h2></div>
-          <a href="baihoc.html">Xem tất cả bài học →</a>
+          <h2 id="chH2"></h2>
+          <a href="baihoc.html" id="chXem"></a>
         </div>
-        <div class="grid c4" id="chapterGrid"></div>
+        <div class="grid c4 chuong" id="chuongGrid"></div>
       </section>
 
-      <!-- VỀ DỰ ÁN -->
-      <section class="section grid c2 about">
-        <div class="card soft reveal" id="about">
-          <span class="badge">Về dự án</span>
-          <p class="small" style="margin-top:10px; color:var(--ink-2)">PhysiHub là sản phẩm dự thi Khoa học kĩ thuật của học sinh Trường THPT Bùi Hữu Nghĩa (Cần Thơ), năm học 2026–2027. Mục tiêu: giúp học sinh lớp 12 ôn Vật lí theo đúng cấu trúc đề thi tốt nghiệp THPT từ 2025, đồng thời làm quen với thuật ngữ vật lí bằng tiếng Anh — hưởng ứng chủ trương đưa tiếng Anh thành ngôn ngữ thứ hai trong trường học.</p>
-        </div>
-        <div class="card soft reveal" data-delay="1" id="sources">
-          <span class="badge">Nguồn học liệu</span>
-          <ul style="margin-top:10px">
-            <li>SGK Vật lí 12 – Kết nối tri thức với cuộc sống (NXB Giáo dục Việt Nam).</li>
-            <li>Đề minh hoạ và cấu trúc đề thi tốt nghiệp THPT môn Vật lí từ năm 2025 của Bộ GD&amp;ĐT.</li>
-            <li>Hằng số vật lí theo CODATA/NIST.</li>
-            <li>Bản dịch tiếng Anh do nhóm biên soạn; phần đang chờ giáo viên thẩm định được ghi rõ trong từng trang.</li>
-          </ul>
-        </div>
-      </section>
+      <p class="notice row" id="installBox" hidden style="margin-top: 24px"></p>
     </div>
   </main>
 
@@ -126,95 +175,97 @@
   <script src="data/exams.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: null });
+    PH.mount({ active: 'home', title: { vi: 'Vật lí 12 song ngữ Việt – Anh', en: 'Bilingual Physics 12' } });
 
-    const SAMPLE = { vi: 'Ở nhiệt độ không đổi, áp suất tỉ lệ nghịch với thể tích của khí.', en: 'At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume.' };
-    const ICONS = {
-      1: '<path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v6"/>',
-      2: '<circle cx="8" cy="9" r="2.2"/><circle cx="15.5" cy="7.5" r="2.2"/><circle cx="12" cy="15.5" r="2.2"/><circle cx="18" cy="15" r="1.6"/><path d="M4.5 16.5 6 14"/>',
-      3: '<path d="M6 3v8a6 6 0 0 0 12 0V3"/><path d="M6 3h4v5H6zM14 3h4v5h-4z"/>',
-      4: '<circle cx="12" cy="12" r="1.8"/><ellipse cx="12" cy="12" rx="9" ry="3.6"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-60 12 12)"/>'
-    };
-    const tone = c => `tone-${c}`;
+    const DEMO = [
+      { so: 1, lang: 'vi', key: 'lv1', mo: 'lv1d', vi: 'Ở nhiệt độ không đổi, áp suất (pressure) của một lượng khí xác định tỉ lệ nghịch với thể tích (volume) của nó.', en: '' },
+      { so: 2, lang: 'bi', key: 'lv2', mo: 'lv2d', vi: 'Ở nhiệt độ không đổi, áp suất của một lượng khí xác định tỉ lệ nghịch với thể tích của nó.', en: 'At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume.' },
+      { so: 3, lang: 'en', key: 'lv3', mo: 'lv3d', vi: '', en: 'At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume.' }
+    ];
+    const IMG = { 1: 'chuong1-vat-li-nhiet', 2: 'chuong2-khi-li-tuong', 3: 'chuong3-tu-truong', 4: 'chuong4-vat-li-hat-nhan' };
+    const en = () => PH.lang() === 'en';
+    const $ = id => document.getElementById(id);
 
-    function renderLevels() {
+    function renderHero() {
+      $('heroEyebrow').textContent = PH.dinh(PH.ui('heroEyebrow'));
+      $('heroH1').textContent = PH.ui('heroH1');
+      $('heroSub').textContent = PH.ui('heroSub');
+      $('heroLead').textContent = PH.dinh(PH.ui('heroLead'));
       const cur = PH.lang();
-      document.getElementById('levelRows').innerHTML = PH.LANGS.map(l => {
-        let body;
-        if (l.id === 'vi') body = `<span class="vi">${PH.esc(SAMPLE.vi)}</span>`;
-        else if (l.id === 'bi') body = `<span class="vi">${PH.esc(SAMPLE.vi)}</span><span class="en">${PH.esc(SAMPLE.en)}</span>`;
-        else body = `<span class="en">${PH.esc(SAMPLE.en)}</span>`;
-        return `<button type="button" class="level ${l.id === cur ? 'active' : ''}" data-lang="${l.id}" title="Mức ${l.level}: ${l.long}"><span class="n">${l.level}</span><span class="txt hl">${body}</span></button>`;
-      }).join('');
-      PH.highlight(document.getElementById('levelRows'));
+      $('demo').innerHTML = PH.label('lang', PH.uiFmt('sameSentence'), '', 'sm') + DEMO.map(d => {
+        const on = d.lang === cur;
+        const body = en() ? `<p>${PH.uiFmt(d.mo)}</p>` : `${d.vi ? `<p>${PH.esc(PH.dinh(d.vi))}</p>` : ''}${d.en ? `<p class="en" lang="en">${PH.esc(PH.dinh(d.en))}</p>` : ''}`;
+        return `<button type="button" class="demo-row${on ? ' on' : ''}" data-lang="${d.lang}" aria-pressed="${on}"><span class="so">${d.so}</span><span style="min-width:0"><p class="nhan">${PH.uiFmt(d.key)}${on ? ' · ' + PH.uiFmt('selected') : ''}</p>${body}</span></button>`;
+      }).join('') + `<p class="ghi">${PH.uiFmt('sameSentenceHint')}</p>`;
     }
-    document.getElementById('levelRows').addEventListener('click', e => { const b = e.target.closest('.level'); if (b) PH.setLang(b.dataset.lang); });
-
-    function renderStats() {
-      const nQ = (PH.EXAMS || []).reduce((s, x) => s + x.parts.reduce((a, p) => a + p.items.length, 0), 0);
-      const nL = Object.keys(PH.CONTENT || {}).length;
-      const items = [[(PH.TERMS || []).length, 'thuật ngữ song ngữ'], [25, 'bài học có nội dung'], [nQ, 'câu hỏi luyện đề'], [2, 'trò chơi ôn tập']];
-      document.getElementById('stats').innerHTML = items.map(([n, l], i) => `<div class="card stat-card reveal" data-delay="${i}"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
-    }
+    $('demo').addEventListener('click', e => { const b = e.target.closest('.demo-row'); if (b) PH.setLang(b.dataset.lang); });
 
     function renderContinue() {
-      const p = PH.progress(); const box = document.getElementById('continueCard');
-      const last = p.last && PH.lesson(p.last.lesson) ? p.last.lesson : null;
-      const n = last || 1; const l = PH.lesson(n); const ch = l ? PH.chapter(l.chapter) : null;
-      const prog = ch ? PH.chapterProgress(ch.n) : { total: 0, done: 0 };
-      const pct = prog.total ? Math.round(prog.done / prog.total * 100) : 0;
-      const label = last ? 'Tiếp tục' : 'Bắt đầu';
-      box.style.setProperty('--accent', `var(--c${ch ? ch.n : 1})`);
-      box.innerHTML = `<span class="icon-tile ${tone(ch ? ch.n : 1)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[ch ? ch.n : 1]}</svg></span>
-        <div>
-          <div class="meta">${label} · Chương ${ch ? PH.roman(ch.n) + ' · ' + PH.esc(ch.vi) : ''}</div>
-          <div class="lesson-name">${PH.L(PH.lessonTitle(n))}</div>
-          <div class="meta">Đang học ở mức <b style="color:var(--navy)">${PH.langInfo().long}</b> · đã xong ${prog.done} / ${prog.total} bài của chương</div>
-        </div>
-        <div class="bar progress" title="${pct}%"><i style="width:${pct}%"></i></div>
-        <a class="btn" href="bai.html?n=${n}">${label} học</a>`;
-      document.getElementById('btnStart').href = `bai.html?n=${n}`;
+      const nx = PH.nextLesson(); const l = PH.lesson(nx.n) || { n: nx.n, chapter: 1 }; const c = l.chapter;
+      const rec = PH.progress().lessons[nx.n] || {};
+      const pct = nx.state === 'doing' ? Math.min(99, Math.round(rec.read || 0)) : nx.state === 'done' ? 100 : 0;
+      const lbl = nx.state === 'doing' ? PH.ui('inProgressLbl', { c: PH.roman(c) }) : nx.state === 'next' ? PH.ui('nextUp', { c: PH.roman(c) }) : nx.state === 'done' ? PH.ui('allDone', { c: PH.roman(c) }) : PH.ui('startHere');
+      const phu = nx.state === 'doing' ? PH.ui('read', { p: pct }) : nx.state === 'done' ? PH.ui('done') : nx.state === 'next' ? PH.ui('notStartedShort') : PH.ui('notStarted');
+      const phuNgan = nx.state === 'new' ? PH.ui('notStartedShort') : phu;
+      const btn = nx.state === 'new' ? PH.ui('startBtn') : nx.state === 'done' ? PH.ui('reviewAgain') : PH.ui('continueBtn');
+      const name = PH.T(PH.lessonTitle(nx.n)).split(' — ')[0];
+      const href = `bai.html?n=${nx.n}`;
+      const desk = $('tiepDesk'); desk.href = href;
+      desk.innerHTML = `<span class="ic tone-${c}">${PH.icon(PH.CH_ICON[c])}</span><span class="txt"><span class="lbl">${PH.esc(lbl)}</span><span class="ten">${PH.esc(PH.dinh(name))}</span><span class="dong"><span class="bar"><i style="width:${pct}%"></i></span><span class="phu">${PH.esc(phu)}</span></span></span><span class="btn gold">${PH.esc(btn)}${PH.icon('arrow', 'sm')}</span>`;
+      const mob = $('tiepMob'); mob.href = href; mob.className = `card tiep-mob acc-${c}`;
+      mob.innerHTML = `<span class="top"><span class="ic tone-${c}">${PH.icon(PH.CH_ICON[c])}</span><span style="flex:1;min-width:0"><span class="lbl" style="display:block">${PH.esc(lbl)}</span><span class="ten">${PH.esc(PH.dinh(name))}</span></span></span><span class="dong"><span class="progress"><i style="width:${pct}%"></i></span><span class="phu">${PH.esc(phuNgan)}</span><span class="btn gold">${PH.esc(btn)}${PH.icon('arrow', 'sm')}</span></span>`;
     }
 
-    function ring(pct, accent) {
-      const C = 2 * Math.PI * 20; const v = C * pct / 100;
-      return `<svg class="ring" viewBox="0 0 48 48" aria-hidden="true"><circle class="track" cx="24" cy="24" r="20"/><circle class="val" cx="24" cy="24" r="20" stroke-dasharray="${v.toFixed(1)} ${C.toFixed(1)}"/><text x="24" y="24">${pct}%</text></svg>`;
+    function renderEntries() {
+      const nL = PH.sampleLessons().length, nT = (PH.TERMS || []).length;
+      const nQ = (PH.EXAMS || []).reduce((s, x) => s + x.parts.reduce((a, p) => a + p.items.length, 0), 0);
+      const LOI = [
+        { href: 'baihoc.html', icon: 'book', key: 'navLessons', m: 'entryLessons', v: { n: nL }, ring: '#1E88E5', ink: 'var(--navy)', nen: '#EDF5FD', vien: '#90C2F0' },
+        { href: 'thuatngu.html', icon: 'speaker', key: 'navTerms', m: 'entryTerms', v: { n: nT }, ring: '#F57C00', ink: '#C25400', nen: '#FFF6EA', vien: '#F6C995' },
+        { href: 'luyende.html', icon: 'exam', key: 'navExams', m: 'entryExams', v: { n: nQ }, ring: '#1E88E5', ink: 'var(--navy)', nen: '#EDF5FD', vien: '#90C2F0' },
+        { href: 'games.html', icon: 'game', key: 'navGames', m: 'entryGames', ring: '#F57C00', ink: '#C25400', nen: '#FFF6EA', vien: '#F6C995' },
+        { href: 'thinghiem.html', icon: 'flask', key: 'navLab', m: 'entryLab', ring: '#1E88E5', ink: 'var(--navy)', nen: '#EDF5FD', vien: '#90C2F0' }
+      ];
+      const box = $('loiVao'); box.setAttribute('aria-label', PH.ui('todayH2'));
+      box.innerHTML = LOI.map(o => `<a class="lv" href="${o.href}" style="--o-nen:${o.nen};--o-vien:${o.vien}"><span class="ic" style="border-color:${o.ring};color:${o.ink}">${PH.icon(o.icon)}</span><span class="t">${PH.uiFmt(o.key)}</span><span class="t-en en" lang="en">${PH.esc(PH.UI[o.key][1])}</span><span class="m">${PH.uiFmt(o.m, o.v)}</span></a>`).join('');
     }
+
     function renderChapters() {
-      const grid = document.getElementById('chapterGrid');
-      document.getElementById('chaptersTitle').textContent = `Bốn chương · ${(PH.LESSONS || []).length || 25} bài`;
-      grid.innerHTML = (PH.CHAPTERS || []).map((ch, i) => {
-        const pr = PH.chapterProgress(ch.n); const pct = pr.total ? Math.round(pr.done / pr.total * 100) : 0;
-        const meta = pr.done ? `${pr.total} bài · đã học ${pr.done}` : `${pr.total} bài · chưa bắt đầu`;
-        return `<a class="card chapter reveal" data-delay="${i}" href="baihoc.html#chuong-${ch.n}" style="--accent: var(--c${ch.n})">
-          <div class="head-row"><span class="icon-tile ${tone(ch.n)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[ch.n]}</svg></span>${ring(pct)}</div>
-          <span class="num">Chương ${PH.roman(ch.n)}</span>
-          <span class="name">${PH.esc(ch.vi)}</span>
-          <span class="name-en">${PH.esc(ch.en)}</span>
-          <span class="progress"><i style="width:${pct}%"></i></span>
-          <span class="meta">${meta}</span></a>`;
+      const n = PH.sampleLessons().length;
+      $('chH2').textContent = PH.ui('fourChapters', { n });
+      $('chXem').innerHTML = `<span class="long">${PH.uiFmt('seeAllLessons')}</span><span class="short">${PH.uiFmt('seeAllShort')}</span>` + PH.icon('arrow', 'sm');
+      $('chuongGrid').innerHTML = (PH.CHAPTERS || []).map((ch, i) => {
+        const pr = PH.sampleProgress(ch.n);
+        const meta = pr.done ? PH.ui('chDone', { n: pr.total, d: pr.done }) : PH.ui('chNone', { n: pr.total });
+        const hasLab = ch.lessons.includes(PH.LAB_LESSON);
+        const img = `assets/img/${IMG[ch.n]}`;
+        return `<a class="the-chuong acc-${ch.n} reveal" data-delay="${i}" href="baihoc.html#chuong-${ch.n}">
+          <span class="band"><img src="${img}-600x324.webp" srcset="${img}-168x96.webp 168w, ${img}-600x324.webp 600w" sizes="(max-width: 720px) 84px, (max-width: 900px) 45vw, 280px" width="600" height="324" loading="lazy" decoding="async" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}">${hasLab ? `<span class="tag lab">${PH.icon('flask', 'sm')}${PH.uiFmt('lab')}</span>` : ''}</span>
+          <span class="body"><span class="icon-tile tone-${ch.n}">${PH.icon(PH.CH_ICON[ch.n])}</span>
+            <span class="nhan">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</span>
+            <span class="ten">${PH.esc(en() ? ch.en : ch.vi)}</span>
+            ${en() ? '' : `<span class="ten-en en" lang="en">${PH.esc(ch.en)}</span>`}
+            <span class="progress"><i style="width:${pr.pct}%"></i></span>
+            <span class="meta">${PH.esc(PH.dinh(meta))}</span></span>
+          <span class="pill-mob">${pr.done}/${pr.total}</span></a>`;
       }).join('');
+      PH.reveal($('chuongGrid'));
     }
 
-    function reveal() {
-      const els = [...document.querySelectorAll('.reveal:not(.in)')];
-      // Phần tử đang nằm trong màn hình thì hiện ngay; phần còn lại hiện khi cuộn tới.
-      els.forEach(e => { if (e.getBoundingClientRect().top < window.innerHeight * 0.95) e.classList.add('in'); });
-      if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-      const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
-      els.forEach(e => { if (!e.classList.contains('in')) io.observe(e); });
-      setTimeout(() => els.forEach(e => e.classList.add('in')), 2500); // an toàn: không bao giờ để nội dung bị ẩn
-    }
-
-    function renderAll() { renderLevels(); renderStats(); renderContinue(); renderChapters(); reveal(); }
+    function renderAll() { renderHero(); renderContinue(); renderEntries(); renderChapters(); }
     renderAll();
     PH.onLang(renderAll);
+    document.addEventListener('ph:progress', renderContinue);
+    document.addEventListener('ph:progress', renderChapters);
 
     // Nút "Cài lên màn hình chính" chỉ hiện khi trình duyệt cho phép cài ứng dụng web
-    const btnInstall = document.getElementById('btnInstall');
-    const showInstall = () => { btnInstall.hidden = !PH.canInstall(); };
-    showInstall(); document.addEventListener('ph:installable', showInstall);
-    btnInstall.addEventListener('click', async () => { const ok = await PH.install(); PH.toast(ok ? 'Đã cài PhysiHub lên màn hình chính.' : 'Em có thể cài sau từ menu trình duyệt: “Thêm vào màn hình chính”.'); showInstall(); });
+    const box = $('installBox');
+    const showInstall = () => {
+      box.hidden = !PH.canInstall();
+      if (!box.hidden) box.innerHTML = `<span style="flex:1">${PH.uiFmt('installLater')}</span><button type="button" class="btn sm outline" id="btnInstall">${PH.uiFmt('install')}</button>`;
+    };
+    showInstall(); document.addEventListener('ph:installable', showInstall); PH.onLang(showInstall);
+    box.addEventListener('click', async e => { if (!e.target.closest('#btnInstall')) return; const ok = await PH.install(); PH.toast(PH.ui(ok ? 'installed' : 'installLater')); showInstall(); });
   </script>
 </body>
 </html>

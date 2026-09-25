@@ -3,115 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tất cả liên kết — PhysiHub</title>
-  <meta name="description" content="Mục lục liên kết của PhysiHub: 25 bài học, ngân hàng thuật ngữ, 4 đề ôn và các trò chơi — bấm được trên cả điện thoại và máy tính.">
+  <title>Tất cả liên kết · PhysiHub</title>
+  <meta name="description" content="Mục lục mọi liên kết của PhysiHub: bài học, thuật ngữ, đề ôn, trò chơi, thí nghiệm ảo và cách cài lên màn hình chính.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tất cả liên kết · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    .section { margin-top: 36px; scroll-margin-top: 80px; }
-    .section > h2 { margin: 8px 0 4px; font-size: 24px; }
+    .section { margin-top: 32px; scroll-margin-top: 130px; }
+    .section > .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .section > .sh h2 { margin: 0; font-size: 24px; }
     .section > p.note { color: var(--ink-2); font-size: 14px; margin-bottom: 14px; }
-    /* Danh sách liên kết dạng ô bấm lớn, ngón tay bấm không lệch */
     .links { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
-    .lk { display: flex; align-items: center; gap: 12px; padding: 13px 16px; min-height: 56px; color: inherit; }
-    .lk .n { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-family: var(--font-serif); font-size: 15px; font-weight: 600; background: var(--accent-soft); color: var(--accent); }
-    .lk .t { font-weight: 500; line-height: 1.35; }
+    .lk { display: flex; align-items: center; gap: 12px; padding: 12px 16px; min-height: 56px; color: inherit; border-radius: 16px; }
+    a.lk:hover { background: var(--accent-soft); color: inherit; }
+    .lk .n { flex: none; width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; border-radius: 50%; font-family: var(--font-display); font-size: 15px; font-weight: 800; background: var(--accent-soft); color: var(--accent-ink); }
+    .lk .n .icon { width: 18px; height: 18px; }
+    .lk .t { font-weight: 500; line-height: 1.35; min-width: 0; }
     .lk .t .en { display: block; font-size: 12.5px; }
-    .lk .go { margin-left: auto; color: var(--accent); font-weight: 600; flex: none; }
+    .lk .t .sub { display: block; font-size: 12.5px; color: var(--ink-3); }
+    .lk .go { margin-left: auto; color: var(--accent-ink); flex: none; }
     .lk.off { opacity: .55; }
     .lk.off .go { display: none; }
     .chapter-links { margin-top: 18px; }
     .chapter-links .head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
-    .chapter-links .head h3 { font-family: var(--font-serif); font-size: 19px; }
+    .chapter-links .head h3 { font-size: 19px; color: var(--accent-ink); }
     .chapter-links .head .meta { margin-left: auto; font-size: 13px; color: var(--ink-3); }
     .urlbox { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; }
-    .urlbox code { font-family: "JetBrains Mono", Consolas, monospace; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; word-break: break-all; }
-    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .urlbox code { font-family: "JetBrains Mono", Consolas, monospace; background: var(--blue-soft); border: 1px solid var(--blue-line); border-radius: 8px; padding: 8px 12px; word-break: break-all; }
+    .toc { margin-top: 16px; }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
-      <div class="page-hero">
-        <div>
-          <span class="badge">Mục lục</span>
-          <h1>Tất cả liên kết của PhysiHub</h1>
-          <p>Mỗi ô dưới đây là một liên kết bấm được: mở trực tiếp bài học, thuật ngữ, đề ôn hay trò chơi. Dùng như nhau trên điện thoại và máy tính.</p>
-        </div>
-      </div>
-
-      <div class="toc">
-        <a class="pill" href="#chinh">Trang chính</a>
-        <a class="pill" href="#baihoc">25 bài học</a>
-        <a class="pill" href="#thuatngu">Thuật ngữ</a>
-        <a class="pill" href="#luyende">Đề ôn</a>
-        <a class="pill" href="#trochoi">Trò chơi</a>
-        <a class="pill" href="#diachi">Địa chỉ web</a>
-      </div>
-
-      <section class="section" id="chinh">
-        <span class="badge">1</span>
-        <h2>Trang chính</h2>
-        <p class="note">Năm mục này cũng nằm trên thanh menu ở đầu mỗi trang.</p>
-        <div class="links" id="mainLinks"></div>
-      </section>
-
-      <section class="section" id="baihoc">
-        <span class="badge">2</span>
-        <h2>25 bài học theo SGK Kết nối tri thức</h2>
-        <p class="note">Bài có nội dung thì bấm mở được ngay; bài ghi “đang biên soạn” là 4 bài “Bài tập” chưa soạn nội dung.</p>
-        <div id="lessonLinks"></div>
-      </section>
-
-      <section class="section" id="thuatngu">
-        <span class="badge">3</span>
-        <h2>Ngân hàng thuật ngữ</h2>
-        <p class="note">Mở sẵn theo chương, hoặc mở trực tiếp một thuật ngữ mẫu.</p>
-        <div class="links" id="termLinks"></div>
-      </section>
-
-      <section class="section" id="luyende">
-        <span class="badge">4</span>
-        <h2>Đề ôn theo cấu trúc đề thi 2025</h2>
-        <p class="note">Bấm vào là vào thẳng phòng thi của đề đó, đồng hồ bắt đầu chạy.</p>
-        <div class="links" id="examLinks"></div>
-      </section>
-
-      <section class="section" id="trochoi">
-        <span class="badge">5</span>
-        <h2>Trò chơi — chọn sẵn phạm vi ôn</h2>
-        <p class="note">Mỗi liên kết mở trò chơi với phạm vi đã chọn trước, không cần bấm thêm.</p>
-        <div class="links" id="gameLinks"></div>
-      </section>
-
-      <section class="section" id="diachi">
-        <span class="badge">6</span>
-        <h2>Địa chỉ web và cách cài lên điện thoại</h2>
-        <div class="card" style="margin-top:12px">
-          <div class="urlbox">
-            <span>Địa chỉ công khai:</span>
-            <code id="publicUrl">https://vvsuslab.github.io/PhysiHub/</code>
-            <button class="btn outline sm" id="btnCopy" type="button">Sao chép</button>
-            <a class="btn sm" id="btnOpen" href="https://vvsuslab.github.io/PhysiHub/">Mở</a>
-          </div>
-          <hr class="sep">
-          <p class="small" style="color:var(--ink-2)">
-            <b>Android (Chrome):</b> mở địa chỉ trên → menu ⋮ → <i>Thêm vào màn hình chính</i>.<br>
-            <b>iPhone (Safari):</b> mở địa chỉ trên → nút Chia sẻ → <i>Thêm vào MH chính</i>.<br>
-            Sau lần mở đầu tiên có mạng, các bài học, thuật ngữ, đề và trò chơi dùng được cả khi không có mạng.
-          </p>
-          <div class="row" style="margin-top:12px"><button class="btn glow" id="btnInstall" type="button" hidden>Cài lên màn hình chính</button></div>
-        </div>
-      </section>
+      <section class="page-hero light"><div><p class="eyebrow" id="eyebrow"></p><h1 id="h1"></h1><p class="lead" id="lead" style="max-width:640px"></p></div></section>
+      <div class="pills toc" id="toc"></div>
+      <section class="section" id="chinh"><div class="sh"><span class="num-dot">1</span><h2 class="sec-title" id="h2a"></h2></div><p class="note" id="na"></p><div class="links" id="mainLinks"></div></section>
+      <section class="section" id="baihoc"><div class="sh"><span class="num-dot">2</span><h2 class="sec-title" id="h2b"></h2></div><p class="note" id="nb"></p><div id="lessonLinks"></div></section>
+      <section class="section" id="thuatngu"><div class="sh"><span class="num-dot">3</span><h2 class="sec-title" id="h2c"></h2></div><p class="note" id="nc"></p><div class="links" id="termLinks"></div></section>
+      <section class="section" id="luyende"><div class="sh"><span class="num-dot">4</span><h2 class="sec-title" id="h2d"></h2></div><p class="note" id="nd"></p><div class="links" id="examLinks"></div></section>
+      <section class="section" id="trochoi"><div class="sh"><span class="num-dot">5</span><h2 class="sec-title" id="h2e"></h2></div><p class="note" id="ne"></p><div class="links" id="gameLinks"></div></section>
+      <section class="section" id="diachi"><div class="sh"><span class="num-dot">6</span><h2 class="sec-title" id="h2f"></h2></div><p class="note" id="nf"></p>
+        <div class="card">
+          <div class="urlbox"><span id="lbUrl"></span><code id="publicUrl">https://vvsuslab.github.io/PhysiHub/</code><button class="btn outline sm" id="btnCopy" type="button"></button><a class="btn sm" id="btnOpen" href="https://vvsuslab.github.io/PhysiHub/"></a></div>
+          <hr class="sep"><p class="small" style="color:var(--ink-2)" id="howInstall"></p>
+          <div class="row" style="margin-top:12px"><button class="btn gold" id="btnInstall" type="button" hidden></button></div>
+        </div></section>
     </div>
   </main>
 
@@ -121,83 +69,73 @@
   <script src="data/exams.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: null });
-
-    const lk = (href, num, title, sub, cls) =>
-      href ? `<a class="card lk ${cls || ''}" href="${href}"><span class="n">${num}</span><span class="t">${title}${sub ? `<span class="en">${sub}</span>` : ''}</span><span class="go" aria-hidden="true">→</span></a>`
-           : `<div class="card lk off ${cls || ''}"><span class="n">${num}</span><span class="t">${title}${sub ? `<span class="en">${sub}</span>` : ''}</span></div>`;
+    Object.assign(PH.UI, {
+      eyebrow: ['Mục lục', 'Index'], h1: ['Tất cả liên kết của PhysiHub', 'Every link on PhysiHub'],
+      lead: ['Mỗi ô dưới đây là một liên kết bấm được: mở trực tiếp bài học, thuật ngữ, đề ôn hay trò chơi. Dùng như nhau trên điện thoại và máy tính.', 'Every tile below is a link: it opens a lesson, a term, a practice test or a game directly. Works the same on phones and computers.'],
+      tMain: ['Trang chính', 'Main pages'], tLessons: ['Bài học', 'Lessons'], tTerms: ['Thuật ngữ', 'Glossary'], tExams: ['Đề ôn', 'Practice tests'], tGames: ['Trò chơi', 'Games'], tUrl: ['Địa chỉ web', 'Web address'],
+      nMain: ['Sáu mục này cũng nằm trên thanh menu ở đầu mỗi trang.', 'These six also sit on the menu bar at the top of every page.'],
+      nLessons: ['Bài mẫu mở được; bài chưa có nội dung vẫn liệt kê để đúng mục lục sách.', 'Sample lessons open; lessons not written yet are still listed to match the textbook.'],
+      nTerms: ['Mở kho theo chương, hoặc mở thẳng một thuật ngữ.', 'Open the glossary by chapter, or jump to one term.'], nExams: ['Mỗi đề theo cấu trúc 2025, có ba mức ngôn ngữ.', 'Each test follows the 2025 format, in three language levels.'],
+      nGames: ['Chọn sẵn phạm vi ôn trước khi vào trò chơi.', 'Pick a review scope before you start.'], nUrl: ['Chia sẻ địa chỉ này cho bạn bè; cài lên màn hình chính để dùng như ứng dụng.', 'Share this address with friends; add it to your home screen to use it like an app.'],
+      home: ['Trang chủ', 'Home'], homeSub: ['Chọn mức ngôn ngữ, tiếp tục học', 'Pick a language level, keep learning'], lessonsSub: ['{n} bài mẫu · 4 chương', '{n} sample lessons · 4 chapters'],
+      termsSub: ['{n} thuật ngữ song ngữ', '{n} bilingual terms'], examsSub: ['{n} đề ôn', '{n} practice tests'], gamesSub: ['Term Rush · Ghép cặp', 'Term Rush · Match Up'], labSub: ['Từ nước đá đến hơi nước', 'From ice to steam'],
+      about: ['Về dự án', 'About the project'], aboutSub: ['Nguồn học liệu, cách kiểm tra thuật ngữ', 'Sources and how terms are checked'],
+      allTerms: ['Tất cả thuật ngữ', 'All terms'], items: ['{n} mục', '{n} entries'], termsOf: ['Thuật ngữ {c}', 'Terms · {c}'], example: ['Ví dụ: {t}', 'Example: {t}'],
+      qm: ['{n} câu · {m} phút', '{n} questions · {m} min'], rushAll: ['Term Rush — tất cả thuật ngữ', 'Term Rush — all terms'], rushCh: ['Term Rush — Chương {c}', 'Term Rush — Chapter {c}'],
+      matchAll: ['Ghép cặp — tất cả thuật ngữ', 'Match Up — all terms'], matchCh: ['Ghép cặp — Chương {c}', 'Match Up — Chapter {c}'], rushMeta: ['60 giây · 3 mạng', '60 seconds · 3 lives'], matchMeta: ['12 thẻ · 90 giây', '12 cards · 90 seconds'],
+      weak: ['Ôn điểm yếu của em', 'My weak spots'], weakN: ['{n} thuật ngữ từng trả lời sai', '{n} terms answered wrongly before'], weak0: ['chưa có thuật ngữ nào sai', 'no wrong answers yet'],
+      lbUrl: ['Địa chỉ công khai:', 'Public address:'], copy: ['Sao chép', 'Copy'], open: ['Mở', 'Open'], copied: ['Đã sao chép địa chỉ web.', 'Address copied.'], copyFail: ['Em hãy chọn và sao chép địa chỉ bằng tay nhé.', 'Please select and copy the address by hand.'],
+      howInstall: ['<b>Android (Chrome):</b> mở địa chỉ trên → menu ⋮ → <i>Thêm vào màn hình chính</i>.<br><b>iPhone (Safari):</b> mở địa chỉ trên → nút Chia sẻ → <i>Thêm vào MH chính</i>.<br>Sau lần mở đầu tiên có mạng, bài học, thuật ngữ, đề và trò chơi dùng được cả khi không có mạng.', '<b>Android (Chrome):</b> open the address → menu ⋮ → <i>Add to Home screen</i>.<br><b>iPhone (Safari):</b> open the address → Share → <i>Add to Home Screen</i>.<br>After the first visit with a connection, lessons, terms, tests and games also work offline.']
+    });
+    PH.mount({ active: null, heroIcon: 'list', title: { vi: 'Tất cả liên kết', en: 'All links' } });
+    const $ = id => document.getElementById(id);
+    const en = () => PH.lang() === 'en';
+    const lk = (href, num, title, sub, cls, enTxt) => {
+      const inner = `<span class="n">${num}</span><span class="t">${title}${enTxt && !en() ? `<span class="en" lang="en">${enTxt}</span>` : ''}${sub ? `<span class="sub">${sub}</span>` : ''}</span>`;
+      return href ? `<a class="card o lk ${cls || ''}" href="${href}">${inner}<span class="go" aria-hidden="true">${PH.icon('arrow', 'sm')}</span></a>` : `<div class="card o lk off ${cls || ''}">${inner}</div>`;
+    };
+    const chName = c => PH.esc(en() ? c.en : c.vi);
 
     function render() {
-      // 1. Trang chính
-      document.getElementById('mainLinks').innerHTML = [
-        ['index.html', '🏠', 'Trang chủ', 'Chọn mức ngôn ngữ, tiếp tục học'],
-        ['baihoc.html', '📚', 'Bài học', 'Danh sách 4 chương · 25 bài'],
-        ['thuatngu.html', '🔤', 'Ngân hàng thuật ngữ', `${(PH.TERMS || []).length} thuật ngữ song ngữ`],
-        ['luyende.html', '📝', 'Luyện đề', `${(PH.EXAMS || []).length} đề ôn`],
-        ['games.html', '🎮', 'Trò chơi', 'Term Rush · Ghép cặp']
-      ].map(([h, n, t, s]) => lk(h, n, t, s)).join('');
-
-      // 2. Bài học, nhóm theo chương, dùng màu của chương
-      document.getElementById('lessonLinks').innerHTML = (PH.CHAPTERS || []).map(ch => {
-        const rows = ch.lessons.map(n => {
-          const l = PH.lesson(n); if (!l) return '';
-          const has = PH.hasContent(n);
-          return lk(has ? `bai.html?n=${n}` : null, PH.pad2(n), PH.esc(l.vi), has ? PH.esc(l.en) : 'đang biên soạn');
-        }).join('');
-        const pr = PH.chapterProgress(ch.n);
-        return `<div class="chapter-links acc-${ch.n}">
-          <div class="head"><h3>Chương ${PH.roman(ch.n)} · ${PH.esc(ch.vi)}</h3><span class="tag acc">${PH.esc(ch.en)}</span><span class="meta">${pr.done}/${pr.total} bài đã học</span></div>
-          <div class="links">${rows}</div></div>`;
+      $('eyebrow').textContent = PH.ui('eyebrow'); $('h1').textContent = PH.ui('h1'); $('lead').textContent = PH.dinh(PH.ui('lead'));
+      $('toc').innerHTML = [['#chinh', 'tMain'], ['#baihoc', 'tLessons'], ['#thuatngu', 'tTerms'], ['#luyende', 'tExams'], ['#trochoi', 'tGames'], ['#diachi', 'tUrl']].map(x => `<a class="pill" href="${x[0]}">${PH.uiFmt(x[1])}</a>`).join('');
+      [['h2a', 'tMain', 'na', 'nMain'], ['h2b', 'tLessons', 'nb', 'nLessons'], ['h2c', 'tTerms', 'nc', 'nTerms'], ['h2d', 'tExams', 'nd', 'nExams'], ['h2e', 'tGames', 'ne', 'nGames'], ['h2f', 'tUrl', 'nf', 'nUrl']].forEach(x => { $(x[0]).textContent = PH.ui(x[1]); $(x[2]).textContent = PH.dinh(PH.ui(x[3])); });
+      const nS = PH.sampleLessons().length;
+      $('mainLinks').innerHTML = [
+        ['index.html', 'home', PH.uiFmt('home'), PH.uiFmt('homeSub')],
+        ['baihoc.html', 'book', PH.uiFmt('navLessons'), PH.uiFmt('lessonsSub', { n: nS })],
+        ['thuatngu.html', 'speaker', PH.uiFmt('navTerms'), PH.uiFmt('termsSub', { n: (PH.TERMS || []).length })],
+        ['luyende.html', 'exam', PH.uiFmt('navExams'), PH.uiFmt('examsSub', { n: (PH.EXAMS || []).length })],
+        ['games.html', 'game', PH.uiFmt('navGames'), PH.uiFmt('gamesSub')],
+        ['thinghiem.html', 'flask', PH.uiFmt('navLab'), PH.uiFmt('labSub')],
+        ['vedan.html', 'shield', PH.uiFmt('about'), PH.uiFmt('aboutSub')]
+      ].map(([h, ic, t, s]) => lk(h, PH.icon(ic), t, s)).join('');
+      $('lessonLinks').innerHTML = (PH.CHAPTERS || []).map(ch => {
+        const rows = ch.lessons.map(n => { const l = PH.lesson(n); if (!l) return ''; const can = PH.canOpen(n); return lk(`bai.html?n=${n}`, PH.pad2(n), PH.esc(PH.dinh(en() ? l.en : l.vi)), can ? '' : PH.uiFmt('noContent'), can ? '' : 'off-look', PH.esc(PH.dinh(l.en))); }).join('');
+        const pr = PH.sampleProgress(ch.n);
+        return `<div class="chapter-links acc-${ch.n}"><div class="head"><h3>${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${chName(ch)}</h3>${en() ? '' : `<span class="tag acc" lang="en">${PH.esc(ch.en)}</span>`}<span class="meta">${PH.uiFmt(pr.done ? 'chDone' : 'chNone', { n: pr.total, d: pr.done })}</span></div><div class="links">${rows}</div></div>`;
       }).join('');
-
-      // 3. Thuật ngữ: tất cả + từng chương + một thuật ngữ mẫu
       const sample = PH.termById('boyles-law') || (PH.TERMS || [])[0];
-      document.getElementById('termLinks').innerHTML = [
-        lk('thuatngu.html', 'ALL', 'Tất cả thuật ngữ', `${(PH.TERMS || []).length} mục`)
-      ].concat((PH.CHAPTERS || []).map(ch =>
-        lk(`thuatngu.html?c=${ch.n}`, `C.${PH.roman(ch.n)}`, `Thuật ngữ ${PH.esc(ch.vi)}`, `${PH.termsForChapter(ch.n).length} mục`, `acc-${ch.n}`)
-      )).concat(sample ? [lk(`thuatngu.html?t=${sample.id}`, '🔎', `Ví dụ: ${PH.esc(sample.vi)}`, PH.esc(sample.en), `acc-${sample.chapter}`)] : []).join('');
-
-      // 4. Đề ôn
-      document.getElementById('examLinks').innerHTML = (PH.EXAMS || []).map(x => {
-        const count = x.parts.reduce((s, pt) => s + pt.items.length, 0);
-        return lk(`luyende.html?exam=${x.id}`, `C.${PH.roman(x.chapter)}`, PH.esc(x.title.vi), `${count} câu · ${x.minutes} phút`, `acc-${x.chapter}`);
-      }).join('');
-
-      // 5. Trò chơi với phạm vi chọn trước
+      $('termLinks').innerHTML = [lk('thuatngu.html', 'ALL', PH.uiFmt('allTerms'), PH.uiFmt('items', { n: (PH.TERMS || []).length }))]
+        .concat((PH.CHAPTERS || []).map(ch => lk(`thuatngu.html?c=${ch.n}`, PH.roman(ch.n), PH.uiFmt('termsOf', { c: chName(ch) }), PH.uiFmt('items', { n: PH.termsForChapter(ch.n).length }), `acc-${ch.n}`)))
+        .concat(sample ? [lk(`thuatngu.html?t=${sample.id}`, PH.icon('search'), PH.uiFmt('example', { t: PH.esc(en() ? sample.en : sample.vi) }), '', `acc-${sample.chapter}`, PH.esc(sample.en))] : []).join('');
+      $('examLinks').innerHTML = (PH.EXAMS || []).map(x => { const c = x.parts.reduce((s, pt) => s + pt.items.length, 0); return lk(`luyende.html?exam=${x.id}`, PH.roman(x.chapter), PH.esc(PH.dinh(en() ? x.title.en : x.title.vi)), PH.uiFmt('qm', { n: c, m: x.minutes }), `acc-${x.chapter}`, PH.esc(x.title.en)); }).join('');
       const weak = PH.weakTermIds().length;
-      const games = [
-        lk('game-termrush.html', '⚡', 'Term Rush — tất cả 25 bài', '60 giây · 3 mạng', 'acc-2'),
-        ...(PH.CHAPTERS || []).map(ch => lk(`game-termrush.html?chapter=${ch.n}`, `⚡ ${PH.roman(ch.n)}`, `Term Rush — Chương ${PH.roman(ch.n)}`, PH.esc(ch.vi), `acc-${ch.n}`)),
-        lk('game-match.html', '🃏', 'Ghép cặp — tất cả 25 bài', '12 thẻ · 90 giây', 'acc-3'),
-        ...(PH.CHAPTERS || []).map(ch => lk(`game-match.html?chapter=${ch.n}`, `🃏 ${PH.roman(ch.n)}`, `Ghép cặp — Chương ${PH.roman(ch.n)}`, PH.esc(ch.vi), `acc-${ch.n}`)),
-        lk(weak ? 'game-termrush.html?scope=weak' : null, '🎯', 'Ôn điểm yếu của em', weak ? `${weak} thuật ngữ từng trả lời sai` : 'chưa có thuật ngữ nào sai')
-      ];
-      document.getElementById('gameLinks').innerHTML = games.join('');
-
-      // 6. Địa chỉ: nếu đang mở từ máy chủ thật thì lấy đúng địa chỉ gốc của site
-      if (location.protocol.startsWith('http') && !/localhost|127\.0\.0\.1/.test(location.hostname)) {
-        const base = location.href.replace(/lienket\.html.*$/, '');
-        document.getElementById('publicUrl').textContent = base;
-        document.getElementById('btnOpen').href = base;
-      }
+      $('gameLinks').innerHTML = [
+        lk('game-termrush.html', PH.icon('bolt'), PH.uiFmt('rushAll'), PH.uiFmt('rushMeta'), 'acc-2'),
+        ...(PH.CHAPTERS || []).map(ch => lk(`game-termrush.html?chapter=${ch.n}`, PH.roman(ch.n), PH.uiFmt('rushCh', { c: PH.roman(ch.n) }), chName(ch), `acc-${ch.n}`)),
+        lk('game-match.html', PH.icon('cards2'), PH.uiFmt('matchAll'), PH.uiFmt('matchMeta'), 'acc-3'),
+        ...(PH.CHAPTERS || []).map(ch => lk(`game-match.html?chapter=${ch.n}`, PH.roman(ch.n), PH.uiFmt('matchCh', { c: PH.roman(ch.n) }), chName(ch), `acc-${ch.n}`)),
+        lk(weak ? 'game-termrush.html?scope=weak' : null, PH.icon('fire'), PH.uiFmt('weak'), weak ? PH.uiFmt('weakN', { n: weak }) : PH.uiFmt('weak0'))
+      ].join('');
+      $('lbUrl').textContent = PH.ui('lbUrl'); $('btnCopy').textContent = PH.ui('copy'); $('btnOpen').textContent = PH.ui('open'); $('howInstall').innerHTML = PH.ui('howInstall'); $('btnInstall').textContent = PH.ui('install');
+      if (location.protocol.startsWith('http') && !/localhost|127\.0\.0\.1/.test(location.hostname)) { const base = location.href.replace(/lienket\.html.*$/, ''); $('publicUrl').textContent = base; $('btnOpen').href = base; }
     }
-
-    render();
-    PH.onLang(render);
-    PH.applyHash();
-    window.addEventListener('hashchange', PH.applyHash);
-
-    document.getElementById('btnCopy').addEventListener('click', async () => {
-      const url = document.getElementById('publicUrl').textContent.trim();
-      try { await navigator.clipboard.writeText(url); PH.toast('Đã sao chép địa chỉ web.'); }
-      catch (e) { PH.toast('Em hãy chọn và sao chép địa chỉ bằng tay nhé.'); }
-    });
-
-    const btnInstall = document.getElementById('btnInstall');
-    const showInstall = () => { btnInstall.hidden = !PH.canInstall(); };
+    render(); PH.onLang(render); PH.applyHash(); window.addEventListener('hashchange', PH.applyHash);
+    $('btnCopy').addEventListener('click', async () => { const url = $('publicUrl').textContent.trim(); try { await navigator.clipboard.writeText(url); PH.toast(PH.ui('copied')); } catch (e) { PH.toast(PH.ui('copyFail')); } });
+    const btnInstall = $('btnInstall'); const showInstall = () => { btnInstall.hidden = !PH.canInstall(); };
     showInstall(); document.addEventListener('ph:installable', showInstall);
-    btnInstall.addEventListener('click', async () => { const ok = await PH.install(); PH.toast(ok ? 'Đã cài PhysiHub lên màn hình chính.' : 'Em có thể cài từ menu trình duyệt: “Thêm vào màn hình chính”.'); showInstall(); });
+    btnInstall.addEventListener('click', async () => { const ok = await PH.install(); PH.toast(PH.ui(ok ? 'installed' : 'installLater')); showInstall(); });
   </script>
 </body>
 </html>

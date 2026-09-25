@@ -3,118 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bài học — PhysiHub</title>
+  <title>Bài học · PhysiHub</title>
+  <meta name="description" content="Bài học Vật lí 12 song ngữ Việt – Anh theo SGK Kết nối tri thức với cuộc sống, có thuật ngữ, công thức và câu tự kiểm tra.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bài học · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    .layout { display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start; }
-    .crumb { font-size: 13px; color: var(--ink-3); }
-    .crumb a { color: var(--ink-3); }
-    h1.title { margin: 6px 0 2px; }
-    .title-en { font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--gold); margin-bottom: 18px; }
-    .level-note { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: var(--ink-2); padding: 12px 16px; }
-    .level-note .icon { color: var(--accent); margin-top: 2px; }
-    .crumb a:last-child { color: var(--accent); font-weight: 500; }
-    .formula { border-top: 5px solid var(--accent); }
-    .formula .math { color: var(--accent); }
-    .side .card.soft { background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%); }
-    .side .btn { background: var(--accent); border-color: var(--accent); }
-    .term-list button:hover { color: var(--accent); }
-    .opt.selected { border-color: var(--accent); background: var(--accent-soft); }
-    .opt.selected .k { background: var(--accent); border-color: var(--accent); }
-    .pager .nm { color: var(--accent); }
-    .content { margin-top: 22px; display: flex; flex-direction: column; gap: 18px; }
-    .prose { font-size: 17px; line-height: 1.75; }
-    .prose .bi .en { margin-top: 6px; }
-    .hint { font-size: 13px; color: var(--ink-3); }
-    .formula .label { font-size: 12px; color: var(--ink-3); margin-bottom: 8px; }
-    .formula .math { font-size: 30px; margin: 4px 0 14px; word-break: break-word; }
-    .vars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px 24px; font-size: 14px; }
-    .vars .sym { font-family: var(--font-serif); font-style: italic; font-size: 17px; width: 26px; display: inline-block; }
+    .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr) 272px; gap: 24px; align-items: start; }
+    /* Mục lục chương */
+    .toc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .toc-head .icon-tile { width: 40px; height: 40px; border-radius: 12px; }
+    .toc-head .lb { font-size: 12px; font-weight: 700; color: var(--accent-ink); }
+    .toc-head .nm { font-family: var(--font-display); font-size: 18px; font-weight: 800; line-height: 1.25; color: var(--navy); }
+    .toc-item { display: block; padding: 10px 12px; margin-bottom: 4px; border-radius: 12px; border-left: 4px solid transparent; color: var(--ink-2); transition: background .2s ease; }
+    a.toc-item:hover { background: #fff; color: var(--ink); }
+    .toc-item .so { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 11.5px; font-weight: 600; color: var(--ink-4); }
+    .toc-item .so .icon { width: 14px; height: 14px; color: var(--green); }
+    .toc-item .tn { display: block; font-size: 14px; line-height: 1.4; }
+    .toc-item.cur { background: #fff; box-shadow: var(--shadow); border-left-color: var(--accent); color: var(--ink); }
+    .toc-item.cur .so { color: var(--accent-ink); font-weight: 700; }
+    .toc-item.cur .tn { font-weight: 700; }
+    .toc-item.trong { opacity: .72; }
+    .toc-item .tag { padding: 2px 8px; font-size: 10.5px; }
+    .toc-foot { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .toc-foot .lb { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+    .toc-foot .progress { background: var(--accent-soft); }
+    .toc-foot .note { margin-top: 12px; font-size: 12px; line-height: 1.55; color: var(--ink-3); }
+    /* Nội dung — kiểu slide: dải xanh đầu bài, khung xanh nhạt "Nội dung chính", khung cam "Trong đó" */
+    .paper { padding: 0 0 30px; border-radius: 22px; overflow: hidden; }
+    .paper > .in { padding: 0 34px; }
+    /* Đầu bài như đầu slide: một dải xanh mảnh (huy hiệu sách + tên bài), vạch cam chéo bên phải; ảnh chương nằm dưới, trên nền trắng */
+    .banner { margin-bottom: 22px; }
+    .banner .bar { position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; min-height: 78px; padding: 12px 128px 12px 18px; background: var(--grad-bar); }
+    .banner .bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: -38px; width: 140px; background: linear-gradient(90deg, #fff 0 4px, #2F80D8 4px, #4B97E4 100%); border-left: 12px solid var(--orange); transform: skewX(-24deg); }
+    .banner .bk { position: relative; z-index: 1; width: 54px; height: 54px; flex: none; border-radius: 50%; display: grid; place-items: center; background: #fff; color: var(--navy-2); box-shadow: 0 0 0 3px #90CAF9, 0 4px 12px rgba(4, 22, 66, .25); }
+    .banner .bk svg { width: 26px; height: 26px; }
+    .banner h1 { position: relative; z-index: 1; color: #fff; font-size: clamp(19px, 2.1vw, 25px); line-height: 1.22; text-transform: uppercase; letter-spacing: .2px; }
+    .banner .sub { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 18px; align-items: center; padding: 16px 34px 0; }
+    .crumb { font-size: 12.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; letter-spacing: .2px; }
+    .crumb a { color: inherit; }
+    .crumb a:hover { color: var(--navy); }
+    .banner .h1-en { font-size: 17px; margin-top: 2px; }
+    .banner .figure { height: 104px; border-radius: 14px; border: 1.5px solid var(--blue-line); box-shadow: 0 6px 16px rgba(13, 71, 161, .12); }
+    .banner .figure .cap { bottom: 6px; font-size: 11px; padding: 3px 10px; border-radius: 8px; }
+    .sec-h { display: inline-block; margin: 6px 0 14px; padding-bottom: 5px; font-size: 20px; font-weight: 800; color: var(--navy); background: linear-gradient(var(--orange), var(--orange)) left bottom / 100% 3px no-repeat; }
+    .lv-hint { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1.5px dashed var(--blue-line); font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+    .prose { font-size: 16px; line-height: 1.75; }
+    .prose .bi > .vi { display: block; }
+    .prose .bi > .en, .prose > .en { display: block; }
+    [data-lang="bi"] .prose .en { margin: 4px 0 2px; padding-left: 12px; border-left: 2px solid var(--orange-line); font-size: 15px; line-height: 1.7; }
+    [data-lang="en"] .prose .en { font-family: var(--font-sans); font-style: normal; color: var(--ink); font-size: 16px; }
+    .items { display: flex; flex-direction: column; gap: 14px; }
+    .item { display: flex; gap: 14px; align-items: flex-start; }
+    .item .num-dot { margin-top: 3px; }
+    .item .prose { flex: 1; min-width: 0; }
+    .summary { font-weight: 600; color: var(--ink); }
+    .ct-math { margin: 4px 0 2px; padding: 12px 16px; border-radius: 14px; background: #fff; border: 1.5px solid var(--blue-line); text-align: center; }
+    .ct-math .ttl { font-size: 12.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; }
+    .ct-math .math { font-size: 24px; word-break: break-word; }
+    .vars { display: flex; flex-direction: column; gap: 6px; font-size: 14.5px; color: var(--ink); }
+    .vars .sym { font-family: var(--font-serif); font-style: italic; font-weight: 700; font-size: 17px; color: var(--navy); display: inline-block; min-width: 30px; }
     .vars .unit { color: var(--ink-3); }
-    .formula .note { margin-top: 12px; font-size: 14px; color: var(--ink-2); }
-    .callout { border-left: 4px solid var(--gold); background: var(--gold-soft); }
-    .side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--header-h) + 16px); }
-    .side h3 { font-family: var(--font-sans); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-    .term-list { display: flex; flex-direction: column; }
-    .term-list button { text-align: left; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; }
-    .term-list button:first-child { border-top: 0; }
-    .term-list button:hover { color: var(--navy); }
-    .term-list .en { font-size: 13px; }
-    .selfcheck { margin-top: 36px; scroll-margin-top: 80px; }
+    .vars .en { font-size: 13.5px; }
+    .vars .bi > .en { display: inline; margin: 0 0 0 4px; padding: 0; border: 0; }
+    .vars .bi > .en::before { content: "· "; color: var(--ink-4); }
+    .panel .prose { font-size: 15px; }
+    .bang { overflow: auto; }
+    .cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
+    .goi-y { margin-top: 12px; font-size: 12.5px; color: var(--ink-4); }
+    /* Tự kiểm tra */
+    .selfcheck { scroll-margin-top: 130px; }
+    .selfcheck .meta { position: absolute; right: 18px; top: 12px; font-size: 12.5px; color: var(--ink-3); }
     .q { margin-top: 16px; }
     .q .stem { font-weight: 500; margin-bottom: 10px; }
     .opts { display: grid; gap: 8px; }
-    .opt { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-    .opt:hover { border-color: var(--navy); }
-    .opt .k { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
-    .opt.selected { border-color: var(--navy); background: var(--navy-soft); }
-    .opt.selected .k { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .opt { display: flex; gap: 10px; align-items: flex-start; text-align: left; padding: 10px 14px; border: 1.5px solid var(--blue-line); border-radius: 12px; background: var(--surface); transition: border-color .2s, background .2s; }
+    .opt:hover { border-color: var(--accent); }
+    .opt .k { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue-soft); border: 1.5px solid var(--blue-line); color: var(--navy); display: grid; place-items: center; font-size: 12.5px; font-weight: 800; }
+    .opt.selected { border-color: var(--accent); background: var(--accent-soft); }
+    .opt.selected .k { background: var(--sky); color: #fff; border-color: var(--sky); }
     .opt.right { border-color: var(--green); background: var(--green-soft); }
     .opt.wrong { border-color: var(--red); background: var(--red-soft); }
-    .why { margin-top: 10px; font-size: 14px; padding: 10px 14px; border-radius: 8px; background: var(--surface-2); display: none; }
+    .why { margin-top: 10px; font-size: 14px; padding: 10px 14px; border-radius: 12px; background: var(--orange-soft); border: 1px solid var(--orange-line); display: none; }
     .why.show { display: block; }
     .result { margin-top: 16px; display: none; }
     .result.show { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
-    .pager a { display: flex; flex-direction: column; gap: 2px; padding: 14px 18px; color: inherit; }
-    .pager a:hover { text-decoration: none; box-shadow: var(--shadow); }
-    .pager a.next { text-align: right; }
-    .pager .lbl { font-size: 12px; color: var(--ink-3); }
-    .pager .nm { font-weight: 500; }
-    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .side { position: static; } .pager { grid-template-columns: 1fr; } .pager a.next { text-align: left; } }
+    /* Cột phải */
+    .side { position: sticky; top: calc(var(--header-h) + 16px); }
+    .side > .ph-label { margin: 0 0 12px -4px; }
+    .tn-card { padding: 13px 15px; margin-bottom: 10px; border-radius: 14px; border-left: 4px solid var(--sky); }
+    .tn-card .top { display: flex; align-items: baseline; gap: 8px; }
+    .tn-card .nm { flex: 1; font-size: 15px; line-height: 1.35; font-weight: 700; }
+    .tn-card .unit { font-size: 12px; color: var(--ink-4); white-space: nowrap; }
+    .tn-card .en { display: block; margin-top: 2px; font-size: 14.5px; line-height: 1.35; }
+    .tn-card .ipa-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; min-height: 32px; }
+    .tn-card .ipa { font-size: 13.5px; }
+    .tn-card .speak-btn.ghost { width: 34px; height: 34px; margin-left: -4px; }
+    .tn-card .dict-links { margin-top: 2px; font-size: 12px; }
+    .tn-card .tag { margin-top: 6px; }
+    .hoc-tiep { margin-top: 36px; }
+    .hoc-tiep .ph-mm-l { --accent-soft: #fff; --accent: var(--orange); --accent-ink: var(--ink); align-items: center; background: rgba(255, 255, 255, .8); border-color: var(--orange-line); }
+    .hoc-tiep .ph-mm-l .rn { width: 30px; height: 30px; flex: none; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 2px 6px rgba(31, 41, 51, .1); color: var(--c1-ink); }
+    .hoc-tiep .ph-mm-l .lbl { display: block; font-size: 11.5px; color: var(--ink-4); }
+    .hoc-tiep .ph-mm-l .nm { display: block; font-size: 13.5px; font-weight: 600; line-height: 1.4; }
+    .hoc-tiep .next { margin: 12px 0 8px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2); }
+    .hoc-tiep .lab-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--c1-ink); }
+    /* Bài chưa có nội dung */
+    .trong-box .in { padding-bottom: 6px; }
+    .toc-mob { display: none; }
+    @media (max-width: 1080px) {
+      .layout { grid-template-columns: minmax(0, 1fr) 260px; }
+      .toc { display: none; }
+      .toc-mob { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 10px; scrollbar-width: none; margin-bottom: 8px; }
+      .toc-mob::-webkit-scrollbar { display: none; }
+      .toc-mob .pill { flex: none; }
+      .paper > .in { padding: 0 24px; }
+      .banner .sub { padding: 16px 24px 0; }
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .tn-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .tn-card { margin-bottom: 0; }
+    }
+    @media (max-width: 720px) {
+      .paper { border-radius: 18px; }
+      .paper > .in { padding: 0 14px; }
+      .banner .bar { min-height: 64px; padding: 10px 58px 10px 12px; gap: 10px; }
+      .banner .bar::after { width: 68px; right: -24px; border-left-width: 9px; }
+      .banner h1 { font-size: 18px; }
+      .banner .sub { grid-template-columns: 1fr; gap: 12px; padding: 14px 14px 0; }
+      .banner .figure { height: 132px; }
+      .banner .bk { width: 44px; height: 44px; }
+      .tn-grid { grid-template-columns: 1fr; }
+      .ct-math .math { font-size: 20px; }
+      .item { gap: 10px; }
+    }
+    .print-terms { display: none; }
+    @media print {
+      .toc, .toc-mob, .side, .cta-row, .goi-y, .lv-hint, .selfcheck .row, .btn { display: none !important; }
+      .layout { display: block; } .paper { box-shadow: none; border: 0; padding: 0; } .why { display: block; }
+      .print-terms { display: block; margin-top: 18px; page-break-inside: avoid; } .print-terms h2 { font-size: 16px; margin-bottom: 6px; }
+      .panel { background: #fff !important; } .banner .bar { background: #fff; color: var(--ink); border-bottom: 3px solid var(--navy); padding-right: 12px; } .banner h1 { color: var(--navy); } .banner .figure, .banner .bar::after { display: none; }
+    }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
       <div class="layout">
-        <article>
-          <div class="crumb" id="crumb"></div>
-          <h1 class="title" id="title"></h1>
-          <div class="title-en" id="titleEn"></div>
-          <div class="card level-note" id="levelNote"></div>
-          <div class="content" id="content"></div>
-          <p class="hint" id="hint" style="margin-top:14px"></p>
-
-          <section class="selfcheck card" id="selfcheck">
-            <div class="row between">
-              <div><span class="badge">Sau khi đọc xong</span><h2 style="margin-top:8px">Tự kiểm tra</h2></div>
-              <span class="small muted" id="scMeta"></span>
-            </div>
-            <div id="questions"></div>
-            <div class="row" style="margin-top:18px">
-              <button class="btn" id="btnCheck">Chấm bài</button>
-              <button class="btn outline" id="btnRetry" style="display:none">Làm lại</button>
-            </div>
-            <div class="result" id="result"></div>
-          </section>
-
-          <nav class="pager" id="pager" aria-label="Bài trước / bài sau"></nav>
-        </article>
-
-        <aside class="side">
-          <div class="card">
-            <h3>Thuật ngữ trong bài</h3>
-            <div class="term-list" id="termList"></div>
-            <hr class="sep">
-            <a id="practiceLink" href="#" class="small">Luyện thuật ngữ của bài này →</a>
-          </div>
-          <div class="card soft">
-            <h3>Sau khi đọc xong</h3>
-            <a class="btn block" href="#selfcheck" id="toSelfcheck">Tự kiểm tra · 3 câu</a>
-            <div class="small muted" style="margin-top:10px" id="nextHint"></div>
-          </div>
-        </aside>
+        <aside class="toc" id="toc"></aside>
+        <div style="min-width:0">
+          <nav class="toc-mob" id="tocMob" aria-label=""></nav>
+          <article class="card paper" id="paper"></article>
+        </div>
+        <aside class="side" id="side"></aside>
       </div>
     </div>
   </main>
@@ -124,105 +178,195 @@
   <script src="data/content.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: 'lessons' });
+    Object.assign(PH.UI, {
+      lvHint1: ['Mức 1 · Tiếng Việt, thuật ngữ tiếng Anh hiện kèm trong ngoặc. Chạm vào từ được tô sáng để xem nghĩa và phiên âm.', ''],
+      lvHint2: ['Mức 2 · Song ngữ: mỗi đoạn tiếng Việt có bản tiếng Anh ngay bên dưới. Thuật ngữ ở cả hai thứ tiếng đều chạm được.', ''],
+      lvHint3: ['', 'Level 3 · English only. Tap a highlighted term to see its Vietnamese meaning and IPA.'],
+      formulaLbl: ['Công thức', 'Formula'], noteLbl: ['Lưu ý', 'Note'], tableLbl: ['Bảng số liệu', 'Data table'], whereLbl: ['Trong đó', 'Where'], mainIdeas: ['Nội dung chính', 'Key ideas'], moreIdeas: ['Nội dung tiếp theo', 'More ideas'],
+      termsInLesson: ['Thuật ngữ trong bài', 'Terms in this lesson'], practiseTerms: ['Luyện {n} thuật ngữ này', 'Practise these {n} terms'],
+      noTermsLesson: ['Chưa có thuật ngữ gắn với bài này.', 'No terms are linked to this lesson yet.'],
+      selfCheckCta: ['Tự kiểm tra · {n} câu', 'Self-check · {n} questions'], markDone: ['Đánh dấu đã học', 'Mark as done'], markedDone: ['Đã học xong', 'Done'],
+      tapHint: ['Chạm vào từ được tô sáng để xem nghĩa, phiên âm và nghe đọc.', 'Tap a highlighted word to see its meaning and IPA and to hear it.'],
+      nextIs: ['Tiếp theo: {t}', 'Next: {t}'], nextEmpty: ['Tiếp theo: Bài {n} chưa có nội dung. Em có thể làm thí nghiệm ảo ở Bài 1.', 'Next: Lesson {n} is not written yet. You can try the virtual lab in Lesson 1.'],
+      lastOne: ['Đây là bài mẫu cuối cùng. Em có thể ôn lại bằng luyện đề hoặc trò chơi.', 'This is the last sample lesson. Review with a practice test or a game.'],
+      openLab: ['Mở thí nghiệm ảo', 'Open the virtual lab'], labShort: ['thí nghiệm ảo', 'virtual lab'],
+      trialNote: ['Bản dùng thử có 4 bài mẫu mỗi chương. Các bài còn lại vẫn hiện đúng tên trong sách và ghi rõ là chưa có nội dung.', 'This trial version has 4 sample lessons per chapter. The other lessons keep their textbook titles and are clearly marked as not written yet.'],
+      lessonsDone: ['Đã học {d} / {n} bài mẫu', '{d} of {n} sample lessons done'],
+      noContentTitle: ['Bài {n} · chưa có nội dung', 'Lesson {n} · not written yet'],
+      noContentText: ['Bài này chưa có lí thuyết, nhưng thuật ngữ của bài đã có trong kho.', 'This lesson has no theory yet, but its terms are already in the glossary.'],
+      noContentText2: ['Bài này chưa có nội dung trong bản mẫu.', 'This lesson is not in the sample version yet.'],
+      seeTerms: ['Xem thuật ngữ', 'See the terms'], backTo: ['Về Bài {n}', 'Back to Lesson {n}'],
+      afterReading: ['Sau khi đọc xong', 'After reading'], selfCheckH: ['Tự kiểm tra', 'Self-check'], untimed: ['{n} câu · không tính giờ', '{n} questions · untimed'],
+      grade: ['Chấm bài', 'Check answers'], retry: ['Làm lại', 'Try again'],
+      chooseAll: ['Em hãy chọn đáp án cho tất cả các câu trước khi chấm.', 'Please answer every question before checking.'],
+      correctN: ['Đúng {k}/{n}', '{k}/{n} correct'], perfect: ['Tuyệt vời — bài này đã được đánh dấu là đã học.', 'Excellent — this lesson is now marked as done.'],
+      marked: ['Bài đã được đánh dấu là đã học. Đọc lại phần giải thích ở các câu sai nhé.', 'This lesson is marked as done. Re-read the explanations for the ones you missed.'],
+      noSelfcheck: ['Bài này chưa có câu tự kiểm tra.', 'This lesson has no self-check questions yet.'],
+      notFound: ['Không tìm thấy bài học.', 'Lesson not found.'], allLessons: ['Tất cả bài học', 'All lessons'],
+      doneToast: ['Đã đánh dấu bài này là đã học.', 'This lesson is now marked as done.'], printLesson: ['In bài', 'Print'], symbolUnitLbl: ['Kí hiệu · đơn vị', 'Symbol · unit'], prevLbl: ['Bài trước', 'Previous lesson'], nextLbl: ['Bài tiếp theo', 'Next lesson']
+    });
     const n = parseInt(PH.qs('n'), 10) || 1;
     const lesson = PH.lesson(n);
-    const data = PH.CONTENT && PH.CONTENT[String(n)];
-    const answers = {};
-    let checked = false;
+    const ch = lesson ? PH.chapter(lesson.chapter) : null;
+    const open = !!lesson && PH.canOpen(n);
+    const data = open ? PH.CONTENT[String(n)] : null;
+    const answers = {}; let checked = false;
+    const en = () => PH.lang() === 'en';
+    const $ = id => document.getElementById(id);
+    if (ch) document.body.classList.add('acc-' + ch.n);
+    PH.mount({ active: 'lessons', title: lesson ? PH.lessonTitle(n) : { vi: 'Bài học', en: 'Lessons' } });
 
-    const NOTES = {
-      vi: 'Mức 1 · Nội dung bằng tiếng Việt. Thuật ngữ tiếng Anh được tô sáng — chạm để xem nghĩa, phiên âm và nghe phát âm.',
-      bi: 'Mức 2 · Song ngữ. Mỗi đoạn có bản tiếng Việt và tiếng Anh; thuật ngữ ở cả hai ngôn ngữ đều chạm được.',
-      en: 'Mức 3 · Nội dung bằng tiếng Anh. Chạm vào thuật ngữ để xem nghĩa tiếng Việt.'
-    };
+    const name = l => PH.dinh(en() ? l.en : l.vi);
+    const lessonHref = m => PH.canOpen(m) ? 'bai.html?n=' + m : (m === PH.LAB_LESSON ? 'thinghiem.html' : 'bai.html?n=' + m);
 
-    function block(b) {
-      if (b.type === 'text') return `<div class="prose hl">${PH.L(b)}</div>`;
-      if (b.type === 'callout') return `<div class="card callout hl">${PH.L(b)}</div>`;
-      if (b.type === 'formula') {
-        const vars = (b.vars || []).map(v => `<div class="hl"><span class="sym">${PH.esc(v.sym)}</span> ${PH.L({ vi: v.vi, en: v.en })}${v.unit ? ` <span class="unit">— ${PH.esc(v.unit)}</span>` : ''}</div>`).join('');
-        return `<div class="card formula"><div class="label">Công thức · Formula${b.title ? ' — ' + PH.esc(PH.T(b.title)) : ''}</div><div class="math">${PH.esc(b.math)}</div><div class="vars">${vars}</div>${b.note ? `<div class="note hl">${PH.L(b.note)}</div>` : ''}</div>`;
-      }
-      if (b.type === 'table') {
-        const head = (b.head || []).map(h => `<th>${PH.L(h)}</th>`).join('');
-        const rows = (b.rows || []).map(r => `<tr>${r.map(c => `<td class="hl">${PH.L(c)}</td>`).join('')}</tr>`).join('');
-        return `<div class="card" style="padding:0;overflow:auto"><table class="tbl"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
-      }
-      return '';
+    function renderToc() {
+      if (!ch) { $('toc').innerHTML = ''; return; }
+      const pr = PH.sampleProgress(ch.n); const p = PH.progress();
+      const rows = ch.lessons.map(m => {
+        const l = PH.lesson(m); const done = p.lessons[m] && p.lessons[m].done;
+        const tags = `${done ? PH.icon('check') : ''}${m === PH.LAB_LESSON ? `<span class="tag acc">${PH.icon('flask', 'sm')}${PH.uiFmt('labShort')}</span>` : ''}`;
+        if (m === n) return `<a class="toc-item cur" href="bai.html?n=${m}" aria-current="page"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}</span></a>`;
+        if (PH.canOpen(m)) return `<a class="toc-item" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}</span></a>`;
+        return `<a class="toc-item trong" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}</span><span class="tn" style="margin-bottom:5px">${PH.esc(name(l))}</span><span class="tag">${PH.uiFmt('noContent')}</span></a>`;
+      }).join('');
+      $('toc').innerHTML = `<div class="toc-head"><span class="icon-tile tone-${ch.n}">${PH.icon(PH.CH_ICON[ch.n])}</span><div><p class="lb">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</p><p class="nm">${PH.esc(en() ? ch.en : ch.vi)}</p></div></div>${rows}
+        <div class="toc-foot"><p class="lb">${PH.uiFmt('lessonsDone', { d: pr.done, n: pr.total })}</p><div class="progress"><i style="width:${pr.pct}%"></i></div><p class="note">${PH.uiFmt('trialNote')}</p></div>`;
+      $('tocMob').setAttribute('aria-label', PH.ui('chapter') + ' ' + PH.roman(ch.n));
+      $('tocMob').innerHTML = `<a class="pill" href="baihoc.html#chuong-${ch.n}">${PH.icon(PH.CH_ICON[ch.n], 'sm')}${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</a>` + ch.lessons.map(m => `<a class="pill${m === n ? ' active acc-' + ch.n : ''}${PH.canOpen(m) ? '' : ' muted'}" href="bai.html?n=${m}"${PH.canOpen(m) ? '' : ' style="opacity:.6"'}>${PH.uiFmt('lesson')} ${m}</a>`).join('');
     }
 
-    function renderQuestions() {
+    // Gom các đoạn văn liền nhau thành khung "Nội dung chính" có vòng số; công thức → khung xanh + khung cam "Trong đó"
+    function bodyHTML() {
+      let html = '', items = [], k = 0, firstText = true;
+      const flush = () => {
+        if (!items.length) return;
+        html += `<div class="panel has-label">${firstText ? PH.label('target', PH.uiFmt('mainIdeas')) : PH.label('book', PH.uiFmt('moreIdeas'), '', 'sm')}<div class="items">${items.join('')}</div></div>`;
+        items = []; firstText = false;
+      };
+      const item = (inner, cls) => `<div class="item"><span class="num-dot">${++k}</span><div class="prose hl${cls ? ' ' + cls : ''}">${inner}</div></div>`;
+      if (data.summary) items.push(item(PH.L(data.summary), 'summary'));
+      data.blocks.forEach(b => {
+        if (b.type === 'text') { items.push(item(PH.L(b))); return; }
+        flush();
+        if (b.type === 'callout') html += `<div class="panel has-label">${PH.label('bulb', PH.uiFmt('noteLbl'))}<div class="prose hl">${PH.L(b)}</div></div>`;
+        if (b.type === 'formula') {
+          const vars = (b.vars || []).map(v => `<div class="hl nokem"><span class="sym">${PH.esc(v.sym)}</span> : ${PH.L({ vi: v.vi, en: v.en })}${v.unit ? ` <span class="unit">(${PH.esc(v.unit)})</span>` : ''}</div>`).join('');
+          html += `<div class="panel has-label">${PH.label('sigma', PH.uiFmt('formulaLbl'))}<div class="ct-math">${b.title ? `<p class="ttl">${PH.esc(PH.dinh(PH.T(b.title)))}</p>` : ''}<div class="math">${PH.esc(b.math)}</div></div>${b.note ? `<div class="prose hl" style="margin-top:10px;font-size:14.5px">${PH.L(b.note)}</div>` : ''}</div>`;
+          if (vars) html += `<div class="panel orange has-label">${PH.label('book', PH.uiFmt('whereLbl'), 'orange', 'sm')}<div class="vars">${vars}</div></div>`;
+        }
+        if (b.type === 'table') {
+          const head = (b.head || []).map(h => `<th>${PH.L(h)}</th>`).join('');
+          const rows = (b.rows || []).map(r => `<tr>${r.map(c => `<td class="hl">${PH.L(c)}</td>`).join('')}</tr>`).join('');
+          html += `<div class="panel orange has-label">${PH.label('table', PH.uiFmt('tableLbl'), 'orange', 'sm')}<div class="bang"><table class="tbl"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div></div>`;
+        }
+      });
+      flush();
+      return html;
+    }
+
+    function questionsHTML() {
       const qs = (data && data.selfcheck) || [];
-      document.getElementById('scMeta').textContent = qs.length ? `${qs.length} câu · không tính giờ` : '';
-      document.getElementById('questions').innerHTML = qs.map((q, qi) => `
+      if (!qs.length) return `<p class="muted small">${PH.uiFmt('noSelfcheck')}</p>`;
+      return qs.map((q, qi) => `
         <div class="q" data-q="${qi}">
           <div class="stem hl">${qi + 1}. ${PH.L(q.q)}</div>
           <div class="opts">${q.options.map((o, oi) => {
             const sel = answers[qi] === oi; let cls = sel ? ' selected' : '';
             if (checked) { if (oi === q.correct) cls = ' right'; else if (sel) cls = ' wrong'; }
-            return `<button type="button" class="opt${cls}" data-q="${qi}" data-o="${oi}"><span class="k">${'ABCD'[oi]}</span><span class="hl">${PH.L(o)}</span></button>`;
+            return `<button type="button" class="opt${cls}" data-q="${qi}" data-o="${oi}"${checked ? ' disabled' : ''}><span class="k">${'ABCD'[oi]}</span><span class="hl nokem">${PH.L(o)}</span></button>`;
           }).join('')}</div>
           <div class="why${checked ? ' show' : ''} hl">${PH.L(q.why)}</div>
-        </div>`).join('') || '<p class="muted small">Bài này chưa có câu tự kiểm tra.</p>';
-      PH.highlight(document.getElementById('questions'));
+        </div>`).join('');
     }
+    function renderQuestions() { const q = $('questions'); if (!q) return; q.innerHTML = questionsHTML(); PH.highlight(q); }
 
-    function render() {
-      if (!lesson) { document.querySelector('article').innerHTML = '<div class="empty">Không tìm thấy bài học.</div>'; return; }
-      const ch = PH.chapter(lesson.chapter);
-      document.body.classList.add(`acc-${ch.n}`); // màu riêng của chương
-      document.title = `Bài ${n}. ${lesson.vi} — PhysiHub`;
-      document.getElementById('crumb').innerHTML = `<a href="baihoc.html">Bài học</a> · <a href="baihoc.html#chuong-${ch.n}">Chương ${PH.roman(ch.n)}. ${PH.esc(ch.vi)}</a>`;
-      document.getElementById('title').textContent = `Bài ${n}. ${lesson.vi}`;
-      document.getElementById('titleEn').textContent = lesson.en;
-      document.getElementById('levelNote').innerHTML = `${PH.icon('lang')}<span>${NOTES[PH.lang()]}${data && data.drafted ? ' <span class="tag gold" style="margin-left:6px">bản nháp · chờ giáo viên thẩm định</span>' : ''}</span>`;
-      const content = document.getElementById('content');
-      if (!data) {
-        content.innerHTML = '<div class="notice">Bài này đang được biên soạn. Em có thể xem thuật ngữ của bài ở cột bên.</div>';
-        document.getElementById('selfcheck').style.display = 'none';
-      } else {
-        content.innerHTML = (data.summary ? `<div class="prose hl" style="font-size:18px;color:var(--ink-2)">${PH.L(data.summary)}</div>` : '') + data.blocks.map(block).join('');
-        PH.highlight(content);
-        document.getElementById('hint').textContent = 'Chạm vào từ được tô sáng để xem nghĩa, phiên âm và nghe phát âm.';
-        renderQuestions();
+    const IMG = { 1: 'chuong1-vat-li-nhiet', 2: 'chuong2-khi-li-tuong', 3: 'chuong3-tu-truong', 4: 'chuong4-vat-li-hat-nhan' };
+    function bannerHTML() {
+      const crumb = `<p class="crumb"><a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-${ch.n}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</a></p>`;
+      const img = `assets/img/${IMG[ch.n]}`;
+      return `<header class="banner"><div class="bar"><span class="bk">${PH.icon('book')}</span><h1>${PH.uiFmt('lesson')} ${n}. ${PH.esc(name(lesson))}</h1></div>
+        <div class="sub"><div style="min-width:0">${crumb}${en() ? '' : `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>`}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"><figcaption class="cap${ch.n === 1 ? ' orange' : ''}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</figcaption></figure></div></header>`;
+    }
+    function renderPaper() {
+      const paper = $('paper');
+      if (!lesson) { paper.innerHTML = `<div class="empty"><p>${PH.uiFmt('notFound')}</p><a class="btn outline" href="baihoc.html" style="margin-top:14px">${PH.uiFmt('allLessons')}</a></div>`; return; }
+      if (!open) {
+        const prevOpen = PH.sampleLessons().map(l => l.n).filter(m => m < n).pop();
+        const terms = PH.termsForLesson(n);
+        paper.className = 'card paper trong-box';
+        paper.innerHTML = `${bannerHTML()}<div class="in"><div class="panel orange has-label">${PH.label('info', PH.uiFmt('noContentTitle', { n }), 'orange', 'sm')}<p style="font-size:15px;color:var(--ink-2)">${PH.uiFmt(terms.length ? 'noContentText' : 'noContentText2')}</p></div>
+          <div class="cta-row">${terms.length ? `<a class="btn gold" href="thuatngu.html?l=${n}">${PH.uiFmt('seeTerms')}${PH.icon('arrow', 'sm')}</a>` : ''}${prevOpen ? `<a class="btn outline" href="bai.html?n=${prevOpen}">${PH.uiFmt('backTo', { n: prevOpen })}</a>` : ''}<a class="btn ghost" href="baihoc.html#chuong-${ch.n}">${PH.uiFmt('allLessons')}</a></div></div>`;
+        return;
       }
-      // Thuật ngữ trong bài
-      const terms = PH.termsForLesson(n);
-      document.getElementById('termList').innerHTML = terms.map(t => `<button type="button" data-term="${t.id}"><span class="vi">${PH.esc(t.vi)}</span> · <span class="en">${PH.esc(t.en)}</span></button>`).join('') || '<span class="small muted">Chưa có thuật ngữ gắn với bài này.</span>';
-      document.getElementById('practiceLink').href = `game-termrush.html?lesson=${n}`;
-      document.getElementById('practiceLink').textContent = terms.length ? `Luyện ${terms.length} thuật ngữ này →` : 'Luyện thuật ngữ →';
-      // Bài trước / sau
-      const all = PH.LESSONS || []; const i = all.findIndex(l => l.n === n);
-      const prev = all[i - 1], next = all[i + 1];
-      const link = (l, cls, lbl) => l ? `<a class="card ${cls}" href="${PH.hasContent(l.n) ? 'bai.html?n=' + l.n : 'baihoc.html'}"><span class="lbl">${lbl}</span><span class="nm">${PH.L(PH.lessonTitle(l.n))}</span></a>` : '<span></span>';
-      document.getElementById('pager').innerHTML = link(prev, 'prev', '← Bài trước') + link(next, 'next', 'Bài tiếp theo →');
-      document.getElementById('nextHint').innerHTML = next ? `Tiếp theo: <a href="${PH.hasContent(next.n) ? 'bai.html?n=' + next.n : 'baihoc.html'}">${PH.esc(PH.T(PH.lessonTitle(next.n)))} →</a>` : 'Đây là bài cuối của chương trình.';
+      paper.className = 'card paper';
+      const lv = PH.lang() === 'vi' ? 1 : PH.lang() === 'bi' ? 2 : 3;
+      const hint = `<div class="lv-hint"><span class="num-dot">${lv}</span><p>${PH.uiFmt('lvHint' + lv)}${data.drafted ? ` <span class="tag gold" style="margin-left:6px">${PH.uiFmt('draft')}</span>` : ''}</p></div>`;
+      const qs = data.selfcheck || []; const done = !!(PH.progress().lessons[n] || {}).done;
+      const cta = `<div class="cta-row">${qs.length ? `<a class="btn gold" href="#selfcheck">${PH.uiFmt('selfCheckCta', { n: qs.length })}</a>` : ''}<button type="button" class="btn outline" id="btnDone"${done ? ' disabled' : ''}>${done ? PH.icon('check', 'sm') + PH.uiFmt('markedDone') : PH.uiFmt('markDone')}</button><button type="button" class="btn ghost" id="btnPrint">${PH.icon('print', 'sm')}${PH.uiFmt('printLesson')}</button></div><p class="goi-y">${PH.uiFmt('tapHint')}</p>`;
+      const pterms = PH.termsForLesson(n);
+      const printTerms = pterms.length ? `<section class="print-terms"><h2>${PH.uiFmt('termsInLesson')}</h2><table class="tbl"><thead><tr><th>${PH.uiFmt('termLbl')}</th><th>English</th><th>IPA</th><th>${PH.uiFmt('symbolUnitLbl')}</th></tr></thead><tbody>${pterms.map(t => `<tr><td>${PH.esc(t.vi)}</td><td lang="en">${PH.esc(t.en)}</td><td class="ipa" lang="en">${PH.esc(t.ipa)}</td><td>${PH.esc([t.symbol, t.unit].filter(Boolean).join(' · '))}</td></tr>`).join('')}</tbody></table></section>` : '';
+      const sc = qs.length ? `<section class="panel white has-label selfcheck" id="selfcheck" style="margin-top:40px">${PH.label('check', PH.uiFmt('selfCheckH'))}<span class="meta">${PH.uiFmt('untimed', { n: qs.length })}</span>
+        <div id="questions"></div><div class="row" style="margin-top:18px"><button type="button" class="btn" id="btnCheck"${checked ? ' style="display:none"' : ''}>${PH.uiFmt('grade')}</button><button type="button" class="btn outline" id="btnRetry"${checked ? '' : ' style="display:none"'}>${PH.uiFmt('retry')}</button></div><div class="result${checked ? ' show' : ''}" id="result"></div></section>` : '';
+      paper.innerHTML = bannerHTML() + `<div class="in">${hint}${bodyHTML()}${cta}${sc}${printTerms}</div>`;
+      PH.highlight(paper.querySelector('.in'));
+      renderQuestions(); if (checked) showResult();
     }
 
-    document.getElementById('questions').addEventListener('click', e => {
-      const b = e.target.closest('.opt'); if (!b || checked) return;
-      answers[+b.dataset.q] = +b.dataset.o; renderQuestions();
-    });
-    document.getElementById('btnCheck').addEventListener('click', () => {
-      const qs = data.selfcheck; if (!qs.length) return;
-      if (Object.keys(answers).length < qs.length) { PH.toast('Em hãy chọn đáp án cho tất cả các câu trước khi chấm.'); return; }
-      checked = true; renderQuestions();
-      const ok = qs.filter((q, i) => answers[i] === q.correct).length;
-      PH.finishLesson(n, ok / qs.length);
-      const r = document.getElementById('result'); r.className = 'result show';
-      r.innerHTML = `<span class="tag ${ok === qs.length ? 'green' : 'navy'}" style="font-size:14px;padding:6px 12px">Đúng ${ok}/${qs.length}</span><span class="small muted">${ok === qs.length ? 'Tuyệt vời — bài này đã được đánh dấu là đã học.' : 'Bài đã được đánh dấu là đã học. Đọc lại phần giải thích ở các câu sai nhé.'}</span>`;
-      document.getElementById('btnCheck').style.display = 'none'; document.getElementById('btnRetry').style.display = '';
-    });
-    document.getElementById('btnRetry').addEventListener('click', () => {
-      checked = false; Object.keys(answers).forEach(k => delete answers[k]); renderQuestions();
-      document.getElementById('result').className = 'result'; document.getElementById('btnCheck').style.display = ''; document.getElementById('btnRetry').style.display = 'none';
-    });
-    document.getElementById('termList').addEventListener('click', e => { const b = e.target.closest('button[data-term]'); if (b) PH.showTerm(b.dataset.term, b); });
+    function renderSide() {
+      if (!lesson) { $('side').innerHTML = ''; return; }
+      const terms = PH.termsForLesson(n);
+      const cards = terms.map(t => `<div class="card o tn-card"><div class="top"><p class="nm">${PH.esc(PH.dinh(en() ? t.en : t.vi))}</p>${t.unit ? `<span class="unit">${PH.esc(PH.unitOf(t))}</span>` : (t.symbol ? `<span class="unit">${PH.esc(t.symbol)}</span>` : '')}</div>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(t.en))}</span>`}
+        <div class="ipa-row"><span class="ipa" lang="en">${PH.esc(t.ipa)}</span>${PH.hasVoice() ? `<button type="button" class="speak-btn ghost" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>${PH.dictHTML(t)}${t.added ? `<span class="tag gold">${PH.uiFmt('awaiting')}</span>` : ''}</div>`).join('');
+      // Học tiếp
+      const list = PH.sampleLessons().map(l => l.n); const i = list.indexOf(n);
+      const all = (PH.LESSONS || []).map(l => l.n); const j = all.indexOf(n);
+      const prev = i > 0 ? list[i - 1] : (j > 0 ? all[j - 1] : null);
+      const nextAny = j >= 0 && j < all.length - 1 ? all[j + 1] : null;
+      let nextTxt;
+      if (nextAny == null) nextTxt = PH.uiFmt('lastOne');
+      else if (PH.canOpen(nextAny)) nextTxt = PH.uiFmt('nextIs', { t: '' }) + `<a href="bai.html?n=${nextAny}"><b>${PH.esc(PH.T(PH.lessonTitle(nextAny)).split(' — ')[0])}</b> →</a>`;
+      else nextTxt = PH.uiFmt('nextEmpty', { n: nextAny });
+      const prevHTML = prev != null ? `<a class="ph-mm-l" href="${lessonHref(prev)}"><span class="rn">${PH.icon('back', 'sm')}</span><span style="min-width:0"><span class="lbl">${PH.uiFmt('prevLbl')}</span><span class="nm">${PH.esc(PH.T(PH.lessonTitle(prev)).split(' — ')[0])}</span></span></a>` : '';
+      $('side').innerHTML = `${PH.label('speaker', PH.uiFmt('termsInLesson'), '', 'sm')}<div class="tn-grid">${cards || `<p class="small muted">${PH.uiFmt('noTermsLesson')}</p>`}</div>
+        ${terms.length ? `<a href="game-termrush.html?lesson=${n}" style="display:inline-flex;align-items:center;gap:6px;margin:2px 0 6px 2px;font-size:13.5px;font-weight:600">${PH.uiFmt('practiseTerms', { n: terms.length })}${PH.icon('arrow', 'sm')}</a>` : ''}
+        <div class="panel orange has-label hoc-tiep">${PH.label('arrow', PH.uiFmt('keepGoing'), 'orange', 'sm')}${prevHTML}<p class="next">${nextTxt}</p><a class="lab-link" href="thinghiem.html">${PH.icon('flask', 'sm')}${PH.uiFmt('openLab')}</a></div>`;
+    }
 
-    if (lesson && data) PH.visitLesson(n); // chỉ ghi nhớ bài đã có nội dung để nút "Tiếp tục" không trỏ vào bài trống
+    function showResult() {
+      const qs = data.selfcheck; const ok = qs.filter((q, i) => answers[i] === q.correct).length;
+      const r = $('result'); if (!r) return; r.className = 'result show';
+      r.innerHTML = `<span class="tag ${ok === qs.length ? 'green' : 'navy'}" style="font-size:14px;padding:6px 12px">${PH.uiFmt('correctN', { k: ok, n: qs.length })}</span><span class="small muted">${PH.uiFmt(ok === qs.length ? 'perfect' : 'marked')}</span>`;
+    }
+    document.addEventListener('click', e => {
+      const b = e.target.closest('.opt'); if (b && !checked) { answers[+b.dataset.q] = +b.dataset.o; renderQuestions(); return; }
+      if (e.target.closest('#btnCheck')) {
+        const qs = data.selfcheck; if (Object.keys(answers).length < qs.length) { PH.toast(PH.ui('chooseAll')); return; }
+        checked = true; renderQuestions(); const ok = qs.filter((q, i) => answers[i] === q.correct).length;
+        PH.finishLesson(n, ok / qs.length); showResult(); $('btnCheck').style.display = 'none'; $('btnRetry').style.display = '';
+        const d = $('btnDone'); if (d) { d.disabled = true; d.innerHTML = PH.icon('check', 'sm') + PH.uiFmt('markedDone'); }
+      }
+      if (e.target.closest('#btnRetry')) { checked = false; Object.keys(answers).forEach(k => delete answers[k]); renderQuestions(); $('result').className = 'result'; $('btnCheck').style.display = ''; $('btnRetry').style.display = 'none'; }
+      if (e.target.closest('#btnPrint')) { window.print(); return; }
+      if (e.target.closest('#btnDone')) { PH.finishLesson(n, null); PH.toast(PH.ui('doneToast')); const d = $('btnDone'); d.disabled = true; d.innerHTML = PH.icon('check', 'sm') + PH.uiFmt('markedDone'); }
+    });
+
+    function render() { renderToc(); renderPaper(); renderSide(); }
+    if (open) PH.visitLesson(n); // chỉ ghi nhớ bài mở được để nút "Tiếp tục" không trỏ vào bài trống
     render();
     PH.onLang(render);
+    document.addEventListener('ph:progress', renderToc);
+
+    // Ghi nhớ đã đọc tới đâu (phần trăm), để trang chủ hiện "Đã đọc … %"
+    if (open) {
+      let best = (PH.progress().lessons[n] || {}).read || 0, timer = null;
+      const measure = () => {
+        const paper = $('paper'); const bottom = paper.getBoundingClientRect().bottom + window.scrollY; const top = paper.getBoundingClientRect().top + window.scrollY;
+        const seen = window.scrollY + window.innerHeight; const pct = Math.max(0, Math.min(100, Math.round((seen - top) / (bottom - top) * 100)));
+        if (pct > best) { best = pct; clearTimeout(timer); timer = setTimeout(() => PH.update(p => { p.lessons[n] = Object.assign({}, p.lessons[n], { read: best }); }), 1500); }
+      };
+      window.addEventListener('scroll', measure, { passive: true }); window.addEventListener('load', measure);
+      window.addEventListener('pagehide', () => { clearTimeout(timer); PH.update(p => { p.lessons[n] = Object.assign({}, p.lessons[n], { read: best }); }); });
+    }
   </script>
 </body>
 </html>

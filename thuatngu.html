@@ -3,200 +3,242 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ngân hàng thuật ngữ — PhysiHub</title>
+  <title>Kho thuật ngữ · PhysiHub</title>
+  <meta name="description" content="Kho thuật ngữ Vật lí 12 song ngữ Việt – Anh: phiên âm IPA đối chiếu Oxford Learner’s, nút nghe trên Oxford và Cambridge, thẻ ghi nhớ và kiểm tra nhanh.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kho thuật ngữ · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/lively.css">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .head h1 { margin-bottom: 4px; }
-    .head .meta { color: var(--ink-2); font-size: 14px; }
-    .head .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-    .search { margin: 0 0 14px; border-radius: 999px; padding: 12px 18px; box-shadow: var(--shadow); }
-    .trow .tag { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
-    .trow.active { border-left-color: var(--accent); background: var(--accent-soft); }
-    .detail .crumb { color: var(--accent); font-weight: 500; }
-    .detail .fbox { border-left: 4px solid var(--accent); }
-    .detail .btns .btn.outline { color: var(--accent); }
-    .layout { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; margin-top: 18px; }
-    .list { padding: 0; overflow: hidden; }
-    .list .thead { display: grid; grid-template-columns: 1fr auto; padding: 10px 18px; background: var(--surface-2); border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 600; color: var(--ink-3); }
-    .trow { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 12px 18px; border-bottom: 1px solid var(--line); border-left: 3px solid transparent; }
-    .trow:hover { background: var(--surface-2); }
-    .trow.active { background: var(--navy-soft); border-left-color: var(--navy); }
-    .trow .vi { font-weight: 500; }
-    .trow .ipa { font-size: 12px; color: var(--ink-3); }
-    .trow .star { color: var(--gold); margin-left: 4px; }
-    .list .tfoot { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; font-size: 13px; color: var(--ink-3); }
-    .detail { position: sticky; top: calc(var(--header-h) + 16px); }
-    .detail .crumb { font-size: 12px; color: var(--ink-3); }
+    .page-hero.light .txt { flex: 1; min-width: 260px; position: relative; }
+    .page-hero .actions { display: flex; gap: 10px; flex-wrap: wrap; flex: none; }
+    .toolbar { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+    .toolbar .search { flex: 1; }
+    .btn-nghia { min-height: 48px; display: inline-flex; align-items: center; gap: 8px; padding: 0 18px; border-radius: 24px; font-size: 14px; font-weight: 600; background: #fff; color: var(--gold); border: 1px solid #E3D2AE; }
+    .btn-nghia.on { background: var(--gold); color: #fff; border-color: var(--gold); }
+    .loc-chips { margin-top: 14px; }
+    .dem { margin: 12px 0 10px 2px; font-size: 13px; color: var(--ink-3); }
+    .grid.terms { gap: 16px; }
+    .tn-the { position: relative; padding: 16px 16px 14px; border-radius: 18px; overflow: hidden; text-align: left; width: 100%; display: block; color: var(--ink); cursor: pointer; }
+    .tn-the .nm, .tn-the .top { display: block; }
+    .tn-the .top { display: flex; }
+    .tn-the::before { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-g1), var(--accent-g2)); }
+    .tn-the .top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .tn-the .top .spacer { flex: 1; }
+    .tn-the .nm { font-size: 17px; line-height: 1.3; font-weight: 700; }
+    .tn-the .sub { display: block; margin-top: 3px; font-size: 15px; line-height: 1.35; }
+    .tn-the .sub.vi { color: var(--ink-2); font-family: var(--font-sans); font-style: normal; }
+    .tn-the .ipa-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; min-height: 40px; }
+    .tn-the .ipa { flex: 1; min-width: 0; font-size: 13.5px; line-height: 1.4; }
+    .tn-the .speak-btn { background: linear-gradient(135deg, var(--accent-g1), var(--accent-g2)); box-shadow: 0 4px 10px rgba(31, 41, 51, .18); }
+    .tn-the .dict-links { margin-top: 6px; }
+    .tn-the .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tn-the .tag.kh { background: var(--blue-soft); color: var(--navy); box-shadow: inset 0 0 0 1px var(--blue-line); font-family: var(--font-serif); font-style: italic; font-weight: 600; font-size: 12.5px; }
+    .tn-the .more { position: absolute; right: 8px; bottom: 6px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--ink-4); }
+    .tn-the .more:hover { background: var(--accent-soft); color: var(--accent-ink); }
+    .rong { grid-column: 1 / -1; }
+    .rong .chips a { margin: 4px 6px 0 0; }
+    .kiem-tra { margin-top: 40px; scroll-margin-top: 130px; }
+    .kiem-tra .steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 26px; }
+    .kiem-tra .step { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+    .kiem-tra .note { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+    /* Hộp thoại: chi tiết, thẻ ghi nhớ, kiểm tra */
+    .overlay { position: fixed; inset: 0; background: rgba(31, 41, 51, .45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 70; }
+    .overlay.show { display: flex; }
+    .dialog { width: min(600px, 100%); max-height: calc(100vh - 32px); overflow: auto; border-radius: 22px; }
+    .dialog .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .detail .crumb { font-size: 12.5px; font-weight: 600; color: var(--accent-ink); }
     .detail h2 { margin-top: 4px; font-size: 26px; }
-    .detail .en-name { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--gold); }
+    .detail .en-name { font-size: 20px; }
     .detail .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 12px 0; font-size: 13px; color: var(--ink-2); }
-    .detail .meta .speak-btn { margin-left: auto; }
+    .detail .meta .ipa { font-size: 15px; }
     .detail .def { font-size: 15px; line-height: 1.65; }
     .detail .def.en { margin-top: 8px; padding-left: 12px; border-left: 3px solid var(--gold-soft); }
-    .detail .fbox { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; margin-top: 14px; }
-    .detail .fbox .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
+    .detail .fbox { background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; margin-top: 14px; }
+    .detail .fbox .lbl { font-size: 12px; color: var(--accent-ink); font-weight: 600; margin-bottom: 4px; }
     .detail .fbox .math { font-size: 22px; }
     .detail .ex { margin-top: 14px; font-size: 14px; }
     .detail .ex .lbl { font-size: 12px; color: var(--ink-3); margin-bottom: 4px; }
-    .detail .ex .en { font-style: italic; }
-    .detail .btns { display: flex; gap: 10px; margin-top: 16px; }
-    .detail .btns .btn { flex: 1; }
-    /* Flashcard & quiz (hộp thoại) */
-    .overlay { position: fixed; inset: 0; background: rgba(31, 41, 51, .45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 70; }
-    .overlay.show { display: flex; }
-    .dialog { width: min(560px, 100%); }
-    .dialog .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .fc { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; cursor: pointer; border: 1px solid var(--line-strong); border-radius: 12px; padding: 24px; background: var(--surface-2); }
-    .fc .big { font-family: var(--font-serif); font-size: 30px; }
-    .fc .lbl { font-size: 12px; color: var(--ink-3); }
-    .fc-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
-    .qz .stem { font-weight: 500; margin: 6px 0 12px; font-size: 17px; }
+    .detail .ex .en { display: block; }
+    .detail .btns { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .fc { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 8px; cursor: pointer; border: 1.5px solid var(--line-strong); border-radius: 16px; padding: 24px; background: var(--surface-2); }
+    .fc .big { font-family: var(--font-display); font-weight: 800; color: var(--navy); font-size: 30px; text-wrap: balance; }
+    .fc .big.en { font-family: var(--font-serif); font-weight: 600; color: var(--gold); }
+    .fc .lbl { font-size: 12.5px; color: var(--ink-3); }
+    .fc-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; gap: 10px; }
+    .qz .stem { font-weight: 500; margin: 6px 0 12px; font-size: 18px; }
     .qz .opts { display: grid; gap: 8px; }
-    .qz .opt { text-align: left; padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    .qz .opt { text-align: left; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); }
     .qz .opt:hover { border-color: var(--navy); }
     .qz .opt.right { border-color: var(--green); background: var(--green-soft); }
     .qz .opt.wrong { border-color: var(--red); background: var(--red-soft); }
-    @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .detail { position: static; order: -1; } }
+    @media (max-width: 1080px) { .grid.terms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 900px) { .grid.terms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 720px) {
+      .page-hero .actions { width: 100%; } .page-hero .actions .btn { flex: 1 1 150px; padding: 0 14px; font-size: 14px; }
+      .toolbar { flex-wrap: wrap; }
+      .loc-chips { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; scrollbar-width: none; margin-right: -16px; padding-right: 16px; }
+      .loc-chips::-webkit-scrollbar { display: none; }
+      .loc-chips .pill { flex: none; }
+      .grid.terms { grid-template-columns: 1fr; gap: 10px; }
+      .kiem-tra .steps { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
   <main>
     <div class="wrap">
-      <div class="page-hero">
-        <div>
-          <span class="badge">Thuật ngữ</span>
-          <h1>Ngân hàng thuật ngữ Vật lí 12</h1>
-          <p class="meta" id="meta"></p>
-        </div>
-        <span class="spacer"></span>
-        <div class="actions">
-          <button class="btn outline" id="btnFlash">Ôn bằng flashcard</button>
-          <button class="btn glow" id="btnQuiz">Kiểm tra · 10 câu</button>
-        </div>
+      <section class="page-hero light reveal in">
+        <div class="txt"><p class="eyebrow" id="eyebrow"></p><h1 id="h1"></h1><p class="sub-en en" lang="en" id="h1en"></p><p class="lead" id="lead" style="max-width:640px;margin-top:10px"></p></div>
+        <div class="actions"><button type="button" class="btn gold" id="btnFlash"></button><button type="button" class="btn" id="btnQuiz"></button></div>
+      </section>
+      <div class="toolbar">
+        <label class="search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" type="search" autocomplete="off"></label>
+        <button type="button" class="btn-nghia" id="btnNghia" hidden></button>
       </div>
-
-      <label class="search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Tìm theo tiếng Việt hoặc tiếng Anh — ví dụ: đẳng nhiệt, flux, half-life" autocomplete="off"></label>
-      <div class="pills" id="chapterPills"></div>
-
-      <div class="layout">
-        <div class="card list">
-          <div class="thead"><span>Thuật ngữ · Term</span><span>Bài</span></div>
-          <div id="rows"></div>
-          <div class="tfoot"><span id="countText"></span><button class="btn ghost sm" id="btnMore">Xem thêm</button></div>
-        </div>
-        <aside class="card detail" id="detail"></aside>
-      </div>
+      <div class="pills loc-chips" id="chips"></div>
+      <p class="dem" id="dem"></p>
+      <div class="grid c4 terms" id="grid"></div>
+      <section class="panel has-label kiem-tra" id="kiem-tra"></section>
     </div>
   </main>
 
-  <div class="overlay" id="overlay"><div class="card dialog" id="dialog"></div></div>
+  <div class="overlay" id="overlay"><div class="card dialog" id="dialog" role="dialog" aria-modal="true"></div></div>
 
   <script src="data/lessons.js"></script>
   <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: 'terms' });
+    Object.assign(PH.UI, {
+      eyebrow: ['Vật lí 12 · song ngữ', 'Physics 12 · bilingual'], h1: ['Kho thuật ngữ', 'Glossary'],
+      lead: ['{n} thuật ngữ của bốn chương. Phiên âm theo tiếng Anh – Anh, đối chiếu từ điển Oxford Learner’s và Collins; nút nghe mở đúng mục từ trên Oxford hoặc Cambridge.', '{n} terms across four chapters. Pronunciation is British English, checked against the Oxford Learner’s and Collins dictionaries; the listen buttons open the entry on Oxford or Cambridge.'],
+      flash: ['Thẻ ghi nhớ', 'Flashcards'], quiz: ['Kiểm tra nhanh · 10 câu', 'Quick quiz · 10 questions'],
+      filterPh: ['Lọc trong kho: gõ tiếng Việt hoặc tiếng Anh', 'Filter the glossary in Vietnamese or English'], filterLbl: ['Tìm thuật ngữ', 'Search the glossary'],
+      all: ['Tất cả', 'All'], c1: ['Chương I · Nhiệt', 'I · Thermal'], c2: ['Chương II · Khí', 'II · Gases'], c3: ['Chương III · Từ', 'III · Magnetism'], c4: ['Chương IV · Hạt nhân', 'IV · Nuclear'],
+      chua: ['Từ em chưa thuộc', 'Not mastered yet'], thuoc: ['Đã thuộc', 'Mastered'], lessonChip: ['Bài {n}', 'Lesson {n}'],
+      showVi: ['Hiện nghĩa tiếng Việt', 'Show Vietnamese meaning'], hideVi: ['Ẩn nghĩa tiếng Việt', 'Hide Vietnamese meaning'],
+      showing: ['Đang hiện {k} / {n} thuật ngữ', 'Showing {k} of {n} terms'], showingQ: ['Đang hiện {k} / {n} thuật ngữ khớp với “{q}”', 'Showing {k} of {n} terms matching “{q}”'],
+      masteredTag: ['đã thuộc', 'mastered'], details: ['Xem chi tiết', 'See details'],
+      howH: ['Mỗi thuật ngữ được kiểm tra thế nào', 'How each term is checked'],
+      how1: ['Tên tiếng Việt lấy đúng như SGK Vật lí 12 Kết nối tri thức với cuộc sống.', 'The Vietnamese name is taken exactly from the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series).'],
+      how2: ['Tên tiếng Anh đối chiếu giáo trình Cambridge International AS & A Level Physics và OpenStax.', 'The English name is checked against the Cambridge International AS & A Level Physics syllabus and OpenStax.'],
+      how3: ['Phiên âm đối chiếu từ điển Oxford Learner’s và Collins. Nút nghe mở trang từ điển Oxford hoặc Cambridge; nút loa nhỏ đọc bằng giọng máy của trình duyệt.', 'IPA is checked against the Oxford Learner’s and Collins dictionaries. The listen links open the Oxford or Cambridge entry; the small speaker reads with the browser voice.'],
+      how4: ['Giáo viên Vật lí và giáo viên tiếng Anh duyệt xong mới bỏ nhãn “chờ thẩm định”.', 'The “awaiting review” label is removed only after a physics teacher and an English teacher approve the term.'],
+      noMatchG: ['Không có thuật ngữ nào khớp đúng với “{q}”.', 'No term matches “{q}” exactly.'], noneInFilter: ['Không có thuật ngữ nào trong bộ lọc này.', 'No terms in this filter.'],
+      clearFilter: ['Bỏ lọc', 'Clear filters'],
+      relatedFormula: ['Công thức liên quan', 'Related formula'], exampleLbl: ['Ví dụ theo dạng đề thi', 'Exam-style example'],
+      openLesson: ['Mở Bài {n}', 'Open Lesson {n}'], practiseThis: ['Luyện với Term Rush', 'Practise in Term Rush'], close: ['Đóng', 'Close'],
+      fcTitle: ['Thẻ {i}/{n}', 'Card {i}/{n}'], fcFront: ['Mặt trước · chạm để lật', 'Front · tap to flip'], fcBack: ['Mặt sau · chạm để lật', 'Back · tap to flip'],
+      fcAsk: ['Thuật ngữ tiếng Anh là gì?', 'What is the English term?'], prev: ['Trước', 'Previous'], next: ['Tiếp', 'Next'],
+      need4: ['Cần ít nhất 4 thuật ngữ trong bộ lọc để tạo bài kiểm tra.', 'The filter needs at least 4 terms to build a quiz.'],
+      qTitle: ['Câu {i}/{n}', 'Question {i}/{n}'], correctSoFar: ['Đúng {k}', '{k} correct'],
+      pickVi: ['Chọn nghĩa tiếng Việt của', 'Choose the Vietnamese meaning of'], pickEn: ['Chọn thuật ngữ tiếng Anh của', 'Choose the English term for'],
+      result: ['Kết quả', 'Result'], excellent: ['Xuất sắc!', 'Excellent!'],
+      wrongNoted: ['Những thuật ngữ trả lời sai đã được ghi vào phần “Ôn điểm yếu” trong Trò chơi.', 'The terms you missed are now in “Review weak spots” in Games.'],
+      masteredHow: ['Một thuật ngữ tính là đã thuộc khi em trả lời đúng ít nhất hai lần và chưa sai lần nào.', 'A term counts as mastered once you have answered it correctly at least twice without a mistake.']
+    });
+    PH.mount({ active: 'terms', title: { vi: 'Kho thuật ngữ', en: 'Glossary' } });
     const TERMS = PH.TERMS || [];
-    const PAGE = 12;
-    // ?t=<id> mở sẵn một thuật ngữ · ?c=<1..4> mở sẵn một chương · ?q=<từ khoá> tìm sẵn
-    let chapter = +(PH.qs('c') || 0) || 0, query = PH.qs('q') || '', limit = PAGE, currentId = PH.qs('t') || (TERMS[0] && TERMS[0].id);
-    if (query) document.getElementById('q').value = query;
-
-    // Chỉ mục tìm kiếm chuẩn hoá sẵn
+    const $ = id => document.getElementById(id);
+    const en = () => PH.lang() === 'en';
+    // ?t=<id> mở chi tiết · ?c=<1..4> lọc chương · ?loc=chua|thuoc · ?l=<bài> · ?q=<từ khoá>
+    let filter = { c: +(PH.qs('c') || 0) || 0, loc: PH.qs('loc') || '', l: +(PH.qs('l') || 0) || 0 };
+    let query = PH.qs('q') || '', showVi = false;
+    $('q').value = query;
     const index = TERMS.map(t => ({ t, key: PH.norm([t.vi, t.en, t.symbol, t.formula].join(' ')) }));
     function filtered() {
       const q = PH.norm(query);
-      return index.filter(x => (!chapter || x.t.chapter === chapter) && (!q || x.key.includes(q))).map(x => x.t);
+      return index.filter(x => (!filter.c || x.t.chapter === filter.c) && (!filter.l || x.t.lesson === filter.l)
+        && (filter.loc !== 'chua' || !PH.isMastered(x.t.id)) && (filter.loc !== 'thuoc' || PH.isMastered(x.t.id)) && (!q || x.key.includes(q))).map(x => x.t);
+    }
+    const khHTML = t => { const kh = [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '); return kh ? `<span class="tag kh">${PH.esc(kh)}</span>` : ''; };
+
+    function renderHead() {
+      $('eyebrow').textContent = PH.ui('eyebrow'); $('h1').textContent = PH.ui('h1'); $('h1en').textContent = en() ? '' : 'Glossary';
+      $('lead').textContent = PH.dinh(PH.ui('lead', { n: TERMS.length }));
+      $('btnFlash').innerHTML = PH.icon('cards2', 'sm') + PH.uiFmt('flash'); $('btnQuiz').innerHTML = PH.icon('clock', 'sm') + PH.uiFmt('quiz');
+      $('q').placeholder = PH.ui('filterPh'); $('q').setAttribute('aria-label', PH.ui('filterLbl'));
+      const bn = $('btnNghia'); bn.hidden = !en(); bn.className = 'btn-nghia' + (showVi ? ' on' : ''); bn.innerHTML = PH.icon('eye', 'sm') + PH.uiFmt(showVi ? 'hideVi' : 'showVi'); bn.setAttribute('aria-pressed', showVi);
+      const chip = (on, key, data, cls, vars) => `<button type="button" class="pill${on ? ' active' : ''}${cls || ''}" ${data}>${cls ? '<span class="dot"></span>' : ''}${PH.uiFmt(key, vars)}</button>`;
+      $('chips').innerHTML = chip(!filter.c && !filter.loc && !filter.l, 'all', 'data-c="0"')
+        + (PH.CHAPTERS || []).map(c => chip(filter.c === c.n, 'c' + c.n, `data-c="${c.n}"`, ' acc-' + c.n)).join('')
+        + chip(filter.loc === 'chua', 'chua', 'data-loc="chua"') + chip(filter.loc === 'thuoc', 'thuoc', 'data-loc="thuoc"')
+        + (filter.l ? chip(true, 'lessonChip', `data-l="${filter.l}"`, '', { n: filter.l }) : '');
+      $('kiem-tra').innerHTML = PH.label('shield', PH.uiFmt('howH')) + `<div class="steps">` + [1, 2, 3, 4].map(i => `<div class="step"><span class="num-dot">${i}</span><p>${PH.uiFmt('how' + i)}</p></div>`).join('') + `</div><p class="note">${PH.uiFmt('masteredHow')}</p>`;
     }
 
-    function renderMeta() {
-      const added = TERMS.filter(t => t.added).length;
-      const lessons = new Set(TERMS.map(t => t.lesson)).size;
-      document.getElementById('meta').textContent = `${TERMS.length} thuật ngữ · 4 chương · ${lessons} bài` + (added ? ` · ${added} mục do nhóm bổ sung, đang chờ giáo viên thẩm định` : '');
-      document.getElementById('chapterPills').innerHTML = [`<button class="pill ${!chapter ? 'active' : ''}" data-c="0">Tất cả</button>`]
-        .concat((PH.CHAPTERS || []).map(c => `<button class="pill acc-${c.n} ${chapter === c.n ? 'active' : ''}" data-c="${c.n}">Chương ${PH.roman(c.n)} · ${PH.esc(c.vi)}</button>`)).join('');
+    function cardHTML(t) {
+      const mastered = PH.isMastered(t.id);
+      const main = en() ? t.en : t.vi; const sub = en() ? (showVi ? t.vi : '') : t.en;
+      return `<div class="card o tn-the acc-${t.chapter}" data-id="${t.id}">
+        <span class="top"><span class="tag acc">${PH.uiFmt('chapter')} ${PH.roman(t.chapter)}</span><span class="spacer"></span>${mastered ? `<span class="tag green">${PH.icon('check', 'sm')}${PH.uiFmt('masteredTag')}</span>` : ''}</span>
+        <span class="nm" ${en() ? 'lang="en"' : ''}>${PH.esc(PH.dinh(main))}</span>${sub ? `<span class="sub ${en() ? 'vi' : 'en'}" ${en() ? '' : 'lang="en"'}>${PH.esc(PH.dinh(sub))}</span>` : ''}
+        <span class="ipa-row">${PH.hasVoice() ? `<button type="button" class="speak-btn" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}<span class="ipa" lang="en">${PH.esc(t.ipa)}</span></span>
+        ${PH.dictHTML(t)}
+        <span class="tags">${khHTML(t)}${t.added ? `<span class="tag gold">${PH.uiFmt('awaiting')}</span>` : ''}</span>
+        <a class="more" href="thuatngu.html?t=${encodeURIComponent(t.id)}" aria-label="${PH.uiFmt('details')}: ${PH.esc(t.en)}" title="${PH.uiFmt('details')}">${PH.icon('right', 'sm')}</a></div>`;
+    }
+    function renderGrid() {
+      const list = filtered(); const q = query.trim();
+      $('dem').textContent = q ? PH.ui('showingQ', { k: list.length, n: TERMS.length, q }) : PH.ui('showing', { k: list.length, n: TERMS.length });
+      if (!list.length) {
+        const sug = q ? PH.search(q).suggest : [];
+        $('grid').innerHTML = `<div class="card rong ph-kq-rong" style="padding:24px"><p>${PH.uiFmt(q ? 'noMatchG' : 'noneInFilter', { q })}</p>${sug.length ? `<p class="goi">${PH.uiFmt('didYouMean')}</p><div class="chips">${sug.map(s => `<a href="${s.href}">${PH.esc(s.label)}</a>`).join('')}</div>` : `<p class="goi">${PH.uiFmt('tip')}</p>`}<button type="button" class="btn outline sm" id="btnClear" style="margin-top:12px">${PH.uiFmt('clearFilter')}</button></div>`;
+        return;
+      }
+      $('grid').innerHTML = list.map(cardHTML).join('');
     }
 
-    function renderList() {
-      const all = filtered(); const shown = all.slice(0, limit); const stars = PH.progress().terms;
-      document.getElementById('rows').innerHTML = shown.map(t => `
-        <button type="button" class="trow acc-${t.chapter} ${t.id === currentId ? 'active' : ''}" data-id="${t.id}">
-          <span><span class="vi">${PH.esc(t.vi)}</span> · <span class="en">${PH.esc(t.en)}</span>${stars[t.id] && stars[t.id].star ? '<span class="star" title="đã thêm vào ôn tập">★</span>' : ''}<br><span class="ipa">${PH.esc(t.ipa)}</span></span>
-          <span class="tag">C.${PH.roman(t.chapter)} · Bài ${t.lesson}</span>
-        </button>`).join('') || '<div class="empty">Không có thuật ngữ nào khớp. Thử gõ theo tiếng Anh hoặc bỏ dấu.</div>';
-      document.getElementById('countText').textContent = `Đang xem ${shown.length} trong ${all.length} thuật ngữ`;
-      document.getElementById('btnMore').style.display = shown.length < all.length ? '' : 'none';
-    }
-
-    function renderDetail() {
-      const t = PH.termById(currentId) || filtered()[0]; const box = document.getElementById('detail');
-      if (!t) { box.innerHTML = '<div class="empty">Chọn một thuật ngữ để xem chi tiết.</div>'; return; }
-      currentId = t.id; const l = PH.lang(); const st = PH.progress().terms[t.id] || {};
-      box.className = `card detail acc-${t.chapter}`;
-      const lt = PH.lessonTitle(t.lesson);
-      const meta = [t.ipa, l === 'en' ? t.posEn : t.pos, t.unit && `đơn vị ${t.unit}`, t.symbol && `kí hiệu ${t.symbol}`].filter(Boolean);
-      const defs = (l === 'vi' ? [['vi', t.defVi]] : l === 'en' ? [['en', t.defEn]] : [['vi', t.defVi], ['en', t.defEn]]).filter(d => d[1]);
-      box.innerHTML = `
-        <div class="crumb">Chương ${PH.roman(t.chapter)} · ${PH.esc(lt.vi)}</div>
-        <h2>${PH.esc(t.vi)}</h2>
-        <div class="en-name">${PH.esc(t.en)}</div>
-        <div class="meta"><span>${meta.map(PH.esc).join(' · ')}</span><button class="speak-btn" type="button" title="Nghe phát âm" data-speak="${PH.esc(t.en)}">${PH.icon('speaker', 'sm')}</button></div>
-        ${defs.map(d => `<div class="def ${d[0]}">${PH.esc(d[1])}</div>`).join('')}
-        ${t.formula ? `<div class="fbox"><div class="lbl">Công thức liên quan</div><div class="math">${PH.esc(t.formula)}</div></div>` : ''}
-        ${(t.exampleEn || t.exampleVi) ? `<div class="ex"><div class="lbl">Ví dụ theo dạng đề thi</div>${l !== 'vi' && t.exampleEn ? `<div class="en">“${PH.esc(t.exampleEn)}”</div>` : ''}${l !== 'en' && t.exampleVi ? `<div class="vi">${PH.esc(t.exampleVi)}</div>` : ''}</div>` : ''}
-        ${t.added ? '<div class="small" style="margin-top:12px"><span class="tag gold">bổ sung · chờ thẩm định</span></div>' : ''}
-        <div class="btns">
-          <button class="btn outline" type="button" id="btnStar">${st.star ? '★ Đã thêm vào ôn tập' : 'Thêm vào ôn tập'}</button>
-          <a class="btn outline" href="bai.html?n=${t.lesson}">Mở bài ${t.lesson}</a>
-        </div>`;
-      document.getElementById('btnStar').addEventListener('click', () => {
-        PH.update(p => { const x = p.terms[t.id] || { seen: 0, wrong: 0 }; x.star = !x.star; p.terms[t.id] = x; });
-        renderDetail(); renderList();
-      });
-      PH.noteTerm(t.id, false);
-    }
-
-    function renderAll() { renderMeta(); renderList(); renderDetail(); }
-
-    document.getElementById('q').addEventListener('input', e => { query = e.target.value; limit = PAGE; renderList(); });
-    document.getElementById('chapterPills').addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (!b) return; chapter = +b.dataset.c; limit = PAGE; renderMeta(); renderList(); });
-    document.getElementById('rows').addEventListener('click', e => {
-      const b = e.target.closest('.trow'); if (!b) return; currentId = b.dataset.id; renderList(); renderDetail();
-      if (window.innerWidth <= 860) document.getElementById('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-    document.getElementById('btnMore').addEventListener('click', () => { limit += PAGE; renderList(); });
-
-    /* ---- Flashcard ---- */
-    const overlay = document.getElementById('overlay'), dialog = document.getElementById('dialog');
-    function openDialog(html) { dialog.innerHTML = html; overlay.classList.add('show'); }
-    function closeDialog() { overlay.classList.remove('show'); dialog.innerHTML = ''; }
+    /* ---- Hộp thoại ---- */
+    const overlay = $('overlay'), dialog = $('dialog');
+    let lastFocus = null;
+    function openDialog(html, cls) { lastFocus = document.activeElement; dialog.className = 'card dialog ' + (cls || ''); dialog.innerHTML = html; overlay.classList.add('show'); dialog.tabIndex = -1; dialog.focus({ preventScroll: true }); }
+    function closeDialog() { overlay.classList.remove('show'); dialog.innerHTML = ''; dialog.onclick = null; if (lastFocus) lastFocus.focus(); if (PH.qs('t')) history.replaceState(null, '', location.pathname); }
     overlay.addEventListener('click', e => { if (e.target === overlay) closeDialog(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDialog(); });
 
-    document.getElementById('btnFlash').addEventListener('click', () => {
+    function openDetail(id) {
+      const t = PH.termById(id); if (!t) return;
+      const l = PH.lang(); const lt = PH.lessonTitle(t.lesson);
+      const meta = [l === 'en' ? t.posEn : t.pos, t.unit && PH.ui('unit', { u: PH.unitOf(t) }), t.symbol && PH.ui('symbolUnit', { s: t.symbol })].filter(Boolean).join(' · ');
+      const defs = (l === 'vi' ? [['vi', t.defVi]] : l === 'en' ? [['en', t.defEn]] : [['vi', t.defVi], ['en', t.defEn]]).filter(d => d[1]);
+      openDialog(`<div class="top"><span class="crumb">${PH.uiFmt('chapter')} ${PH.roman(t.chapter)} · ${PH.esc(l === 'en' ? lt.en : lt.vi)}</span><button type="button" class="btn ghost sm" data-close>${PH.uiFmt('close')}</button></div>
+        <h2 ${l === 'en' ? 'lang="en"' : ''}>${PH.esc(l === 'en' ? t.en : t.vi)}</h2>${l === 'en' ? `<div class="en-name" style="font-family:var(--font-sans);font-size:17px;color:var(--ink-2)">${PH.esc(t.vi)}</div>` : `<div class="en-name en" lang="en">${PH.esc(t.en)}</div>`}
+        <div class="meta"><span class="ipa" lang="en">${PH.esc(t.ipa)}</span>${meta ? `<span>· ${PH.esc(meta)}</span>` : ''}${PH.hasVoice() ? `<button class="speak-btn ghost" type="button" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>
+        ${PH.dictHTML(t)}
+        <div style="margin-top:12px">${defs.map(d => `<div class="def ${d[0]}">${PH.esc(d[1])}</div>`).join('')}</div>
+        ${t.formula ? `<div class="fbox"><div class="lbl">${PH.uiFmt('relatedFormula')}</div><div class="math">${PH.esc(t.formula)}</div></div>` : ''}
+        ${(t.exampleEn || t.exampleVi) ? `<div class="ex"><div class="lbl">${PH.uiFmt('exampleLbl')}</div>${l !== 'vi' && t.exampleEn ? `<span class="en" lang="en">“${PH.esc(t.exampleEn)}”</span>` : ''}${l !== 'en' && t.exampleVi ? `<div>${PH.esc(t.exampleVi)}</div>` : ''}</div>` : ''}
+        ${t.added ? `<div style="margin-top:12px"><span class="tag gold">${PH.uiFmt('added')}</span></div>` : ''}
+        <div class="btns">${PH.canOpen(t.lesson) ? `<a class="btn outline sm" href="bai.html?n=${t.lesson}">${PH.uiFmt('openLesson', { n: t.lesson })}</a>` : ''}<a class="btn outline sm" href="game-termrush.html?lesson=${t.lesson}">${PH.uiFmt('practiseThis')}</a></div>`, 'detail acc-' + t.chapter);
+      dialog.onclick = e => { if (e.target.closest('[data-close]')) closeDialog(); };
+      PH.noteTerm(t.id, false);
+    }
+
+    $('btnFlash').addEventListener('click', () => {
       const deck = PH.shuffle(filtered()); if (!deck.length) return;
       let i = 0, flipped = false;
       const draw = () => {
         const t = deck[i];
-        const front = PH.lang() === 'en' ? { big: t.en, lbl: t.ipa } : { big: t.vi, lbl: 'Thuật ngữ tiếng Anh là gì?' };
-        const back = PH.lang() === 'en' ? { big: t.vi, lbl: t.defVi } : { big: t.en, lbl: t.ipa + ' — ' + t.defVi };
+        const front = en() ? { big: t.en, lbl: t.ipa, cls: 'en' } : { big: t.vi, lbl: PH.ui('fcAsk'), cls: '' };
+        const back = en() ? { big: t.vi, lbl: t.defVi, cls: '' } : { big: t.en, lbl: t.ipa + (t.defVi ? ' — ' + t.defVi : ''), cls: 'en' };
         const s = flipped ? back : front;
-        dialog.innerHTML = `<div class="top"><b>Flashcard ${i + 1}/${deck.length}</b><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
-          <div class="fc" id="fc"><span class="lbl">${flipped ? 'Mặt sau · chạm để lật' : 'Mặt trước · chạm để lật'}</span><span class="big ${flipped ? 'en' : ''}">${PH.esc(s.big)}</span><span class="lbl">${PH.esc(s.lbl)}</span></div>
-          <div class="fc-nav"><button class="btn outline sm" type="button" data-prev>← Trước</button><button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe">${PH.icon('speaker', 'sm')}</button><button class="btn sm" type="button" data-next>Tiếp →</button></div>`;
+        dialog.innerHTML = `<div class="top"><b>${PH.uiFmt('fcTitle', { i: i + 1, n: deck.length })}</b><button class="btn ghost sm" type="button" data-close>${PH.uiFmt('close')}</button></div>
+          <div class="fc" id="fc" role="button" tabindex="0"><span class="lbl">${PH.uiFmt(flipped ? 'fcBack' : 'fcFront')}</span><span class="big ${s.cls}" ${s.cls ? 'lang="en"' : ''}>${PH.esc(s.big)}</span><span class="lbl">${PH.esc(s.lbl)}</span></div>
+          <div class="fc-nav"><button class="btn outline sm" type="button" data-prev>${PH.icon('back', 'sm')}${PH.uiFmt('prev')}</button>${PH.hasVoice() ? `<button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : PH.dictHTML(t)}<button class="btn sm" type="button" data-next>${PH.uiFmt('next')}${PH.icon('arrow', 'sm')}</button></div>`;
       };
-      draw(); overlay.classList.add('show');
+      openDialog('', ''); draw();
       dialog.onclick = e => {
         if (e.target.closest('[data-close]')) return closeDialog();
         if (e.target.closest('#fc')) { flipped = !flipped; draw(); }
@@ -205,9 +247,8 @@
       };
     });
 
-    /* ---- Kiểm tra 10 câu (chọn nghĩa) ---- */
-    document.getElementById('btnQuiz').addEventListener('click', () => {
-      const pool = filtered(); if (pool.length < 4) { PH.toast('Cần ít nhất 4 thuật ngữ trong bộ lọc để tạo bài kiểm tra.'); return; }
+    $('btnQuiz').addEventListener('click', () => {
+      const pool = filtered(); if (pool.length < 4) { PH.toast(PH.ui('need4')); return; }
       const qs = PH.sample(pool, Math.min(10, pool.length)).map(t => {
         const wrong = PH.sample(TERMS.filter(x => x.id !== t.id && x.chapter === t.chapter).concat(TERMS.filter(x => x.id !== t.id && x.chapter !== t.chapter)), 3);
         return { t, opts: PH.shuffle([t].concat(wrong)) };
@@ -216,13 +257,13 @@
       const askEn = PH.lang() !== 'vi'; // mức 2–3: cho thuật ngữ tiếng Anh, chọn nghĩa Việt; mức 1: ngược lại
       const draw = () => {
         const q = qs[i];
-        dialog.innerHTML = `<div class="top"><b>Câu ${i + 1}/${qs.length}</b><span class="small muted">Đúng ${ok}</span><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
-          <div class="qz"><div class="small muted">${askEn ? 'Chọn nghĩa tiếng Việt của' : 'Chọn thuật ngữ tiếng Anh của'}</div>
-          <div class="stem ${askEn ? 'en' : ''}">${PH.esc(askEn ? q.t.en : q.t.vi)} ${askEn ? `<button class="speak-btn" type="button" data-speak="${PH.esc(q.t.en)}" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>` : ''}</div>
+        dialog.innerHTML = `<div class="top"><b>${PH.uiFmt('qTitle', { i: i + 1, n: qs.length })}</b><span class="small muted">${PH.uiFmt('correctSoFar', { k: ok })}</span><button class="btn ghost sm" type="button" data-close>${PH.uiFmt('close')}</button></div>
+          <div class="qz"><div class="small muted">${PH.uiFmt(askEn ? 'pickVi' : 'pickEn')}</div>
+          <div class="stem ${askEn ? 'en' : ''}" ${askEn ? 'lang="en"' : ''}>${PH.esc(askEn ? q.t.en : q.t.vi)} ${askEn && PH.hasVoice() ? `<button class="speak-btn ghost" type="button" data-speak="${PH.esc(q.t.en)}" style="vertical-align:middle" aria-label="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>
           <div class="opts">${q.opts.map(o => `<button type="button" class="opt ${askEn ? '' : 'en'}" data-id="${o.id}">${PH.esc(askEn ? o.vi : o.en)}</button>`).join('')}</div></div>`;
         locked = false;
       };
-      draw(); overlay.classList.add('show');
+      openDialog('', ''); draw();
       dialog.onclick = e => {
         if (e.target.closest('[data-close]')) return closeDialog();
         const b = e.target.closest('.opt'); if (!b || locked) return;
@@ -231,14 +272,34 @@
         dialog.querySelectorAll('.opt').forEach(o => { if (o.dataset.id === q.t.id) o.classList.add('right'); else if (o === b) o.classList.add('wrong'); });
         setTimeout(() => {
           if (++i < qs.length) draw();
-          else dialog.innerHTML = `<div class="top"><b>Kết quả</b><button class="btn ghost sm" type="button" data-close>Đóng</button></div>
-            <div class="fc" style="cursor:default"><span class="big">${ok}/${qs.length}</span><span class="lbl">${ok === qs.length ? 'Xuất sắc!' : 'Những thuật ngữ trả lời sai đã được ghi vào phần “Ôn điểm yếu” trong Trò chơi.'}</span></div>`;
+          else { dialog.innerHTML = `<div class="top"><b>${PH.uiFmt('result')}</b><button class="btn ghost sm" type="button" data-close>${PH.uiFmt('close')}</button></div>
+            <div class="fc" style="cursor:default"><span class="big">${ok}/${qs.length}</span><span class="lbl">${PH.uiFmt(ok === qs.length ? 'excellent' : 'wrongNoted')}</span></div>`; renderGrid(); }
         }, 900);
       };
     });
 
+    $('q').addEventListener('input', e => { query = e.target.value; renderGrid(); });
+    $('chips').addEventListener('click', e => {
+      const b = e.target.closest('.pill'); if (!b) return;
+      if (b.dataset.c != null) filter = { c: +b.dataset.c, loc: '', l: 0 };
+      else if (b.dataset.loc) filter = { c: 0, loc: filter.loc === b.dataset.loc ? '' : b.dataset.loc, l: 0 };
+      else if (b.dataset.l) filter = { c: 0, loc: '', l: 0 };
+      renderHead(); renderGrid();
+    });
+    $('btnNghia').addEventListener('click', () => { showVi = !showVi; renderHead(); renderGrid(); });
+    $('grid').addEventListener('click', e => {
+      if (e.target.closest('#btnClear')) { query = ''; $('q').value = ''; filter = { c: 0, loc: '', l: 0 }; renderHead(); renderGrid(); return; }
+      if (e.target.closest('[data-speak], .dict-links a')) return;
+      const a = e.target.closest('.tn-the'); if (a) { e.preventDefault(); openDetail(a.dataset.id); }
+    });
+    $('grid').addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return; const a = e.target.closest('.tn-the'); if (a && e.target === a) { e.preventDefault(); openDetail(a.dataset.id); }
+    });
+
+    function renderAll() { renderHead(); renderGrid(); }
     renderAll();
-    PH.onLang(() => { renderList(); renderDetail(); });
+    PH.onLang(renderAll); document.addEventListener('ph:progress', renderGrid);
+    if (PH.qs('t')) openDetail(PH.qs('t'));
   </script>
 </body>
 </html>

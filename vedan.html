@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Về dự án · PhysiHub</title>
+  <meta name="description" content="PhysiHub là gì, nguồn học liệu, cách đối chiếu phiên âm với từ điển Oxford/Collins, cách kiểm tra thuật ngữ và tình trạng thẩm định.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Về dự án · PhysiHub">
+  <meta property="og:image" content="https://vvsuslab.github.io/PhysiHub/assets/og-physihub.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Charis+SIL:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/lively.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0D47A1">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="PhysiHub">
+  <style>
+    .layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 22px; }
+    .toc { position: sticky; top: calc(var(--header-h) + 16px); display: flex; flex-direction: column; gap: 2px; }
+    .toc a { padding: 8px 12px; border-radius: 10px; font-size: 14px; color: var(--ink-2); }
+    .toc a:hover { background: var(--blue-soft); color: var(--navy); }
+    .sec { scroll-margin-top: 130px; padding: 24px 28px; }
+    .sec + .sec { margin-top: 16px; }
+    .sec .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .sec .sh h2 { font-size: 22px; margin: 0; }
+    .sec p, .sec li { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); }
+    .sec ul, .sec ol { padding-left: 20px; }
+    .sec li + li { margin-top: 4px; }
+    .sec p + p { margin-top: 8px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 12px 0 14px; }
+    .stats .o { padding: 12px 14px; border-radius: 16px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
+    .stats .o:nth-child(even) { background: var(--orange-soft); border-color: var(--orange-line); }
+    .stats .n { font-family: var(--font-display); font-size: 28px; font-weight: 800; line-height: 1.2; color: var(--navy); }
+    .stats .o:nth-child(even) .n { color: var(--c1-ink); }
+    .stats .l { font-size: 12.5px; color: var(--ink-3); }
+    .steps { counter-reset: s; display: grid; gap: 8px; margin-top: 10px; }
+    .steps div { display: flex; gap: 12px; align-items: flex-start; }
+    .steps div::before { counter-increment: s; content: counter(s); flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--sky); color: #fff; font-weight: 800; font-size: 14px; box-shadow: 0 4px 10px rgba(30, 136, 229, .3); display: grid; place-items: center; margin-top: 2px; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .toc { position: static; flex-direction: row; flex-wrap: wrap; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 720px) { .sec { padding: 18px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <section class="page-hero light"><div style="flex:1;min-width:240px"><p class="eyebrow" id="eyebrow"></p><h1 id="h1"></h1><p class="lead" id="lead" style="max-width:720px"></p></div></section>
+      <div class="layout">
+        <nav class="toc" id="toc" aria-label=""></nav>
+        <div id="body"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/lessons.js"></script>
+  <script src="data/terms.js"></script>
+  <script src="data/content.js"></script>
+  <script src="data/exams.js"></script>
+  <script src="assets/site.js"></script>
+  <script>
+    Object.assign(PH.UI, {
+      h1: ['PhysiHub là gì?', 'What is PhysiHub?'],
+      lead: ['PhysiHub là sản phẩm dự thi Khoa học kĩ thuật của học sinh Trường THPT Bùi Hữu Nghĩa (Cần Thơ), năm học 2026–2027. Mục tiêu: giúp học sinh lớp 12 ôn Vật lí theo đúng cấu trúc đề thi tốt nghiệp THPT từ 2025, đồng thời làm quen với thuật ngữ vật lí bằng tiếng Anh — hưởng ứng chủ trương đưa tiếng Anh thành ngôn ngữ thứ hai trong trường học.', 'PhysiHub is a science and engineering fair project by students of Bùi Hữu Nghĩa High School (Cần Thơ), school year 2026–2027. Its aim: help Grade 12 students revise physics in the format of the national graduation exam from 2025, while getting used to physics terms in English — in line with the policy of making English a second language in schools.'],
+      onThisPage: ['Trên trang này', 'On this page'],
+      sSample: ['Bản mẫu để thử nghiệm', 'A sample version for trials'],
+      sample1: ['Đây là bản mẫu: mỗi chương có 4 bài lí thuyết đầu, tổng cộng {l} bài; {t} thuật ngữ; {q} câu hỏi luyện đề; 1 thí nghiệm ảo; 2 trò chơi (trò thứ ba đang phát triển). Các bài còn lại vẫn hiện đúng tên trong sách và ghi rõ là chưa có nội dung.', 'This is a sample version: the first 4 theory lessons of each chapter, {l} lessons in total; {t} terms; {q} practice questions; 1 virtual lab; 2 games (a third is in development). The other lessons keep their textbook titles and are marked as not written yet.'],
+      sample2: ['Hướng phát triển nếu được tiếp tục: video bài giảng, tài khoản học sinh, bảng theo dõi cho giáo viên, lộ trình học tự điều chỉnh theo từng em, trò chơi Bilingual Arena.', 'Planned if the project continues: video lessons, student accounts, a teacher dashboard, a learning path that adapts to each student, and the Bilingual Arena game.'],
+      lLessons: ['bài mẫu', 'sample lessons'], lTerms: ['thuật ngữ', 'terms'], lQ: ['câu hỏi luyện đề', 'practice questions'], lLab: ['thí nghiệm ảo', 'virtual lab'],
+      sSources: ['Nguồn học liệu', 'Sources'],
+      src1: ['SGK Vật lí 12 – Kết nối tri thức với cuộc sống (NXB Giáo dục Việt Nam).', 'Grade 12 Physics textbook – Kết nối tri thức với cuộc sống series (Vietnam Education Publishing House).'],
+      src2: ['Đề minh hoạ và cấu trúc đề thi tốt nghiệp THPT môn Vật lí từ năm 2025 của Bộ GD&ĐT.', 'The Ministry of Education and Training’s sample exam and the physics exam format from 2025.'],
+      src3: ['Hằng số vật lí theo CODATA/NIST.', 'Physical constants from CODATA/NIST.'],
+      src4: ['Bản dịch tiếng Anh do nhóm biên soạn; phần đang chờ giáo viên thẩm định được ghi rõ trong từng trang.', 'English translations were written by the team; parts still awaiting teacher review are labelled on every page.'],
+      src5: ['Tên tiếng Anh của thuật ngữ đối chiếu giáo trình Cambridge International AS & A Level Physics (9702) và OpenStax College Physics.', 'English term names are checked against the Cambridge International AS & A Level Physics (9702) syllabus and OpenStax College Physics.'],
+      src6: ['Ảnh minh hoạ bốn chương do giáo viên hướng dẫn cung cấp cho nhóm và được cắt lại về khung 840 : 454; nguồn gốc từng ảnh ghi trong hồ sơ dự án.', 'The four chapter images were supplied to the team by the supervising teacher and cropped to a 840 : 454 frame; the origin of each image is recorded in the project file.'],
+      sIpa: ['Phiên âm và âm thanh', 'Pronunciation and audio'],
+      ipa1: ['Phiên âm IPA theo tiếng Anh – Anh, đối chiếu từ điển Oxford Learner’s. Thuật ngữ chuyên ngành không có trong Oxford thì tra Collins (mục British English trên Dictionary.com); Merriam-Webster chỉ dùng để xác nhận trọng âm.', 'IPA follows British English and is checked against the Oxford Learner’s Dictionary. Specialist terms missing from Oxford are checked in Collins (the British English section on Dictionary.com); Merriam-Webster is used only to confirm stress.'],
+      ipa2: ['Nút “Nghe phát âm trên Oxford / Cambridge” mở đúng mục từ trên trang từ điển, nơi có bản ghi âm của người bản ngữ. Trang không sao chép tệp âm thanh của từ điển.', 'The “Hear it on Oxford / Cambridge” buttons open the entry on the dictionary site, where native-speaker recordings are available. The site does not copy the dictionaries’ audio files.'],
+      ipa3: ['Nút loa nhỏ đọc bằng giọng máy tiếng Anh của trình duyệt (Web Speech API). Máy không có giọng tiếng Anh thì nút này tự ẩn; em xem phiên âm hoặc nghe trên từ điển.', 'The small speaker button reads with the browser’s English voice (Web Speech API). On devices without an English voice the button hides itself; read the IPA or listen on the dictionary instead.'],
+      sCheck: ['Mỗi thuật ngữ được kiểm tra thế nào', 'How each term is checked'],
+      chk1: ['Tên tiếng Việt lấy đúng như SGK Vật lí 12 Kết nối tri thức với cuộc sống.', 'The Vietnamese name is taken exactly from the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series).'],
+      chk2: ['Tên tiếng Anh đối chiếu giáo trình Cambridge International AS & A Level Physics và OpenStax.', 'The English name is checked against the Cambridge International AS & A Level Physics syllabus and OpenStax.'],
+      chk3: ['Phiên âm đối chiếu từ điển Oxford Learner’s và Collins; nghe trên Oxford hoặc Cambridge.', 'IPA is checked against the Oxford Learner’s and Collins dictionaries; audio via Oxford or Cambridge.'],
+      chk4: ['Giáo viên Vật lí và giáo viên tiếng Anh duyệt xong mới bỏ nhãn “chờ thẩm định”. Trang không ghi tên người duyệt khi chưa có biên bản.', 'The “awaiting review” label is removed only after a physics teacher and an English teacher approve the term. No reviewer’s name is shown until a signed record exists.'],
+      sStatus: ['Tình trạng thẩm định', 'Review status'],
+      status1: ['Số liệu dưới đây đếm trực tiếp từ dữ liệu của trang, không gõ tay.', 'The figures below are counted directly from the site’s data, not typed by hand.'],
+      stTerms: ['thuật ngữ trong kho', 'terms in the glossary'], stAdded: ['thuật ngữ do nhóm bổ sung, chờ thẩm định', 'terms added by the team, awaiting review'],
+      stDraft: ['bài mẫu ở dạng bản nháp, chờ giáo viên thẩm định', 'sample lessons still in draft, awaiting teacher review'], stExams: ['đề ôn theo cấu trúc 2025', 'practice tests in the 2025 format'],
+      sHow: ['Cách nhóm làm', 'How the team works'],
+      how1: ['Trang viết bằng HTML, CSS và JavaScript thuần, đặt trên GitHub Pages; không có máy chủ, không có tài khoản. Tiến độ học, kỉ lục trò chơi và bài làm chỉ lưu trên máy của em (localStorage), không gửi đi đâu.', 'The site is plain HTML, CSS and JavaScript on GitHub Pages; there is no server and no account. Progress, game records and answers are stored only on your device (localStorage) and are never sent anywhere.'],
+      how2: ['Khi khảo sát, nhóm chỉ ghi mã lớp và số thứ tự, không thu thập họ tên hay thông tin cá nhân.', 'In surveys the team records only a class code and a roll number — no names or personal details.'],
+      how3: ['Nhóm dùng công cụ AI (Claude của Anthropic) để hỗ trợ thiết kế giao diện, viết mã và soạn bản nháp tiếng Anh. Mọi nội dung vật lí, bản dịch và phiên âm đều do nhóm đối chiếu với sách giáo khoa và từ điển, rồi giáo viên rà soát.', 'The team used an AI tool (Claude by Anthropic) to help design the interface, write code and draft English text. All physics content, translations and IPA are checked by the team against the textbook and dictionaries, then reviewed by teachers.'],
+      how4: ['Mã nguồn công khai tại GitHub; góp ý gửi qua mục Issues.', 'The source code is public on GitHub; feedback goes through Issues.'],
+      openRepo: ['Mã nguồn trên GitHub', 'Source on GitHub'], feedback: ['Góp ý cho nhóm', 'Send feedback'], allLinks: ['Tất cả liên kết', 'All links']
+    });
+    PH.mount({ active: null, heroIcon: 'info', title: { vi: 'Về dự án', en: 'About the project' } });
+    const $ = id => document.getElementById(id);
+    function render() {
+      $('eyebrow').textContent = PH.ui('aboutTitle'); $('h1').textContent = PH.ui('h1'); $('lead').textContent = PH.dinh(PH.ui('lead'));
+      const terms = PH.TERMS || [], added = terms.filter(t => t.added).length;
+      const sample = PH.sampleLessons(); const drafted = sample.filter(l => PH.CONTENT[String(l.n)].drafted).length;
+      const nQ = (PH.EXAMS || []).reduce((s, x) => s + x.parts.reduce((a, p) => a + p.items.length, 0), 0);
+      const SECS = [['mau', 'sSample'], ['nguon', 'sSources'], ['phat-am', 'sIpa'], ['kiem-tra', 'sCheck'], ['tham-dinh', 'sStatus'], ['cach-lam', 'sHow']];
+      $('toc').setAttribute('aria-label', PH.ui('onThisPage'));
+      $('toc').innerHTML = `<p class="eyebrow" style="padding:0 12px 6px">${PH.uiFmt('onThisPage')}</p>` + SECS.map(s => `<a href="#${s[0]}">${PH.uiFmt(s[1])}</a>`).join('') + `<a href="lienket.html" style="margin-top:8px;font-weight:600">${PH.uiFmt('allLinks')} →</a>`;
+      const li = keys => `<ul>${keys.map(k => `<li>${PH.uiFmt(k)}</li>`).join('')}</ul>`;
+      $('body').innerHTML = `
+        <section class="card sec" id="mau"><div class="sh"><span class="num-dot">1</span><h2 class="sec-title">${PH.uiFmt('sSample')}</h2></div>
+          <div class="stats"><div class="o"><div class="n">${sample.length}</div><div class="l">${PH.uiFmt('lLessons')}</div></div><div class="o"><div class="n">${terms.length}</div><div class="l">${PH.uiFmt('lTerms')}</div></div><div class="o"><div class="n">${nQ}</div><div class="l">${PH.uiFmt('lQ')}</div></div><div class="o"><div class="n">1</div><div class="l">${PH.uiFmt('lLab')}</div></div></div>
+          <p>${PH.uiFmt('sample1', { l: sample.length, t: terms.length, q: nQ })}</p><p>${PH.uiFmt('sample2')}</p></section>
+        <section class="card sec" id="nguon"><div class="sh"><span class="num-dot">2</span><h2 class="sec-title">${PH.uiFmt('sSources')}</h2></div>${li(['src1', 'src2', 'src3', 'src4', 'src5', 'src6'])}</section>
+        <section class="card sec" id="phat-am"><div class="sh"><span class="num-dot">3</span><h2 class="sec-title">${PH.uiFmt('sIpa')}</h2></div><p>${PH.uiFmt('ipa1')}</p><p>${PH.uiFmt('ipa2')}</p><p>${PH.uiFmt('ipa3')}</p></section>
+        <section class="card sec" id="kiem-tra"><div class="sh"><span class="num-dot">4</span><h2 class="sec-title">${PH.uiFmt('sCheck')}</h2></div><div class="steps">${['chk1', 'chk2', 'chk3', 'chk4'].map(k => `<div><p>${PH.uiFmt(k)}</p></div>`).join('')}</div><p style="margin-top:12px">${PH.uiFmt('masteredHint')}</p></section>
+        <section class="card sec" id="tham-dinh"><div class="sh"><span class="num-dot">5</span><h2 class="sec-title">${PH.uiFmt('sStatus')}</h2></div><p>${PH.uiFmt('status1')}</p>
+          <div class="stats"><div class="o"><div class="n">${terms.length}</div><div class="l">${PH.uiFmt('stTerms')}</div></div><div class="o"><div class="n">${added}</div><div class="l">${PH.uiFmt('stAdded')}</div></div><div class="o"><div class="n">${drafted} / ${sample.length}</div><div class="l">${PH.uiFmt('stDraft')}</div></div><div class="o"><div class="n">${(PH.EXAMS || []).length}</div><div class="l">${PH.uiFmt('stExams')}</div></div></div></section>
+        <section class="card sec" id="cach-lam"><div class="sh"><span class="num-dot">6</span><h2 class="sec-title">${PH.uiFmt('sHow')}</h2></div><p>${PH.uiFmt('how1')}</p><p>${PH.uiFmt('how2')}</p><p>${PH.uiFmt('how3')}</p><p>${PH.uiFmt('how4')}</p>
+          <div class="row" style="margin-top:14px"><a class="btn outline sm" href="https://github.com/vvsuslab/PhysiHub" target="_blank" rel="noopener">${PH.uiFmt('openRepo')}</a><a class="btn gold sm" href="https://github.com/vvsuslab/PhysiHub/issues" target="_blank" rel="noopener">${PH.uiFmt('feedback')}</a></div></section>`;
+    }
+    render(); PH.onLang(render); PH.applyHash(); window.addEventListener('hashchange', PH.applyHash);
+  </script>
+</body>
+</html>

@@ -11,14 +11,14 @@
   <link rel="stylesheet" href="assets/lively.css">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2e4a86">
+  <meta name="theme-color" content="#0D47A1">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
     .top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-    .top .name { font-family: var(--font-serif); font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
-    .top .name .mark { width: 24px; height: 24px; border-radius: 7px; background: linear-gradient(90deg, var(--navy) 0 50%, var(--gold) 50% 100%); }
+    .top .name { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+    .top .name .mark { width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(90deg, var(--navy) 0 50%, var(--orange) 50% 100%); box-shadow: 0 0 0 3px var(--blue-soft); }
     .top .sep { width: 1px; height: 22px; background: var(--line-strong); }
     .top .scope { font-size: 14px; color: var(--ink-2); }
     .top .exit { margin-left: auto; }
@@ -35,8 +35,8 @@
     .ask { margin: 16px 0 10px; font-size: 16px; }
     .ask b { color: var(--gold-2); }
     .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .opt { padding: 16px 18px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); font-size: 17px; font-weight: 500; text-align: center; }
-    .opt:hover { border-color: var(--navy); }
+    .opt { padding: 16px 18px; border: 1.5px solid var(--blue-line); border-radius: 12px; background: var(--surface); font-size: 17px; font-weight: 500; text-align: center; }
+    .opt:hover { border-color: var(--navy-2); background: var(--blue-soft); }
     .opt.right { border-color: var(--green); background: var(--green-soft); }
     .opt.wrong { border-color: var(--red); background: var(--red-soft); }
     .typebox { display: flex; gap: 10px; }
@@ -52,7 +52,7 @@
     .stat { padding: 12px 0; border-top: 1px solid var(--line); }
     .stat:first-child { border-top: 0; padding-top: 0; }
     .stat .l { font-size: 13px; color: var(--ink-3); }
-    .stat .v { font-family: var(--font-serif); font-size: 30px; color: var(--navy); }
+    .stat .v { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--navy); }
     .stat .v.gold { color: var(--gold); }
     .lives { display: flex; gap: 6px; margin-top: 6px; }
     .lives i { width: 14px; height: 14px; border-radius: 50%; background: var(--navy); }
@@ -69,33 +69,33 @@
     <div class="wrap">
       <div class="top">
         <div class="name"><span class="mark"></span>Term Rush</div><span class="sep"></span>
-        <span class="scope">Phạm vi: <b id="scopeLabel"></b></span>
+        <span class="scope"><span id="scopeLbl"></span> <b id="scopeLabel"></b></span>
         <span class="pill gold" id="langPill"></span>
-        <a class="exit" href="games.html">Thoát ván</a>
+        <a class="exit" href="games.html" id="exitLink"></a>
       </div>
 
       <div class="layout">
         <div>
-          <div class="arena" id="arena"><div class="stars"></div><div class="line"></div><div class="line-lbl">chạm vạch này là mất một mạng</div></div>
+          <div class="arena" id="arena"><div class="stars"></div><div class="line"></div><div class="line-lbl" id="lineLbl"></div></div>
           <div class="ask" id="ask"></div>
           <div id="answer"></div>
-          <div class="fb" id="fb"><span class="small muted">Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.</span></div>
+          <div class="fb" id="fb"></div>
           <div class="hint" id="hint"></div>
-          <p class="foot">Điểm mỗi thuật ngữ = 10 × hệ số tốc độ × hệ số ngôn ngữ. Trả lời càng nhanh và ở mức ngôn ngữ càng cao thì điểm càng lớn.</p>
+          <p class="foot" id="foot"></p>
         </div>
         <aside class="side">
           <div class="card">
-            <div class="stat"><div class="l">Thời gian còn lại</div><div class="v gold" id="time">60 giây</div><div class="timebar"><i id="timebar" style="width:100%"></i></div></div>
-            <div class="stat"><div class="l">Điểm</div><div class="v" id="score">0</div></div>
-            <div class="stat"><div class="l">Chuỗi đúng liên tiếp</div><div class="v streak-v"><span id="streak">0</span><span id="flame"></span></div></div>
-            <div class="stat"><div class="l">Mạng còn lại</div><div class="lives" id="lives"></div></div>
+            <div class="stat"><div class="l" id="lTime"></div><div class="v gold" id="time">60</div><div class="timebar"><i id="timebar" style="width:100%"></i></div></div>
+            <div class="stat"><div class="l" id="lScore"></div><div class="v" id="score">0</div></div>
+            <div class="stat"><div class="l" id="lStreak"></div><div class="v streak-v"><span id="streak">0</span><span id="flame"></span></div></div>
+            <div class="stat"><div class="l" id="lLives"></div><div class="lives" id="lives"></div></div>
           </div>
-          <div class="card modes"><div class="small muted" style="margin-bottom:6px">Chế độ chơi</div>
-            <button data-mode="choose"><b>A</b>· Chọn nghĩa</button>
-            <button data-mode="type"><b>B</b>· Gõ từ tiếng Anh</button>
-            <button data-mode="listen"><b>C</b>· Nghe rồi gõ</button>
+          <div class="card modes"><div class="small muted" style="margin-bottom:6px" id="lModes"></div>
+            <button data-mode="choose"><b>A</b>· <span id="mA"></span></button>
+            <button data-mode="type"><b>B</b>· <span id="mB"></span></button>
+            <button data-mode="listen"><b>C</b>· <span id="mC"></span></button>
           </div>
-          <div class="notice">Hệ thống ghi lại thuật ngữ em hay sai để đưa vào phần “Ôn điểm yếu”.</div>
+          <div class="notice" id="noteWeak"></div>
         </aside>
       </div>
     </div>
@@ -105,26 +105,57 @@
   <script src="data/terms.js"></script>
   <script src="assets/site.js"></script>
   <script>
-    PH.mount({ active: 'games', noFooter: true });
+    Object.assign(PH.UI, {
+      scopeLbl: ['Phạm vi:', 'Scope:'], levelPill: ['Mức {l} · điểm ×{m}', 'Level {l} · points ×{m}'], exitRound: ['Thoát ván', 'Leave the round'],
+      lineLbl: ['chạm vạch này là mất một mạng', 'reach this line and you lose a life'],
+      fbIdle: ['Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.', 'Pick the right meaning of the highlighted term before it hits the line.'],
+      foot: ['Điểm mỗi thuật ngữ = 10 × hệ số tốc độ × hệ số ngôn ngữ. Trả lời càng nhanh và ở mức ngôn ngữ càng cao thì điểm càng lớn.', 'Points per term = 10 × speed factor × language factor. The faster you answer and the higher your level, the more you score.'],
+      lTime: ['Thời gian còn lại', 'Time left'], secs: ['{n} giây', '{n} s'], lScore: ['Điểm', 'Score'], lStreak: ['Chuỗi đúng liên tiếp', 'Streak'], lLives: ['Mạng còn lại', 'Lives left'],
+      lModes: ['Chế độ chơi', 'Game mode'], mA: ['Chọn nghĩa', 'Choose the meaning'], mB: ['Gõ từ tiếng Anh', 'Type the English term'], mC: ['Nghe rồi gõ', 'Listen and type'],
+      noteWeak: ['Hệ thống ghi lại thuật ngữ em hay sai để đưa vào phần “Ôn điểm yếu”.', 'Terms you miss are saved to “Review weak spots”.'],
+      fewTerms: ['Phạm vi này có ít thuật ngữ, dùng toàn bộ kho.', 'This scope has too few terms, so the whole glossary is used.'],
+      timeUp: ['Hết giờ!', 'Time is up!'], allDone: ['Em đã ôn hết thuật ngữ trong phạm vi này!', 'You have reviewed every term in this scope!'], noLives: ['Hết mạng!', 'No lives left!'],
+      chooseDef: ['Chọn định nghĩa đúng của', 'Choose the correct definition of'], chooseVi: ['Chọn nghĩa đúng của', 'Choose the correct meaning of'],
+      listenBtn: ['Nghe', 'Listen'], hintVi: ['Gợi ý tiếng Việt (×1,5)', 'Vietnamese hint (×1.5)'],
+      listenType: ['Nghe và gõ thuật ngữ tiếng Anh', 'Listen and type the English term'], listenAgain: ['Nghe lại', 'Listen again'],
+      typeFor: ['Gõ thuật ngữ tiếng Anh của', 'Type the English term for'], egPh: ['ví dụ: internal energy', 'e.g. internal energy'], answer: ['Trả lời', 'Answer'],
+      plusPts: ['+{n} điểm', '+{n} points'], hitLine: ['chạm vạch — mất một mạng', 'hit the line — one life lost'], wrongLife: ['sai — mất một mạng', 'wrong — one life lost'],
+      right: ['Đúng', 'Correct'], notRight: ['Chưa đúng', 'Not quite'], isVi: ['là', 'means'], symbolIs: ['kí hiệu {s}', 'symbol {s}'], seeLesson: ['Xem Bài {n}', 'See Lesson {n}'],
+      hot: ['nóng!', 'on fire!'], streakTitle: ['Chuỗi {n} câu đúng', '{n} in a row'], pts: ['{n} điểm', '{n} points'],
+      rightWrong: ['Đúng {c}, sai {w}', '{c} right, {w} wrong'], newRecord: ['Kỉ lục mới!', 'New record!'], record: ['kỉ lục {n}', 'best {n}'], review: ['Cần ôn lại:', 'Review these:'],
+      again: ['Chơi lại', 'Play again'], backGames: ['Về Trò chơi', 'Back to Games'],
+      intro: ['{n} thuật ngữ · 60 giây · 3 mạng. Thuật ngữ rơi từ trên xuống — trả lời thuật ngữ đang tô vàng trước khi nó chạm vạch. Chọn chế độ A, B hoặc C ở cột bên.', '{n} terms · 60 seconds · 3 lives. Terms fall from the top — answer the highlighted one before it hits the line. Pick mode A, B or C on the side.'],
+      startBtn2: ['Bắt đầu', 'Start']
+    });
+    PH.mount({ active: 'games', noFooter: true, title: { vi: 'Term Rush', en: 'Term Rush' } });
+    const $ = id => document.getElementById(id);
+    function renderStatic() {
+      $('scopeLbl').textContent = PH.ui('scopeLbl'); $('exitLink').textContent = PH.ui('exitRound'); $('lineLbl').textContent = PH.ui('lineLbl'); $('foot').textContent = PH.ui('foot');
+      ['lTime', 'lScore', 'lStreak', 'lLives', 'lModes', 'mA', 'mB', 'mC', 'noteWeak'].forEach(k => { $(k).textContent = PH.ui(k); });
+    }
     const ROUND = 60, LIVES = 3, FALL_MS = 9000, SPAWN_MS = 3200, MAX_ON_SCREEN = 3;
     const arena = document.getElementById('arena');
     let mode = 'choose', pool = [], items = [], timer = null, endAt = 0, spawnAt = 0, raf = null;
-    let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, hintUsed = false;
+    // multVan: hệ số điểm được CHỐT lúc bắt đầu ván. Nếu đọc hệ số tại lúc trả lời,
+    // học sinh có thể đọc đề ở mức Tiếng Việt rồi bấm sang English để ăn ×2.
+    let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, multVan = 1;
 
     const scope = PH.scope();
     document.getElementById('scopeLabel').textContent = PH.scopeLabel(scope);
-    function langPill() { const l = PH.langInfo(); document.getElementById('langPill').textContent = `Mức ${l.long} · điểm ×${PH.num(l.mult)}`; }
-    langPill(); PH.onLang(() => { langPill(); if (running) renderAnswer(); });
+    renderStatic();
+    function langPill() { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); }
+    langPill(); PH.onLang(() => { langPill(); renderStatic(); renderStats(); if (running) renderAnswer(); else setFeedback(null); });
 
     function buildPool() {
       let t = PH.scopeTerms(scope);
-      if (t.length < 4) { PH.toast('Phạm vi này có ít thuật ngữ, dùng toàn bộ ngân hàng.'); t = PH.TERMS || []; }
+      if (t.length < 4) { PH.toast(PH.ui('fewTerms')); t = PH.TERMS || []; }
       return PH.shuffle(t);
     }
 
     /* ----- vòng chơi ----- */
     function start() {
-      pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true; hintUsed = false;
+      pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true;
+      multVan = PH.langInfo().mult;   // chốt hệ số theo mức ngôn ngữ lúc bắt đầu ván
       arena.querySelectorAll('.fall, .overlay').forEach(e => e.remove());
       endAt = Date.now() + ROUND * 1000; spawnAt = 0;
       clearInterval(timer); timer = setInterval(tickTime, 250); tickTime();
@@ -134,16 +165,22 @@
     }
     function tickTime() {
       const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-      document.getElementById('time').textContent = left + ' giây';
+      document.getElementById('time').textContent = PH.ui('secs', { n: left });
       document.getElementById('timebar').style.width = Math.max(0, Math.min(100, (endAt - Date.now()) / (ROUND * 1000) * 100)) + '%';
-      if (left === 0 && running) end('Hết giờ!');
+      if (left === 0 && running) end(PH.ui('timeUp'));
     }
     function spawn() {
       if (!running || items.length >= MAX_ON_SCREEN || !pool.length) return;
       const term = pool.shift();
-      const el = document.createElement('div'); el.className = 'fall'; el.textContent = term.en;
-      const maxX = Math.max(0, arena.clientWidth - 260); el.style.left = (20 + Math.random() * maxX) + 'px';
+      const el = document.createElement('div'); el.className = 'fall';
+      // Chế độ B (gõ từ tiếng Anh) và C (nghe rồi gõ): KHÔNG hiện sẵn từ tiếng Anh trên thẻ rơi,
+      // nếu không học sinh chỉ việc chép lại, hai chế độ đó mất tác dụng luyện tập.
+      el.textContent = mode === 'choose' ? term.en : (PH.lang() === 'en' ? term.en.replace(/[a-z]/g, '_') : term.vi);
       arena.appendChild(el);
+      // Đo bề rộng THẬT sau khi gắn vào trang rồi mới kẹp vị trí, vì thẻ dài tới hơn 300px
+      // sẽ bị khung cắt mất chữ nếu đoán cứng 260px.
+      const maxX = Math.max(0, arena.clientWidth - el.offsetWidth - 20);
+      el.style.left = (10 + Math.random() * maxX) + 'px';
       items.push({ term, el, born: performance.now(), hint: false });
       spawnAt = Date.now() + SPAWN_MS;
       renderAnswer();
@@ -158,7 +195,7 @@
       const hit = items.find(it => it.p >= 1);
       if (hit) miss(hit, 'chạm vạch');
       if (Date.now() >= spawnAt) spawn();
-      if (!items.length && !pool.length) end('Em đã ôn hết thuật ngữ trong phạm vi này!');
+      if (!items.length && !pool.length) end(PH.ui('allDone'));
       markActive();
       raf = requestAnimationFrame(frame);
     }
@@ -180,33 +217,33 @@
         const en = l === 'en';
         const others = PH.sample((PH.TERMS || []).filter(x => x.id !== t.id && (en ? x.defEn : x.vi)), 3);
         const opts = PH.shuffle([t].concat(others));
-        ask.innerHTML = `Chọn ${en ? 'định nghĩa đúng' : 'nghĩa đúng'} của <b>${PH.esc(t.en)}</b> ${l !== 'vi' ? `<span class="small muted">${PH.esc(t.ipa)}</span>` : ''} <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>${en ? ` <button class="btn ghost sm" type="button" id="btnHint">Gợi ý tiếng Việt (×1,5)</button>` : ''}`;
+        ask.innerHTML = `${PH.uiFmt(en ? 'chooseDef' : 'chooseVi')} <b lang="en">${PH.esc(t.en)}</b> ${l !== 'vi' ? `<span class="small muted ipa" lang="en">${PH.esc(t.ipa)}</span>` : ''} ${PH.hasVoice() ? `<button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="${PH.uiFmt('listenMachine')}" aria-label="${PH.uiFmt('listenMachine')}" style="vertical-align:middle">${PH.icon('speaker', 'sm')}</button>` : ''}${en ? ` <button class="btn ghost sm" type="button" id="btnHint">${PH.uiFmt('hintVi')}</button>` : ''}`;
         box.innerHTML = `<div class="opts">${opts.map(o => `<button type="button" class="opt ${en ? 'en' : ''}" data-id="${o.id}" style="${en ? 'font-size:14px;font-weight:400;text-align:left' : ''}">${PH.esc(en ? o.defEn : o.vi)}</button>`).join('')}</div>`;
         if (l === 'vi') hint.textContent = t.defVi;
       } else {
         const listen = mode === 'listen';
         ask.innerHTML = listen
-          ? `Nghe và gõ thuật ngữ tiếng Anh <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="Nghe lại">${PH.icon('speaker', 'sm')}</button> <span class="small muted">(${PH.esc(t.vi)})</span>`
-          : `Gõ thuật ngữ tiếng Anh của <b class="vi" style="color:var(--ink)">${PH.esc(t.vi)}</b> ${l === 'vi' ? `<span class="small muted">— ${PH.esc(t.defVi)}</span>` : ''}`;
-        box.innerHTML = `<form class="typebox" id="typeForm"><input type="text" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${listen ? '…' : 'ví dụ: internal energy'}"><button class="btn" type="submit">Trả lời</button></form>`;
+          ? `${PH.uiFmt('listenType')} <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="${PH.uiFmt('listenAgain')}" aria-label="${PH.uiFmt('listenAgain')}">${PH.icon('speaker', 'sm')}</button> <span class="small muted">(${PH.esc(l === 'en' ? t.defEn : t.vi)})</span>`
+          : `${PH.uiFmt('typeFor')} <b class="vi" style="color:var(--ink)">${PH.esc(l === 'en' ? t.defEn : t.vi)}</b> ${l === 'vi' ? `<span class="small muted">— ${PH.esc(t.defVi)}</span>` : ''}`;
+        box.innerHTML = `<form class="typebox" id="typeForm"><input type="text" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${listen ? '…' : PH.uiFmt('egPh')}"><button class="btn" type="submit">${PH.uiFmt('answer')}</button></form>`;
         if (listen) PH.speak(t.en);
         setTimeout(() => { const i = document.getElementById('typeIn'); if (i) i.focus(); }, 0);
       }
     }
-    function points(it) { const speed = 1 + (1 - (it.p || 0)); const mult = it.hint ? Math.min(PH.langInfo().mult, 1.5) : PH.langInfo().mult; return Math.round(10 * speed * mult); }
+    function points(it) { const speed = 1 + (1 - (it.p || 0)); const mult = it.hint ? Math.min(multVan, 1.5) : multVan; return Math.round(10 * speed * mult); }
     function hitOk(it) {
       const pts = points(it); score += pts; streak++; correct++;
       PH.noteTerm(it.term.id, false);
-      setFeedback(true, it.term, `+${pts} điểm`);
+      setFeedback(true, it.term, PH.ui('plusPts', { n: pts }));
       sparks(it.el);
       const sc = document.getElementById('score'); sc.classList.remove('bump'); void sc.offsetWidth; sc.classList.add('bump');
       remove(it, 'hit');
     }
     function miss(it, why) {
       lives--; streak = 0; wrongIds.push(it.term.id); PH.noteTerm(it.term.id, true);
-      setFeedback(false, it.term, why === 'chạm vạch' ? 'chạm vạch — mất một mạng' : 'sai — mất một mạng');
+      setFeedback(false, it.term, PH.ui(why === 'chạm vạch' ? 'hitLine' : 'wrongLife'));
       remove(it, 'missed');
-      if (lives <= 0) end('Hết mạng!');
+      if (lives <= 0) end(PH.ui('noLives'));
     }
     // Hiệu ứng: giữ nguyên vị trí rơi hiện tại rồi chạy animation "nổ" (đúng) hoặc "rung" (sai)
     function remove(it, fx) {
@@ -220,7 +257,7 @@
     function sparks(el) {
       const r = el.getBoundingClientRect(), a = arena.getBoundingClientRect();
       const cx = r.left - a.left + r.width / 2, cy = r.top - a.top + r.height / 2;
-      const colors = ['#f0d39a', '#e0663f', '#3cb3b8', '#fff'];
+      const colors = ['#FFB547', '#F57C00', '#64B5F6', '#fff'];
       for (let i = 0; i < 12; i++) {
         const s = document.createElement('span'); s.className = 'spark';
         const ang = (Math.PI * 2 * i) / 12 + Math.random() * .4, d = 40 + Math.random() * 50;
@@ -231,12 +268,13 @@
     }
     function setFeedback(ok, t, extra) {
       const fb = document.getElementById('fb');
-      if (ok == null) { fb.innerHTML = '<span class="small muted">Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.</span>'; return; }
-      fb.innerHTML = `<span class="dot ${ok ? 'ok' : 'no'}">${PH.icon(ok ? 'check' : 'x', 'sm')}</span><span>${ok ? 'Đúng' : 'Chưa đúng'} — <b class="en">${PH.esc(t.en)}</b> là <b>${PH.esc(t.vi)}</b>${t.symbol ? `, kí hiệu ${PH.esc(t.symbol)}` : ''}. <span class="muted">${extra}</span></span><a class="small" href="bai.html?n=${t.lesson}">Xem Bài ${t.lesson}</a>`;
+      if (ok == null) { fb.innerHTML = `<span class="small muted">${PH.uiFmt('fbIdle')}</span>`; return; }
+      const en = PH.lang() === 'en';
+      fb.innerHTML = `<span class="dot ${ok ? 'ok' : 'no'}">${PH.icon(ok ? 'check' : 'x', 'sm')}</span><span>${PH.uiFmt(ok ? 'right' : 'notRight')} — <b class="en" lang="en">${PH.esc(t.en)}</b> ${PH.uiFmt('isVi')} <b>${PH.esc(en ? t.defEn : t.vi)}</b>${t.symbol ? `, ${PH.uiFmt('symbolIs', { s: t.symbol })}` : ''}. <span class="muted">${PH.esc(extra)}</span></span>${PH.canOpen(t.lesson) ? `<a class="small" href="bai.html?n=${t.lesson}">${PH.uiFmt('seeLesson', { n: t.lesson })}</a>` : ''}`;
     }
     function renderStats() {
       document.getElementById('score').textContent = score; document.getElementById('streak').textContent = streak;
-      document.getElementById('flame').innerHTML = streak >= 3 ? `<span class="flame" title="Chuỗi ${streak} câu đúng">${PH.icon('flame', 'sm')} nóng!</span>` : '';
+      document.getElementById('flame').innerHTML = streak >= 3 ? `<span class="flame" title="${PH.uiFmt('streakTitle', { n: streak })}">${PH.icon('flame', 'sm')} ${PH.uiFmt('hot')}</span>` : '';
       document.getElementById('lives').innerHTML = Array.from({ length: LIVES }, (_, i) => `<i class="${i < lives ? '' : 'off'}"></i>`).join('');
     }
     function end(reason) {
@@ -246,10 +284,10 @@
       PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode });
       const wrongTerms = [...new Set(wrongIds)].map(PH.termById).filter(Boolean);
       const ov = document.createElement('div'); ov.className = 'overlay';
-      ov.innerHTML = `<div class="small muted">${PH.esc(reason)}</div><h2>${score} điểm</h2>
-        <p>Đúng ${correct}, sai ${wrongIds.length}${score > best ? ' · <b style="color:var(--gold-2)">Kỷ lục mới!</b>' : best ? ` · kỷ lục ${best}` : ''}</p>
-        ${wrongTerms.length ? `<p class="small">Cần ôn lại: ${wrongTerms.slice(0, 6).map(t => `<a href="thuatngu.html?t=${t.id}">${PH.esc(t.en)}</a>`).join(', ')}</p>` : ''}
-        <div class="row"><button class="btn" id="btnAgain">Chơi lại</button><a class="btn outline" href="games.html">Về Trò chơi</a></div>`;
+      ov.innerHTML = `<div class="small muted">${PH.esc(reason)}</div><h2>${PH.uiFmt('pts', { n: score })}</h2>
+        <p>${PH.uiFmt('rightWrong', { c: correct, w: wrongIds.length })}${score > best ? ` · <b style="color:var(--gold-2)">${PH.uiFmt('newRecord')}</b>` : best ? ` · ${PH.uiFmt('record', { n: best })}` : ''}</p>
+        ${wrongTerms.length ? `<p class="small">${PH.uiFmt('review')} ${wrongTerms.slice(0, 6).map(t => `<a href="thuatngu.html?t=${t.id}">${PH.esc(t.en)}</a>`).join(', ')}</p>` : ''}
+        <div class="row"><button class="btn" id="btnAgain">${PH.uiFmt('again')}</button><a class="btn outline" href="games.html">${PH.uiFmt('backGames')}</a></div>`;
       arena.appendChild(ov);
       document.getElementById('btnAgain').addEventListener('click', start);
       document.getElementById('ask').innerHTML = ''; document.getElementById('answer').innerHTML = '';
@@ -284,8 +322,8 @@
     (function intro() {
       const n = PH.scopeTerms(scope).length;
       const ov = document.createElement('div'); ov.className = 'overlay';
-      ov.innerHTML = `<h2>Term Rush</h2><p>${n} thuật ngữ · 60 giây · 3 mạng. Thuật ngữ rơi từ trên xuống — trả lời thuật ngữ đang tô vàng trước khi nó chạm vạch. Chọn chế độ A, B hoặc C ở cột bên.</p><button class="btn" id="btnStart">Bắt đầu</button>`;
-      arena.appendChild(ov); renderStats();
+      ov.innerHTML = `<h2>Term Rush</h2><p>${PH.uiFmt('intro', { n })}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
+      arena.appendChild(ov); renderStats(); setFeedback(null);
       document.getElementById('btnStart').addEventListener('click', start);
     })();
   </script>
