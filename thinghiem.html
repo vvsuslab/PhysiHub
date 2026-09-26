@@ -252,43 +252,72 @@
     /* ---------- Âm thanh thí nghiệm ----------
        Tiếng bếp và tiếng nước sôi được tổng hợp ngay trong trình duyệt bằng Web Audio,
        không tải tệp âm thanh nào nên trang vẫn chạy được khi mất mạng.
-       Chỉ phát sau khi học sinh bấm Đun (trình duyệt chỉ cho phát âm sau một thao tác thật),
-       và tắt hẳn khi tạm dừng. Nút loa lưu lựa chọn vào máy. */
+       Ba lớp chồng lên nhau cho giống tiếng sôi thật:
+         1. tiếng bếp  — nhiễu lọc trầm, rất khẽ, to dần theo nhiệt độ;
+         2. tiếng xì xèo — nhiễu lọc dải 900–2500 Hz, chỉ nổi lên khi bắt đầu sôi;
+         3. tiếng bọt   — mỗi bọt là một hình sin có tần số ĐI LÊN rồi tắt nhanh
+                          (bọt khí co lại khi vỡ nên cao dần, không phải thấp dần
+                          như tiếng giọt nước rơi).
+       Chỉ phát sau khi học sinh bấm Đun, tắt hẳn khi tạm dừng hoặc rời khỏi tab.
+       Nút loa lưu lựa chọn vào máy. */
     const AM = (() => {
-      let ctx = null, master = null, humGain = null, hen = 0, soiMuc = 0;
+      let ctx = null, master = null, humGain = null, xeoGain = null, hen = 0, soiMuc = 0;
       const bat = () => localStorage.getItem('ph-tn-am') !== '0';
+      function nhieu(giay) {
+        const n = Math.floor(ctx.sampleRate * giay), b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0);
+        for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+        const s = ctx.createBufferSource(); s.buffer = b; s.loop = true; return s;
+      }
       function mo() {
         if (ctx) return true;
         const AC = window.AudioContext || window.webkitAudioContext;
         if (!AC) return false;
         try { ctx = new AC(); } catch (e) { return false; }
-        master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-        const n = Math.floor(ctx.sampleRate * 2), buf = ctx.createBuffer(1, n, ctx.sampleRate), d = buf.getChannelData(0);
-        for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * 0.6;
-        const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
-        const loc = ctx.createBiquadFilter(); loc.type = 'lowpass'; loc.frequency.value = 340; loc.Q.value = 0.7;
+        master = ctx.createGain(); master.gain.value = 0;
+        const nen = ctx.createDynamicsCompressor();
+        nen.threshold.value = -10; nen.knee.value = 6; nen.ratio.value = 12;
+        nen.attack.value = 0.003; nen.release.value = 0.15;
+        master.connect(nen); nen.connect(ctx.destination);
+
+        const sHum = nhieu(2);
+        const fHum = ctx.createBiquadFilter(); fHum.type = 'lowpass'; fHum.frequency.value = 300; fHum.Q.value = 0.7;
         humGain = ctx.createGain(); humGain.gain.value = 0;
-        src.connect(loc); loc.connect(humGain); humGain.connect(master);
-        try { src.start(); } catch (e) { }
+        sHum.connect(fHum); fHum.connect(humGain); humGain.connect(master);
+
+        const sXeo = nhieu(3);
+        const fXeo = ctx.createBiquadFilter(); fXeo.type = 'bandpass'; fXeo.frequency.value = 2100; fXeo.Q.value = 0.4;
+        const fCao = ctx.createBiquadFilter(); fCao.type = 'highpass'; fCao.frequency.value = 700;
+        xeoGain = ctx.createGain(); xeoGain.gain.value = 0;
+        sXeo.connect(fXeo); fXeo.connect(fCao); fCao.connect(xeoGain); xeoGain.connect(master);
+
+        try { sHum.start(); sXeo.start(); } catch (e) { }
         return true;
       }
-      function bongBong() {
+      /* Một bọt khí: tần số đi lên, tắt trong khoảng 40–110 ms. to = bọt lớn (ít, trầm). */
+      function bot(to) {
         if (!ctx) return;
-        const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
-        const f0 = 380 + Math.random() * 540;
+        const t = ctx.currentTime;
+        const f0 = to ? 130 + Math.random() * 130 : 340 + Math.random() * 560;
+        const len = to ? 0.10 + Math.random() * 0.07 : 0.04 + Math.random() * 0.05;
+        const bien = (to ? 0.75 : 0.34 + Math.random() * 0.34) * (0.55 + 0.45 * soiMuc);
+        const o = ctx.createOscillator(), g = ctx.createGain();
         o.type = 'sine';
         o.frequency.setValueAtTime(f0, t);
-        o.frequency.exponentialRampToValueAtTime(f0 * 0.45, t + 0.07);
+        o.frequency.exponentialRampToValueAtTime(f0 * (1.7 + Math.random() * 0.8), t + len * 0.85);
         g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(0.35, t + 0.008);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+        g.gain.exponentialRampToValueAtTime(bien, t + 0.004);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + len);
         o.connect(g); g.connect(master);
-        o.start(t); o.stop(t + 0.1);
+        o.start(t); o.stop(t + len + 0.02);
       }
       function lich() {
         hen = setTimeout(() => {
-          if (soiMuc > 0 && bat()) { bongBong(); lich(); } else { hen = 0; }
-        }, 55 + Math.random() * (460 - 400 * soiMuc));
+          if (soiMuc > 0 && bat()) {
+            bot(Math.random() < 0.10);
+            if (soiMuc > 0.6 && Math.random() < 0.45) bot(false);   /* sôi mạnh thì bọt chồng nhau */
+            lich();
+          } else { hen = 0; }
+        }, 18 + Math.random() * (210 - 170 * soiMuc));
       }
       return {
         bat,
@@ -298,8 +327,10 @@
           if (!chay || !bat()) { this.dung(); return; }
           if (!mo()) return;
           if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) { } }
-          master.gain.setTargetAtTime(0.5, ctx.currentTime, 0.2);
-          humGain.gain.setTargetAtTime(0.04 + 0.09 * nong, ctx.currentTime, 0.3);
+          const t = ctx.currentTime;
+          master.gain.setTargetAtTime(0.62, t, 0.2);
+          humGain.gain.setTargetAtTime(0.09 + 0.15 * nong, t, 0.3);
+          xeoGain.gain.setTargetAtTime(0.17 * soi * (0.78 + 0.44 * Math.random()), t, 0.12);   /* hơi dao động cho giống nước sôi cuộn */
           soiMuc = soi;
           if (soi > 0 && !hen) lich();
         },
