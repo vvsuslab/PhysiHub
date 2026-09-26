@@ -2,7 +2,7 @@
 
 Bản 2 (giao diện mới theo mockup) đã được viết xong **toàn bộ** trong một lần bàn giao ngày 23–24/9/2026, thay cho 13 bước nhỏ dự kiến trước đó. Lí do: học sinh chưa bắt đầu tuần thử nghiệm, nên không cần giữ hai nhánh; cô giáo hướng dẫn quyết định đưa bản mới lên luôn.
 
-Cách dùng tệp này: mỗi việc còn lại là **một phiên** với Claude Code. Dán lời nhắn in nghiêng, đọc kế hoạch Claude đề xuất, trả lời "Đồng ý", tự kiểm tra, rồi viết vào `NHAT-KI.md`.
+Cách dùng tệp này: mỗi việc còn lại là **một buổi làm**. Đọc phần mô tả in nghiêng, thống nhất kế hoạch, sửa, rồi tự kiểm tra theo hướng dẫn kèm theo.
 
 ## Đã làm (23–24/9/2026)
 
@@ -24,9 +24,9 @@ Cách dùng tệp này: mỗi việc còn lại là **một phiên** với Claud
 
 ## Việc còn lại — theo thứ tự nên làm
 
-### Việc 1 · Đưa bản mới lên GitHub (cô giáo hoặc nhóm làm, không cần Claude)
+### Việc 1 · Đưa bản mới lên GitHub
 
-Nếu kho đã nhận được bản này qua Claude thì bỏ qua. Nếu nhận dạng tệp ZIP: giải nén, vào kho trên GitHub → **Add file → Upload files**, kéo toàn bộ thư mục vào, ghi lời nhắn "Bản 2: giao diện mới theo mockup 23/9" → **Commit changes**. Khoảng một phút sau mở https://vvsuslab.github.io/PhysiHub/ và nhấn Ctrl+F5.
+Nếu nhận dạng tệp ZIP: giải nén, vào kho trên GitHub → **Add file → Upload files**, kéo toàn bộ thư mục vào, ghi lời nhắn "Bản 2: giao diện mới theo mockup 23/9" → **Commit changes**. Khoảng một phút sau mở https://vvsuslab.github.io/PhysiHub/ và nhấn Ctrl+F5.
 
 **Em kiểm tra:** trang chủ có đầu trang hai tầng; rê chuột vào "Bài học" thấy bảng sổ; đổi 3 mức ngôn ngữ; mở trên điện thoại thấy 4 thẻ ở đáy.
 
@@ -68,6 +68,6 @@ Video bài giảng, tài khoản học sinh, bảng theo dõi cho giáo viên, l
 
 ## Khi có lỗi
 
-- Chưa lưu thì bảo Claude: "Hoàn tác thay đổi vừa rồi".
-- Đã lưu lên GitHub: vào **Commits**, mở lần sửa gây lỗi, chọn **Revert**; hoặc nhờ Claude "tìm lần sửa làm hỏng … và hoàn tác nó".
+- Chưa lưu thì hoàn tác thay đổi vừa rồi ngay trong trình soạn thảo.
+- Đã lưu lên GitHub: vào **Commits**, mở lần sửa gây lỗi, chọn **Revert** và xác nhận.
 - Mọi phiên bản cũ vẫn nằm trong lịch sử của kho, không mất. Bản 1 (trước 23/9) là commit `7c71688`.

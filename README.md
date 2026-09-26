@@ -3,7 +3,7 @@
 Sản phẩm dự thi Khoa học kĩ thuật · Trường THPT Bùi Hữu Nghĩa, Cần Thơ · Năm học 2026–2027.
 Site tĩnh (HTML + CSS + JS thuần), chạy trên GitHub Pages hoặc mở trực tiếp từ thư mục/USB, không cần cài đặt gì.
 
-**Bản 2 (24/9/2026):** giao diện mới theo mockup trong `thiet-ke/`. Quy tắc làm việc cho Claude Code ở `CLAUDE.md`; việc còn lại ở `thiet-ke/KE-HOACH.md`; nhật kí ở `NHAT-KI.md`.
+**Bản 2 (24/9/2026):** giao diện mới theo mockup trong `thiet-ke/`. Quy tắc làm việc của nhóm ở `QUY-TAC-DU-AN.md`; việc còn lại ở `thiet-ke/KE-HOACH.md`.
 
 ## Cấu trúc
 

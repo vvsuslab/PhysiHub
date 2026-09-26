@@ -19,6 +19,34 @@ window.PH = window.PH || {};
 
   /* ---------- Tiện ích ---------- */
   PH.esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* Chỉ số dưới: "E_lk" hiện thành E kèm "lk" nhỏ bên dưới, "A_(Z+1)" thành A kèm "Z+1".
+     Chạy trên nút văn bản của trang đã dựng xong nên không đụng tới tên biến trong mã;
+     chạy lại nhiều lần cũng không sao vì sau lần đầu trong văn bản không còn dấu gạch dưới. */
+  const RE_CHISO = /([A-Za-zΔΦλ])_(?:\(([^()]{1,14})\)|([A-Za-z0-9À-ỹ]{1,8}))/g;
+  PH.chiSo = root => {
+    root = root || document.body;
+    if (!root || !root.nodeType) return;
+    const boQua = 'script, style, textarea, input, code, .nochiso';
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => (n.nodeValue.indexOf('_') < 0 || (n.parentElement && n.parentElement.closest(boQua)))
+        ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+    });
+    const ds = []; let n; while ((n = w.nextNode())) ds.push(n);
+    ds.forEach(node => {
+      const t = node.nodeValue; RE_CHISO.lastIndex = 0;
+      if (!RE_CHISO.test(t)) return;
+      RE_CHISO.lastIndex = 0;
+      const frag = document.createDocumentFragment(); let last = 0, m;
+      while ((m = RE_CHISO.exec(t))) {
+        frag.appendChild(document.createTextNode(t.slice(last, m.index) + m[1]));
+        const s = document.createElement('sub'); s.textContent = m[2] || m[3];
+        frag.appendChild(s); last = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(t.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  };
   PH.qs = name => new URLSearchParams(location.search).get(name);
   PH.shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   PH.sample = (arr, n) => PH.shuffle(arr).slice(0, n);
@@ -681,7 +709,7 @@ window.PH = window.PH || {};
     const t = typeof idOrTerm === 'string' ? PH.termById(idOrTerm) : idOrTerm; if (!t || !anchor) return;
     if (popAnchor === anchor) { closePop(); return; }
     closePop();
-    pop = document.createElement('div'); pop.className = 'ph-pop'; pop.innerHTML = PH.termPopoverHTML(t);
+    pop = document.createElement('div'); pop.className = 'ph-pop'; pop.innerHTML = PH.termPopoverHTML(t); PH.chiSo(pop);
     document.body.appendChild(pop);
     const r = anchor.getBoundingClientRect(); const w = pop.offsetWidth, h = pop.offsetHeight;
     let left = r.left + window.scrollX; if (left + w > window.scrollX + document.documentElement.clientWidth - 12) left = window.scrollX + document.documentElement.clientWidth - w - 12;
@@ -713,4 +741,23 @@ window.PH = window.PH || {};
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; document.dispatchEvent(new CustomEvent('ph:installable')); });
   PH.canInstall = () => !!installPrompt;
   PH.install = async () => { if (!installPrompt) return false; installPrompt.prompt(); const r = await installPrompt.userChoice; installPrompt = null; return r.outcome === 'accepted'; };
+  /* Quét chỉ số dưới: một lần khi trang dựng xong, và cho phần nội dung dựng thêm về sau
+     (lọc danh sách thuật ngữ, đổi ngôn ngữ, chấm bài…). Gộp 80 ms một lần cho đỡ tốn. */
+  (function () {
+    let hangCho = [], hen = 0;
+    const quet = () => { hen = 0; const ds = hangCho; hangCho = []; ds.forEach(n => { if (n.isConnected) PH.chiSo(n); }); };
+    const batDau = () => {
+      if (!document.body) return;
+      PH.chiSo(document.body);
+      new MutationObserver(recs => {
+        for (const r of recs) for (const n of r.addedNodes) {
+          const el = n.nodeType === 3 ? n.parentElement : (n.nodeType === 1 ? n : null);
+          if (el && el.tagName !== 'SUB') hangCho.push(el);
+        }
+        if (hangCho.length && !hen) hen = setTimeout(quet, 80);
+      }).observe(document.body, { childList: true, subtree: true });
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', batDau); else batDau();
+  })();
+
 })(window.PH);

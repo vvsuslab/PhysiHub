@@ -1,6 +1,6 @@
-# PhysiHub — hướng dẫn cho Claude Code
+# PhysiHub — quy tắc làm việc của nhóm
 
-Claude Code tự đọc tệp này ở đầu mỗi phiên. Nhóm chỉ sửa tệp này khi có quyết định mới của giáo viên hướng dẫn.
+Mọi người đọc tệp này trước khi sửa mã. Nhóm chỉ sửa tệp này khi có quyết định mới của giáo viên hướng dẫn.
 
 ## Dự án
 
@@ -8,12 +8,12 @@ PhysiHub là học liệu số song ngữ Việt – Anh cho môn Vật lí 12 (
 
 **Tình trạng (23/9/2026):** giao diện mới theo mockup đã viết xong toàn bộ (bản 2). Học sinh chưa bắt đầu thử nghiệm, nên bản 2 đưa thẳng lên `main`. Việc còn lại nằm trong `thiet-ke/KE-HOACH.md`.
 
-## Người đang làm việc với em
+## Cách làm việc trong nhóm
 
-Người dùng là học sinh lớp 12, chưa học lập trình.
-- Luôn trả lời bằng tiếng Việt, câu ngắn, không dùng từ chuyên môn khi chưa giải thích.
-- Mỗi lần chỉ làm **một việc nhỏ** trong `thiet-ke/KE-HOACH.md`. Trước khi sửa, nói rõ em sẽ sửa tệp nào và vì sao, rồi chờ đồng ý.
-- Làm xong thì chỉ cho học sinh **cách tự kiểm tra bằng mắt**: mở trang nào, bấm vào đâu, phải thấy gì.
+Người trực tiếp dùng tài liệu này là học sinh lớp 12, chưa học lập trình.
+- Mọi giải thích viết bằng tiếng Việt, câu ngắn, không dùng từ chuyên môn khi chưa giải thích.
+- Mỗi lần chỉ làm **một việc nhỏ** trong `thiet-ke/KE-HOACH.md`. Trước khi sửa, phải nói rõ sẽ sửa tệp nào và vì sao, rồi chờ giáo viên hướng dẫn đồng ý.
+- Làm xong phải ghi lại **cách tự kiểm tra bằng mắt**: mở trang nào, bấm vào đâu, phải thấy gì.
 - Học sinh phải hiểu được thay đổi để trả lời hội đồng. Khi được hỏi "đoạn này làm gì", giải thích từng dòng bằng lời dễ hiểu.
 
 ## Kĩ thuật — giữ nguyên cách làm hiện tại
@@ -67,7 +67,7 @@ Người dùng là học sinh lớp 12, chưa học lập trình.
 8. Điểm luyện đề **không** nhân hệ số theo mức ngôn ngữ. Hệ số ×1 / ×1,5 / ×2 chỉ dùng trong trò chơi.
 9. Ở mức English, **không còn chữ tiếng Việt** trên màn hình (trừ nút "Tiếng Việt", tên trường, tên bộ sách, và nghĩa tiếng Việt khi người học chủ động mở).
 10. **Phát âm chuẩn nghe trên Oxford / Cambridge:** nút "Nghe phát âm trên Oxford · Cambridge" (`PH.dictHTML`) mở đúng mục từ trên trang từ điển, nơi có bản ghi âm người bản ngữ. Trang **không sao chép tệp âm thanh** của từ điển và không được ghi "âm thanh lấy từ Oxford". Nút loa nhỏ là giọng máy của trình duyệt (`PH.speak`), chỉ hiện khi máy có giọng tiếng Anh (`PH.hasVoice()`).
-11. Trang phải nói thật về công cụ: nhóm dùng AI (Claude) hỗ trợ thiết kế, viết mã và soạn bản nháp tiếng Anh; nội dung do nhóm và giáo viên rà soát (đã ghi ở `vedan.html`).
+11. Trang phải nói thật về công cụ: nhóm có dùng công cụ hỗ trợ lập trình bằng AI để hỗ trợ thiết kế, viết mã và soạn bản nháp tiếng Anh; nội dung do nhóm và giáo viên rà soát (đã ghi ở `vedan.html`).
 
 ## Phạm vi đã chốt (23/9/2026)
 

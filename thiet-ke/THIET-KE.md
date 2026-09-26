@@ -151,4 +151,4 @@ Chân trang của mọi trang liên kết tới `vedan.html` và `vedan.html#ngu
 
 ## 11. Trước khi coi là xong
 
-Làm theo mục "Kiểm tra trước khi báo xong" trong `CLAUDE.md`, rồi so từng trang với ảnh trong `anh-chup/`.
+Làm theo mục "Kiểm tra trước khi báo xong" trong `QUY-TAC-DU-AN.md`, rồi so từng trang với ảnh trong `anh-chup/`.

@@ -74,7 +74,7 @@ function tepVanBan(thuMuc = '') {
     if (/^(\.git|node_modules|thiet-ke|_luu-tru)$/.test(f)) continue;
     const st = statSync(join(GOC, p));
     if (st.isDirectory()) ra.push(...tepVanBan(p));
-    else if (/\.(html|json|js|css|md|webmanifest)$/.test(f) && !/^tools[\\/]/.test(p) && !/^(CLAUDE|NHAT-KI)\.md$/.test(f)) ra.push(p);
+    else if (/\.(html|json|js|css|md|webmanifest)$/.test(f) && !/^tools[\\/]/.test(p) && !/^(QUY-TAC-DU-AN)\.md$/.test(f)) ra.push(p);
   }
   return ra;
 }
