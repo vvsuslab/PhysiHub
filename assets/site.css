@@ -311,6 +311,16 @@ a.card { color: inherit; }
 .tone-gold { background: var(--grad-cta); }
 .tone-teal { background: linear-gradient(135deg, #34C3B8, #178C9C); }
 .tone-violet { background: linear-gradient(135deg, #7986CB, #3F51B5); }
+/* Ô biểu tượng trong bảng menu sổ xuống: .tone-* chỉ có 1 lớp nên thua .ph-mm-l .ic (2 lớp),
+   nền gradient không được áp, biểu tượng màu trắng nằm trên nền xanh nhạt nên gần như vô hình. */
+.ph-mm-l .ic.tone-1 { background: linear-gradient(135deg, var(--c1-g1), var(--c1-g2)); }
+.ph-mm-l .ic.tone-2 { background: linear-gradient(135deg, var(--c2-g1), var(--c2-g2)); }
+.ph-mm-l .ic.tone-3 { background: linear-gradient(135deg, var(--c3-g1), var(--c3-g2)); }
+.ph-mm-l .ic.tone-4 { background: linear-gradient(135deg, var(--c4-g1), var(--c4-g2)); }
+.ph-mm-l .ic.tone-navy { background: linear-gradient(135deg, #1E88E5, #0D47A1); }
+.ph-mm-l .ic.tone-gold { background: var(--grad-cta); }
+.ph-mm-l .ic.tone-teal { background: linear-gradient(135deg, #34C3B8, #178C9C); }
+.ph-mm-l .ic.tone-violet { background: linear-gradient(135deg, #7986CB, #3F51B5); }
 .tone-cta { background: var(--grad-cta); color: var(--ink); }
 
 .grid { display: grid; gap: 18px; }
