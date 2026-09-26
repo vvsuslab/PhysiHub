@@ -29,7 +29,10 @@
     .cardx.up .in, .cardx.done .in { transform: rotateY(180deg); }
     /* overflow: hidden — câu dài trên thẻ (ví dụ phát biểu định luật) không được tràn đè thẻ bên cạnh */
     .face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; border: 1px solid var(--line-strong); overflow: hidden; }
-    .face.back { color: var(--navy-2); font-family: var(--font-display); font-weight: 800; font-size: 28px; cursor: pointer; }
+    .face.back { color: var(--sky); cursor: pointer; }
+    .face.back .mark { width: 46%; max-width: 54px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .92); box-shadow: 0 4px 12px rgba(13, 71, 161, .16), inset 0 0 0 1.5px rgba(30, 136, 229, .16); transition: transform .25s ease; }
+    .face.back .icon { width: 58%; height: 58%; stroke-width: 1.7; }
+    .cardx:not(.up):not(.done):hover .face.back .mark { transform: scale(1.08) rotate(-6deg); }
     .face.front { background: var(--surface); transform: rotateY(180deg); }
     .face.front .k { font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
     .face.front .t { font-size: 16.5px; font-weight: 500; line-height: 1.3; word-break: break-word; }
@@ -141,7 +144,7 @@
       const pairs = buildPairs();
       cards = PH.shuffle(pairs.flatMap(p => [{ pid: p.id, ...p.a }, { pid: p.id, ...p.b }]));
       van++; open = []; lock = false; flips = 0; matched = 0; running = true; startedAt = Date.now(); endAt = startedAt + ROUND * 1000;
-      board.innerHTML = cards.map((c, i) => `<div class="cardx" data-i="${i}"><div class="in"><div class="face back">?</div><div class="face front"><span class="k">${PH.esc(c.k)}</span><span class="t ${c.math ? 'math' : ''} ${c.en ? 'en' : ''}">${PH.esc(c.t)}</span></div></div></div>`).join('');
+      board.innerHTML = cards.map((c, i) => `<div class="cardx" data-i="${i}"><div class="in"><div class="face back"><span class="mark">${PH.icon('atom')}</span></div><div class="face front"><span class="k">${PH.esc(c.k)}</span><span class="t ${c.math ? 'math' : ''} ${c.en ? 'en' : ''}">${PH.esc(c.t)}</span></div></div></div>`).join('');
       clearInterval(timer); timer = setInterval(tick, 250); tick(); renderStats();
     }
     function tick() {
@@ -208,7 +211,7 @@
     document.getElementById('btnNew').addEventListener('click', start);
 
     (function intro() {
-      board.innerHTML = Array.from({ length: 12 }, () => '<div class="cardx"><div class="in"><div class="face back">?</div></div></div>').join('');
+      board.innerHTML = Array.from({ length: 12 }, () => `<div class="cardx"><div class="in"><div class="face back"><span class="mark">${PH.icon('atom')}</span></div></div></div>`).join('');
       const ov = document.createElement('div'); ov.className = 'overlay';
       ov.innerHTML = `<h2>${PH.uiFmt('gameName')}</h2><p>${PH.uiFmt('intro')}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
       board.appendChild(ov); renderStats();
