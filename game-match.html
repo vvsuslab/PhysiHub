@@ -96,7 +96,7 @@
       lTime: ['Thời gian còn lại', 'Time left'], secs: ['{n} giây', '{n} s'], lFlips: ['Lượt lật', 'Flips'], lMatched: ['Đã ghép', 'Matched'], lBest: ['Kỉ lục của em', 'Your record'],
       bestTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], noBest: ['Chưa có — hoàn thành một ván để lập kỉ lục.', 'None yet — finish a board to set one.'],
       noteRule: ['Mỗi cặp là hai mặt của cùng một kiến thức: thuật ngữ Việt – Anh, hoặc công thức – định luật/đơn vị. Lật hai thẻ; ghép đúng thì cặp đó ở lại.', 'Each pair is two sides of the same idea: a term and its symbol or unit. Flip two cards; a correct pair stays face up.'],
-      newBoard: ['Ván mới', 'New board'], kTerm: ['thuật ngữ', 'term'], kTermEn: ['term', 'term'], kSym: ['kí hiệu · đơn vị', 'symbol · unit'],
+      newBoard: ['Ván mới', 'New board'], kTerm: ['thuật ngữ', 'term'], kTermEn: ['term', 'term'], kSym: ['kí hiệu và đơn vị', 'symbol and unit'],
       done: ['Xong bảng!', 'Board cleared!'], doneTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], newRecord: ['Kỉ lục mới!', 'New record!'],
       timeUp: ['Hết giờ', 'Time is up'], timeUpTxt: ['Em đã ghép {m}/{n} cặp. Thử lại nhé — các thẻ sẽ được xáo lại.', 'You matched {m}/{n} pairs. Try again — the cards will be reshuffled.'],
       again: ['Chơi lại', 'Play again'], backGames: ['Về Trò chơi', 'Back to Games'],
@@ -123,8 +123,9 @@
         // Bỏ các thuật ngữ cho ra cùng một mặt thẻ "kí hiệu · đơn vị" (ví dụ melting point và
         // boiling point đều ra "°C, K"): nếu để lọt, học sinh lật đúng nội dung mà vẫn bị báo sai.
         const daCo = new Set();
-        const pool = PH.shuffle(pool0).filter(t => { const k = [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '); if (!k || daCo.has(k)) return false; daCo.add(k); return true; });
-        return PH.sample(pool, PAIRS_PER_GAME).map(t => ({ id: t.id, a: { k: PH.ui('kTermEn'), t: t.en, en: true }, b: { k: PH.ui('kSym'), t: [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '), math: true } }));
+        const kyHieu = t => { const s = t.symbol, u = PH.unitOf(t); return s && u ? s + ' (' + u + ')' : (s || u || ''); };
+        const pool = PH.shuffle(pool0).filter(t => { const k = kyHieu(t); if (!k || daCo.has(k)) return false; daCo.add(k); return true; });
+        return PH.sample(pool, PAIRS_PER_GAME).map(t => ({ id: t.id, a: { k: PH.ui('kTermEn'), t: t.en, en: true }, b: { k: PH.ui('kSym'), t: kyHieu(t), math: true } }));
       }
       const chapters = new Set(terms.map(t => t.chapter));
       let formula = (PH.PAIRS || []).filter(p => scope.type === 'all' || chapters.has(p.chapter));

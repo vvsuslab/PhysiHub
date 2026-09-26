@@ -162,7 +162,7 @@
       return index.filter(x => (!filter.c || x.t.chapter === filter.c) && (!filter.l || x.t.lesson === filter.l)
         && (filter.loc !== 'chua' || !PH.isMastered(x.t.id)) && (filter.loc !== 'thuoc' || PH.isMastered(x.t.id)) && (!q || x.key.includes(q))).map(x => x.t);
     }
-    const khHTML = t => { const kh = [t.symbol, PH.unitOf(t)].filter(Boolean).join(' · '); return kh ? `<span class="tag kh">${PH.esc(kh)}</span>` : ''; };
+    const khHTML = t => { const s = t.symbol, u = PH.unitOf(t); const kh = s && u ? s + ' (' + u + ')' : (s || u || ''); return kh ? `<span class="tag kh">${PH.esc(kh)}</span>` : ''; };
 
     function renderHead() {
       $('eyebrow').textContent = PH.ui('eyebrow'); $('h1').textContent = PH.ui('h1'); $('h1en').textContent = en() ? '' : 'Glossary';

@@ -135,6 +135,7 @@
       <div class="card controls">
         <button type="button" class="tn-nut" id="btnDun"><span class="ic" id="icDun"></span><span id="nhanDun"></span></button>
         <button type="button" class="btn outline" id="btnLai"></button>
+        <button type="button" class="btn ghost" id="btnAm" aria-pressed="true"></button>
         <div class="tua"><label for="tua" id="lbKeo"></label><input id="tua" class="tn-range" type="range" min="0" max="100" step="0.5" value="0"></div>
         <div class="toc" role="group" aria-labelledby="lbToc"><span class="lb" id="lbToc"></span><button type="button" class="tn-toc on" data-toc="1" aria-pressed="true">×1</button><button type="button" class="tn-toc" data-toc="2" aria-pressed="false">×2</button><button type="button" class="tn-toc" data-toc="4" aria-pressed="false">×4</button></div>
       </div>
@@ -159,7 +160,7 @@
       lbThoiGian: ['thời gian đun', 'heating time'], lbNC: ['Nóng chảy · 0 °C', 'Melting · 0 °C'], lbSoi: ['Sôi · 100 °C', 'Boiling · 100 °C'],
       lbMau: ['Màu phân tử cho biết tốc độ chuyển động trung bình', 'Colour shows the average speed of the molecules'], cham: ['chậm', 'slow'], nhanh: ['nhanh', 'fast'],
       lbNhietDo: ['Nhiệt độ', 'Temperature'], lbTrangThai: ['Đang diễn ra', 'What is happening'], lbKeo: ['Kéo để tua lại hoặc tua nhanh', 'Drag to rewind or skip ahead'],
-      lamLai: ['Làm lại', 'Reset'], lbToc: ['Tốc độ', 'Speed'], dun: ['Đun', 'Heat'], dunLai: ['Đun lại', 'Heat again'], tamDung: ['Tạm dừng', 'Pause'],
+      lamLai: ['Làm lại', 'Reset'], amOn: ['Tắt tiếng', 'Mute'], amOff: ['Bật tiếng', 'Unmute'], lbToc: ['Tốc độ', 'Speed'], dun: ['Đun', 'Heat'], dunLai: ['Đun lại', 'Heat again'], tamDung: ['Tạm dừng', 'Pause'],
       lbThay: ['Em thấy gì?', 'What do you notice?'],
       thay1: ['Trong lúc nước đá tan (0 °C) và lúc nước sôi (100 °C), nhiệt độ đứng yên dù vẫn đang đun.', 'While the ice is melting (0 °C) and while the water is boiling (100 °C), the temperature stays the same even though heating continues.'],
       thay2: ['Màu các phân tử cũng không đổi trong hai đoạn đó: nhiệt lượng nhận được dùng để phá vỡ liên kết giữa các phân tử, làm chất chuyển thể, chứ không làm chúng chuyển động nhanh hơn.', 'The colour of the molecules does not change in those two stretches either: the energy supplied breaks the bonds between molecules and changes the state, instead of making them move faster.'],
@@ -248,6 +249,77 @@
     // phải dựng lại phần tử liên tục -> nút và số liệu bị nháy/giật.
     const setTxt = (el, v) => { if (el.__v !== v) { el.__v = v; el.textContent = v; } };
     const setAttr = (el, k, v) => { const s = String(v); if (el.getAttribute(k) !== s) el.setAttribute(k, s); };
+    /* ---------- Âm thanh thí nghiệm ----------
+       Tiếng bếp và tiếng nước sôi được tổng hợp ngay trong trình duyệt bằng Web Audio,
+       không tải tệp âm thanh nào nên trang vẫn chạy được khi mất mạng.
+       Chỉ phát sau khi học sinh bấm Đun (trình duyệt chỉ cho phát âm sau một thao tác thật),
+       và tắt hẳn khi tạm dừng. Nút loa lưu lựa chọn vào máy. */
+    const AM = (() => {
+      let ctx = null, master = null, humGain = null, hen = 0, soiMuc = 0;
+      const bat = () => localStorage.getItem('ph-tn-am') !== '0';
+      function mo() {
+        if (ctx) return true;
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return false;
+        try { ctx = new AC(); } catch (e) { return false; }
+        master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+        const n = Math.floor(ctx.sampleRate * 2), buf = ctx.createBuffer(1, n, ctx.sampleRate), d = buf.getChannelData(0);
+        for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * 0.6;
+        const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true;
+        const loc = ctx.createBiquadFilter(); loc.type = 'lowpass'; loc.frequency.value = 340; loc.Q.value = 0.7;
+        humGain = ctx.createGain(); humGain.gain.value = 0;
+        src.connect(loc); loc.connect(humGain); humGain.connect(master);
+        try { src.start(); } catch (e) { }
+        return true;
+      }
+      function bongBong() {
+        if (!ctx) return;
+        const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
+        const f0 = 380 + Math.random() * 540;
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f0, t);
+        o.frequency.exponentialRampToValueAtTime(f0 * 0.45, t + 0.07);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.35, t + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+        o.connect(g); g.connect(master);
+        o.start(t); o.stop(t + 0.1);
+      }
+      function lich() {
+        hen = setTimeout(() => {
+          if (soiMuc > 0 && bat()) { bongBong(); lich(); } else { hen = 0; }
+        }, 55 + Math.random() * (460 - 400 * soiMuc));
+      }
+      return {
+        bat,
+        datBat(v) { try { localStorage.setItem('ph-tn-am', v ? '1' : '0'); } catch (e) { } if (!v) this.dung(); },
+        /* chay: đang đun · soi: mức sôi 0..1 · nong: mức nóng 0..1 */
+        capNhat(chay, soi, nong) {
+          if (!chay || !bat()) { this.dung(); return; }
+          if (!mo()) return;
+          if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) { } }
+          master.gain.setTargetAtTime(0.5, ctx.currentTime, 0.2);
+          humGain.gain.setTargetAtTime(0.04 + 0.09 * nong, ctx.currentTime, 0.3);
+          soiMuc = soi;
+          if (soi > 0 && !hen) lich();
+        },
+        dung() {
+          soiMuc = 0; clearTimeout(hen); hen = 0;
+          if (ctx && master) master.gain.setTargetAtTime(0, ctx.currentTime, 0.15);
+        }
+      };
+    })();
+    document.addEventListener('visibilitychange', () => { if (document.hidden) AM.dung(); });
+
+    function veNutAm() {
+      const on = AM.bat(), b = document.getElementById('btnAm');
+      if (!b) return;
+      b.innerHTML = PH.icon(on ? 'speaker' : 'x', 'sm') + PH.esc(PH.ui(on ? 'amOn' : 'amOff'));
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    (() => { const b = document.getElementById('btnAm'); if (b) b.addEventListener('click', () => { AM.datBat(!AM.bat()); veNutAm(); }); })();
+
+
     function update() {
       const T = nhietDo(p);
       const f = p < 6 ? 0 : (p < 22 ? (p - 6) / 16 : 1), g = p < 42 ? 0 : (p < 100 ? (p - 42) / 58 : 1);
@@ -308,6 +380,7 @@
       const tua = $('tua');
       if (document.activeElement !== tua && +tua.value !== p) tua.value = p;
       setAttr(tua, 'aria-valuetext', $('tHien').textContent + ' °C');
+      AM.capNhat(chay, pha === 3 ? Math.min(1, 0.25 + (p - 42) / 72) : 0, Math.min(1, p / 100));
     }
 
     /* ---------- chữ tĩnh theo mức ---------- */
@@ -321,6 +394,7 @@
       ['lbDungCu', 'lbPhanTu', 'lbDoThi', 'lbMau', 'cham', 'nhanh', 'lbNhietDo', 'lbTrangThai', 'lbKeo', 'lbToc', 'lbNC', 'lbSoi'].forEach(k => { $(k).textContent = PH.ui(k); });
       $('lbThoiGian').textContent = PH.ui('lbThoiGian') + ' →';
       $('btnLai').innerHTML = PH.icon('refresh', 'sm') + PH.uiFmt('lamLai');
+      veNutAm();
       const bi = PH.lang() === 'bi';
       $('thay').innerHTML = `${PH.label('eye', PH.uiFmt('lbThay'))}<p>${PH.uiFmt('thay1')}</p>${bi ? `<p class="en" lang="en">${PH.esc(PH.dinh(PH.UI.thay1[1]))}</p>` : ''}<p>${PH.uiFmt('thay2')}</p>${bi ? `<p class="en" lang="en">${PH.esc(PH.dinh(PH.UI.thay2[1]))}</p>` : ''}<p class="hoi">${PH.icon('star', 'sm')}${PH.uiFmt('hoi')}</p>`;
       const terms = TN_IDS.map(id => PH.termById(id)).filter(Boolean);

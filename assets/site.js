@@ -23,13 +23,13 @@ window.PH = window.PH || {};
   /* Chỉ số dưới: "E_lk" hiện thành E kèm "lk" nhỏ bên dưới, "A_(Z+1)" thành A kèm "Z+1".
      Chạy trên nút văn bản của trang đã dựng xong nên không đụng tới tên biến trong mã;
      chạy lại nhiều lần cũng không sao vì sau lần đầu trong văn bản không còn dấu gạch dưới. */
-  const RE_CHISO = /([A-Za-zΔΦλ])_(?:\(([^()]{1,14})\)|([A-Za-z0-9À-ỹ]{1,8}))/g;
+  const RE_CHISO = /([A-Za-z0-9\u0394\u03a6\u03bb)])([_^])(?:\(([^()]{1,14})\)|([A-Za-z0-9\u00c0-\u1ef9]{1,8}))/g;
   PH.chiSo = root => {
     root = root || document.body;
     if (!root || !root.nodeType) return;
     const boQua = 'script, style, textarea, input, code, .nochiso';
     const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode: n => (n.nodeValue.indexOf('_') < 0 || (n.parentElement && n.parentElement.closest(boQua)))
+      acceptNode: n => ((n.nodeValue.indexOf("_") < 0 && n.nodeValue.indexOf("^") < 0) || (n.parentElement && n.parentElement.closest(boQua)))
         ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
     });
     const ds = []; let n; while ((n = w.nextNode())) ds.push(n);
@@ -40,7 +40,7 @@ window.PH = window.PH || {};
       const frag = document.createDocumentFragment(); let last = 0, m;
       while ((m = RE_CHISO.exec(t))) {
         frag.appendChild(document.createTextNode(t.slice(last, m.index) + m[1]));
-        const s = document.createElement('sub'); s.textContent = m[2] || m[3];
+        const s = document.createElement(m[2] === '^' ? 'sup' : 'sub'); s.textContent = m[3] || m[4];
         frag.appendChild(s); last = m.index + m[0].length;
       }
       frag.appendChild(document.createTextNode(t.slice(last)));

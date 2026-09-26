@@ -420,7 +420,7 @@ PH.CONTENT = {
           "vi": "Chuyển đổi giữa các thang nhiệt độ",
           "en": "Converting between temperature scales"
         },
-        "math": "T(K) = t(°C) + 273   ;   t(°F) = (9/5)·t(°C) + 32",
+        "math": "T(K) = t(°C) + 273   ;   t(°F) = (9/5)⋅t(°C) + 32",
         "vars": [
           {
             "sym": "T",
@@ -545,8 +545,8 @@ PH.CONTENT = {
     "blocks": [
       {
         "type": "text",
-        "vi": "Nhiệt lượng Q mà một vật nhận vào (hoặc toả ra) khi nhiệt độ thay đổi tỉ lệ với khối lượng m của vật, với độ biến thiên nhiệt độ ΔT và phụ thuộc vào chất làm vật. Nhiệt dung riêng c của một chất là nhiệt lượng cần cung cấp để 1 kg chất đó tăng thêm 1 K (hay 1 °C). Nước có nhiệt dung riêng lớn (khoảng 4 200 J/(kg·K)), lớn hơn nhiều so với kim loại như đồng (khoảng 380 J/(kg·K)); vì thế nước được dùng làm chất tải nhiệt và giúp điều hoà khí hậu ven biển.",
-        "en": "The heat Q a body absorbs (or releases) when its temperature changes is proportional to its mass m and to the temperature change ΔT, and depends on the material. The specific heat capacity c of a substance is the heat needed to raise 1 kg of it by 1 K (or 1 °C). Water has a large specific heat capacity (about 4 200 J/(kg·K)), much larger than metals such as copper (about 380 J/(kg·K)); that is why water is used as a coolant and why it moderates coastal climates."
+        "vi": "Nhiệt lượng Q mà một vật nhận vào (hoặc toả ra) khi nhiệt độ thay đổi tỉ lệ với khối lượng m của vật, với độ biến thiên nhiệt độ ΔT và phụ thuộc vào chất làm vật. Nhiệt dung riêng c của một chất là nhiệt lượng cần cung cấp để 1 kg chất đó tăng thêm 1 K (hay 1 °C). Nước có nhiệt dung riêng lớn (khoảng 4 200 J/(kg⋅K)), lớn hơn nhiều so với kim loại như đồng (khoảng 380 J/(kg⋅K)); vì thế nước được dùng làm chất tải nhiệt và giúp điều hoà khí hậu ven biển.",
+        "en": "The heat Q a body absorbs (or releases) when its temperature changes is proportional to its mass m and to the temperature change ΔT, and depends on the material. The specific heat capacity c of a substance is the heat needed to raise 1 kg of it by 1 K (or 1 °C). Water has a large specific heat capacity (about 4 200 J/(kg⋅K)), much larger than metals such as copper (about 380 J/(kg⋅K)); that is why water is used as a coolant and why it moderates coastal climates."
       },
       {
         "type": "formula",
@@ -554,7 +554,7 @@ PH.CONTENT = {
           "vi": "Nhiệt lượng trao đổi khi thay đổi nhiệt độ",
           "en": "Heat exchanged during a temperature change"
         },
-        "math": "Q = m·c·ΔT = m·c·(T₂ − T₁)",
+        "math": "Q = m⋅c⋅ΔT = m⋅c⋅(T₂ − T₁)",
         "vars": [
           {
             "sym": "Q",
@@ -572,7 +572,7 @@ PH.CONTENT = {
             "sym": "c",
             "vi": "nhiệt dung riêng của chất",
             "en": "specific heat capacity",
-            "unit": "J/(kg·K)"
+            "unit": "J/(kg⋅K)"
           },
           {
             "sym": "ΔT",
@@ -593,15 +593,15 @@ PH.CONTENT = {
       },
       {
         "type": "callout",
-        "vi": "Khi tính toán, đổi khối lượng về kg và kiểm tra đơn vị của c: J/(kg·K) cho kết quả Q bằng jun.",
-        "en": "In calculations convert mass to kg and check the unit of c: J/(kg·K) gives Q in joules."
+        "vi": "Khi tính toán, đổi khối lượng về kg và kiểm tra đơn vị của c: J/(kg⋅K) cho kết quả Q bằng jun.",
+        "en": "In calculations convert mass to kg and check the unit of c: J/(kg⋅K) gives Q in joules."
       }
     ],
     "selfcheck": [
       {
         "q": {
-          "vi": "Nhiệt lượng cần cung cấp để đun 2 kg nước từ 20 °C lên 70 °C (c = 4 200 J/(kg·K)) là",
-          "en": "The heat needed to warm 2 kg of water from 20 °C to 70 °C (c = 4 200 J/(kg·K)) is"
+          "vi": "Nhiệt lượng cần cung cấp để đun 2 kg nước từ 20 °C lên 70 °C (c = 4 200 J/(kg⋅K)) là",
+          "en": "The heat needed to warm 2 kg of water from 20 °C to 70 °C (c = 4 200 J/(kg⋅K)) is"
         },
         "options": [
           {
@@ -634,8 +634,8 @@ PH.CONTENT = {
         },
         "options": [
           {
-            "vi": "J/(kg·K)",
-            "en": "J/(kg·K)"
+            "vi": "J/(kg⋅K)",
+            "en": "J/(kg⋅K)"
           },
           {
             "vi": "J/K",
@@ -646,14 +646,14 @@ PH.CONTENT = {
             "en": "J/kg"
           },
           {
-            "vi": "J·kg/K",
-            "en": "J·kg/K"
+            "vi": "J⋅kg/K",
+            "en": "J⋅kg/K"
           }
         ],
         "correct": 0,
         "why": {
-          "vi": "Từ c = Q/(mΔT) suy ra đơn vị J/(kg·K).",
-          "en": "From c = Q/(mΔT) the unit is J/(kg·K)."
+          "vi": "Từ c = Q/(mΔT) suy ra đơn vị J/(kg⋅K).",
+          "en": "From c = Q/(mΔT) the unit is J/(kg⋅K)."
         }
       },
       {
@@ -705,7 +705,7 @@ PH.CONTENT = {
           "vi": "Nhiệt nóng chảy",
           "en": "Heat of fusion"
         },
-        "math": "Q = λ·m",
+        "math": "Q = λ⋅m",
         "vars": [
           {
             "sym": "Q",
@@ -733,8 +733,8 @@ PH.CONTENT = {
       },
       {
         "type": "callout",
-        "vi": "Bài toán 'nước đá ở −10 °C thành nước ở 20 °C' gồm ba giai đoạn: làm nóng nước đá đến 0 °C (Q = mc_đá·ΔT), làm tan hết đá ở 0 °C (Q = λm), rồi làm nóng nước (Q = mc_nước·ΔT). Cộng cả ba nhiệt lượng lại.",
-        "en": "A problem such as 'ice at −10 °C becomes water at 20 °C' has three stages: warm the ice to 0 °C (Q = mc_ice·ΔT), melt it at 0 °C (Q = λm), then warm the water (Q = mc_water·ΔT). Add the three amounts of heat."
+        "vi": "Bài toán 'nước đá ở −10 °C thành nước ở 20 °C' gồm ba giai đoạn: làm nóng nước đá đến 0 °C (Q = mc_đá⋅ΔT), làm tan hết đá ở 0 °C (Q = λm), rồi làm nóng nước (Q = mc_nước⋅ΔT). Cộng cả ba nhiệt lượng lại.",
+        "en": "A problem such as 'ice at −10 °C becomes water at 20 °C' has three stages: warm the ice to 0 °C (Q = mc_ice⋅ΔT), melt it at 0 °C (Q = λm), then warm the water (Q = mc_water⋅ΔT). Add the three amounts of heat."
       }
     ],
     "selfcheck": [
@@ -845,7 +845,7 @@ PH.CONTENT = {
           "vi": "Nhiệt hoá hơi",
           "en": "Heat of vaporisation"
         },
-        "math": "Q = L·m",
+        "math": "Q = L⋅m",
         "vars": [
           {
             "sym": "Q",
@@ -902,8 +902,8 @@ PH.CONTENT = {
               "en": "specific heat capacity"
             },
             {
-              "vi": "J/(kg·K)",
-              "en": "J/(kg·K)"
+              "vi": "J/(kg⋅K)",
+              "en": "J/(kg⋅K)"
             },
             {
               "vi": "nhiệt lượng làm 1 kg chất tăng thêm 1 K",
@@ -1195,8 +1195,8 @@ PH.CONTENT = {
         ],
         "correct": 3,
         "why": {
-          "vi": "N = n·N_A = 2 · 6,02 × 10²³ = 1,204 × 10²⁴ phân tử.",
-          "en": "N = n·N_A = 2 × 6.02 × 10²³ = 1.204 × 10²⁴ molecules."
+          "vi": "N = n⋅N_A = 2 · 6,02 × 10²³ = 1,204 × 10²⁴ phân tử.",
+          "en": "N = n⋅N_A = 2 × 6.02 × 10²³ = 1.204 × 10²⁴ molecules."
         }
       }
     ]
@@ -1210,8 +1210,8 @@ PH.CONTENT = {
     "blocks": [
       {
         "type": "text",
-        "vi": "Trạng thái của một lượng khí được xác định bởi ba thông số trạng thái: áp suất p, thể tích V và nhiệt độ tuyệt đối T. Quá trình biến đổi trạng thái trong đó nhiệt độ được giữ không đổi gọi là quá trình đẳng nhiệt. Thí nghiệm nén hoặc dãn từ từ một lượng khí trong xilanh kín (đủ chậm để nhiệt độ khí cân bằng với môi trường) cho thấy: khi thể tích giảm còn một nửa thì áp suất tăng gấp đôi, tích p·V hầu như không đổi.",
-        "en": "The state of a fixed amount of gas is described by three state variables: pressure p, volume V and absolute temperature T. A change of state in which the temperature is kept constant is an isothermal process. Slowly compressing or expanding a gas in a sealed cylinder (slowly enough for its temperature to stay equal to the surroundings) shows that halving the volume doubles the pressure: the product p·V stays practically constant."
+        "vi": "Trạng thái của một lượng khí được xác định bởi ba thông số trạng thái: áp suất p, thể tích V và nhiệt độ tuyệt đối T. Quá trình biến đổi trạng thái trong đó nhiệt độ được giữ không đổi gọi là quá trình đẳng nhiệt. Thí nghiệm nén hoặc dãn từ từ một lượng khí trong xilanh kín (đủ chậm để nhiệt độ khí cân bằng với môi trường) cho thấy: khi thể tích giảm còn một nửa thì áp suất tăng gấp đôi, tích p⋅V hầu như không đổi.",
+        "en": "The state of a fixed amount of gas is described by three state variables: pressure p, volume V and absolute temperature T. A change of state in which the temperature is kept constant is an isothermal process. Slowly compressing or expanding a gas in a sealed cylinder (slowly enough for its temperature to stay equal to the surroundings) shows that halving the volume doubles the pressure: the product p⋅V stays practically constant."
       },
       {
         "type": "formula",
@@ -1219,7 +1219,7 @@ PH.CONTENT = {
           "vi": "Định luật Boyle",
           "en": "Boyle's law"
         },
-        "math": "p·V = const   hay   p₁V₁ = p₂V₂",
+        "math": "p⋅V = const   hay   p₁V₁ = p₂V₂",
         "vars": [
           {
             "sym": "p",
@@ -1528,8 +1528,8 @@ PH.CONTENT = {
         ],
         "correct": 2,
         "why": {
-          "vi": "V = (const)·T là hàm bậc nhất qua gốc toạ độ.",
-          "en": "V = (const)·T is a linear relation through the origin."
+          "vi": "V = (const)⋅T là hàm bậc nhất qua gốc toạ độ.",
+          "en": "V = (const)⋅T is a linear relation through the origin."
         }
       }
     ]
@@ -1584,7 +1584,7 @@ PH.CONTENT = {
           "vi": "Phương trình Clapeyron",
           "en": "Clapeyron equation (ideal-gas law)"
         },
-        "math": "pV = nRT = (m/M)·R·T",
+        "math": "pV = nRT = (m/M)⋅R⋅T",
         "vars": [
           {
             "sym": "n",
@@ -1596,7 +1596,7 @@ PH.CONTENT = {
             "sym": "R",
             "vi": "hằng số khí lí tưởng",
             "en": "ideal-gas constant",
-            "unit": "J/(mol·K)"
+            "unit": "J/(mol⋅K)"
           },
           {
             "sym": "m",
@@ -1612,8 +1612,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "R = 8,31 J/(mol·K). Với giá trị này, p phải tính bằng Pa, V bằng m³ và T bằng K.",
-          "en": "R = 8.31 J/(mol·K). With this value, p must be in Pa, V in m³ and T in K."
+          "vi": "R = 8,31 J/(mol⋅K). Với giá trị này, p phải tính bằng Pa, V bằng m³ và T bằng K.",
+          "en": "R = 8.31 J/(mol⋅K). With this value, p must be in Pa, V in m³ and T in K."
         }
       },
       {
@@ -1773,8 +1773,8 @@ PH.CONTENT = {
             "en": "1.38 × 10⁻²³ J/K"
           },
           {
-            "vi": "8,31 J/(mol·K)",
-            "en": "8.31 J/(mol·K)"
+            "vi": "8,31 J/(mol⋅K)",
+            "en": "8.31 J/(mol⋅K)"
           },
           {
             "vi": "22,4 lít/mol",
@@ -1798,8 +1798,8 @@ PH.CONTENT = {
     "blocks": [
       {
         "type": "text",
-        "vi": "Mỗi phân tử khí khi va chạm với thành bình truyền cho thành một xung lực nhỏ; vô số va chạm trong mỗi giây tạo nên lực ép trung bình lên thành bình, tức là áp suất của khí. Theo mô hình động học phân tử, áp suất tỉ lệ với mật độ phân tử μ = N/V, với khối lượng m của một phân tử và với trung bình của bình phương tốc độ v̄² của các phân tử. Vì khối lượng riêng ρ = μ·m nên cũng có thể viết p = (1/3)ρv̄².",
-        "en": "Each gas molecule that hits the wall gives it a small impulse; the enormous number of hits every second produces a steady average force on the wall, which is the gas pressure. In the kinetic model the pressure is proportional to the number density μ = N/V, to the mass m of one molecule and to the mean square speed v̄² of the molecules. Since the density is ρ = μ·m, this can also be written p = (1/3)ρv̄²."
+        "vi": "Mỗi phân tử khí khi va chạm với thành bình truyền cho thành một xung lực nhỏ; vô số va chạm trong mỗi giây tạo nên lực ép trung bình lên thành bình, tức là áp suất của khí. Theo mô hình động học phân tử, áp suất tỉ lệ với mật độ phân tử μ = N/V, với khối lượng m của một phân tử và với trung bình của bình phương tốc độ v̄² của các phân tử. Vì khối lượng riêng ρ = μ⋅m nên cũng có thể viết p = (1/3)ρv̄².",
+        "en": "Each gas molecule that hits the wall gives it a small impulse; the enormous number of hits every second produces a steady average force on the wall, which is the gas pressure. In the kinetic model the pressure is proportional to the number density μ = N/V, to the mass m of one molecule and to the mean square speed v̄² of the molecules. Since the density is ρ = μ⋅m, this can also be written p = (1/3)ρv̄²."
       },
       {
         "type": "formula",
@@ -1807,7 +1807,7 @@ PH.CONTENT = {
           "vi": "Áp suất khí theo mô hình động học phân tử",
           "en": "Gas pressure from the kinetic model"
         },
-        "math": "p = (1/3)·μ·m·v̄² = (2/3)·μ·Ē_đ",
+        "math": "p = (1/3)⋅μ⋅m⋅v̄² = (2/3)⋅μ⋅Ē_đ",
         "vars": [
           {
             "sym": "μ",
@@ -1835,8 +1835,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "Ē_đ = (1/2)·m·v̄². Tốc độ căn quân phương v_rms = √(v̄²) là tốc độ đặc trưng cho chuyển động nhiệt của phân tử.",
-          "en": "Ē_đ = (1/2)·m·v̄². The root-mean-square speed v_rms = √(v̄²) is the characteristic speed of thermal motion."
+          "vi": "Ē_đ = (1/2)⋅m⋅v̄². Tốc độ căn quân phương v_rms = √(v̄²) là tốc độ đặc trưng cho chuyển động nhiệt của phân tử.",
+          "en": "Ē_đ = (1/2)⋅m⋅v̄². The root-mean-square speed v_rms = √(v̄²) is the characteristic speed of thermal motion."
         }
       },
       {
@@ -1845,7 +1845,7 @@ PH.CONTENT = {
           "vi": "Động năng phân tử và nhiệt độ",
           "en": "Molecular kinetic energy and temperature"
         },
-        "math": "Ē_đ = (3/2)·k·T",
+        "math": "Ē_đ = (3/2)⋅k⋅T",
         "vars": [
           {
             "sym": "k",
@@ -1867,7 +1867,7 @@ PH.CONTENT = {
       },
       {
         "type": "callout",
-        "vi": "Kết hợp hai công thức trên với pV = nRT: v_rms = √(3kT/m) = √(3RT/M). Trong công thức này M phải tính bằng kg/mol. Ở 300 K, phân tử hydrogen (M = 2 g/mol = 2·10⁻³ kg/mol) có v_rms ≈ 1 900 m/s, còn oxygen (M = 32 g/mol = 32·10⁻³ kg/mol) chỉ khoảng 480 m/s.",
+        "vi": "Kết hợp hai công thức trên với pV = nRT: v_rms = √(3kT/m) = √(3RT/M). Trong công thức này M phải tính bằng kg/mol. Ở 300 K, phân tử hydrogen (M = 2 g/mol = 2⋅10⁻³ kg/mol) có v_rms ≈ 1 900 m/s, còn oxygen (M = 32 g/mol = 32⋅10⁻³ kg/mol) chỉ khoảng 480 m/s.",
         "en": "Combining the two formulas with pV = nRT gives v_rms = √(3kT/m) = √(3RT/M), where M must be in kg/mol. At 300 K a hydrogen molecule (M = 2 g/mol = 2×10⁻³ kg/mol) has v_rms ≈ 1 900 m/s, while oxygen (M = 32 g/mol = 32×10⁻³ kg/mol) has only about 480 m/s."
       }
     ],
@@ -2153,7 +2153,7 @@ PH.CONTENT = {
           "vi": "Lực từ tác dụng lên đoạn dây dẫn mang dòng điện",
           "en": "Magnetic force on a current-carrying conductor"
         },
-        "math": "F = B·I·L·sinα",
+        "math": "F = B⋅I⋅L⋅sinα",
         "vars": [
           {
             "sym": "F",
@@ -2187,8 +2187,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "Lực lớn nhất khi dây vuông góc với B (α = 90°): F = BIL; bằng không khi dây song song với B. Từ đó định nghĩa B = F/(I·L·sinα); 1 T = 1 N/(A·m).",
-          "en": "The force is greatest when the conductor is perpendicular to B (α = 90°): F = BIL, and zero when it is parallel to B. This defines B = F/(I·L·sinα); 1 T = 1 N/(A·m)."
+          "vi": "Lực lớn nhất khi dây vuông góc với B (α = 90°): F = BIL; bằng không khi dây song song với B. Từ đó định nghĩa B = F/(I⋅L⋅sinα); 1 T = 1 N/(A⋅m).",
+          "en": "The force is greatest when the conductor is perpendicular to B (α = 90°): F = BIL, and zero when it is parallel to B. This defines B = F/(I⋅L⋅sinα); 1 T = 1 N/(A⋅m)."
         }
       },
       {
@@ -2305,7 +2305,7 @@ PH.CONTENT = {
           "vi": "Từ thông",
           "en": "Magnetic flux"
         },
-        "math": "Φ = B·S·cosα",
+        "math": "Φ = B⋅S⋅cosα",
         "vars": [
           {
             "sym": "Φ",
@@ -2333,8 +2333,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "1 Wb = 1 T·m². Φ lớn nhất khi B vuông góc với mặt S (α = 0), bằng không khi B song song với mặt S. Φ ở đây là từ thông qua MỘT vòng dây; với khung N vòng, từ thông móc vòng là Ψ = N·Φ = N·B·S·cosα.",
-          "en": "1 Wb = 1 T·m². Φ is greatest when B is perpendicular to the surface (α = 0) and zero when B is parallel to it. Here Φ is the flux through ONE turn; for a coil of N turns the total flux linkage is Ψ = N·Φ = N·B·S·cosα."
+          "vi": "1 Wb = 1 T⋅m². Φ lớn nhất khi B vuông góc với mặt S (α = 0), bằng không khi B song song với mặt S. Φ ở đây là từ thông qua MỘT vòng dây; với khung N vòng, từ thông móc vòng là Ψ = N⋅Φ = N⋅B⋅S⋅cosα.",
+          "en": "1 Wb = 1 T⋅m². Φ is greatest when B is perpendicular to the surface (α = 0) and zero when B is parallel to it. Here Φ is the flux through ONE turn; for a coil of N turns the total flux linkage is Ψ = N⋅Φ = N⋅B⋅S⋅cosα."
         }
       },
       {
@@ -2348,7 +2348,7 @@ PH.CONTENT = {
           "vi": "Định luật Faraday về cảm ứng điện từ",
           "en": "Faraday's law of electromagnetic induction"
         },
-        "math": "e_c = −N·ΔΦ/Δt",
+        "math": "e_c = −N⋅ΔΦ/Δt",
         "vars": [
           {
             "sym": "e_c",
@@ -2441,8 +2441,8 @@ PH.CONTENT = {
         ],
         "correct": 0,
         "why": {
-          "vi": "|e_c| = N·|ΔΦ|/Δt = 100 · 0,2/0,1 = 200 V.",
-          "en": "|e_c| = N·|ΔΦ|/Δt = 100 × 0.2/0.1 = 200 V."
+          "vi": "|e_c| = N⋅|ΔΦ|/Δt = 100 · 0,2/0,1 = 200 V.",
+          "en": "|e_c| = N⋅|ΔΦ|/Δt = 100 × 0.2/0.1 = 200 V."
         }
       },
       {
@@ -2494,7 +2494,7 @@ PH.CONTENT = {
           "vi": "Từ thông và suất điện động xoay chiều",
           "en": "Flux and alternating e.m.f."
         },
-        "math": "Φ = N·B·S·cos(ωt + φ₀)   →   e = E₀·cos(ωt + φ₀ − π/2),   E₀ = N·B·S·ω",
+        "math": "Φ = N⋅B⋅S⋅cos(ωt + φ₀)   →   e = E₀⋅cos(ωt + φ₀ − π/2),   E₀ = N⋅B⋅S⋅ω",
         "vars": [
           {
             "sym": "E₀",
@@ -2534,8 +2534,8 @@ PH.CONTENT = {
       },
       {
         "type": "text",
-        "vi": "Máy phát điện xoay chiều biến đổi cơ năng thành điện năng, gồm hai bộ phận chính: phần cảm (nam châm) tạo ra từ trường và phần ứng (các cuộn dây) trong đó xuất hiện suất điện động cảm ứng. Bộ phận đứng yên là stato, bộ phận quay là rôto. Nếu rôto là nam châm có p cặp cực quay n vòng/giây thì tần số dòng điện f = n·p; lưới điện Việt Nam có f = 50 Hz.",
-        "en": "An AC generator converts mechanical energy into electrical energy. Its two main parts are the field system (magnets), which produces the magnetic field, and the armature (coils), in which the e.m.f. is induced. The stationary part is the stator, the rotating part the rotor. If the rotor is a magnet with p pole pairs turning at n revolutions per second, the frequency is f = n·p; Vietnam's grid uses f = 50 Hz."
+        "vi": "Máy phát điện xoay chiều biến đổi cơ năng thành điện năng, gồm hai bộ phận chính: phần cảm (nam châm) tạo ra từ trường và phần ứng (các cuộn dây) trong đó xuất hiện suất điện động cảm ứng. Bộ phận đứng yên là stato, bộ phận quay là rôto. Nếu rôto là nam châm có p cặp cực quay n vòng/giây thì tần số dòng điện f = n⋅p; lưới điện Việt Nam có f = 50 Hz.",
+        "en": "An AC generator converts mechanical energy into electrical energy. Its two main parts are the field system (magnets), which produces the magnetic field, and the armature (coils), in which the e.m.f. is induced. The stationary part is the stator, the rotating part the rotor. If the rotor is a magnet with p pole pairs turning at n revolutions per second, the frequency is f = n⋅p; Vietnam's grid uses f = 50 Hz."
       },
       {
         "type": "formula",
@@ -2613,8 +2613,8 @@ PH.CONTENT = {
       },
       {
         "q": {
-          "vi": "Dòng điện xoay chiều có biểu thức i = 2√2·cos(100πt) (A). Cường độ hiệu dụng và tần số của dòng điện là",
-          "en": "An alternating current is i = 2√2·cos(100πt) (A). Its r.m.s. value and frequency are"
+          "vi": "Dòng điện xoay chiều có biểu thức i = 2√2⋅cos(100πt) (A). Cường độ hiệu dụng và tần số của dòng điện là",
+          "en": "An alternating current is i = 2√2⋅cos(100πt) (A). Its r.m.s. value and frequency are"
         },
         "options": [
           {
@@ -2689,7 +2689,7 @@ PH.CONTENT = {
           "vi": "Máy biến áp lí tưởng",
           "en": "Ideal transformer"
         },
-        "math": "U₂/U₁ = N₂/N₁   ;   U₁·I₁ = U₂·I₂",
+        "math": "U₂/U₁ = N₂/N₁   ;   U₁⋅I₁ = U₂⋅I₂",
         "vars": [
           {
             "sym": "U₁, U₂",
@@ -2711,8 +2711,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "N₂ > N₁: máy tăng áp; N₂ < N₁: máy hạ áp. Khi truyền tải điện năng đi xa, tăng điện áp lên n lần thì công suất hao phí trên đường dây P_hp = R·P²/U² giảm n² lần.",
-          "en": "N₂ > N₁: step-up; N₂ < N₁: step-down. In long-distance transmission, raising the voltage n times cuts the line loss P_loss = R·P²/U² by a factor n²."
+          "vi": "N₂ > N₁: máy tăng áp; N₂ < N₁: máy hạ áp. Khi truyền tải điện năng đi xa, tăng điện áp lên n lần thì công suất hao phí trên đường dây P_hp = R⋅P²/U² giảm n² lần.",
+          "en": "N₂ > N₁: step-up; N₂ < N₁: step-down. In long-distance transmission, raising the voltage n times cuts the line loss P_loss = R⋅P²/U² by a factor n²."
         }
       },
       {
@@ -2752,8 +2752,8 @@ PH.CONTENT = {
         ],
         "correct": 1,
         "why": {
-          "vi": "U₂ = U₁·N₂/N₁ = 220 · 50/1 000 = 11 V.",
-          "en": "U₂ = U₁·N₂/N₁ = 220 × 50/1 000 = 11 V."
+          "vi": "U₂ = U₁⋅N₂/N₁ = 220 · 50/1 000 = 11 V.",
+          "en": "U₂ = U₁⋅N₂/N₁ = 220 × 50/1 000 = 11 V."
         }
       },
       {
@@ -2839,7 +2839,7 @@ PH.CONTENT = {
           "vi": "Bước sóng của sóng điện từ trong chân không",
           "en": "Wavelength of an electromagnetic wave in vacuum"
         },
-        "math": "λ = c·T = c/f",
+        "math": "λ = c⋅T = c/f",
         "vars": [
           {
             "sym": "λ",
@@ -2985,7 +2985,7 @@ PH.CONTENT = {
           "vi": "Số neutron và điện tích hạt nhân",
           "en": "Neutron number and nuclear charge"
         },
-        "math": "N = A − Z   ;   q = +Z·e",
+        "math": "N = A − Z   ;   q = +Z⋅e",
         "vars": [
           {
             "sym": "A",
@@ -3023,7 +3023,7 @@ PH.CONTENT = {
           "vi": "Bán kính hạt nhân và đơn vị khối lượng nguyên tử",
           "en": "Nuclear radius and the atomic mass unit"
         },
-        "math": "R ≈ r₀·A^(1/3)",
+        "math": "R ≈ r₀⋅A^(1/3)",
         "vars": [
           {
             "sym": "R",
@@ -3142,8 +3142,8 @@ PH.CONTENT = {
   "22": {
     "drafted": false,
     "summary": {
-      "vi": "Năng lượng liên kết E_lk = Δm·c² giữ các nucleon trong hạt nhân; phản ứng hạt nhân như phân hạch, nhiệt hạch toả năng lượng khi tổng khối lượng nghỉ giảm.",
-      "en": "The binding energy E_lk = Δm·c² holds the nucleons together; nuclear reactions such as fission and fusion release energy when the total rest mass decreases."
+      "vi": "Năng lượng liên kết E_lk = Δm⋅c² giữ các nucleon trong hạt nhân; phản ứng hạt nhân như phân hạch, nhiệt hạch toả năng lượng khi tổng khối lượng nghỉ giảm.",
+      "en": "The binding energy E_lk = Δm⋅c² holds the nucleons together; nuclear reactions such as fission and fusion release energy when the total rest mass decreases."
     },
     "blocks": [
       {
@@ -3157,7 +3157,7 @@ PH.CONTENT = {
           "vi": "Độ hụt khối và năng lượng liên kết",
           "en": "Mass defect and binding energy"
         },
-        "math": "Δm = Z·m_p + (A − Z)·m_n − m_hn   ;   E_lk = Δm·c²   ;   E_lk riêng = E_lk/A",
+        "math": "Δm = Z⋅m_p + (A − Z)⋅m_n − m_hn   ;   E_lk = Δm⋅c²   ;   E_lk riêng = E_lk/A",
         "vars": [
           {
             "sym": "Δm",
@@ -3185,14 +3185,14 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "Nếu Δm tính bằng u thì E_lk = Δm · 931,5 MeV (vì 1 u·c² = 931,5 MeV).",
-          "en": "If Δm is in u, then E_lk = Δm × 931.5 MeV (since 1 u·c² = 931.5 MeV)."
+          "vi": "Nếu Δm tính bằng u thì E_lk = Δm · 931,5 MeV (vì 1 u⋅c² = 931,5 MeV).",
+          "en": "If Δm is in u, then E_lk = Δm × 931.5 MeV (since 1 u⋅c² = 931.5 MeV)."
         }
       },
       {
         "type": "text",
-        "vi": "Phản ứng hạt nhân là quá trình biến đổi các hạt nhân, tuân theo các định luật bảo toàn điện tích, số nucleon, năng lượng toàn phần và động lượng (khối lượng nghỉ không bảo toàn). Năng lượng toả ra W = (m_trước − m_sau)·c²; W > 0 là phản ứng toả năng lượng. Phân hạch: hạt nhân rất nặng (²³⁵U, ²³⁹Pu) hấp thụ một neutron chậm rồi vỡ thành hai hạt nhân nhẹ hơn kèm 2–3 neutron mới, toả năng lượng cỡ 200 MeV. Nhiệt hạch: hai hạt nhân rất nhẹ (²H, ³H) tổng hợp thành hạt nhân nặng hơn ở nhiệt độ hàng chục triệu độ; đó là nguồn năng lượng của Mặt Trời và các ngôi sao.",
-        "en": "A nuclear reaction transforms nuclei and obeys conservation of charge, of nucleon number, of total energy and of momentum (rest mass is not conserved). The energy released is W = (m_before − m_after)·c²; W > 0 means energy is released. Fission: a very heavy nucleus (²³⁵U, ²³⁹Pu) absorbs a slow neutron and splits into two lighter nuclei plus 2–3 new neutrons, releasing about 200 MeV. Fusion: two very light nuclei (²H, ³H) combine into a heavier nucleus at temperatures of tens of millions of degrees; this powers the Sun and the stars."
+        "vi": "Phản ứng hạt nhân là quá trình biến đổi các hạt nhân, tuân theo các định luật bảo toàn điện tích, số nucleon, năng lượng toàn phần và động lượng (khối lượng nghỉ không bảo toàn). Năng lượng toả ra W = (m_trước − m_sau)⋅c²; W > 0 là phản ứng toả năng lượng. Phân hạch: hạt nhân rất nặng (²³⁵U, ²³⁹Pu) hấp thụ một neutron chậm rồi vỡ thành hai hạt nhân nhẹ hơn kèm 2–3 neutron mới, toả năng lượng cỡ 200 MeV. Nhiệt hạch: hai hạt nhân rất nhẹ (²H, ³H) tổng hợp thành hạt nhân nặng hơn ở nhiệt độ hàng chục triệu độ; đó là nguồn năng lượng của Mặt Trời và các ngôi sao.",
+        "en": "A nuclear reaction transforms nuclei and obeys conservation of charge, of nucleon number, of total energy and of momentum (rest mass is not conserved). The energy released is W = (m_before − m_after)⋅c²; W > 0 means energy is released. Fission: a very heavy nucleus (²³⁵U, ²³⁹Pu) absorbs a slow neutron and splits into two lighter nuclei plus 2–3 new neutrons, releasing about 200 MeV. Fusion: two very light nuclei (²H, ³H) combine into a heavier nucleus at temperatures of tens of millions of degrees; this powers the Sun and the stars."
       },
       {
         "type": "callout",
@@ -3369,7 +3369,7 @@ PH.CONTENT = {
           "vi": "Định luật phóng xạ",
           "en": "Law of radioactive decay"
         },
-        "math": "N = N₀·2^(−t/T) = N₀·e^(−λt)   ;   λ = ln2/T",
+        "math": "N = N₀⋅2^(−t/T) = N₀⋅e^(−λt)   ;   λ = ln2/T",
         "vars": [
           {
             "sym": "N",
@@ -3397,8 +3397,8 @@ PH.CONTENT = {
           }
         ],
         "note": {
-          "vi": "Chu kì bán rã T là thời gian để một nửa số hạt nhân phân rã. Khối lượng chất phóng xạ m và độ phóng xạ H = λN (đơn vị becquerel, Bq; 1 Ci = 3,7 × 10¹⁰ Bq) cũng giảm theo cùng quy luật. Số hạt nhân đã phân rã: ΔN = N₀·(1 − 2^(−t/T)).",
-          "en": "The half-life T is the time for half of the nuclei to decay. The mass m of the radioactive substance and the activity H = λN (unit becquerel, Bq; 1 Ci = 3.7 × 10¹⁰ Bq) fall by the same law. Number of nuclei that have decayed: ΔN = N₀·(1 − 2^(−t/T))."
+          "vi": "Chu kì bán rã T là thời gian để một nửa số hạt nhân phân rã. Khối lượng chất phóng xạ m và độ phóng xạ H = λN (đơn vị becquerel, Bq; 1 Ci = 3,7 × 10¹⁰ Bq) cũng giảm theo cùng quy luật. Số hạt nhân đã phân rã: ΔN = N₀⋅(1 − 2^(−t/T)).",
+          "en": "The half-life T is the time for half of the nuclei to decay. The mass m of the radioactive substance and the activity H = λN (unit becquerel, Bq; 1 Ci = 3.7 × 10¹⁰ Bq) fall by the same law. Number of nuclei that have decayed: ΔN = N₀⋅(1 − 2^(−t/T))."
         }
       },
       {
@@ -3477,8 +3477,8 @@ PH.CONTENT = {
             "en": "λ = ln2/T"
           },
           {
-            "vi": "λ = T·ln2",
-            "en": "λ = T·ln2"
+            "vi": "λ = T⋅ln2",
+            "en": "λ = T⋅ln2"
           },
           {
             "vi": "λ = 1/T",

@@ -19,7 +19,7 @@ PH.PAIRS = [
     "id": "pair-4",
     "chapter": 1,
     "a": {
-      "title": "Q = m · c · ΔT",
+      "title": "Q = m⋅c⋅ΔT",
       "sub": "Nhiệt lượng thu vào / toả ra",
       "kind": "công thức"
     },
@@ -33,7 +33,7 @@ PH.PAIRS = [
     "id": "pair-11",
     "chapter": 1,
     "a": {
-      "title": "Q = λ · m",
+      "title": "Q = λ⋅m",
       "sub": "Nhiệt lượng cần để nóng chảy",
       "kind": "công thức"
     },
@@ -47,7 +47,7 @@ PH.PAIRS = [
     "id": "pair-12",
     "chapter": 1,
     "a": {
-      "title": "Q = L · m",
+      "title": "Q = L⋅m",
       "sub": "Nhiệt lượng cần để hoá hơi",
       "kind": "công thức"
     },
@@ -75,13 +75,13 @@ PH.PAIRS = [
     "id": "pair-14",
     "chapter": 1,
     "a": {
-      "title": "c = Q / (m · ΔT)",
+      "title": "c = Q / (m⋅ΔT)",
       "sub": "Nhiệt dung riêng",
       "kind": "công thức"
     },
     "b": {
-      "title": "J/(kg·K)",
-      "sub": "Đơn vị nhiệt dung riêng; nước: 4200 J/(kg·K)",
+      "title": "J/(kg⋅K)",
+      "sub": "Đơn vị nhiệt dung riêng; nước: 4200 J/(kg⋅K)",
       "kind": "đơn vị"
     }
   },
@@ -103,7 +103,7 @@ PH.PAIRS = [
     "id": "pair-2",
     "chapter": 2,
     "a": {
-      "title": "p · V = const",
+      "title": "p⋅V = const",
       "sub": "Định luật Boyle (đẳng nhiệt)",
       "kind": "công thức"
     },
@@ -145,13 +145,13 @@ PH.PAIRS = [
     "id": "pair-16",
     "chapter": 2,
     "a": {
-      "title": "p · V = n · R · T",
+      "title": "p⋅V = n⋅R⋅T",
       "sub": "Phương trình Clapeyron",
       "kind": "công thức"
     },
     "b": {
       "title": "Phương trình trạng thái của khí lí tưởng",
-      "sub": "n = m/M là số mol; R = 8,31 J/(mol·K)",
+      "sub": "n = m/M là số mol; R = 8,31 J/(mol⋅K)",
       "kind": "định luật"
     }
   },
@@ -173,13 +173,13 @@ PH.PAIRS = [
     "id": "pair-18",
     "chapter": 2,
     "a": {
-      "title": "W̄đ = (3/2) · k · T",
+      "title": "W̄đ = (3/2)⋅k⋅T",
       "sub": "Động năng tịnh tiến trung bình của phân tử",
       "kind": "công thức"
     },
     "b": {
       "title": "Hằng số Boltzmann k",
-      "sub": "k = 1,38·10⁻²³ J/K; động năng phân tử tỉ lệ với nhiệt độ tuyệt đối",
+      "sub": "k = 1,38⋅10⁻²³ J/K; động năng phân tử tỉ lệ với nhiệt độ tuyệt đối",
       "kind": "định nghĩa"
     }
   },
@@ -187,13 +187,13 @@ PH.PAIRS = [
     "id": "pair-19",
     "chapter": 2,
     "a": {
-      "title": "p = (1/3) · (N/V) · m · v̄²",
+      "title": "p = (1/3)⋅(N/V)⋅m⋅v̄²",
       "sub": "Áp suất khí theo mô hình động học phân tử",
       "kind": "công thức"
     },
     "b": {
       "title": "Pascal (Pa)",
-      "sub": "Đơn vị áp suất; 1 atm = 1,013·10⁵ Pa",
+      "sub": "Đơn vị áp suất; 1 atm = 1,013⋅10⁵ Pa",
       "kind": "đơn vị"
     }
   },
@@ -201,13 +201,13 @@ PH.PAIRS = [
     "id": "pair-1",
     "chapter": 3,
     "a": {
-      "title": "Φ = B · S · cosα",
+      "title": "Φ = B⋅S⋅cosα",
       "sub": "Công thức từ thông",
       "kind": "công thức"
     },
     "b": {
       "title": "Weber (Wb)",
-      "sub": "Đơn vị từ thông (1 Wb = 1 T·m²)",
+      "sub": "Đơn vị từ thông (1 Wb = 1 T⋅m²)",
       "kind": "đơn vị"
     }
   },
@@ -215,7 +215,7 @@ PH.PAIRS = [
     "id": "pair-5",
     "chapter": 3,
     "a": {
-      "title": "F = B · I · L · sinα",
+      "title": "F = B⋅I⋅L⋅sinα",
       "sub": "Lực từ tác dụng lên dây dẫn",
       "kind": "công thức"
     },
@@ -243,13 +243,13 @@ PH.PAIRS = [
     "id": "pair-20",
     "chapter": 3,
     "a": {
-      "title": "B = F / (I · L)",
+      "title": "B = F / (I⋅L)",
       "sub": "Độ lớn cảm ứng từ (dây đặt vuông góc với từ trường)",
       "kind": "công thức"
     },
     "b": {
       "title": "Tesla (T)",
-      "sub": "Đơn vị cảm ứng từ; 1 T = 1 N/(A·m)",
+      "sub": "Đơn vị cảm ứng từ; 1 T = 1 N/(A⋅m)",
       "kind": "đơn vị"
     }
   },
@@ -271,7 +271,7 @@ PH.PAIRS = [
     "id": "pair-22",
     "chapter": 3,
     "a": {
-      "title": "i = I₀ · cos(ωt + φ)",
+      "title": "i = I₀⋅cos(ωt + φ)",
       "sub": "Biểu thức cường độ dòng điện xoay chiều",
       "kind": "công thức"
     },
@@ -291,7 +291,7 @@ PH.PAIRS = [
     },
     "b": {
       "title": "Sóng điện từ",
-      "sub": "Điện từ trường lan truyền trong không gian; c = 3·10⁸ m/s",
+      "sub": "Điện từ trường lan truyền trong không gian; c = 3⋅10⁸ m/s",
       "kind": "định nghĩa"
     }
   },
@@ -299,13 +299,13 @@ PH.PAIRS = [
     "id": "pair-9",
     "chapter": 4,
     "a": {
-      "title": "E = m · c²",
+      "title": "E = m⋅c²",
       "sub": "Hệ thức Einstein giữa khối lượng và năng lượng",
       "kind": "công thức"
     },
     "b": {
       "title": "Năng lượng nghỉ tương đương với khối lượng nghỉ",
-      "sub": "c = 3·10⁸ m/s (tốc độ ánh sáng)",
+      "sub": "c = 3⋅10⁸ m/s (tốc độ ánh sáng)",
       "kind": "định nghĩa"
     }
   },
@@ -313,7 +313,7 @@ PH.PAIRS = [
     "id": "pair-24",
     "chapter": 4,
     "a": {
-      "title": "Δm = Z · m_p + (A − Z) · m_n − m_hn",
+      "title": "Δm = Z⋅m_p + (A − Z)⋅m_n − m_hn",
       "sub": "Độ hụt khối",
       "kind": "công thức"
     },
@@ -327,7 +327,7 @@ PH.PAIRS = [
     "id": "pair-25",
     "chapter": 4,
     "a": {
-      "title": "E_lk = Δm · c²",
+      "title": "E_lk = Δm⋅c²",
       "sub": "Năng lượng liên kết",
       "kind": "công thức"
     },
@@ -355,13 +355,13 @@ PH.PAIRS = [
     "id": "pair-27",
     "chapter": 4,
     "a": {
-      "title": "N = N₀ · 2^(−t/T)",
+      "title": "N = N₀⋅2^(−t/T)",
       "sub": "Định luật phóng xạ",
       "kind": "công thức"
     },
     "b": {
       "title": "Số hạt nhân chưa phân rã giảm theo hàm mũ của thời gian",
-      "sub": "T là chu kì bán rã; N = N₀·e^(−λt)",
+      "sub": "T là chu kì bán rã; N = N₀⋅e^(−λt)",
       "kind": "định luật"
     }
   },
@@ -383,13 +383,13 @@ PH.PAIRS = [
     "id": "pair-29",
     "chapter": 4,
     "a": {
-      "title": "H = λ · N",
+      "title": "H = λ⋅N",
       "sub": "Độ phóng xạ",
       "kind": "công thức"
     },
     "b": {
       "title": "Becquerel (Bq)",
-      "sub": "1 Bq = 1 phân rã/giây; 1 Ci = 3,7·10¹⁰ Bq",
+      "sub": "1 Bq = 1 phân rã/giây; 1 Ci = 3,7⋅10¹⁰ Bq",
       "kind": "đơn vị"
     }
   },
@@ -403,7 +403,7 @@ PH.PAIRS = [
     },
     "b": {
       "title": "Đơn vị khối lượng nguyên tử (u)",
-      "sub": "1 u = 1/12 khối lượng nguyên tử carbon-12 ≈ 1,66·10⁻²⁷ kg",
+      "sub": "1 u = 1/12 khối lượng nguyên tử carbon-12 ≈ 1,66⋅10⁻²⁷ kg",
       "kind": "đơn vị"
     }
   }

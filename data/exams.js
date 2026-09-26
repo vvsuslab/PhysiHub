@@ -75,16 +75,16 @@ PH.EXAMS = [
                      "en": "By definition (textbook Lesson 5), the specific latent heat of fusion λ (J/kg) is the heat that must be supplied to 1 kg of a solid to turn it completely into liquid at its melting temperature: Q = λm. Option A is the specific heat capacity c, option B is the specific latent heat of vaporisation L, and option D is not per kilogram, so it is not a ‘specific’ quantity." } },
 
           { "id": "c1-m6", "lesson": 6,
-            "q": { "vi": "Nhiệt hoá hơi riêng của nước ở 100°C là L = 2,3·10⁶ J/kg. Nhiệt lượng cần cung cấp để 200 g nước ở 100°C hoá hơi hoàn toàn là",
+            "q": { "vi": "Nhiệt hoá hơi riêng của nước ở 100°C là L = 2,3⋅10⁶ J/kg. Nhiệt lượng cần cung cấp để 200 g nước ở 100°C hoá hơi hoàn toàn là",
                    "en": "The specific latent heat of vaporisation of water at 100°C is L = 2.3×10⁶ J/kg. The heat required to completely vaporise 200 g of water at 100°C is" },
             "options": [
-              { "vi": "4,6·10⁶ J.", "en": "4.6×10⁶ J." },
-              { "vi": "4,6·10⁵ J.", "en": "4.6×10⁵ J." },
-              { "vi": "1,15·10⁷ J.", "en": "1.15×10⁷ J." },
-              { "vi": "2,3·10⁵ J.", "en": "2.3×10⁵ J." }
+              { "vi": "4,6⋅10⁶ J.", "en": "4.6×10⁶ J." },
+              { "vi": "4,6⋅10⁵ J.", "en": "4.6×10⁵ J." },
+              { "vi": "1,15⋅10⁷ J.", "en": "1.15×10⁷ J." },
+              { "vi": "2,3⋅10⁵ J.", "en": "2.3×10⁵ J." }
             ],
             "correct": 1,
-            "why": { "vi": "Đổi 200 g = 0,2 kg. Q = Lm = 2,3·10⁶ × 0,2 = 4,6·10⁵ J = 460 kJ. Phương án A lớn gấp 10 lần (lấy nhầm m = 2 kg), phương án C chia thay vì nhân, phương án D ứng với 100 g.",
+            "why": { "vi": "Đổi 200 g = 0,2 kg. Q = Lm = 2,3⋅10⁶ × 0,2 = 4,6⋅10⁵ J = 460 kJ. Phương án A lớn gấp 10 lần (lấy nhầm m = 2 kg), phương án C chia thay vì nhân, phương án D ứng với 100 g.",
                      "en": "Convert 200 g = 0.2 kg. Q = Lm = 2.3×10⁶ × 0.2 = 4.6×10⁵ J = 460 kJ. Option A is ten times too large (m mistaken as 2 kg), option C divides instead of multiplying, option D corresponds to 100 g." } }
         ] },
 
@@ -103,23 +103,23 @@ PH.EXAMS = [
                      "en": "a) True, b) True: these are basic results of the kinetic molecular model and of heat transfer. c) True: an ideal gas has no intermolecular potential energy, so its internal energy is the molecular kinetic energy alone and depends only on temperature. d) False: a kelvin and a Celsius degree are the same size, so the temperature change is ΔT = Δt = 15 K. The 273 is added only when converting a temperature value (T = t + 273), not a temperature change." } },
 
           { "id": "c1-t2", "lesson": 5,
-            "stem": { "vi": "Một khối nước đá có khối lượng 2,0 kg ở 0°C được cung cấp nhiệt để nóng chảy hoàn toàn, sau đó lượng nước thu được tiếp tục được đun nóng. Cho nhiệt nóng chảy riêng của nước đá λ = 3,4·10⁵ J/kg và nhiệt dung riêng của nước c = 4200 J/(kg·K).",
-                      "en": "A 2.0 kg block of ice at 0°C is supplied with heat until it has completely melted, and the water obtained is then heated further. Take the specific latent heat of fusion of ice λ = 3.4×10⁵ J/kg and the specific heat capacity of water c = 4200 J/(kg·K)." },
+            "stem": { "vi": "Một khối nước đá có khối lượng 2,0 kg ở 0°C được cung cấp nhiệt để nóng chảy hoàn toàn, sau đó lượng nước thu được tiếp tục được đun nóng. Cho nhiệt nóng chảy riêng của nước đá λ = 3,4⋅10⁵ J/kg và nhiệt dung riêng của nước c = 4200 J/(kg⋅K).",
+                      "en": "A 2.0 kg block of ice at 0°C is supplied with heat until it has completely melted, and the water obtained is then heated further. Take the specific latent heat of fusion of ice λ = 3.4×10⁵ J/kg and the specific heat capacity of water c = 4200 J/(kg⋅K)." },
             "statements": [
               { "vi": "Trong suốt quá trình nóng chảy, nhiệt độ của nước đá giữ nguyên ở 0°C dù vẫn nhận nhiệt.", "en": "Throughout the melting process the temperature of the ice stays at 0°C even though it keeps receiving heat.", "answer": true },
-              { "vi": "Nhiệt lượng cần cung cấp để khối nước đá nóng chảy hoàn toàn là 6,8·10⁵ J.", "en": "The heat required to melt the block of ice completely is 6.8×10⁵ J.", "answer": true },
+              { "vi": "Nhiệt lượng cần cung cấp để khối nước đá nóng chảy hoàn toàn là 6,8⋅10⁵ J.", "en": "The heat required to melt the block of ice completely is 6.8×10⁵ J.", "answer": true },
               { "vi": "Nhiệt lượng nhận được trong quá trình nóng chảy chủ yếu làm tăng động năng chuyển động nhiệt của các phân tử nước.", "en": "The heat received during melting mainly increases the kinetic energy of thermal motion of the water molecules.", "answer": false },
               { "vi": "Sau khi nóng chảy hết, để đun 2,0 kg nước từ 0°C lên 20°C cần cung cấp nhiệt lượng 84 kJ.", "en": "After all the ice has melted, heating the 2.0 kg of water from 0°C to 20°C requires 84 kJ of heat.", "answer": false }
             ],
-            "why": { "vi": "a) Đúng: trong quá trình chuyển thể, nhiệt độ của chất không đổi. b) Đúng: Q = λm = 3,4·10⁵ × 2,0 = 6,8·10⁵ J. c) Sai: vì nhiệt độ không đổi nên động năng phân tử không đổi; nhiệt lượng nhận được dùng để phá vỡ liên kết trong mạng tinh thể, tức làm tăng thế năng tương tác giữa các phân tử. d) Sai: Q = mcΔT = 2,0 × 4200 × 20 = 168 000 J = 168 kJ, gấp đôi 84 kJ.",
+            "why": { "vi": "a) Đúng: trong quá trình chuyển thể, nhiệt độ của chất không đổi. b) Đúng: Q = λm = 3,4⋅10⁵ × 2,0 = 6,8⋅10⁵ J. c) Sai: vì nhiệt độ không đổi nên động năng phân tử không đổi; nhiệt lượng nhận được dùng để phá vỡ liên kết trong mạng tinh thể, tức làm tăng thế năng tương tác giữa các phân tử. d) Sai: Q = mcΔT = 2,0 × 4200 × 20 = 168 000 J = 168 kJ, gấp đôi 84 kJ.",
                      "en": "a) True: during a change of state the temperature stays constant. b) True: Q = λm = 3.4×10⁵ × 2.0 = 6.8×10⁵ J. c) False: since the temperature is constant, the molecular kinetic energy does not change; the heat received breaks the bonds of the crystal lattice, i.e. it increases the intermolecular potential energy. d) False: Q = mcΔT = 2.0 × 4200 × 20 = 168 000 J = 168 kJ, twice 84 kJ." } }
         ] },
 
       { "kind": "short", "points": 0.25,
         "items": [
           { "id": "c1-s1", "lesson": 4,
-            "q": { "vi": "Một bình đun nước siêu tốc chứa 0,5 kg nước ở nhiệt độ ban đầu 25°C. Người ta bật ấm để đun nước lên đến 85°C. Biết nhiệt dung riêng của nước là c = 4200 J/(kg·K); bỏ qua nhiệt lượng làm nóng vỏ ấm và nhiệt lượng toả ra môi trường. Nhiệt lượng cần cung cấp cho khối nước bằng bao nhiêu kilôjun (kJ)?",
-                   "en": "An electric kettle contains 0.5 kg of water at an initial temperature of 25°C. The kettle is switched on and heats the water to 85°C. The specific heat capacity of water is c = 4200 J/(kg·K); ignore the heat absorbed by the kettle body and the heat lost to the surroundings. How much heat, in kilojoules (kJ), must be supplied to the water?" },
+            "q": { "vi": "Một bình đun nước siêu tốc chứa 0,5 kg nước ở nhiệt độ ban đầu 25°C. Người ta bật ấm để đun nước lên đến 85°C. Biết nhiệt dung riêng của nước là c = 4200 J/(kg⋅K); bỏ qua nhiệt lượng làm nóng vỏ ấm và nhiệt lượng toả ra môi trường. Nhiệt lượng cần cung cấp cho khối nước bằng bao nhiêu kilôjun (kJ)?",
+                   "en": "An electric kettle contains 0.5 kg of water at an initial temperature of 25°C. The kettle is switched on and heats the water to 85°C. The specific heat capacity of water is c = 4200 J/(kg⋅K); ignore the heat absorbed by the kettle body and the heat lost to the surroundings. How much heat, in kilojoules (kJ), must be supplied to the water?" },
             "answer": 126, "tolerance": 0.5, "unit": "kJ",
             "solution": { "vi": "Độ tăng nhiệt độ: ΔT = 85 − 25 = 60°C = 60 K. Nhiệt lượng: Q = mcΔT = 0,5 × 4200 × 60 = 126 000 J = 126 kJ. Điền vào phiếu: 126.",
                           "en": "Temperature rise: ΔT = 85 − 25 = 60°C = 60 K. Heat: Q = mcΔT = 0.5 × 4200 × 60 = 126 000 J = 126 kJ. Answer sheet: 126." } },
@@ -156,16 +156,16 @@ PH.EXAMS = [
                      "en": "In the ideal-gas model the intermolecular forces at the average separation (when the molecules are far apart) are very small and taken as zero; the molecules interact only when they collide directly with one another or with the container walls. Statement B, ‘the forces are very strong when the molecules are far apart’, is therefore wrong. Statements A, C and D are all part of the kinetic theory of gases (textbook Lesson 8)." } },
 
           { "id": "c2-m2", "lesson": 9,
-            "q": { "vi": "Một lượng khí xác định được nén đẳng nhiệt từ thể tích 6,0 lít xuống 2,0 lít. Áp suất ban đầu của khí là 1,0·10⁵ Pa. Áp suất của khí sau khi nén là",
+            "q": { "vi": "Một lượng khí xác định được nén đẳng nhiệt từ thể tích 6,0 lít xuống 2,0 lít. Áp suất ban đầu của khí là 1,0⋅10⁵ Pa. Áp suất của khí sau khi nén là",
                    "en": "A fixed mass of gas is compressed isothermally from a volume of 6.0 L to 2.0 L. The initial pressure of the gas is 1.0×10⁵ Pa. The pressure of the gas after compression is" },
             "options": [
-              { "vi": "0,33·10⁵ Pa.", "en": "0.33×10⁵ Pa." },
-              { "vi": "2,0·10⁵ Pa.", "en": "2.0×10⁵ Pa." },
-              { "vi": "3,0·10⁵ Pa.", "en": "3.0×10⁵ Pa." },
-              { "vi": "12·10⁵ Pa.", "en": "12×10⁵ Pa." }
+              { "vi": "0,33⋅10⁵ Pa.", "en": "0.33×10⁵ Pa." },
+              { "vi": "2,0⋅10⁵ Pa.", "en": "2.0×10⁵ Pa." },
+              { "vi": "3,0⋅10⁵ Pa.", "en": "3.0×10⁵ Pa." },
+              { "vi": "12⋅10⁵ Pa.", "en": "12×10⁵ Pa." }
             ],
             "correct": 2,
-            "why": { "vi": "Quá trình đẳng nhiệt tuân theo định luật Boyle: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 1,0·10⁵ × 6,0/2,0 = 3,0·10⁵ Pa. Thể tích giảm 3 lần thì áp suất tăng 3 lần.",
+            "why": { "vi": "Quá trình đẳng nhiệt tuân theo định luật Boyle: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 1,0⋅10⁵ × 6,0/2,0 = 3,0⋅10⁵ Pa. Thể tích giảm 3 lần thì áp suất tăng 3 lần.",
                      "en": "An isothermal process obeys Boyle's law: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 1.0×10⁵ × 6.0/2.0 = 3.0×10⁵ Pa. The volume falls to one third, so the pressure triples." } },
 
           { "id": "c2-m3", "lesson": 10,
@@ -182,8 +182,8 @@ PH.EXAMS = [
                      "en": "Charles's law: V/T = const, with T the absolute temperature. T₁ = 27 + 273 = 300 K; T₂ = 177 + 273 = 450 K. V₂ = V₁T₂/T₁ = 2.0 × 450/300 = 3.0 L. Using Celsius temperatures by mistake would give 2.0 × 177/27 ≈ 13 L (wrong)." } },
 
           { "id": "c2-m4", "lesson": 11,
-            "q": { "vi": "Một bình chứa 2,0 mol khí lí tưởng ở nhiệt độ 300 K và áp suất 2,0·10⁵ Pa. Lấy R = 8,31 J/(mol·K). Thể tích của bình xấp xỉ bằng",
-                   "en": "A container holds 2.0 mol of an ideal gas at 300 K and 2.0×10⁵ Pa. Take R = 8.31 J/(mol·K). The volume of the container is approximately" },
+            "q": { "vi": "Một bình chứa 2,0 mol khí lí tưởng ở nhiệt độ 300 K và áp suất 2,0⋅10⁵ Pa. Lấy R = 8,31 J/(mol⋅K). Thể tích của bình xấp xỉ bằng",
+                   "en": "A container holds 2.0 mol of an ideal gas at 300 K and 2.0×10⁵ Pa. Take R = 8.31 J/(mol⋅K). The volume of the container is approximately" },
             "options": [
               { "vi": "12,5 lít.", "en": "12.5 L." },
               { "vi": "2,5 lít.", "en": "2.5 L." },
@@ -191,7 +191,7 @@ PH.EXAMS = [
               { "vi": "25 lít.", "en": "25 L." }
             ],
             "correct": 3,
-            "why": { "vi": "Phương trình trạng thái của khí lí tưởng: pV = nRT ⇒ V = nRT/p = 2,0 × 8,31 × 300/(2,0·10⁵) = 4986/200 000 ≈ 0,0249 m³ ≈ 25 lít (1 m³ = 1000 lít).",
+            "why": { "vi": "Phương trình trạng thái của khí lí tưởng: pV = nRT ⇒ V = nRT/p = 2,0 × 8,31 × 300/(2,0⋅10⁵) = 4986/200 000 ≈ 0,0249 m³ ≈ 25 lít (1 m³ = 1000 lít).",
                      "en": "Ideal-gas equation of state: pV = nRT ⇒ V = nRT/p = 2.0 × 8.31 × 300/(2.0×10⁵) = 4986/200 000 ≈ 0.0249 m³ ≈ 25 L (1 m³ = 1000 L)." } },
 
           { "id": "c2-m5", "lesson": 12,
@@ -204,35 +204,35 @@ PH.EXAMS = [
               { "vi": "nhiệt độ tuyệt đối của khí.", "en": "the absolute temperature of the gas." }
             ],
             "correct": 3,
-            "why": { "vi": "Động năng tịnh tiến trung bình của phân tử: Ē = (3/2)kT, với k = 1,38·10⁻²³ J/K là hằng số Boltzmann và T là nhiệt độ tuyệt đối (K). Nhiệt độ tuyệt đối là số đo động năng trung bình của các phân tử; hệ thức này không đúng nếu thay T bằng nhiệt độ Celsius.",
+            "why": { "vi": "Động năng tịnh tiến trung bình của phân tử: Ē = (3/2)kT, với k = 1,38⋅10⁻²³ J/K là hằng số Boltzmann và T là nhiệt độ tuyệt đối (K). Nhiệt độ tuyệt đối là số đo động năng trung bình của các phân tử; hệ thức này không đúng nếu thay T bằng nhiệt độ Celsius.",
                      "en": "The average translational kinetic energy of a molecule is Ē = (3/2)kT, where k = 1.38×10⁻²³ J/K is the Boltzmann constant and T is the absolute temperature (K). Absolute temperature is a measure of the average molecular kinetic energy; the relation does not hold with the Celsius temperature." } },
 
           { "id": "c2-m6", "lesson": 12,
-            "q": { "vi": "Lấy hằng số Boltzmann k = 1,38·10⁻²³ J/K. Động năng tịnh tiến trung bình của một phân tử khí lí tưởng ở 27°C là",
+            "q": { "vi": "Lấy hằng số Boltzmann k = 1,38⋅10⁻²³ J/K. Động năng tịnh tiến trung bình của một phân tử khí lí tưởng ở 27°C là",
                    "en": "Take the Boltzmann constant k = 1.38×10⁻²³ J/K. The average translational kinetic energy of an ideal-gas molecule at 27°C is" },
             "options": [
-              { "vi": "6,21·10⁻²¹ J.", "en": "6.21×10⁻²¹ J." },
-              { "vi": "5,59·10⁻²² J.", "en": "5.59×10⁻²² J." },
-              { "vi": "4,14·10⁻²¹ J.", "en": "4.14×10⁻²¹ J." },
-              { "vi": "1,24·10⁻²⁰ J.", "en": "1.24×10⁻²⁰ J." }
+              { "vi": "6,21⋅10⁻²¹ J.", "en": "6.21×10⁻²¹ J." },
+              { "vi": "5,59⋅10⁻²² J.", "en": "5.59×10⁻²² J." },
+              { "vi": "4,14⋅10⁻²¹ J.", "en": "4.14×10⁻²¹ J." },
+              { "vi": "1,24⋅10⁻²⁰ J.", "en": "1.24×10⁻²⁰ J." }
             ],
             "correct": 0,
-            "why": { "vi": "T = 27 + 273 = 300 K. Ē = (3/2)kT = 1,5 × 1,38·10⁻²³ × 300 = 6,21·10⁻²¹ J. Phương án B dùng nhầm nhiệt độ Celsius (27 K), phương án C thiếu hệ số 3/2, phương án D dùng nhầm hệ số 3.",
+            "why": { "vi": "T = 27 + 273 = 300 K. Ē = (3/2)kT = 1,5 × 1,38⋅10⁻²³ × 300 = 6,21⋅10⁻²¹ J. Phương án B dùng nhầm nhiệt độ Celsius (27 K), phương án C thiếu hệ số 3/2, phương án D dùng nhầm hệ số 3.",
                      "en": "T = 27 + 273 = 300 K. Ē = (3/2)kT = 1.5 × 1.38×10⁻²³ × 300 = 6.21×10⁻²¹ J. Option B uses the Celsius temperature by mistake (27 K), option C omits the factor 3/2, option D uses a factor 3." } }
         ] },
 
       { "kind": "tf",
         "items": [
           { "id": "c2-t1", "lesson": 9,
-            "stem": { "vi": "Một lượng khí xác định được nén chậm ở nhiệt độ không đổi từ thể tích 4,0 lít, áp suất 1,0·10⁵ Pa xuống thể tích 1,0 lít.",
+            "stem": { "vi": "Một lượng khí xác định được nén chậm ở nhiệt độ không đổi từ thể tích 4,0 lít, áp suất 1,0⋅10⁵ Pa xuống thể tích 1,0 lít.",
                       "en": "A fixed mass of gas is compressed slowly at constant temperature from a volume of 4.0 L at a pressure of 1.0×10⁵ Pa to a volume of 1.0 L." },
             "statements": [
-              { "vi": "Áp suất của khí sau khi nén là 4,0·10⁵ Pa.", "en": "The pressure of the gas after compression is 4.0×10⁵ Pa.", "answer": true },
+              { "vi": "Áp suất của khí sau khi nén là 4,0⋅10⁵ Pa.", "en": "The pressure of the gas after compression is 4.0×10⁵ Pa.", "answer": true },
               { "vi": "Trong quá trình nén, tích pV của lượng khí tăng dần.", "en": "During the compression the product pV of the gas increases steadily.", "answer": false },
               { "vi": "Trong hệ toạ độ (p, V), đường biểu diễn quá trình này là một đoạn của đường hypebol.", "en": "In (p, V) coordinates the graph of this process is part of a hyperbola.", "answer": true },
               { "vi": "Vì thể tích giảm 4 lần nên số phân tử khí trong bình giảm 4 lần.", "en": "Because the volume is reduced fourfold, the number of gas molecules in the container falls fourfold.", "answer": false }
             ],
-            "why": { "vi": "a) Đúng: p₁V₁ = p₂V₂ ⇒ p₂ = 1,0·10⁵ × 4,0/1,0 = 4,0·10⁵ Pa. b) Sai: ở nhiệt độ không đổi, tích pV của lượng khí xác định là hằng số (định luật Boyle). c) Đúng: đường đẳng nhiệt trong hệ (p, V) là đường hypebol p = const/V. d) Sai: lượng khí xác định nên số phân tử không đổi; chỉ mật độ phân tử tăng 4 lần, đó chính là lí do áp suất tăng 4 lần.",
+            "why": { "vi": "a) Đúng: p₁V₁ = p₂V₂ ⇒ p₂ = 1,0⋅10⁵ × 4,0/1,0 = 4,0⋅10⁵ Pa. b) Sai: ở nhiệt độ không đổi, tích pV của lượng khí xác định là hằng số (định luật Boyle). c) Đúng: đường đẳng nhiệt trong hệ (p, V) là đường hypebol p = const/V. d) Sai: lượng khí xác định nên số phân tử không đổi; chỉ mật độ phân tử tăng 4 lần, đó chính là lí do áp suất tăng 4 lần.",
                      "en": "a) True: p₁V₁ = p₂V₂ ⇒ p₂ = 1.0×10⁵ × 4.0/1.0 = 4.0×10⁵ Pa. b) False: at constant temperature the product pV of a fixed mass of gas is constant (Boyle's law). c) True: an isotherm in (p, V) coordinates is a hyperbola p = const/V. d) False: the mass of gas is fixed, so the number of molecules is unchanged; only the number density rises fourfold, which is exactly why the pressure rises fourfold." } },
 
           { "id": "c2-t2", "lesson": 12,
@@ -244,21 +244,21 @@ PH.EXAMS = [
               { "vi": "Trung bình của bình phương tốc độ phân tử (v̄²) tăng gấp 4 lần.", "en": "The mean square speed of the molecules (v̄²) increases fourfold.", "answer": false },
               { "vi": "Mật độ phân tử khí trong bình tăng gấp đôi.", "en": "The number density of gas molecules in the container doubles.", "answer": false }
             ],
-            "why": { "vi": "a) Đúng: Ē = (3/2)kT tỉ lệ thuận với T. b) Đúng: thể tích không đổi nên p/T = const (từ pV/T = const); T tăng 2 lần thì p tăng 2 lần. c) Sai: (1/2)m·v̄² = (3/2)kT nên v̄² tỉ lệ thuận với T, chỉ tăng gấp đôi (tốc độ căn quân phương tăng √2 lần). d) Sai: số phân tử và thể tích bình đều không đổi nên mật độ phân tử n = N/V không đổi; áp suất tăng là do các phân tử chuyển động nhanh hơn (p = (1/3)n·m·v̄²).",
-                     "en": "a) True: Ē = (3/2)kT is proportional to T. b) True: the volume is constant, so p/T = const (from pV/T = const); doubling T doubles p. c) False: (1/2)m·v̄² = (3/2)kT, so v̄² is proportional to T and only doubles (the root-mean-square speed rises by √2). d) False: neither the number of molecules nor the volume changes, so the number density n = N/V is unchanged; the pressure rises because the molecules move faster (p = (1/3)n·m·v̄²)." } }
+            "why": { "vi": "a) Đúng: Ē = (3/2)kT tỉ lệ thuận với T. b) Đúng: thể tích không đổi nên p/T = const (từ pV/T = const); T tăng 2 lần thì p tăng 2 lần. c) Sai: (1/2)m⋅v̄² = (3/2)kT nên v̄² tỉ lệ thuận với T, chỉ tăng gấp đôi (tốc độ căn quân phương tăng √2 lần). d) Sai: số phân tử và thể tích bình đều không đổi nên mật độ phân tử n = N/V không đổi; áp suất tăng là do các phân tử chuyển động nhanh hơn (p = (1/3)n⋅m⋅v̄²).",
+                     "en": "a) True: Ē = (3/2)kT is proportional to T. b) True: the volume is constant, so p/T = const (from pV/T = const); doubling T doubles p. c) False: (1/2)m⋅v̄² = (3/2)kT, so v̄² is proportional to T and only doubles (the root-mean-square speed rises by √2). d) False: neither the number of molecules nor the volume changes, so the number density n = N/V is unchanged; the pressure rises because the molecules move faster (p = (1/3)n⋅m⋅v̄²)." } }
         ] },
 
       { "kind": "short", "points": 0.25,
         "items": [
           { "id": "c2-s1", "lesson": 9,
-            "q": { "vi": "Một lượng khí có thể tích 3,0 lít ở áp suất 2,0·10⁵ Pa được nén đẳng nhiệt đến thể tích 1,2 lít. Áp suất của khí sau khi nén bằng bao nhiêu, tính theo đơn vị 10⁵ Pa?",
+            "q": { "vi": "Một lượng khí có thể tích 3,0 lít ở áp suất 2,0⋅10⁵ Pa được nén đẳng nhiệt đến thể tích 1,2 lít. Áp suất của khí sau khi nén bằng bao nhiêu, tính theo đơn vị 10⁵ Pa?",
                    "en": "A fixed mass of gas occupying 3.0 L at a pressure of 2.0×10⁵ Pa is compressed isothermally to a volume of 1.2 L. What is the pressure of the gas after compression, in units of 10⁵ Pa?" },
             "answer": 5, "tolerance": 0.05, "unit": "·10⁵ Pa",
-            "solution": { "vi": "Định luật Boyle: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 2,0 × 3,0/1,2 = 6,0/1,2 = 5,0 (·10⁵ Pa). Điền: 5,0.",
+            "solution": { "vi": "Định luật Boyle: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 2,0 × 3,0/1,2 = 6,0/1,2 = 5,0 (⋅10⁵ Pa). Điền: 5,0.",
                           "en": "Boyle's law: p₁V₁ = p₂V₂ ⇒ p₂ = p₁V₁/V₂ = 2.0 × 3.0/1.2 = 6.0/1.2 = 5.0 (×10⁵ Pa). Answer: 5.0." } },
 
           { "id": "c2-s2", "lesson": 11,
-            "q": { "vi": "Một lượng khí lí tưởng ở trạng thái 1 có p₁ = 1,0·10⁵ Pa, V₁ = 6,0 lít, T₁ = 300 K được chuyển sang trạng thái 2 có p₂ = 2,0·10⁵ Pa, T₂ = 400 K. Thể tích V₂ của khí ở trạng thái 2 bằng bao nhiêu lít?",
+            "q": { "vi": "Một lượng khí lí tưởng ở trạng thái 1 có p₁ = 1,0⋅10⁵ Pa, V₁ = 6,0 lít, T₁ = 300 K được chuyển sang trạng thái 2 có p₂ = 2,0⋅10⁵ Pa, T₂ = 400 K. Thể tích V₂ của khí ở trạng thái 2 bằng bao nhiêu lít?",
                    "en": "A fixed mass of ideal gas in state 1 has p₁ = 1.0×10⁵ Pa, V₁ = 6.0 L, T₁ = 300 K and is taken to state 2 with p₂ = 2.0×10⁵ Pa, T₂ = 400 K. What is the volume V₂ of the gas in state 2, in litres?" },
             "answer": 4, "tolerance": 0.05, "unit": "L",
             "solution": { "vi": "Phương trình trạng thái: p₁V₁/T₁ = p₂V₂/T₂ ⇒ V₂ = p₁V₁T₂/(p₂T₁) = 1,0 × 6,0 × 400/(2,0 × 300) = 2400/600 = 4,0 lít. Điền: 4,0.",
@@ -305,26 +305,26 @@ PH.EXAMS = [
             "q": { "vi": "Trong hệ SI, đơn vị của cảm ứng từ là tesla (T). Từ biểu thức lực từ F = BILsinα, hệ thức nào sau đây đúng?",
                    "en": "In SI units the magnetic flux density B is measured in tesla (T). From the magnetic-force formula F = BILsinα, which of the following relations is correct?" },
             "options": [
-              { "vi": "1 T = 1 N·A/m", "en": "1 T = 1 N·A/m" },
-              { "vi": "1 T = 1 N/(A·m)", "en": "1 T = 1 N/(A·m)" },
-              { "vi": "1 T = 1 N·m/A", "en": "1 T = 1 N·m/A" },
+              { "vi": "1 T = 1 N⋅A/m", "en": "1 T = 1 N⋅A/m" },
+              { "vi": "1 T = 1 N/(A⋅m)", "en": "1 T = 1 N/(A⋅m)" },
+              { "vi": "1 T = 1 N⋅m/A", "en": "1 T = 1 N⋅m/A" },
               { "vi": "1 T = 1 V/m", "en": "1 T = 1 V/m" }
             ],
             "correct": 1,
-            "why": { "vi": "Từ F = BILsinα ⇒ B = F/(ILsinα). Với F đo bằng N, I bằng A, L bằng m thì 1 T = 1 N/(A·m): từ trường đều 1 T tác dụng lực 1 N lên mỗi mét dây dẫn mang dòng điện 1 A đặt vuông góc với đường sức từ.",
-                     "en": "From F = BILsinα ⇒ B = F/(ILsinα). With F in N, I in A and L in m, 1 T = 1 N/(A·m): a uniform field of 1 T exerts a force of 1 N on each metre of a conductor carrying 1 A placed perpendicular to the field lines." } },
+            "why": { "vi": "Từ F = BILsinα ⇒ B = F/(ILsinα). Với F đo bằng N, I bằng A, L bằng m thì 1 T = 1 N/(A⋅m): từ trường đều 1 T tác dụng lực 1 N lên mỗi mét dây dẫn mang dòng điện 1 A đặt vuông góc với đường sức từ.",
+                     "en": "From F = BILsinα ⇒ B = F/(ILsinα). With F in N, I in A and L in m, 1 T = 1 N/(A⋅m): a uniform field of 1 T exerts a force of 1 N on each metre of a conductor carrying 1 A placed perpendicular to the field lines." } },
 
           { "id": "c3-m4", "lesson": 16,
             "q": { "vi": "Một khung dây phẳng có diện tích 50 cm² đặt trong từ trường đều có cảm ứng từ B = 0,20 T. Vectơ pháp tuyến của mặt phẳng khung hợp với vectơ cảm ứng từ một góc 60°. Từ thông qua khung dây là",
                    "en": "A flat coil of area 50 cm² is placed in a uniform magnetic field of B = 0.20 T. The normal to the plane of the coil makes an angle of 60° with the field. The magnetic flux through the coil is" },
             "options": [
-              { "vi": "1,0·10⁻³ Wb.", "en": "1.0×10⁻³ Wb." },
-              { "vi": "8,7·10⁻⁴ Wb.", "en": "8.7×10⁻⁴ Wb." },
+              { "vi": "1,0⋅10⁻³ Wb.", "en": "1.0×10⁻³ Wb." },
+              { "vi": "8,7⋅10⁻⁴ Wb.", "en": "8.7×10⁻⁴ Wb." },
               { "vi": "5,0 Wb.", "en": "5.0 Wb." },
-              { "vi": "5,0·10⁻⁴ Wb.", "en": "5.0×10⁻⁴ Wb." }
+              { "vi": "5,0⋅10⁻⁴ Wb.", "en": "5.0×10⁻⁴ Wb." }
             ],
             "correct": 3,
-            "why": { "vi": "Đổi S = 50 cm² = 50·10⁻⁴ m² = 5,0·10⁻³ m². Φ = BScosα = 0,20 × 5,0·10⁻³ × cos60° = 0,20 × 5,0·10⁻³ × 0,5 = 5,0·10⁻⁴ Wb. Phương án A quên cosα, phương án B dùng nhầm sin60°, phương án C không đổi cm² sang m².",
+            "why": { "vi": "Đổi S = 50 cm² = 50⋅10⁻⁴ m² = 5,0⋅10⁻³ m². Φ = BScosα = 0,20 × 5,0⋅10⁻³ × cos60° = 0,20 × 5,0⋅10⁻³ × 0,5 = 5,0⋅10⁻⁴ Wb. Phương án A quên cosα, phương án B dùng nhầm sin60°, phương án C không đổi cm² sang m².",
                      "en": "Convert S = 50 cm² = 50×10⁻⁴ m² = 5.0×10⁻³ m². Φ = BScosα = 0.20 × 5.0×10⁻³ × cos60° = 0.20 × 5.0×10⁻³ × 0.5 = 5.0×10⁻⁴ Wb. Option A omits cosα, option B uses sin60°, option C does not convert cm² to m²." } },
 
           { "id": "c3-m5", "lesson": 16,
@@ -350,7 +350,7 @@ PH.EXAMS = [
               { "vi": "Trong chân không, sóng điện từ có tần số càng lớn thì truyền đi càng nhanh.", "en": "In a vacuum, electromagnetic waves of higher frequency travel faster." }
             ],
             "correct": 1,
-            "why": { "vi": "Sóng điện từ là sóng ngang: E ⊥ B và cả hai cùng vuông góc với phương truyền sóng. Sóng điện từ truyền được trong chân không với tốc độ c = 3·10⁸ m/s như nhau đối với mọi tần số; bước sóng λ = c/f.",
+            "why": { "vi": "Sóng điện từ là sóng ngang: E ⊥ B và cả hai cùng vuông góc với phương truyền sóng. Sóng điện từ truyền được trong chân không với tốc độ c = 3⋅10⁸ m/s như nhau đối với mọi tần số; bước sóng λ = c/f.",
                      "en": "Electromagnetic waves are transverse: E ⊥ B and both are perpendicular to the direction of travel. They propagate through a vacuum at c = 3×10⁸ m/s, the same for every frequency; the wavelength is λ = c/f." } }
         ] },
 
@@ -365,8 +365,8 @@ PH.EXAMS = [
               { "vi": "Suất điện động cảm ứng cực đại trong khung xấp xỉ 62,8 V.", "en": "The maximum induced e.m.f. in the coil is approximately 62.8 V.", "answer": true },
               { "vi": "Suất điện động cảm ứng đạt giá trị cực đại tại thời điểm mặt phẳng khung vuông góc với các đường sức từ.", "en": "The induced e.m.f. is greatest at the instant when the plane of the coil is perpendicular to the field lines.", "answer": false }
             ],
-            "why": { "vi": "a) Đúng: khi khung quay, góc giữa pháp tuyến khung và B thay đổi nên Φ = NBScos(ωt) biến thiên điều hoà, tạo ra suất điện động xoay chiều e = NBSω·sin(ωt). b) Sai: tần số của suất điện động bằng tần số quay của khung, f = 50 Hz. c) Đúng: E₀ = NBSω = 100 × 0,10 × 0,020 × (2π × 50) = 0,20 × 314 = 62,8 V. d) Sai: khi mặt khung vuông góc với đường sức, từ thông cực đại nhưng tốc độ biến thiên của từ thông bằng 0 nên e = 0; e cực đại khi mặt khung song song với đường sức từ.",
-                     "en": "a) True: as the coil rotates, the angle between its normal and B changes, so Φ = NBScos(ωt) varies sinusoidally and produces an alternating e.m.f. e = NBSω·sin(ωt). b) False: the e.m.f. has the same frequency as the rotation, f = 50 Hz. c) True: E₀ = NBSω = 100 × 0.10 × 0.020 × (2π × 50) = 0.20 × 314 = 62.8 V. d) False: when the plane of the coil is perpendicular to the field lines the flux is maximal but its rate of change is zero, so e = 0; e is greatest when the plane of the coil is parallel to the field lines." } },
+            "why": { "vi": "a) Đúng: khi khung quay, góc giữa pháp tuyến khung và B thay đổi nên Φ = NBScos(ωt) biến thiên điều hoà, tạo ra suất điện động xoay chiều e = NBSω⋅sin(ωt). b) Sai: tần số của suất điện động bằng tần số quay của khung, f = 50 Hz. c) Đúng: E₀ = NBSω = 100 × 0,10 × 0,020 × (2π × 50) = 0,20 × 314 = 62,8 V. d) Sai: khi mặt khung vuông góc với đường sức, từ thông cực đại nhưng tốc độ biến thiên của từ thông bằng 0 nên e = 0; e cực đại khi mặt khung song song với đường sức từ.",
+                     "en": "a) True: as the coil rotates, the angle between its normal and B changes, so Φ = NBScos(ωt) varies sinusoidally and produces an alternating e.m.f. e = NBSω⋅sin(ωt). b) False: the e.m.f. has the same frequency as the rotation, f = 50 Hz. c) True: E₀ = NBSω = 100 × 0.10 × 0.020 × (2π × 50) = 0.20 × 314 = 62.8 V. d) False: when the plane of the coil is perpendicular to the field lines the flux is maximal but its rate of change is zero, so e = 0; e is greatest when the plane of the coil is parallel to the field lines." } },
 
           { "id": "c3-t2", "lesson": 18,
             "stem": { "vi": "Một tấm kim loại phẳng được treo như con lắc và dao động giữa hai cực của một nam châm điện mạnh. Xét tính đúng/sai của các phát biểu sau:",
@@ -394,7 +394,7 @@ PH.EXAMS = [
             "q": { "vi": "Một khung dây dẫn kín gồm 200 vòng, diện tích mỗi vòng 20 cm², đặt sao cho mặt phẳng khung vuông góc với các đường sức của một từ trường đều. Cảm ứng từ giảm đều từ 0,50 T về 0 trong khoảng thời gian 0,10 s. Độ lớn suất điện động cảm ứng xuất hiện trong khung bằng bao nhiêu vôn (V)?",
                    "en": "A closed coil of 200 turns, each of area 20 cm², is placed with its plane perpendicular to the field lines of a uniform magnetic field. The flux density decreases uniformly from 0.50 T to zero in 0.10 s. What is the magnitude of the e.m.f. induced in the coil, in volts (V)?" },
             "answer": 2, "tolerance": 0.05, "unit": "V",
-            "solution": { "vi": "Từ thông qua một vòng lúc đầu: Φ₁ = BS = 0,50 × 20·10⁻⁴ = 1,0·10⁻³ Wb; lúc sau Φ₂ = 0 nên |ΔΦ| = 1,0·10⁻³ Wb. Suất điện động: |e| = N|ΔΦ|/Δt = 200 × 1,0·10⁻³/0,10 = 2,0 V. Điền: 2,0.",
+            "solution": { "vi": "Từ thông qua một vòng lúc đầu: Φ₁ = BS = 0,50 × 20⋅10⁻⁴ = 1,0⋅10⁻³ Wb; lúc sau Φ₂ = 0 nên |ΔΦ| = 1,0⋅10⁻³ Wb. Suất điện động: |e| = N|ΔΦ|/Δt = 200 × 1,0⋅10⁻³/0,10 = 2,0 V. Điền: 2,0.",
                           "en": "Initial flux through one turn: Φ₁ = BS = 0.50 × 20×10⁻⁴ = 1.0×10⁻³ Wb; final flux Φ₂ = 0, so |ΔΦ| = 1.0×10⁻³ Wb. E.m.f.: |e| = N|ΔΦ|/Δt = 200 × 1.0×10⁻³/0.10 = 2.0 V. Answer: 2.0." } }
         ] }
     ]
@@ -444,8 +444,8 @@ PH.EXAMS = [
               { "vi": "0,0015 u.", "en": "0.0015 u." }
             ],
             "correct": 0,
-            "why": { "vi": "Δm = Z·mₚ + (A − Z)·mₙ − m(He) = 2 × 1,0073 + 2 × 1,0087 − 4,0015 = 2,0146 + 2,0174 − 4,0015 = 4,0320 − 4,0015 = 0,0305 u. Độ hụt khối này ứng với năng lượng liên kết E = Δm·c² = 0,0305 × 931,5 ≈ 28,4 MeV.",
-                     "en": "Δm = Z·mₚ + (A − Z)·mₙ − m(He) = 2 × 1.0073 + 2 × 1.0087 − 4.0015 = 2.0146 + 2.0174 − 4.0015 = 4.0320 − 4.0015 = 0.0305 u. This mass defect corresponds to a binding energy E = Δm·c² = 0.0305 × 931.5 ≈ 28.4 MeV." } },
+            "why": { "vi": "Δm = Z⋅mₚ + (A − Z)⋅mₙ − m(He) = 2 × 1,0073 + 2 × 1,0087 − 4,0015 = 2,0146 + 2,0174 − 4,0015 = 4,0320 − 4,0015 = 0,0305 u. Độ hụt khối này ứng với năng lượng liên kết E = Δm⋅c² = 0,0305 × 931,5 ≈ 28,4 MeV.",
+                     "en": "Δm = Z⋅mₚ + (A − Z)⋅mₙ − m(He) = 2 × 1.0073 + 2 × 1.0087 − 4.0015 = 2.0146 + 2.0174 − 4.0015 = 4.0320 − 4.0015 = 0.0305 u. This mass defect corresponds to a binding energy E = Δm⋅c² = 0.0305 × 931.5 ≈ 28.4 MeV." } },
 
           { "id": "c4-m4", "lesson": 22,
             "q": { "vi": "Hạt nhân có năng lượng liên kết riêng càng lớn thì",
@@ -498,8 +498,8 @@ PH.EXAMS = [
               { "vi": "Quá trình phóng xạ xảy ra tự phát, không phụ thuộc vào nhiệt độ hay áp suất của mẫu.", "en": "The radioactive decay occurs spontaneously and does not depend on the temperature or pressure of the sample.", "answer": true },
               { "vi": "Sau 24 ngày, mẫu không còn hạt nhân ¹³¹I nào.", "en": "After 24 days no ¹³¹I nuclei are left in the sample.", "answer": false }
             ],
-            "why": { "vi": "Định luật phóng xạ: N = N₀·2^(−t/T). a) Đúng: t = T ⇒ N = N₀/2. b) Sai: t = 2T ⇒ còn lại N₀/4, nên số đã phân rã là N₀ − N₀/4 = 3N₀/4. c) Đúng: phóng xạ là quá trình tự phát, không điều khiển được và không chịu ảnh hưởng của các yếu tố bên ngoài như nhiệt độ, áp suất. d) Sai: t = 3T ⇒ còn lại N₀/8 hạt nhân; số hạt nhân giảm dần theo hàm mũ chứ không bằng 0 sau một số hữu hạn chu kì bán rã.",
-                     "en": "Law of radioactive decay: N = N₀·2^(−t/T). a) True: t = T ⇒ N = N₀/2. b) False: t = 2T ⇒ N₀/4 remain, so the number decayed is N₀ − N₀/4 = 3N₀/4. c) True: decay is spontaneous, cannot be controlled, and is unaffected by external conditions such as temperature and pressure. d) False: t = 3T ⇒ N₀/8 nuclei remain; the number decreases exponentially and does not reach zero after a finite number of half-lives." } },
+            "why": { "vi": "Định luật phóng xạ: N = N₀⋅2^(−t/T). a) Đúng: t = T ⇒ N = N₀/2. b) Sai: t = 2T ⇒ còn lại N₀/4, nên số đã phân rã là N₀ − N₀/4 = 3N₀/4. c) Đúng: phóng xạ là quá trình tự phát, không điều khiển được và không chịu ảnh hưởng của các yếu tố bên ngoài như nhiệt độ, áp suất. d) Sai: t = 3T ⇒ còn lại N₀/8 hạt nhân; số hạt nhân giảm dần theo hàm mũ chứ không bằng 0 sau một số hữu hạn chu kì bán rã.",
+                     "en": "Law of radioactive decay: N = N₀⋅2^(−t/T). a) True: t = T ⇒ N = N₀/2. b) False: t = 2T ⇒ N₀/4 remain, so the number decayed is N₀ − N₀/4 = 3N₀/4. c) True: decay is spontaneous, cannot be controlled, and is unaffected by external conditions such as temperature and pressure. d) False: t = 3T ⇒ N₀/8 nuclei remain; the number decreases exponentially and does not reach zero after a finite number of half-lives." } },
 
           { "id": "c4-t2", "lesson": 24,
             "stem": { "vi": "Xét phản ứng phân hạch ²³⁵₉₂U + ¹₀n → ¹⁴⁴₅₆Ba + ⁸⁹₃₆Kr + 3 ¹₀n, toả ra năng lượng khoảng 200 MeV.",
@@ -510,8 +510,8 @@ PH.EXAMS = [
               { "vi": "Các neutron sinh ra có thể tiếp tục gây phân hạch các hạt nhân ²³⁵U khác, tạo thành phản ứng dây chuyền.", "en": "The neutrons produced can go on to cause fission of other ²³⁵U nuclei, giving a chain reaction.", "answer": true },
               { "vi": "Trong lò phản ứng hạt nhân, các thanh điều khiển làm bằng vật liệu hấp thụ neutron (như boron, cadmium) được dùng để khống chế phản ứng dây chuyền.", "en": "In a nuclear reactor, control rods made of neutron-absorbing material (such as boron or cadmium) are used to control the chain reaction.", "answer": true }
             ],
-            "why": { "vi": "a) Đúng: tổng số khối 235 + 1 = 236 = 144 + 89 + 3; tổng điện tích 92 + 0 = 92 = 56 + 36 + 0. b) Sai: phản ứng toả năng lượng nên tổng khối lượng nghỉ sau phản ứng nhỏ hơn trước phản ứng; phần khối lượng hụt Δm chuyển thành năng lượng E = Δm·c² ≈ 200 MeV. c) Đúng: mỗi phân hạch sinh ra 2–3 neutron; nếu trung bình có ít nhất 1 neutron gây phân hạch tiếp theo thì phản ứng dây chuyền tự duy trì. d) Đúng: thanh điều khiển hấp thụ bớt neutron để giữ hệ số nhân neutron k = 1, lò hoạt động ổn định.",
-                     "en": "a) True: mass numbers 235 + 1 = 236 = 144 + 89 + 3; charges 92 + 0 = 92 = 56 + 36 + 0. b) False: the reaction releases energy, so the total rest mass after the reaction is less than before; the missing mass Δm becomes energy E = Δm·c² ≈ 200 MeV. c) True: each fission releases 2–3 neutrons; if on average at least one of them causes another fission the chain reaction sustains itself. d) True: control rods absorb some of the neutrons to keep the neutron multiplication factor k = 1 so that the reactor runs steadily." } }
+            "why": { "vi": "a) Đúng: tổng số khối 235 + 1 = 236 = 144 + 89 + 3; tổng điện tích 92 + 0 = 92 = 56 + 36 + 0. b) Sai: phản ứng toả năng lượng nên tổng khối lượng nghỉ sau phản ứng nhỏ hơn trước phản ứng; phần khối lượng hụt Δm chuyển thành năng lượng E = Δm⋅c² ≈ 200 MeV. c) Đúng: mỗi phân hạch sinh ra 2–3 neutron; nếu trung bình có ít nhất 1 neutron gây phân hạch tiếp theo thì phản ứng dây chuyền tự duy trì. d) Đúng: thanh điều khiển hấp thụ bớt neutron để giữ hệ số nhân neutron k = 1, lò hoạt động ổn định.",
+                     "en": "a) True: mass numbers 235 + 1 = 236 = 144 + 89 + 3; charges 92 + 0 = 92 = 56 + 36 + 0. b) False: the reaction releases energy, so the total rest mass after the reaction is less than before; the missing mass Δm becomes energy E = Δm⋅c² ≈ 200 MeV. c) True: each fission releases 2–3 neutrons; if on average at least one of them causes another fission the chain reaction sustains itself. d) True: control rods absorb some of the neutrons to keep the neutron multiplication factor k = 1 so that the reactor runs steadily." } }
         ] },
 
       { "kind": "short", "points": 0.25,
@@ -520,15 +520,15 @@ PH.EXAMS = [
             "q": { "vi": "Độ hụt khối của hạt nhân ⁵⁶₂₆Fe là Δm = 0,5285 u. Lấy 1 u = 931,5 MeV/c². Năng lượng liên kết riêng của hạt nhân ⁵⁶₂₆Fe bằng bao nhiêu MeV/nuclôn (lấy đến một chữ số thập phân)?",
                    "en": "The mass defect of the ⁵⁶₂₆Fe nucleus is Δm = 0.5285 u. Take 1 u = 931.5 MeV/c². What is the binding energy per nucleon of ⁵⁶₂₆Fe, in MeV/nucleon (to one decimal place)?" },
             "answer": 8.8, "tolerance": 0.05, "unit": "MeV/nucleon",
-            "solution": { "vi": "Năng lượng liên kết: E = Δm·c² = 0,5285 × 931,5 ≈ 492,3 MeV. Năng lượng liên kết riêng: ε = E/A = 492,3/56 ≈ 8,79 ≈ 8,8 MeV/nuclôn (thuộc loại lớn nhất trong các hạt nhân, nên sắt rất bền vững). Điền: 8,8.",
-                          "en": "Binding energy: E = Δm·c² = 0.5285 × 931.5 ≈ 492.3 MeV. Binding energy per nucleon: ε = E/A = 492.3/56 ≈ 8.79 ≈ 8.8 MeV/nucleon (among the highest of all nuclei, which is why iron is so stable). Answer: 8.8." } },
+            "solution": { "vi": "Năng lượng liên kết: E = Δm⋅c² = 0,5285 × 931,5 ≈ 492,3 MeV. Năng lượng liên kết riêng: ε = E/A = 492,3/56 ≈ 8,79 ≈ 8,8 MeV/nuclôn (thuộc loại lớn nhất trong các hạt nhân, nên sắt rất bền vững). Điền: 8,8.",
+                          "en": "Binding energy: E = Δm⋅c² = 0.5285 × 931.5 ≈ 492.3 MeV. Binding energy per nucleon: ε = E/A = 492.3/56 ≈ 8.79 ≈ 8.8 MeV/nucleon (among the highest of all nuclei, which is why iron is so stable). Answer: 8.8." } },
 
           { "id": "c4-s2", "lesson": 23,
             "q": { "vi": "Technetium-99m (⁹⁹ᵐTc) dùng trong chụp xạ hình y học có chu kì bán rã 6,0 giờ. Một mẫu ban đầu chứa 32 mg ⁹⁹ᵐTc. Sau 24 giờ, khối lượng ⁹⁹ᵐTc còn lại trong mẫu bằng bao nhiêu miligam (mg)?",
                    "en": "Technetium-99m (⁹⁹ᵐTc), used in medical imaging, has a half-life of 6.0 hours. A sample initially contains 32 mg of ⁹⁹ᵐTc. How much ⁹⁹ᵐTc, in milligrams (mg), remains in the sample after 24 hours?" },
             "answer": 2, "tolerance": 0.05, "unit": "mg",
-            "solution": { "vi": "Số chu kì bán rã đã trôi qua: t/T = 24/6,0 = 4. Khối lượng còn lại: m = m₀·2^(−t/T) = 32/2⁴ = 32/16 = 2,0 mg. Điền: 2,0.",
-                          "en": "Number of half-lives elapsed: t/T = 24/6.0 = 4. Remaining mass: m = m₀·2^(−t/T) = 32/2⁴ = 32/16 = 2.0 mg. Answer: 2.0." } }
+            "solution": { "vi": "Số chu kì bán rã đã trôi qua: t/T = 24/6,0 = 4. Khối lượng còn lại: m = m₀⋅2^(−t/T) = 32/2⁴ = 32/16 = 2,0 mg. Điền: 2,0.",
+                          "en": "Number of half-lives elapsed: t/T = 24/6.0 = 4. Remaining mass: m = m₀⋅2^(−t/T) = 32/2⁴ = 32/16 = 2.0 mg. Answer: 2.0." } }
         ] }
     ]
   }
