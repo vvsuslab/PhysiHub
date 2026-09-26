@@ -56,7 +56,7 @@
     .crumb a:hover { color: var(--navy); }
     .banner .h1-en { font-size: 18px; margin-top: 2px; }
     .banner .figure { height: 104px; border-radius: 14px; border: 1.5px solid var(--blue-line); box-shadow: 0 6px 16px rgba(13, 71, 161, .12); }
-    .banner .figure .cap { bottom: 6px; font-size: 14px; white-space: normal; line-height: 1.25; padding: 3px 10px; border-radius: 8px; }
+    .banner .figure .cap { bottom: 8px; font-size: 13.5px; padding: 3px 11px; border-radius: 8px; }
     .sec-h { display: inline-block; margin: 6px 0 14px; padding-bottom: 5px; font-size: 20px; font-weight: 800; color: var(--navy); background: linear-gradient(var(--orange), var(--orange)) left bottom / 100% 3px no-repeat; }
     .lv-hint { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1.5px dashed var(--blue-line); font-size: 16px; line-height: 1.5; color: var(--ink-2); }
     .prose { font-size: 17px; line-height: 1.75; }
@@ -285,7 +285,7 @@
       const crumb = `<p class="crumb"><a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-${ch.n}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</a></p>`;
       const img = `assets/img/${IMG[ch.n]}`;
       return `<header class="banner"><div class="bar"><span class="bk">${PH.icon('book')}</span><h1>${PH.uiFmt('lesson')} ${n}. ${PH.esc(name(lesson))}</h1></div>
-        <div class="sub"><div style="min-width:0">${crumb}${PH.lang() === 'bi' ? `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>` : ''}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"><figcaption class="cap${ch.n === 1 ? ' orange' : ''}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</figcaption></figure></div></header>`;
+        <div class="sub"><div style="min-width:0">${crumb}${PH.lang() === 'bi' ? `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>` : ''}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"><figcaption class="cap${ch.n === 1 ? ' orange' : ''}">${PH.esc(en() ? ch.en : ch.vi)}</figcaption></figure></div></header>`;
     }
     function renderPaper() {
       const paper = $('paper');
