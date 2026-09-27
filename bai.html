@@ -31,6 +31,7 @@
     .toc-item .so { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 14px; font-weight: 600; color: var(--ink-4); }
     .toc-item .so .icon { width: 14px; height: 14px; color: var(--green); }
     .toc-item .tn { display: block; font-size: 16.5px; line-height: 1.4; }
+    .toc-item .tn-en { display: block; margin-top: 2px; font-size: 14px; line-height: 1.35; }
     .toc-item.cur { background: #fff; box-shadow: var(--shadow); border-left-color: var(--accent); color: var(--ink); }
     .toc-item.cur .so { color: var(--accent-ink); font-weight: 700; }
     .toc-item.cur .tn { font-weight: 700; }
@@ -54,7 +55,7 @@
     .crumb { font-size: 15.5px; font-weight: 700; color: var(--navy-2); margin-bottom: 4px; letter-spacing: .2px; }
     .crumb a { color: inherit; }
     .crumb a:hover { color: var(--navy); }
-    .banner .h1-en { font-size: 18px; margin-top: 2px; }
+    .banner h1 .h1en { display: block; margin-top: 5px; font-family: var(--font-serif); font-style: italic; font-weight: 500; font-size: .72em; line-height: 1.25; letter-spacing: 0; text-transform: none; color: #FFD9A8; }
     .banner .figure { height: 104px; border-radius: 14px; border: 1.5px solid var(--blue-line); box-shadow: 0 6px 16px rgba(13, 71, 161, .12); }
     .sec-h { display: inline-block; margin: 6px 0 14px; padding-bottom: 5px; font-size: 20px; font-weight: 800; color: var(--navy); background: linear-gradient(var(--orange), var(--orange)) left bottom / 100% 3px no-repeat; }
     .lv-hint { display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1.5px dashed var(--blue-line); font-size: 16px; line-height: 1.5; color: var(--ink-2); }
@@ -221,12 +222,14 @@
     function renderToc() {
       if (!ch) { $('toc').innerHTML = ''; return; }
       const pr = PH.sampleProgress(ch.n); const p = PH.progress();
+      /* Mức Song ngữ: tên bài hiện thêm dòng tiếng Anh ngay dưới tên tiếng Việt */
+      const enBai = l => (PH.lang() === 'bi' && l && l.en) ? `<span class="tn-en en" lang="en">${PH.esc(PH.dinh(l.en))}</span>` : '';
       const rows = ch.lessons.map(m => {
         const l = PH.lesson(m); const done = p.lessons[m] && p.lessons[m].done;
         const tags = `${done ? PH.icon('check') : ''}${m === PH.LAB_LESSON ? `<span class="tag acc">${PH.icon('flask', 'sm')}${PH.uiFmt('labShort')}</span>` : ''}`;
-        if (m === n) return `<a class="toc-item cur" href="bai.html?n=${m}" aria-current="page"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}</span></a>`;
-        if (PH.canOpen(m)) return `<a class="toc-item" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}</span></a>`;
-        return `<a class="toc-item trong" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}</span><span class="tn" style="margin-bottom:5px">${PH.esc(name(l))}</span><span class="tag">${PH.uiFmt('noContent')}</span></a>`;
+        if (m === n) return `<a class="toc-item cur" href="bai.html?n=${m}" aria-current="page"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}${enBai(l)}</span></a>`;
+        if (PH.canOpen(m)) return `<a class="toc-item" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}${tags}</span><span class="tn">${PH.esc(name(l))}${enBai(l)}</span></a>`;
+        return `<a class="toc-item trong" href="bai.html?n=${m}"><span class="so">${PH.uiFmt('lesson')} ${m}</span><span class="tn" style="margin-bottom:5px">${PH.esc(name(l))}${enBai(l)}</span><span class="tag">${PH.uiFmt('noContent')}</span></a>`;
       }).join('');
       $('toc').innerHTML = `<div class="toc-head"><span class="icon-tile tone-${ch.n}">${PH.icon(PH.CH_ICON[ch.n])}</span><div><p class="lb">${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</p><p class="nm">${PH.esc(en() ? ch.en : ch.vi)}</p></div></div>${rows}
         <div class="toc-foot"><p class="lb">${PH.uiFmt('lessonsDone', { d: pr.done, n: pr.total })}</p><div class="progress"><i style="width:${pr.pct}%"></i></div><p class="note">${PH.uiFmt('trialNote')}</p></div>`;
@@ -283,8 +286,8 @@
     function bannerHTML() {
       const crumb = `<p class="crumb"><a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-${ch.n}">${PH.uiFmt('chapter')} ${PH.roman(ch.n)} · ${PH.esc(en() ? ch.en : ch.vi)}</a></p>`;
       const img = `assets/img/${IMG[ch.n]}`;
-      return `<header class="banner"><div class="bar"><span class="bk">${PH.icon('book')}</span><h1>${PH.uiFmt('lesson')} ${n}. ${PH.esc(name(lesson))}</h1></div>
-        <div class="sub"><div style="min-width:0">${crumb}${PH.lang() === 'bi' ? `<p class="h1-en en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</p>` : ''}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"></figure></div></header>`;
+      return `<header class="banner"><div class="bar"><span class="bk">${PH.icon('book')}</span><h1>${PH.uiFmt('lesson')} ${n}. ${PH.esc(name(lesson))}${PH.lang() === 'bi' ? `<span class="h1en" lang="en">Lesson ${n}. ${PH.esc(PH.dinh(lesson.en))}</span>` : ''}</h1></div>
+        <div class="sub"><div style="min-width:0">${crumb}</div><figure class="figure"><img src="${img}-600x324.webp" width="600" height="324" alt="${PH.uiRaw('ch' + ch.n + 'Alt')}"></figure></div></header>`;
     }
     function renderPaper() {
       const paper = $('paper');
