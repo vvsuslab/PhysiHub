@@ -302,7 +302,7 @@
       }
       paper.className = 'card paper';
       const lv = PH.lang() === 'vi' ? 1 : PH.lang() === 'bi' ? 2 : 3;
-      const hint = `<div class="lv-hint"><span class="num-dot">${lv}</span><p>${PH.uiFmt('lvHint' + lv)}${data.drafted ? ` <span class="tag gold" style="margin-left:6px">${PH.uiFmt('draft')}</span>` : ''}</p></div>`;
+      const hint = `<div class="lv-hint"><span class="num-dot">${lv}</span><p>${PH.uiFmt('lvHint' + lv)}</p></div>`;
       const qs = data.selfcheck || []; const done = !!(PH.progress().lessons[n] || {}).done;
       const cta = `<div class="cta-row">${qs.length ? `<a class="btn gold" href="#selfcheck">${PH.uiFmt('selfCheckCta', { n: qs.length })}</a>` : ''}<button type="button" class="btn outline" id="btnDone"${done ? ' disabled' : ''}>${done ? PH.icon('check', 'sm') + PH.uiFmt('markedDone') : PH.uiFmt('markDone')}</button><button type="button" class="btn ghost" id="btnPrint">${PH.icon('print', 'sm')}${PH.uiFmt('printLesson')}</button></div><p class="goi-y">${PH.uiFmt('tapHint')}</p>`;
       const pterms = PH.termsForLesson(n);
@@ -318,7 +318,7 @@
       if (!lesson) { $('side').innerHTML = ''; return; }
       const terms = PH.termsForLesson(n);
       const cards = terms.map(t => `<div class="card o tn-card"><div class="top"><p class="nm">${PH.esc(PH.dinh(en() ? t.en : t.vi))}</p>${t.unit ? `<span class="unit">${PH.esc(PH.unitOf(t))}</span>` : (t.symbol ? `<span class="unit">${PH.esc(t.symbol)}</span>` : '')}</div>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(t.en))}</span>`}
-        <div class="ipa-row"><span class="ipa" lang="en">${PH.esc(t.ipa)}</span>${PH.hasVoice() ? `<button type="button" class="speak-btn ghost" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>${PH.dictHTML(t)}${t.added ? `<span class="tag gold">${PH.uiFmt('awaiting')}</span>` : ''}</div>`).join('');
+        <div class="ipa-row"><span class="ipa" lang="en">${PH.esc(t.ipa)}</span>${PH.hasVoice() ? `<button type="button" class="speak-btn ghost" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>${PH.dictHTML(t)}</div>`).join('');
       // Học tiếp
       const list = PH.sampleLessons().map(l => l.n); const i = list.indexOf(n);
       const all = (PH.LESSONS || []).map(l => l.n); const j = all.indexOf(n);

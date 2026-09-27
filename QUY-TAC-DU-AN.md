@@ -44,7 +44,7 @@ Người trực tiếp dùng tài liệu này là học sinh lớp 12, chưa h�
 | `luyende.html` | Danh sách đề và trang làm đề (`?exam=`); bản đồ câu hỏi, đánh dấu xem lại, tự lưu |
 | `games.html`, `game-termrush.html`, `game-match.html` | Trò chơi. Thẻ **Bilingual Arena giữ lại, ghi "đang phát triển"** |
 | `thinghiem.html` | Thí nghiệm ảo "Từ nước đá đến hơi nước" (Chương I · Bài 1) |
-| `vedan.html` | Về dự án, nguồn học liệu, phiên âm và âm thanh, cách kiểm tra thuật ngữ, tình trạng thẩm định (đếm từ dữ liệu) |
+| `vedan.html` | Về dự án, nguồn học liệu, phiên âm và âm thanh, cách kiểm tra thuật ngữ, quy trình duyệt nội dung (đếm từ dữ liệu) |
 | `lienket.html` | Mục lục mọi liên kết, tự sinh từ dữ liệu |
 | `assets/site.css`, `assets/site.js`, `assets/lively.css` | Hệ thiết kế, mã dùng chung, hiệu ứng |
 | `assets/img/*.webp`, `assets/icon-*.png`, `assets/favicon.svg`, `assets/og-physihub.jpg` | Ảnh chương, biểu tượng ứng dụng, ảnh xem trước khi chia sẻ |
@@ -61,8 +61,8 @@ Người trực tiếp dùng tài liệu này là học sinh lớp 12, chưa h�
 2. Chính tả: **Vật lí, kĩ thuật, kỉ lục, lí thuyết** (dùng i, không dùng y). Số thập phân tiếng Việt dùng dấu phẩy (83,6 kJ); tiếng Anh dùng dấu chấm (83.6 kJ).
 3. Tiếng Anh theo **Anh – Anh** và đề cương Cambridge International AS & A Level Physics 9702. Viết "vaporisation"; "cảm ứng từ" là "magnetic flux density", không dùng "magnetic induction" (id thuật ngữ vẫn giữ tên cũ, không đổi).
 4. **Phiên âm IPA** theo Oxford Learner's (thuật ngữ không có trong Oxford thì theo Collins; Merriam-Webster chỉ để xác nhận trọng âm). Ngày 23/9/2026 đã áp dụng toàn bộ cột `ipa_de_xuat` trong `thiet-ke/noi-dung/ipa-de-xuat.json` vào `data/terms.json`; trường `oxford` là đường dẫn mục từ trên Oxford. Giáo viên tiếng Anh vẫn phải ghi "Đồng ý" vào bảng Excel; riêng `isochoric process` có ghi chú "cần giáo viên nghe lại". Khi giáo viên sửa khác, làm theo giáo viên.
-5. Mục do nhóm tự bổ sung giữ nhãn chờ thẩm định (`"added": true` với thuật ngữ, `"drafted": true` với bài học) cho đến khi có biên bản của giáo viên.
-6. **Không bao giờ bịa**: tên người thẩm định, số liệu khảo sát, số người dùng, kết quả thử nghiệm. Chưa có thì ghi rõ là chưa có.
+5. Mục do nhóm tự bổ sung được đánh dấu trong dữ liệu (`"added": true` với thuật ngữ, `"drafted": true` với bài học) cho đến khi có biên bản của giáo viên.
+6. **Không bao giờ bịa**: tên người duyệt, số liệu khảo sát, số người dùng, kết quả thử nghiệm. Chưa có thì ghi rõ là chưa có.
 7. **Không thu thập dữ liệu cá nhân** của học sinh: không họ tên, số điện thoại, email, không gửi dữ liệu đi đâu. Tiến độ chỉ lưu trên máy.
 8. Điểm luyện đề **không** nhân hệ số theo mức ngôn ngữ. Hệ số ×1 / ×1,5 / ×2 chỉ dùng trong trò chơi.
 9. Ở mức English, **không còn chữ tiếng Việt** trên màn hình (trừ nút "Tiếng Việt", tên trường, tên bộ sách, và nghĩa tiếng Việt khi người học chủ động mở).

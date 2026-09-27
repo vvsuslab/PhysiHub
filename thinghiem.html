@@ -280,7 +280,7 @@
         master.connect(nen); nen.connect(ctx.destination);
 
         const sHum = nhieu(2);
-        const fHum = ctx.createBiquadFilter(); fHum.type = 'lowpass'; fHum.frequency.value = 300; fHum.Q.value = 0.7;
+        const fHum = ctx.createBiquadFilter(); fHum.type = 'lowpass'; fHum.frequency.value = 240; fHum.Q.value = 0.7;
         humGain = ctx.createGain(); humGain.gain.value = 0;
         sHum.connect(fHum); fHum.connect(humGain); humGain.connect(master);
 
@@ -329,7 +329,7 @@
           if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) { } }
           const t = ctx.currentTime;
           master.gain.setTargetAtTime(0.62, t, 0.2);
-          humGain.gain.setTargetAtTime(0.09 + 0.15 * nong, t, 0.3);
+          humGain.gain.setTargetAtTime((0.045 + 0.06 * nong) * (1 - 0.5 * soi), t, 0.3);   /* soi cang manh thi tieng bep cang lui xuong nen */
           xeoGain.gain.setTargetAtTime(0.17 * soi * (0.78 + 0.44 * Math.random()), t, 0.12);   /* hơi dao động cho giống nước sôi cuộn */
           soiMuc = soi;
           if (soi > 0 && !hen) lich();
