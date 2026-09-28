@@ -68,6 +68,7 @@
         <div class="name"><span class="mark"></span><span id="gameName">Ghép cặp Vật lí</span></div><span class="sep"></span>
         <span class="scope"><span id="scopeLbl"></span> <b id="scopeLabel"></b></span>
         <span class="pill gold" id="langPill"></span>
+        <button type="button" class="btn outline sm" id="btnAm" aria-pressed="true"></button>
         <a class="exit" href="games.html" id="exitLink"></a>
       </div>
       <div class="layout">
@@ -164,6 +165,7 @@
     function finish(won) {
       if (!running) return;   // tránh chạy hai lần (vừa hết giờ vừa ghép xong) làm chồng hai bảng kết quả
       running = false; clearInterval(timer);
+      (won ? PH.am.thang() : PH.am.thua());
       const time = Math.round((Date.now() - startedAt) / 1000);
       const prev = PH.progress().games.match || {};
       PH.logGame('match', { won, flips, time: won ? time : null, matched });
@@ -192,7 +194,7 @@
     board.addEventListener('click', e => {
       const el = e.target.closest('.cardx'); if (!el || !running || lock) return;
       if (el.classList.contains('up') || el.classList.contains('done')) return;
-      el.classList.add('up'); open.push(el); flips++; renderStats();
+      el.classList.add('up'); open.push(el); flips++; renderStats(); PH.am.lat();
       if (open.length === 2) {
         lock = true;
         const [a, b] = open; const ca = cards[+a.dataset.i], cb = cards[+b.dataset.i];
@@ -200,11 +202,11 @@
         if (ca.pid === cb.pid) {
           setTimeout(() => {
             if (vanNay !== van) return;
-            a.classList.add('done'); b.classList.add('done'); a.classList.remove('up'); b.classList.remove('up');
+            a.classList.add('done'); b.classList.add('done'); a.classList.remove('up'); b.classList.remove('up'); PH.am.ghep();
             open = []; lock = false; matched++; renderStats(); if (matched === PAIRS_PER_GAME) finish(true);
           }, 350);
         } else {
-          a.classList.add('bad'); b.classList.add('bad');
+          a.classList.add('bad'); b.classList.add('bad'); PH.am.lech();
           setTimeout(() => { if (vanNay !== van) return; a.classList.remove('up', 'bad'); b.classList.remove('up', 'bad'); open = []; lock = false; }, 900);
         }
       }
@@ -217,6 +219,7 @@
       ov.innerHTML = `<h2>${PH.uiFmt('gameName')}</h2><p>${PH.uiFmt('intro')}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
       board.appendChild(ov); renderStats();
       document.getElementById('btnStart').addEventListener('click', start);
+      PH.am.gan(document.getElementById('btnAm'));
     })();
   </script>
 </body>

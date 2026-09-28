@@ -72,6 +72,7 @@
         <div class="name"><span class="mark"></span>Term Rush</div><span class="sep"></span>
         <span class="scope"><span id="scopeLbl"></span> <b id="scopeLabel"></b></span>
         <span class="pill gold" id="langPill"></span>
+        <button type="button" class="btn outline sm" id="btnAm" aria-pressed="true"></button>
         <a class="exit" href="games.html" id="exitLink"></a>
       </div>
 
@@ -233,7 +234,7 @@
     }
     function points(it) { const speed = 1 + (1 - (it.p || 0)); const mult = it.hint ? Math.min(multVan, 1.5) : multVan; return Math.round(10 * speed * mult); }
     function hitOk(it) {
-      const pts = points(it); score += pts; streak++; correct++;
+      const pts = points(it); score += pts; streak++; correct++; PH.am.dung();
       PH.noteTerm(it.term.id, false);
       setFeedback(true, it.term, PH.ui('plusPts', { n: pts }));
       sparks(it.el);
@@ -241,7 +242,7 @@
       remove(it, 'hit');
     }
     function miss(it, why) {
-      lives--; streak = 0; wrongIds.push(it.term.id); PH.noteTerm(it.term.id, true);
+      lives--; streak = 0; wrongIds.push(it.term.id); PH.noteTerm(it.term.id, true); (why === 'chạm vạch' ? PH.am.matMang() : PH.am.sai());
       setFeedback(false, it.term, PH.ui(why === 'chạm vạch' ? 'hitLine' : 'wrongLife'));
       remove(it, 'missed');
       if (lives <= 0) end(PH.ui('noLives'));
@@ -279,7 +280,7 @@
       document.getElementById('lives').innerHTML = Array.from({ length: LIVES }, (_, i) => `<i class="${i < lives ? '' : 'off'}"></i>`).join('');
     }
     function end(reason) {
-      if (!running) return; running = false; clearInterval(timer); cancelAnimationFrame(raf);
+      if (!running) return; running = false; clearInterval(timer); cancelAnimationFrame(raf); (lives <= 0 ? PH.am.thua() : PH.am.thang());
       items.forEach(it => it.el.remove()); items = [];
       const best = (PH.progress().games.termrush || {}).best || 0;
       PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode });
@@ -326,6 +327,7 @@
       ov.innerHTML = `<h2>Term Rush</h2><p>${PH.uiFmt('intro', { n })}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
       arena.appendChild(ov); renderStats(); setFeedback(null);
       document.getElementById('btnStart').addEventListener('click', start);
+      PH.am.gan(document.getElementById('btnAm'));
     })();
   </script>
 </body>

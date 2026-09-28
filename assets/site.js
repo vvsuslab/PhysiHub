@@ -237,6 +237,59 @@ window.PH = window.PH || {};
     clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms || 2200);
   };
 
+  /* ---------- Tiếng phản hồi cho trò chơi ----------
+     Tổng hợp ngay trong trình duyệt bằng Web Audio (không tải tệp âm thanh), mỗi tiếng
+     dưới 0,4 s. Chỉ tạo bộ phát sau thao tác đầu tiên của người chơi (trình duyệt yêu cầu).
+     Lựa chọn bật/tắt lưu ở khoá ph-am, mặc định bật. */
+  PH.am = (() => {
+    let ctx = null, master = null;
+    const bat = () => store.get('ph-am', true) !== false;
+    function mo() {
+      if (ctx) return true;
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+      try { ctx = new AC(); } catch (e) { return false; }
+      master = ctx.createGain(); master.gain.value = 0.5;
+      const nen = ctx.createDynamicsCompressor(); nen.threshold.value = -12; nen.ratio.value = 8;
+      master.connect(nen); nen.connect(ctx.destination); return true;
+    }
+    /* một nốt: tần số f (Hz), bắt đầu sau tre giây, dài dai giây, dạng sóng, biên độ, trượt tới f2 */
+    function not(f, tre, dai, dang, bien, f2) {
+      const t = ctx.currentTime + tre, o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = dang || 'sine'; o.frequency.setValueAtTime(f, t);
+      if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dai);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(bien || 0.5, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dai);
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + dai + 0.03);
+    }
+    function nhieu(tre, dai, bien, loc) {
+      const n = Math.floor(ctx.sampleRate * dai), b = ctx.createBuffer(1, n, ctx.sampleRate), d = b.getChannelData(0);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+      const s = ctx.createBufferSource(); s.buffer = b; const f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = loc || 1800; f.Q.value = 0.8;
+      const g = ctx.createGain(); g.gain.value = bien || 0.3; s.connect(f); f.connect(g); g.connect(master); s.start(ctx.currentTime + tre);
+    }
+    const choi = fn => { if (!bat() || !mo()) return; if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) { } } try { fn(); } catch (e) { } };
+    const A = {
+      bat,
+      datBat(v) { store.set('ph-am', !!v); document.dispatchEvent(new CustomEvent('ph:am')); },
+      dung()    { choi(() => { not(659, 0, .11, 'sine', .45); not(880, .09, .16, 'sine', .45); }); },            /* trả lời đúng: hai nốt đi lên */
+      sai()     { choi(() => { not(190, 0, .22, 'sawtooth', .22, 140); nhieu(0, .12, .12, 500); }); },            /* trả lời sai: tiếng rè trầm đi xuống */
+      lat()     { choi(() => { nhieu(0, .04, .25, 2600); not(1100, 0, .05, 'triangle', .12); }); },               /* lật ô: tách nhẹ */
+      ghep()    { choi(() => { not(523, 0, .1, 'sine', .4); not(659, .08, .1, 'sine', .4); not(784, .16, .22, 'sine', .45); }); },  /* ghép đúng: ba nốt đi lên */
+      lech()    { choi(() => { not(330, 0, .13, 'triangle', .3); not(247, .12, .2, 'triangle', .3); }); },       /* ghép sai: hai nốt đi xuống, êm */
+      matMang() { choi(() => { not(120, 0, .25, 'sine', .5, 70); nhieu(0, .18, .2, 300); }); },                 /* mất mạng: tiếng thịch trầm */
+      thang()   { choi(() => { [523, 659, 784, 1047].forEach((f, i) => not(f, i * .1, i === 3 ? .4 : .12, 'sine', .42)); }); },   /* thắng: hồi kèn ngắn */
+      thua()    { choi(() => { [392, 330, 262].forEach((f, i) => not(f, i * .16, .22, 'triangle', .35)); }); },   /* thua: ba nốt đi xuống */
+      /* gắn một nút loa: tự vẽ nhãn, đổi khi bấm, cập nhật khi đổi ngôn ngữ */
+      gan(btn) {
+        if (!btn) return;
+        const ve = () => { const on = bat(); btn.innerHTML = PH.icon(on ? 'speaker' : 'x', 'sm') + PH.esc(PH.ui(on ? 'amOn' : 'amOff')); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); };
+        btn.addEventListener('click', () => { A.datBat(!bat()); if (bat()) A.dung(); });
+        document.addEventListener('ph:lang', ve); document.addEventListener('ph:am', ve); ve();
+      }
+    };
+    return A;
+  })();
+
   /* ---------- Chữ trên giao diện theo mức ngôn ngữ ----------
      Mức 1 và 2 hiện tiếng Việt (mức 2 có dòng tiếng Anh nhỏ ở menu), mức 3 hiện tiếng Anh. */
   PH.UI = {
@@ -272,6 +325,7 @@ window.PH = window.PH || {};
     listen: ['Nghe phát âm', 'Play pronunciation'], listenMachine: ['Đọc bằng giọng máy của trình duyệt', 'Read aloud by the browser voice'],
     hearOn: ['Nghe phát âm trên', 'Hear it on'], hearOxford: ['Nghe trên Oxford', 'Hear it on Oxford'], hearCambridge: ['Nghe trên Cambridge', 'Hear it on Cambridge'],
     openInGlossary: ['Mở trong kho thuật ngữ', 'Open in the glossary'], noVoice: ['Máy này chưa có giọng đọc tiếng Anh — em nghe trên Oxford hoặc Cambridge nhé.', 'No English voice on this device — listen on Oxford or Cambridge instead.'],
+    amOn: ['Tắt tiếng', 'Mute'], amOff: ['Bật tiếng', 'Unmute'],
     noContent: ['chưa có nội dung', 'no content yet'], done: ['đã học', 'done'], inProgress: ['đang học', 'in progress'],
     of: ['/', '/'], continueBtn: ['Tiếp tục học', 'Continue'], startBtn: ['Bắt đầu học', 'Start learning'],
     inProgressLbl: ['Em đang học dở · Chương {c}', 'Pick up where you left off · Chapter {c}'], startHere: ['Bắt đầu từ đây', 'Start here'],
