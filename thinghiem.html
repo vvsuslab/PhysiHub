@@ -33,6 +33,7 @@
     .tn-stage .grid3 { display: grid; grid-template-columns: 290px 300px minmax(0, 1fr); gap: 18px; }
     .tn-panel { border-radius: 18px; background: #fff; border: 1.5px solid var(--blue-line); padding: 16px 16px 14px; min-width: 0; }
     .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 15px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
+    .tn-ghi { margin: 10px 2px 0; font-size: 13.5px; line-height: 1.45; color: var(--ink-3); }
     .tn-kinh { position: relative; width: 250px; height: 250px; margin: 4px auto 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1A4A9E 0%, #072460 75%); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--blue-line), 0 10px 24px rgba(13, 71, 161, .2); }
     /* Không đặt transition cho background/box-shadow: màu đổi liên tục theo nhiệt độ,
        transition sẽ bị khởi động lại mỗi khung hình và làm phân tử nhấp nháy. */
@@ -156,7 +157,7 @@
             <div class="tn-kinh" id="kinh"><svg width="250" height="250" viewBox="0 0 250 250" aria-hidden="true" style="position:absolute;left:0;top:0"><path id="luoi" d="" stroke="#9FD8FF" stroke-width="2" stroke-opacity=".35" fill="none" style="transition:stroke-opacity .8s ease"/></svg></div>
             <div class="pha" id="pha"></div>
             <div class="legend"><span id="lbMau"></span><div class="bar"><span id="cham"></span><i></i><span id="nhanh"></span></div></div></div>
-          <div class="tn-panel"><p class="tn-h" id="lbDoThi"></p><div id="doThi"></div>
+          <div class="tn-panel"><p class="tn-h" id="lbDoThi"></p><div id="doThi"></div><p class="tn-ghi" id="ghiChuDoThi"></p>
             <div class="readout"><div class="o"><p class="l" id="lbNhietDo"></p><p class="t"><span id="tHien">—</span> <small>°C</small></p></div><div class="o grow"><p class="l" id="lbTrangThai"></p><p class="s" id="moTaPha"></p></div></div></div>
         </div>
       </section>
@@ -187,6 +188,7 @@
       hd: ['Bấm Đun để cấp nhiệt cho 0,5 kg nước đá ở −20 °C. Quan sát ba chỗ cùng lúc: cốc nước, các phân tử bên trong và đồ thị nhiệt độ.', 'Press Heat to warm 0.5 kg of ice that starts at −20 °C. Watch three things at once: the beaker, the molecules inside and the temperature graph.'],
       lbDungCu: ['Dụng cụ', 'Apparatus'], lbPhanTu: ['Nhìn vào bên trong', 'Inside the water'], lbDoThi: ['Đồ thị nhiệt độ theo thời gian đun', 'Temperature against heating time'],
       lbThoiGian: ['thời gian đun', 'heating time'], lbNC: ['Nóng chảy · 0 °C', 'Melting · 0 °C'], lbSoi: ['Sôi · 100 °C', 'Boiling · 100 °C'],
+      ghiChuDoThi: ['Trục thời gian theo tỉ lệ nhiệt lượng thật (cấp nhiệt đều): m = 0,5 kg; c_đá = 2 100 J/(kg⋅K), c_nước = 4 200 J/(kg⋅K); λ = 3,34 × 10⁵ J/kg; L = 2,26 × 10⁶ J/kg. Hoạt ảnh chạy chậm lại ở các đoạn ngắn để dễ quan sát.', 'Time axis in true proportion to the heat supplied (steady heating): m = 0.5 kg; c_ice = 2 100 J/(kg⋅K), c_water = 4 200 J/(kg⋅K); λ = 3.34 × 10⁵ J/kg; L = 2.26 × 10⁶ J/kg. Playback slows down in the short stages so they can be watched.'],
       lbMau: ['Màu phân tử cho biết tốc độ chuyển động trung bình', 'Colour shows the average speed of the molecules'], cham: ['chậm', 'slow'], nhanh: ['nhanh', 'fast'],
       lbNhietDo: ['Nhiệt độ', 'Temperature'], lbTrangThai: ['Đang diễn ra', 'What is happening'], lbKeo: ['Kéo để tua lại hoặc tua nhanh', 'Drag to rewind or skip ahead'],
       lamLai: ['Làm lại', 'Reset'], amOn: ['Tắt tiếng', 'Mute'], amOff: ['Bật tiếng', 'Unmute'], lbToc: ['Tốc độ', 'Speed'], dun: ['Đun', 'Heat'], dunLai: ['Đun lại', 'Heat again'], tamDung: ['Tạm dừng', 'Pause'],
@@ -209,7 +211,15 @@
     const LUOI = "M50 80 L80 80 M50 80 L50 110 M80 80 L110 80 M80 80 L80 110 M110 80 L140 80 M110 80 L110 110 M140 80 L170 80 M140 80 L140 110 M170 80 L200 80 M170 80 L170 110 M200 80 L200 110 M50 110 L80 110 M50 110 L50 140 M80 110 L110 110 M80 110 L80 140 M110 110 L140 110 M110 110 L110 140 M140 110 L170 110 M140 110 L140 140 M170 110 L200 110 M170 110 L170 140 M200 110 L200 140 M50 140 L80 140 M50 140 L50 170 M80 140 L110 140 M80 140 L80 170 M110 140 L140 140 M110 140 L110 170 M140 140 L170 140 M140 140 L140 170 M170 140 L200 140 M170 140 L170 170 M200 140 L200 170 M50 170 L80 170 M80 170 L110 170 M110 170 L140 170 M140 170 L170 170 M170 170 L200 170";
     const PHA_MAU = ['#6EA8FF', '#5CD6FF', '#2EE6B5', '#FFB547', '#FF7A59'];
     const PHA_CHU = ['#1565C0', '#0B6F94', '#0F7A5F', '#B54D00', '#C62828'];   // cùng pha, đủ tương phản trên nền trắng
-    const MOC = [[0, -20], [6, 0], [22, 0], [42, 100], [100, 100]];
+    /* Mô hình nhiệt: 0,5 kg nước đá từ −20 °C, cấp nhiệt đều. Hằng số theo SGK KNTT (Bài 4, 5).
+       Tiến trình p (0–100) = phần trăm nhiệt lượng đã nhận, nên trục thời gian của đồ thị
+       có tỉ lệ các đoạn đúng như thật: đun đá 1,4 % · tan 10,9 % · đun nước 13,7 % · sôi 74 %.
+       Đoạn đun đá dốc gấp đôi đoạn đun nước vì c_đá ≈ ½ c_nước. */
+    const M_KG = 0.5, C_DA = 2100, C_NUOC = 4200, LAMBDA = 3.34e5, L_HOI = 2.26e6;
+    const Q_DA = M_KG * C_DA * 20, Q_TAN = M_KG * LAMBDA, Q_NUOC = M_KG * C_NUOC * 100, Q_HOI = M_KG * L_HOI;
+    const Q_TONG = Q_DA + Q_TAN + Q_NUOC + Q_HOI;
+    const P1 = 100 * Q_DA / Q_TONG, P2 = P1 + 100 * Q_TAN / Q_TONG, P3 = P2 + 100 * Q_NUOC / Q_TONG;
+    const MOC = [[0, -20], [P1, 0], [P2, 0], [P3, 100], [100, 100]];
     const gx = q => 70 + q * 4.3, gy = t => 300 - (t + 20) * (270 / 130);
     const DA = [[88, 284, -6], [126, 287, 4], [164, 283, -3], [104, 250, 8], [144, 249, -5], [182, 254, 6], [124, 216, -2]];
     const BOT_X = [98, 116, 134, 152, 170, 188, 108, 160];
@@ -254,10 +264,10 @@
       $('doThi').innerHTML = `<svg class="dt" width="492" height="331" viewBox="0 0 520 350" aria-hidden="true"><defs>
           <linearGradient id="tnNhiet" gradientUnits="userSpaceOnUse" x1="0" y1="${gy(-20).toFixed(1)}" x2="0" y2="${gy(110).toFixed(1)}"><stop offset="0" stop-color="#1E88E5"/><stop offset=".154" stop-color="#00A5C8"/><stop offset=".462" stop-color="#17A589"/><stop offset=".769" stop-color="#F2A600"/><stop offset=".923" stop-color="#FB8C00"/><stop offset="1" stop-color="#F4511E"/></linearGradient>
           <filter id="tnGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-        <rect x="${gx(6).toFixed(1)}" y="30" width="${(gx(22) - gx(6)).toFixed(1)}" height="270" rx="8" fill="#5CD6FF" fill-opacity=".09"/><rect x="${gx(42).toFixed(1)}" y="30" width="${(gx(100) - gx(42)).toFixed(1)}" height="270" rx="8" fill="#FFB547" fill-opacity=".09"/>
+        <rect x="${gx(P1).toFixed(1)}" y="30" width="${(gx(P2) - gx(P1)).toFixed(1)}" height="270" rx="8" fill="#5CD6FF" fill-opacity=".09"/><rect x="${gx(P3).toFixed(1)}" y="30" width="${(gx(100) - gx(P3)).toFixed(1)}" height="270" rx="8" fill="#FFB547" fill-opacity=".09"/>
         ${vach}
-        <text id="lbNC" x="${((gx(6) + gx(22)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#0B7FA6"></text>
-        <text id="lbSoi" x="${((gx(42) + gx(100)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#B54D00"></text>
+        <text id="lbNC" x="${(gx(P1) + 4).toFixed(1)}" y="22" text-anchor="start" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#0B7FA6"></text>
+        <text id="lbSoi" x="${((gx(P3) + gx(100)) / 2).toFixed(1)}" y="22" text-anchor="middle" font-family="Be Vietnam Pro, sans-serif" font-size="14" font-weight="700" fill="#B54D00"></text>
         <line x1="70" y1="30" x2="70" y2="304" stroke="#4F5F77" stroke-width="2"/><line x1="66" y1="300" x2="506" y2="300" stroke="#4F5F77" stroke-width="2"/><path d="M500 294 L510 300 L500 306" stroke="#4F5F77" stroke-width="2" fill="none"/>
         <text x="4" y="16" font-family="Lora, Georgia, serif" font-style="italic" font-size="15" fill="#0F2548">t (°C)</text>
         <text id="lbThoiGian" x="506" y="328" text-anchor="end" font-family="Be Vietnam Pro, sans-serif" font-size="12.5" fill="#4F5F77"></text>
@@ -384,8 +394,8 @@
 
     function update() {
       const T = nhietDo(p);
-      const f = p < 6 ? 0 : (p < 22 ? (p - 6) / 16 : 1), g = p < 42 ? 0 : (p < 100 ? (p - 42) / 58 : 1);
-      const pha = p < 6 ? 0 : (p < 22 ? 1 : (p < 42 ? 2 : (p < 100 ? 3 : 4)));
+      const f = p < P1 ? 0 : (p < P2 ? (p - P1) / (P2 - P1) : 1), g = p < P3 ? 0 : (p < 100 ? (p - P3) / (100 - P3) : 1);
+      const pha = p < P1 ? 0 : (p < P2 ? 1 : (p < P3 ? 2 : (p < 100 ? 3 : 4)));
       // làm tròn màu để không phải ghi lại 24 phân tử ở mỗi khung hình
       const c = mau(T).map(v => Math.round(v / 4) * 4);
       const hex = `rgb(${c.join(',')})`, dam = `rgb(${c.map(x => Math.round(x * .72)).join(',')})`, toi = `rgb(${c.map(x => Math.round(x * .45 + 11 * .55)).join(',')})`, nhanhK = (T + 20) / 140;
@@ -417,9 +427,9 @@
       setAttr($('nuocTren'), 'stop-color', pha >= 2 ? (T > 60 ? '#5FB4E8' : '#6FD3F0') : '#8FE0F7');
       const soDa = pha === 0 ? 7 : pha === 1 ? Math.ceil(7 * (1 - f)) : 0;
       for (let k = 0; k < 7; k++) setAttr($('da' + k), 'opacity', k < soDa ? 1 : 0);
-      setAttr($('bot'), 'opacity', pha === 3 ? 1 : (pha === 2 && p > 36 ? .45 : 0));
+      setAttr($('bot'), 'opacity', pha === 3 ? 1 : (pha === 2 && p > P2 + 0.7 * (P3 - P2) ? .45 : 0));
       if (cao !== lastCao) { lastCao = cao; $('bot').querySelectorAll('.tn-bot, .tn-ban').forEach(b => b.style.setProperty('--len', '-' + Math.max(12, cao - 8) + 'px')); }
-      setAttr($('hoi'), 'opacity', pha === 3 ? (.45 + .55 * g).toFixed(2) : pha === 4 ? 1 : (pha === 2 && p > 34 ? .25 : 0));
+      setAttr($('hoi'), 'opacity', pha === 3 ? (.45 + .55 * g).toFixed(2) : pha === 4 ? 1 : (pha === 2 && p > P2 + 0.6 * (P3 - P2) ? .25 : 0));
       const lua = p >= 100 ? 0 : ((chay || p > 0) ? 1 : .15); setAttr($('lua'), 'opacity', lua); setAttr($('sang'), 'opacity', lua);
       const cot = $('cot'); setAttr(cot, 'height', ((T + 20) / 140 * 230 + 6).toFixed(1)); setAttr(cot, 'y', (300 - (T + 20) / 140 * 230).toFixed(1));
       setAttr($('luoi'), 'stroke-opacity', pha === 0 ? .35 : pha === 1 ? (.35 * (1 - f)).toFixed(2) : 0);
@@ -442,7 +452,7 @@
       const tua = $('tua');
       if (document.activeElement !== tua && +tua.value !== p) tua.value = p;
       setAttr(tua, 'aria-valuetext', $('tHien').textContent + ' °C');
-      AM.capNhat(chay, pha === 3 ? Math.min(1, 0.25 + (p - 42) / 72) : 0, Math.min(1, p / 100));
+      AM.capNhat(chay, pha === 3 ? Math.min(1, 0.25 + 0.9 * (p - P3) / (100 - P3)) : 0, Math.min(1, p / 100));
     }
 
     /* ---------- chữ tĩnh theo mức ---------- */
@@ -453,7 +463,7 @@
       $('h1en').textContent = PH.lang() === 'bi' ? PH.UI.h1[1] : ''; $('h1en').hidden = PH.lang() !== 'bi';
       $('hd').textContent = PH.dinh(PH.ui('hd')); $('veBai').innerHTML = PH.uiFmt('veBai') + PH.icon('arrow', 'sm');
       document.querySelector('.tn-stage').setAttribute('aria-label', PH.ui('stageLbl'));
-      ['lbDungCu', 'lbPhanTu', 'lbDoThi', 'lbMau', 'cham', 'nhanh', 'lbNhietDo', 'lbTrangThai', 'lbKeo', 'lbToc', 'lbNC', 'lbSoi'].forEach(k => { $(k).textContent = PH.ui(k); });
+      ['lbDungCu', 'lbPhanTu', 'lbDoThi', 'lbMau', 'cham', 'nhanh', 'lbNhietDo', 'lbTrangThai', 'lbKeo', 'lbToc', 'lbNC', 'lbSoi', 'ghiChuDoThi'].forEach(k => { $(k).textContent = PH.ui(k); });
       $('lbThoiGian').textContent = PH.ui('lbThoiGian') + ' →';
       $('btnLai').innerHTML = PH.icon('refresh', 'sm') + PH.uiFmt('lamLai');
       veNutAm();
@@ -473,12 +483,16 @@
     // nên tốc độ đun như nhau trên máy nhanh lẫn máy chậm.
     // Dùng setInterval chứ không dùng requestAnimationFrame: một số trình duyệt trong ứng dụng
     // (Facebook, Zalo, trình duyệt nhúng) không chạy requestAnimationFrame và thí nghiệm sẽ đứng im.
-    const TOC_GOC = 3.75;  // đơn vị tiến trình mỗi giây ở mức ×1 (bằng đúng nhịp cũ)
+    /* Tốc độ chạy theo từng đoạn (giây ở mức ×1): đoạn đun đá chỉ chiếm 1,4 % nhiệt lượng,
+       chạy đều sẽ vụt qua trong nửa giây nên cho mỗi đoạn một thời lượng riêng để quan sát được;
+       đồ thị vẫn vẽ theo tỉ lệ nhiệt lượng thật, chỉ tốc độ xem là thay đổi. */
+    const THOI_LUONG = [[0, P1, 3], [P1, P2, 6], [P2, P3, 6], [P3, 100, 12]];
+    const tocTai = q => { for (const [a, b, s] of THOI_LUONG) if (q < b) return (b - a) / s; return (100 - P3) / 12; };
     function buoc() {
       const now = performance.now();
       if (!chay) { moc = now; return; }
       const dt = Math.min(.12, (now - moc) / 1000); moc = now;   // chặn bước nhảy khi quay lại tab
-      p = Math.min(100, p + TOC_GOC * toc * dt);
+      p = Math.min(100, p + tocTai(p) * toc * dt);
       if (p >= 100) { p = 100; chay = false; }
       update();
     }

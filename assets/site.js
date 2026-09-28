@@ -272,7 +272,6 @@ window.PH = window.PH || {};
     listen: ['Nghe phát âm', 'Play pronunciation'], listenMachine: ['Đọc bằng giọng máy của trình duyệt', 'Read aloud by the browser voice'],
     hearOn: ['Nghe phát âm trên', 'Hear it on'], hearOxford: ['Nghe trên Oxford', 'Hear it on Oxford'], hearCambridge: ['Nghe trên Cambridge', 'Hear it on Cambridge'],
     openInGlossary: ['Mở trong kho thuật ngữ', 'Open in the glossary'], noVoice: ['Máy này chưa có giọng đọc tiếng Anh — em nghe trên Oxford hoặc Cambridge nhé.', 'No English voice on this device — listen on Oxford or Cambridge instead.'],
-    awaiting: ['chờ thẩm định', 'awaiting review'], added: ['bổ sung · chờ thẩm định', 'added · awaiting review'], draft: ['bản nháp · chờ giáo viên thẩm định', 'draft · awaiting teacher review'],
     noContent: ['chưa có nội dung', 'no content yet'], done: ['đã học', 'done'], inProgress: ['đang học', 'in progress'],
     of: ['/', '/'], continueBtn: ['Tiếp tục học', 'Continue'], startBtn: ['Bắt đầu học', 'Start learning'],
     inProgressLbl: ['Em đang học dở · Chương {c}', 'Pick up where you left off · Chapter {c}'], startHere: ['Bắt đầu từ đây', 'Start here'],
