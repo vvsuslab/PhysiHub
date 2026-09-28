@@ -17,7 +17,7 @@ Site tĩnh (HTML + CSS + JS thuần), chạy trên GitHub Pages hoặc mở tr�
 | `games.html` | Trò chơi: Term Rush, Ghép cặp Vật lí, Bilingual Arena (đang phát triển); phạm vi ôn, huy hiệu, kỉ lục |
 | `game-termrush.html`, `game-match.html` | Hai trò chơi |
 | `thinghiem.html` | Thí nghiệm ảo "Từ nước đá đến hơi nước" (Chương I · Bài 1) |
-| `vedan.html` | Về dự án, nguồn học liệu, phiên âm và âm thanh, quy trình duyệt nội dung |
+| `vedan.html` | Về dự án, nguồn học liệu, phiên âm và âm thanh, tình trạng thẩm định |
 | `lienket.html` | Mục lục **tất cả liên kết**, tự sinh từ dữ liệu |
 | `assets/site.css`, `assets/site.js`, `assets/lively.css` | Hệ thiết kế, mã dùng chung (đầu trang, menu sổ, tìm kiếm, mức ngôn ngữ, thẻ nghĩa, tiến độ), hiệu ứng |
 | `data/*.json` → `data/*.js` | Dữ liệu: **sửa file `.json`**, rồi chạy `node tools/build-data.mjs` |
@@ -61,6 +61,6 @@ Trang `lienket.html` tự sinh toàn bộ các liên kết này từ dữ liệu
 - Tiếng Việt = màu mực, tiếng Anh = màu cam đậm (Lora nghiêng); mọi văn bản là cặp `{ "vi": "...", "en": "..." }`.
 - Mức ngôn ngữ (`ph-lang`), tiến độ (`ph-progress`), phạm vi ôn (`ph-scope`) lưu trong `localStorage` của trình duyệt — chỉ trên máy đang dùng.
 - Kí hiệu SGK KNTT: nguyên lí I viết `ΔU = A + Q`. Số thập phân tiếng Việt dùng dấu phẩy.
-- Mục có `"added": true` (thuật ngữ) hoặc `"drafted": true` (bài học) là mục do nhóm bổ sung ngoài SGK.
+- Mục có `"added": true` (thuật ngữ) hoặc `"drafted": true` (bài học) là do nhóm bổ sung, đang chờ giáo viên thẩm định.
 - Phiên âm IPA theo Oxford Learner's (trường `oxford` là mục từ trên Oxford); nút nghe mở trang Oxford/Cambridge, trang không sao chép tệp âm thanh của từ điển. Nút loa nhỏ là giọng máy của trình duyệt.
 - Chữ trên giao diện nằm trong `PH.UI` dạng `[tiếng Việt, English]`; ở mức English không còn chữ Việt.

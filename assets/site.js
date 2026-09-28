@@ -51,7 +51,7 @@ window.PH = window.PH || {};
   PH.shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   PH.sample = (arr, n) => PH.shuffle(arr).slice(0, n);
   // Chuẩn hoá để tìm kiếm: bỏ dấu, chỉ số trên, khoảng trắng và dấu nhân
-  PH.norm = s => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[\s.·×*_]/g, '');
+  PH.norm = s => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[\s.·⋅×*_'’()-]/g, '');
   // Số theo cách viết Việt Nam: 2,5 · 126
   PH.num = (x, digits) => {
     if (x == null || isNaN(x)) return '';
@@ -272,6 +272,7 @@ window.PH = window.PH || {};
     listen: ['Nghe phát âm', 'Play pronunciation'], listenMachine: ['Đọc bằng giọng máy của trình duyệt', 'Read aloud by the browser voice'],
     hearOn: ['Nghe phát âm trên', 'Hear it on'], hearOxford: ['Nghe trên Oxford', 'Hear it on Oxford'], hearCambridge: ['Nghe trên Cambridge', 'Hear it on Cambridge'],
     openInGlossary: ['Mở trong kho thuật ngữ', 'Open in the glossary'], noVoice: ['Máy này chưa có giọng đọc tiếng Anh — em nghe trên Oxford hoặc Cambridge nhé.', 'No English voice on this device — listen on Oxford or Cambridge instead.'],
+    awaiting: ['chờ thẩm định', 'awaiting review'], added: ['bổ sung · chờ thẩm định', 'added · awaiting review'], draft: ['bản nháp · chờ giáo viên thẩm định', 'draft · awaiting teacher review'],
     noContent: ['chưa có nội dung', 'no content yet'], done: ['đã học', 'done'], inProgress: ['đang học', 'in progress'],
     of: ['/', '/'], continueBtn: ['Tiếp tục học', 'Continue'], startBtn: ['Bắt đầu học', 'Start learning'],
     inProgressLbl: ['Em đang học dở · Chương {c}', 'Pick up where you left off · Chapter {c}'], startHere: ['Bắt đầu từ đây', 'Start here'],
