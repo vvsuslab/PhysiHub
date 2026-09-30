@@ -91,9 +91,9 @@
   <script src="assets/site.js"></script>
   <script>
     Object.assign(PH.UI, {
-      gameName: ['Ghép cặp Vật lí', 'Physics Match Up'], scopeLbl: ['Phạm vi:', 'Scope:'], levelPill: ['Mức {l} · điểm ×{m}', 'Level {l} · points ×{m}'], exitRound: ['Thoát ván', 'Leave the round'],
+      gameName: ['Ghép cặp Vật lí', 'Physics Match Up'], scopeLbl: ['Phạm vi:', 'Scope:'], levelPill: ['Mức {l}', 'Level {l}'], exitRound: ['Thoát ván', 'Leave the round'],
       lTime: ['Thời gian còn lại', 'Time left'], secs: ['{n} giây', '{n} s'], lFlips: ['Lượt lật', 'Flips'], lMatched: ['Đã ghép', 'Matched'], lBest: ['Kỉ lục của em', 'Your record'],
-      bestTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], noBest: ['Chưa có — hoàn thành một ván để lập kỉ lục.', 'None yet — finish a board to set one.'],
+      bestTxt: ['Ít lượt lật nhất: {f} · nhanh nhất: {t}', 'Fewest flips: {f} · fastest: {t}'], noBest: ['Chưa có — hoàn thành một ván để lập kỉ lục.', 'None yet — finish a board to set one.'],
       noteRule: ['Mỗi cặp là hai mặt của cùng một kiến thức: thuật ngữ Việt – Anh, hoặc công thức – định luật/đơn vị. Lật hai thẻ; ghép đúng thì cặp đó ở lại.', 'Each pair is two sides of the same idea: a term and its symbol or unit. Flip two cards; a correct pair stays face up.'],
       newBoard: ['Ván mới', 'New board'], kTerm: ['thuật ngữ', 'term'], kTermEn: ['term', 'term'], kSym: ['kí hiệu và đơn vị', 'symbol and unit'],
       done: ['Xong bảng!', 'Board cleared!'], doneTxt: ['{f} lượt lật · {t}', '{f} flips · {t}'], newRecord: ['Kỉ lục mới!', 'New record!'],
@@ -111,7 +111,7 @@
     const langPill = () => { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); };
     renderStatic(); langPill(); PH.onLang(() => { langPill(); renderStatic(); renderStats(); });
 
-    let cards = [], open = [], lock = false, flips = 0, matched = 0, timer = null, endAt = 0, startedAt = 0, running = false, van = 0;
+    let cards = [], open = [], lock = false, flips = 0, matched = 0, timer = null, endAt = 0, startedAt = 0, running = false, van = 0, langVan = null;
 
     function buildPairs() {
       const terms = PH.scopeTerms(scope);
@@ -139,7 +139,7 @@
     function start() {
       const pairs = buildPairs();
       cards = PH.shuffle(pairs.flatMap(p => [{ pid: p.id, ...p.a }, { pid: p.id, ...p.b }]));
-      van++; open = []; lock = false; flips = 0; matched = 0; running = true; startedAt = Date.now(); endAt = startedAt + ROUND * 1000;
+      van++; open = []; lock = false; flips = 0; matched = 0; running = true; startedAt = Date.now(); langVan = PH.lang(); endAt = startedAt + ROUND * 1000;
       board.innerHTML = cards.map((c, i) => `<div class="cardx" data-i="${i}"><div class="in"><div class="face back"><span class="mark">${PH.icon('atom')}</span></div><div class="face front"><span class="k">${PH.esc(c.k)}</span><span class="t ${c.math ? 'math' : ''} ${c.en ? 'en' : ''}">${PH.esc(c.t)}</span></div></div></div>`).join('');
       clearInterval(timer); timer = setInterval(tick, 250); tick(); renderStats();
     }
@@ -162,7 +162,7 @@
       (won ? PH.am.thang() : PH.am.thua());
       const time = Math.round((Date.now() - startedAt) / 1000);
       const prev = PH.progress().games.match || {};
-      PH.logGame('match', { won, flips, time: won ? time : null, matched });
+      PH.logGame('match', { won, flips, time: won ? time : null, matched, lang: langVan });
       const record = won && (!prev.bestFlips || flips < prev.bestFlips);
       const ov = document.createElement('div'); ov.className = 'overlay';
       ov.innerHTML = won

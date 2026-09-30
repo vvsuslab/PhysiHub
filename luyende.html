@@ -146,7 +146,7 @@
       termsInTest: ['Thuật ngữ xuất hiện trong đề', 'Terms used in this test'],
       termsNote: ['Nộp bài xong, em xem được lời giải của từng câu và chạm vào thuật ngữ để xem nghĩa.', 'After you submit, you can read each solution and tap a term to see its meaning.'],
       partQ: ['Phần {p} · Câu {i}', 'Part {p} · Question {i}'], ptsOne: ['{p} điểm', '{p} points'],
-      tfPts: ['1 ý 0,1 – 2 ý 0,25 – 3 ý 0,5 – 4 ý 1,0 điểm', '1 right 0.1 – 2 right 0.25 – 3 right 0.5 – 4 right 1.0 points'],
+      tfPts: ['1 ý {a} – 2 ý {b} – 3 ý {c} – 4 ý {d} điểm', '1 right {a} – 2 right {b} – 3 right {c} – 4 right {d} points'],
       flag: ['Đánh dấu xem lại', 'Flag for review'], flagged: ['Đã đánh dấu', 'Flagged'],
       tfHint: ['Chọn Đúng hoặc Sai cho từng ý.', 'Choose True or False for each statement.'], tru: ['Đúng', 'True'], fal: ['Sai', 'False'],
       yourAnswer: ['Câu trả lời của em', 'Your answer'], shortHint: ['Ghi kết quả là một số, tối đa 4 kí tự; không ghi đơn vị.', 'Write a number of up to 4 characters, without a unit.'], answerIs: ['Đáp án: {a}', 'Answer: {a}'],
@@ -156,8 +156,8 @@
       confirmLeft: ['Em còn {k} câu chưa làm. Nộp bài ngay?', 'You have {k} unanswered questions. Submit now?'], confirmAll: ['Nộp bài và xem kết quả?', 'Submit and see your result?'],
       submitNow: ['Nộp ngay', 'Submit now'], keepDoing: ['Làm tiếp', 'Keep going'],
       timeUp: ['Hết giờ — bài đã được nộp tự động.', 'Time is up — your test was submitted automatically.'],
-      resultLbl: ['Kết quả', 'Result'], resultTxt: ['Đúng trọn vẹn {ok}/{n} câu · {raw}/{max} điểm thô · thời gian {m} phút {s} giây', '{ok}/{n} fully correct · raw {raw}/{max} · time {m} min {s} s'],
-      quyDoi: ['Điểm từng câu ghi trên đề là điểm thô (tổng {max}); điểm bên cạnh đã quy về thang 10.', 'The marks shown on each question are raw marks (total {max}); the score beside them is converted to a 10-point scale.'],
+      resultLbl: ['Kết quả', 'Result'], resultTxt: ['Đúng trọn vẹn {ok}/{n} câu · thời gian {m} phút {s} giây', '{ok}/{n} fully correct · time {m} min {s} s'],
+      quyDoi: ['Đề rút gọn {n} câu nhưng giữ tỉ lệ điểm của đề thi thật: Phần I {a} – Phần II {b} – Phần III {c} điểm, tổng 10 điểm.', 'A shortened {n}-question test that keeps the real exam’s weighting: Part I {a} – Part II {b} – Part III {c} points, 10 in total.'],
       lamLaiDe: ['Làm lại đề này', 'Take this exam again'],
       retry: ['Làm lại đề này', 'Retake this test'], backList: ['Về danh sách đề', 'Back to the tests'],
       wrongLead: ['Làm sai câu nào, em bấm “Xem lại bài” để về đúng bài học chứa kiến thức của câu đó.', 'For any question you got wrong, press “Review the lesson” to go straight to the lesson that covers it.'],
@@ -206,8 +206,13 @@
     }
     const saveDraft = () => PH.update(p => { p.exams[exam.id] = Object.assign({}, p.exams[exam.id], { draft: state }); });
     const clearDraft = () => PH.update(p => { if (p.exams[exam.id]) delete p.exams[exam.id].draft; });
-    const tfPoints = n => [0, 0.1, 0.25, 0.5, 1][n] || 0;
-    const partMax = pt => pt.kind === 'tf' ? pt.items.length : pt.items.length * pt.points;
+    const PHAN = { mcq: 4.5, tf: 4, short: 1.5 }, TF_BAC = [0, 0.1, 0.25, 0.5, 1];
+    const tongPhan = exam ? exam.parts.reduce((s, pt) => s + PHAN[pt.kind], 0) : 10;
+    const diemCau = pt => PHAN[pt.kind] * 10 / tongPhan / pt.items.length;
+    const tfPoints = (n, pt) => (TF_BAC[n] || 0) * diemCau(pt);
+    const partMax = pt => diemCau(pt) * pt.items.length;
+    const lam2 = x => Math.round((x + 1e-9) * 100) / 100;
+    const docSo = s => { s = String(s == null ? '' : s).trim().replace(',', '.'); return /^-?(\d+\.?\d*|\.\d+)$/.test(s) ? parseFloat(s) : NaN; };
 
     function isDone(f) {
       const a = state.answers[f.item.id];
@@ -217,10 +222,16 @@
     }
     function grade(f) {
       const a = state.answers[f.item.id]; const it = f.item;
-      if (f.part.kind === 'mcq') return { pts: a === it.correct ? f.part.points : 0, max: f.part.points, ok: a === it.correct };
-      if (f.part.kind === 'tf') { const n = it.statements.filter((s, i) => a && a[i] === s.answer).length; return { pts: tfPoints(n), max: 1, ok: n === 4, n }; }
-      const v = PH.parseNum(a); const ok = !isNaN(v) && Math.abs(v - it.answer) <= (it.tolerance != null ? it.tolerance : 1e-6);
-      return { pts: ok ? f.part.points : 0, max: f.part.points, ok };
+      const max = diemCau(f.part);
+      if (f.part.kind === 'mcq') { const ok = a === it.correct; return { pts: ok ? max : 0, max, ok }; }
+      if (f.part.kind === 'tf') { const n = it.statements.filter((s, i) => a && a[i] === s.answer).length; return { pts: tfPoints(n, f.part), max, ok: n === 4, n }; }
+      const v = docSo(a); const ok = !isNaN(v) && Math.abs(v - it.answer) < 1e-9;
+      return { pts: ok ? max : 0, max, ok };
+    }
+    function tinhKetQua() {
+      let raw = 0, max = 0, ok = 0;
+      flat.forEach(f => { const g = grade(f); raw += g.pts; max += g.max; if (g.ok) ok++; });
+      return { score: max ? lam2(raw / max * 10) : 0, ok };
     }
     function termsInExam() {
       const text = flat.map(f => JSON.stringify(f.item)).join(' ').toLowerCase();
@@ -229,7 +240,7 @@
 
     function qHTML(f, n) {
       const it = f.item, kind = f.part.kind, a = state.answers[it.id], g = submitted ? grade(f) : null;
-      const pts = kind === 'tf' ? PH.uiFmt('tfPts') : PH.uiFmt('ptsOne', { p: num(f.part.points) });
+      const pts = kind === 'tf' ? PH.uiFmt('tfPts', { a: num(lam2(tfPoints(1, f.part))), b: num(lam2(tfPoints(2, f.part))), c: num(lam2(tfPoints(3, f.part))), d: num(lam2(tfPoints(4, f.part))) }) : PH.uiFmt('ptsOne', { p: num(lam2(diemCau(f.part))) });
       const flagged = !!state.flags[it.id];
       let body = '';
       if (kind === 'mcq') {
@@ -247,7 +258,7 @@
             ${submitted ? `<span class="tag ${s.answer ? 'green' : 'gold'}">${PH.uiFmt(s.answer ? 'tru' : 'fal')}</span>` : ''}</div>`;
         }).join('');
       } else {
-        body = `<div class="short${submitted ? (g.ok ? ' right' : ' wrong') : ''}"><label for="in-${it.id}">${PH.uiFmt('yourAnswer')}</label><span class="box"><input id="in-${it.id}" type="text" inputmode="decimal" maxlength="5" value="${PH.esc(a || '')}" data-short="${it.id}" placeholder="?" ${submitted ? 'disabled' : ''}><span class="unit">${PH.esc(it.unit || '')}</span></span>
+        body = `<div class="short${submitted ? (g.ok ? ' right' : ' wrong') : ''}"><label for="in-${it.id}">${PH.uiFmt('yourAnswer')}</label><span class="box"><input id="in-${it.id}" type="text" inputmode="decimal" maxlength="4" value="${PH.esc(a || '')}" data-short="${it.id}" placeholder="?" ${submitted ? 'disabled' : ''}><span class="unit">${PH.esc(it.unit || '')}</span></span>
           <span class="note">${PH.uiFmt('shortHint')}${submitted ? ` <b>${PH.uiFmt('answerIs', { a: num(it.answer) })}</b>` : ''}</span></div>`;
       }
       const why = it.why || it.solution;
@@ -265,7 +276,7 @@
           if (current === it.id) cls += ' cur';
           return `<button type="button" class="${cls}" data-go="${it.id}" aria-label="${PH.uiFmt('partQ', { p: partRoman[pt.kind], i: i + 1 })}">${i + 1}</button>`;
         }).join('');
-        return `<p class="grp">${PH.uiFmt(partKey[pt.kind])}</p><p class="grpd">${PH.uiFmt(partKey[pt.kind] + 'd', { n: pt.items.length, p: num(partMax(pt), 2) })}</p><div class="nums">${btns}</div>`;
+        return `<p class="grp">${PH.uiFmt(partKey[pt.kind])}</p><p class="grpd">${PH.uiFmt(partKey[pt.kind] + 'd', { n: pt.items.length, p: num(lam2(partMax(pt))) })}</p><div class="nums">${btns}</div>`;
       }).join('');
       const legend = submitted
         ? `<span><i style="background:var(--green);border-color:var(--green)"></i>${PH.uiFmt('lgOk')}</span><span><i style="background:var(--red);border-color:var(--red)"></i>${PH.uiFmt('lgBad')}</span>`
@@ -308,11 +319,9 @@
     function submit(auto) {
       if (submitted) return;
       submitted = true; clearInterval(timerId);
-      let raw = 0, max = 0, ok = 0;
-      flat.forEach(f => { const g = grade(f); raw += g.pts; max += g.max; if (g.ok) ok++; });
-      const score = max ? raw / max * 10 : 0;
+      const { score, ok } = tinhKetQua();
       const spent = Math.min(exam.minutes * 60, Math.round((Date.now() - state.startedAt) / 1000));
-      state.result = { score, raw, max, ok, spent, at: Date.now() };
+      state.result = { score, ok, spent, at: Date.now() };
       PH.update(p => {
         const x = p.exams[exam.id] || {}; delete x.draft;
         x.last = state.result; x.best = Math.max(x.best || 0, score); x.attempts = (x.attempts || 0) + 1;
@@ -325,8 +334,8 @@
     function renderResult() {
       const r = state.result; if (!r) return;
       document.getElementById('resultBox').innerHTML = `<div class="card result"><div class="score">${num(r.score, 2)}<span style="font-size:20px;color:var(--ink-3)"> / 10</span></div>
-        <div><div class="l">${PH.uiFmt('resultLbl')}</div><div>${PH.uiFmt('resultTxt', { ok: r.ok, n: flat.length, raw: num(r.raw, 2), max: num(r.max, 2), m: Math.floor(r.spent / 60), s: r.spent % 60 })}</div>
-        <div class="small muted" style="margin-top:4px">${PH.uiFmt('quyDoi', { max: num(r.max, 2) })}</div></div>
+        <div><div class="l">${PH.uiFmt('resultLbl')}</div><div>${PH.uiFmt('resultTxt', { ok: r.ok, n: flat.length, m: Math.floor(r.spent / 60), s: r.spent % 60 })}</div>
+        <div class="small muted" style="margin-top:4px">${PH.uiFmt('quyDoi', Object.assign({ n: flat.length }, ...exam.parts.map(pt => ({ [{ mcq: 'a', tf: 'b', short: 'c' }[pt.kind]]: num(lam2(partMax(pt))) }))))}</div></div>
         <div class="row"><button type="button" class="btn outline sm" id="btnRetry">${PH.uiFmt('retry')}</button><a class="btn ghost sm" href="luyende.html">${PH.uiFmt('backList')}</a></div></div>`;
       document.getElementById('btnRetry').addEventListener('click', () => {
         PH.update(p => { const x = p.exams[exam.id]; if (x) { delete x.draft; delete x.lastState; } });
@@ -337,7 +346,7 @@
       napNhapHetGio = khoiPhucKetQua = false;
       state = loadState();
       if (napNhapHetGio) { renderExam(); submit(true); return; }
-      if (khoiPhucKetQua) { submitted = true; clearInterval(timerId); renderExam(); return; }
+      if (khoiPhucKetQua) { submitted = true; clearInterval(timerId); Object.assign(state.result, tinhKetQua()); renderExam(); return; }
       submitted = false;
       saveDraft(); renderExam(); clearInterval(timerId); timerId = setInterval(tick, 500);
     }
@@ -363,7 +372,7 @@
         if (e.target.closest('#btnYes')) { submit(false); return; }
         if (e.target.closest('#btnNo')) { document.getElementById('confirmBox').innerHTML = ''; }
       });
-      app.addEventListener('input', e => { const s = e.target.closest('[data-short]'); if (s && !submitted) { s.value = s.value.replace(/[^0-9.,\-]/g, '').slice(0, 5); state.answers[s.dataset.short] = s.value; saveDraft(); refreshMap(); } });
+      app.addEventListener('input', e => { const s = e.target.closest('[data-short]'); if (s && !submitted) { s.value = s.value.replace(/[^0-9.,\-]/g, '').slice(0, 4); state.answers[s.dataset.short] = s.value; saveDraft(); refreshMap(); } });
       PH.onLang(() => { const y = window.scrollY; renderExam(); window.scrollTo(0, y); });
     } else {
       renderList(); PH.onLang(renderList);

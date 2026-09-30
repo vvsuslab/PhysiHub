@@ -140,12 +140,12 @@
     const ROUND = 60, LIVES = 3, FALL_MS = 9000, SPAWN_MS = 3200, MAX_ON_SCREEN = 3;
     const arena = document.getElementById('arena');
     let mode = 'choose', pool = [], items = [], timer = null, endAt = 0, spawnAt = 0, raf = null;
-    let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, multVan = 1;
+    let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, multVan = 1, langVan = null;
     let leftSec = ROUND, board = null, lastFb = [null];
 
     const scope = PH.scope();
     renderStatic();
-    function langPill() { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); }
+    function langPill() { const l = PH.langInfo(running && langVan ? langVan : undefined); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); }
     langPill(); PH.onLang(() => { langPill(); renderStatic(); renderTime(); renderStats(); refreshCards(); renderBoard(); setFeedback(...lastFb); if (running) renderAnswer(); });
 
     function buildPool() {
@@ -156,7 +156,7 @@
 
     function start() {
       pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true; board = null;
-      multVan = PH.langInfo().mult;
+      multVan = PH.langInfo().mult; langVan = PH.lang(); langPill();
       arena.querySelectorAll('.fall, .overlay').forEach(e => e.remove());
       endAt = Date.now() + ROUND * 1000; spawnAt = 0;
       clearInterval(timer); timer = setInterval(tickTime, 250); tickTime();
@@ -275,10 +275,10 @@
       document.getElementById('lives').innerHTML = Array.from({ length: LIVES }, (_, i) => `<i class="${i < lives ? '' : 'off'}"></i>`).join('');
     }
     function end(reason) {
-      if (!running) return; running = false; clearInterval(timer); cancelAnimationFrame(raf); (lives <= 0 ? PH.am.thua() : PH.am.thang());
+      if (!running) return; running = false; langPill(); clearInterval(timer); cancelAnimationFrame(raf); (lives <= 0 ? PH.am.thua() : PH.am.thang());
       items.forEach(it => it.el.remove()); items = [];
       board = { kind: 'end', reason, best: (PH.progress().games.termrush || {}).best || 0 };
-      PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode });
+      PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode, lang: langVan });
       renderBoard();
       document.getElementById('ask').innerHTML = ''; document.getElementById('answer').innerHTML = ''; document.getElementById('hint').textContent = '';
     }
