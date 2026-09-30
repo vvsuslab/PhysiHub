@@ -283,7 +283,7 @@ window.PH = window.PH || {};
     vietnamese: ['Tiếng Việt', 'Vietnamese'], bilingual: ['Song ngữ', 'Bilingual'],
     ft1: ['Sản phẩm dự thi Khoa học kĩ thuật · Trường THPT Bùi Hữu Nghĩa, Cần Thơ · Năm học 2026–2027', 'Science and engineering fair project · Bùi Hữu Nghĩa High School, Cần Thơ · School year 2026–2027'],
     ft2: ['Nội dung bám SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoạ của Bộ GD&ĐT, dùng cho mục đích học tập.', 'Content follows the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series) and the Ministry of Education’s sample exams, for learning purposes only.'],
-    ftAll: ['Tất cả liên kết', 'All links'], ftAbout: ['Về dự án', 'About the project'], ftSources: ['Nguồn học liệu', 'Sources'], ftFeedback: ['Góp ý cho nhóm', 'Send feedback'],
+    ftAll: ['Tất cả liên kết', 'All links'], ftAbout: ['Về dự án', 'About the project'], ftSources: ['Nguồn học liệu', 'Sources'],
     listen: ['Nghe phát âm', 'Play pronunciation'], listenMachine: ['Đọc bằng giọng máy của trình duyệt', 'Read aloud by the browser voice'],
     hearOn: ['Nghe phát âm trên', 'Hear it on'], hearOxford: ['Nghe trên Oxford', 'Hear it on Oxford'], hearCambridge: ['Nghe trên Cambridge', 'Hear it on Cambridge'],
     openInGlossary: ['Mở trong kho thuật ngữ', 'Open in the glossary'], noVoice: ['Máy này chưa có giọng đọc tiếng Anh — em nghe trên Oxford hoặc Cambridge nhé.', 'No English voice on this device — listen on Oxford or Cambridge instead.'],
@@ -525,7 +525,7 @@ window.PH = window.PH || {};
   }
   function footerHTML() {
     return `<div class="wrap"><div><p>${PH.uiFmt('ft1')}</p><p>${PH.uiFmt('ft2')}</p></div>
-      <nav aria-label="${PH.uiFmt('ftAll')}"><a href="lienket.html">${PH.uiFmt('ftAll')}</a><a href="vedan.html">${PH.uiFmt('ftAbout')}</a><a href="vedan.html#nguon">${PH.uiFmt('ftSources')}</a><a href="https://github.com/vvsuslab/PhysiHub/issues" target="_blank" rel="noopener">${PH.uiFmt('ftFeedback')}</a></nav></div>`;
+      <nav aria-label="${PH.uiFmt('ftAll')}"><a href="lienket.html">${PH.uiFmt('ftAll')}</a><a href="vedan.html">${PH.uiFmt('ftAbout')}</a><a href="vedan.html#nguon">${PH.uiFmt('ftSources')}</a></nav></div>`;
   }
 
   function resultsHTML(q) {
