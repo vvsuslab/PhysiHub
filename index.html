@@ -23,7 +23,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    /* Khối mở đầu */
     .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 44px; align-items: center; }
     .hero h1 { white-space: pre-line; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.14; letter-spacing: -.6px; margin-top: 16px; }
     .tiep { display: flex; align-items: center; gap: 14px; margin-top: 26px; padding: 14px 14px 14px 16px; border-radius: 20px; background: var(--orange-soft); border: 1.5px solid var(--orange-line); color: var(--ink); transition: background .25s ease, border-color .25s ease; }
@@ -54,7 +53,6 @@
     .section-head a .short { display: none; }
     #installBox[hidden] { display: none; }
 
-    /* Năm lối vào */
     .loi-vao { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
     .lv { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 14px 18px; border-radius: 18px; background: #fff; border: 1.5px solid var(--line); box-shadow: 0 1px 2px rgba(31, 41, 51, .04); color: var(--ink); transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
     .lv:hover { background: var(--o-nen); border-color: var(--o-vien); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(31, 41, 51, .1); color: var(--ink); }
@@ -65,8 +63,6 @@
     .lv .t-en { display: none; font-size: 16px; }
     [data-lang="bi"] .lv .t-en { display: block; }
     .lv .m { display: block; margin-top: 4px; font-size: 16px; line-height: 1.45; color: var(--ink-3); }
-
-    /* Bốn chương */
     .the-chuong { display: block; position: relative; background: #fff; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--line); border-top: 4px solid var(--accent); box-shadow: var(--shadow); color: var(--ink); transition: transform .4s cubic-bezier(.2, .7, .3, 1), box-shadow .4s ease, background .3s ease, border-color .3s ease; }
     .the-chuong:hover { transform: translateY(-6px); background: var(--accent-soft); border-color: var(--accent); box-shadow: var(--shadow-hover); color: var(--ink); }
     .the-chuong .band { display: block; position: relative; aspect-ratio: 840 / 454; overflow: hidden; background: #DCE7F3; }
@@ -136,7 +132,6 @@
 <body>
   <main>
     <div class="wrap">
-      <!-- KHỐI MỞ ĐẦU: một nút duy nhất để học tiếp -->
       <section class="hero-panel reveal in">
         <div class="hero">
           <div>
@@ -149,14 +144,8 @@
           <div class="panel has-label demo" id="demo"></div>
         </div>
       </section>
-
-      <!-- Thẻ "học tiếp" cho điện thoại (trên máy tính nằm trong khối mở đầu) -->
       <a class="card tiep-mob" id="tiepMob" href="bai.html?n=1"></a>
-
-      <!-- NĂM LỐI VÀO -->
       <nav class="loi-vao" id="loiVao" aria-label=""></nav>
-
-      <!-- BỐN CHƯƠNG -->
       <section class="section" style="margin-top: 30px">
         <div class="section-head">
           <h2 id="chH2"></h2>
@@ -257,8 +246,6 @@
     PH.onLang(renderAll);
     document.addEventListener('ph:progress', renderContinue);
     document.addEventListener('ph:progress', renderChapters);
-
-    // Nút "Cài lên màn hình chính" chỉ hiện khi trình duyệt cho phép cài ứng dụng web
     const box = $('installBox');
     const showInstall = () => {
       box.hidden = !PH.canInstall();
