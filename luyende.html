@@ -20,7 +20,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
-    /* Danh sách đề */
     .exam-card { display: flex; flex-direction: column; gap: 6px; border-top: 4px solid var(--accent); }
     .exam-card .t { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--navy); }
     .exam-card .meta { font-size: 16px; color: var(--ink-3); }
@@ -29,7 +28,6 @@
     .stat .lb { font-size: 15px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--gold); }
     .stat .n { font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1.15; color: var(--navy); }
     .three { margin-top: 20px; padding: 16px 20px; display: flex; gap: 14px; align-items: center; background: var(--blue-soft); border: 1.5px solid var(--blue-line); }
-    /* Làm bài */
     .strip { position: relative; overflow: hidden; display: flex; align-items: center; gap: 18px; padding: 12px 18px; border-radius: 18px; background: var(--grad-bar); color: #fff; box-shadow: 0 10px 24px rgba(13, 71, 161, .16); flex-wrap: wrap; }
     .strip .icon-tile { background: #fff; color: var(--navy-2); width: 52px; height: 52px; border-radius: 50%; box-shadow: 0 0 0 3px #90CAF9; }
     .strip .txt { flex: 1; min-width: 220px; }
@@ -176,7 +174,6 @@
     const partKey = { mcq: 'p1', tf: 'p2', short: 'p3' };
     const countQ = x => x.parts.reduce((s, pt) => s + pt.items.length, 0);
 
-    /* =============== DANH SÁCH ĐỀ =============== */
     function renderList() {
       const p = PH.progress();
       const attempts = Object.values(p.exams).reduce((s, x) => s + (x.attempts || 0), 0);
@@ -194,19 +191,15 @@
         <div class="card three"><span class="icon-tile tone-navy">${PH.icon('exam')}</span><div><p style="font-weight:700;color:var(--navy)">${PH.uiFmt('threeLevels')}</p><p class="small" style="color:var(--ink-2)">${PH.uiFmt('threeLevelsNote')}</p></div></div>`;
     }
 
-    /* =============== LÀM BÀI =============== */
     let state = null, timerId = null, submitted = false, current = null;
     const flat = [];
     if (exam) exam.parts.forEach(pt => pt.items.forEach((it, i) => flat.push({ part: pt, item: it, idx: i })));
 
-    // Nạp lại bài đang làm dở. Nếu bản nháp đã quá giờ (đóng máy giữa chừng rồi mở lại sau),
-    // KHÔNG được xoá bài làm: nạp lại rồi chấm luôn, coi như nộp khi hết giờ.
     let napNhapHetGio = false, khoiPhucKetQua = false;
     function loadState() {
       const p = PH.progress(); const d = p.exams[exam.id] && p.exams[exam.id].draft;
       if (d && d.endTime > Date.now()) return Object.assign({ flags: {} }, d);
       if (d && d.answers && Object.keys(d.answers).length) { napNhapHetGio = true; return Object.assign({ flags: {} }, d); }
-      // Đã nộp rồi mà mở lại trang: hiện lại bài đã chấm (đáp án, lời giải) thay vì bắt làm lại từ đầu
       const x = p.exams[exam.id];
       if (x && x.lastState && x.lastState.result) { khoiPhucKetQua = true; return Object.assign({ flags: {} }, x.lastState); }
       return { answers: {}, flags: {}, endTime: Date.now() + exam.minutes * 60000, startedAt: Date.now() };
@@ -229,7 +222,6 @@
       const v = PH.parseNum(a); const ok = !isNaN(v) && Math.abs(v - it.answer) <= (it.tolerance != null ? it.tolerance : 1e-6);
       return { pts: ok ? f.part.points : 0, max: f.part.points, ok };
     }
-    // Thuật ngữ xuất hiện trong đề (dò theo tên tiếng Việt / tiếng Anh trong đề)
     function termsInExam() {
       const text = flat.map(f => JSON.stringify(f.item)).join(' ').toLowerCase();
       return (PH.TERMS || []).filter(t => text.includes(t.vi.toLowerCase()) || text.includes(t.en.toLowerCase())).slice(0, 10);
@@ -324,7 +316,7 @@
       PH.update(p => {
         const x = p.exams[exam.id] || {}; delete x.draft;
         x.last = state.result; x.best = Math.max(x.best || 0, score); x.attempts = (x.attempts || 0) + 1;
-        x.lastState = { answers: state.answers, flags: state.flags, result: state.result };   // để mở lại còn xem được bài đã chấm
+        x.lastState = { answers: state.answers, flags: state.flags, result: state.result };
         p.exams[exam.id] = x;
       });
       renderExam(); window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -337,15 +329,15 @@
         <div class="small muted" style="margin-top:4px">${PH.uiFmt('quyDoi', { max: num(r.max, 2) })}</div></div>
         <div class="row"><button type="button" class="btn outline sm" id="btnRetry">${PH.uiFmt('retry')}</button><a class="btn ghost sm" href="luyende.html">${PH.uiFmt('backList')}</a></div></div>`;
       document.getElementById('btnRetry').addEventListener('click', () => {
-        PH.update(p => { const x = p.exams[exam.id]; if (x) { delete x.draft; delete x.lastState; } });   // làm lại: bỏ cả bài cũ đã chấm
+        PH.update(p => { const x = p.exams[exam.id]; if (x) { delete x.draft; delete x.lastState; } });
         state = null; submitted = false; start(); window.scrollTo(0, 0);
       });
     }
     function start() {
       napNhapHetGio = khoiPhucKetQua = false;
       state = loadState();
-      if (napNhapHetGio) { renderExam(); submit(true); return; }   // bài dở đã hết giờ: chấm ngay, không mất bài
-      if (khoiPhucKetQua) { submitted = true; clearInterval(timerId); renderExam(); return; }   // xem lại bài đã nộp
+      if (napNhapHetGio) { renderExam(); submit(true); return; }
+      if (khoiPhucKetQua) { submitted = true; clearInterval(timerId); renderExam(); return; }
       submitted = false;
       saveDraft(); renderExam(); clearInterval(timerId); timerId = setInterval(tick, 500);
     }

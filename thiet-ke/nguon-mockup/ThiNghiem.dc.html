@@ -31,7 +31,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid 
 h1, h2, h3 { text-wrap: balance; }
 .ph-ipa { font-family: 'Charis SIL', 'Noto Sans', 'Segoe UI', 'Lucida Sans Unicode', sans-serif; letter-spacing: 0.1px; }
 p, li, a, span, button, td { text-wrap-style: pretty; }
-/* ô tìm kiếm */
 .ph-tim { position: relative; flex: 1 1 auto; min-width: 280px; max-width: 470px; }
 .ph-tim-o { display: block; width: 100%; box-sizing: border-box; height: 44px; padding: 0 52px 0 20px; border-radius: 999px; border: 1.5px solid #DCD3C1; background: #FAF8F3; font-family: inherit; font-size: 14.5px; color: #1F2933; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
 .ph-tim-o:hover { border-color: #B9A77F; background: #FFFFFF; }
@@ -45,7 +44,6 @@ p, li, a, span, button, td { text-wrap-style: pretty; }
 .ph-tim-kq { position: absolute; left: 0; width: 600px; top: 52px; background: #FFFFFF; border-radius: 18px; border: 1px solid #E6E1D6; box-shadow: 0 22px 50px rgba(20,32,66,0.20); padding: 8px; z-index: 60; }
 .ph-kq { display: flex; align-items: center; gap: 12px; padding: 9px 10px; border-radius: 12px; border: 1px solid transparent; transition: background 0.2s ease, border-color 0.2s ease; }
 .ph-kq:hover { background: #E8F6F5; border-color: #9ED8D2; }
-/* thanh menu */
 .ph-bar { position: relative; height: 48px; box-sizing: border-box; padding: 0 36px; background: linear-gradient(90deg, #1B2D5E 0%, #22407A 60%, #1D5C78 100%); display: flex; align-items: stretch; }
 .ph-mm { display: flex; }
 .ph-bar-i { position: relative; box-sizing: border-box; height: 48px; display: inline-flex; align-items: center; gap: 7px; padding: 0 16px; color: #FFFFFF; font-size: 15px; font-weight: 600; white-space: nowrap; transition: background 0.2s ease, color 0.2s ease; }
@@ -61,7 +59,6 @@ p, li, a, span, button, td { text-wrap-style: pretty; }
 .ph-mm-h { margin: 0 0 10px 0; font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8A5A14; }
 .ph-mm-l { display: flex; align-items: flex-start; gap: 10px; padding: 9px 10px; min-height: 40px; box-sizing: border-box; border-radius: 12px; border: 1px solid transparent; color: #1F2933; font-size: 13.5px; line-height: 1.45; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
 .ph-mm-l:hover { background: var(--o-nen, #EEF2FB); border-color: var(--o-vien, #B9C6E6); color: var(--o-chu, #1E3266); }
-/* ô đổi màu khi rê chuột, dùng chung */
 .ph-o { border: 1.5px solid transparent; transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease; }
 .ph-o:hover { background: var(--o-nen, #EAF6EE); border-color: var(--o-vien, #7CC49A); transform: translateY(-3px); }
 .ph-ng[aria-pressed="false"]:hover { background: #EDE5D3 !important; color: #1F2933 !important; }
@@ -441,7 +438,6 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
     <a href="BaiHoc.dc.html" style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; white-space: nowrap;">{{veBai}}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22376B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
   </div>
 
-  <!-- SÂN KHẤU -->
   <section class="tn-stage" style="flex-shrink: 0; margin: 20px 36px 0 36px; padding: 22px;">
     <div style="display: grid; grid-template-columns: 290px 300px minmax(0, 1fr); gap: 18px;">
 
@@ -456,7 +452,6 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
               <radialGradient id="tnSang" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFB547" stop-opacity="0.55"/><stop offset="1" stop-color="#FFB547" stop-opacity="0"/></radialGradient>
             </defs>
             <g opacity="{{hoiOp}}" style="transition: opacity 0.8s ease;"><path class="tn-khoi" d="M112 142 C 102 124, 122 112, 112 94 C 104 80, 118 70, 114 58" stroke="#E9F2FF" stroke-width="7" stroke-linecap="round" fill="none" style="animation-delay: -0.00s;"/><path class="tn-khoi" d="M140 140 C 150 122, 130 110, 142 92 C 150 78, 136 68, 144 54" stroke="#E9F2FF" stroke-width="6" stroke-linecap="round" fill="none" style="animation-delay: -0.65s;"/><path class="tn-khoi" d="M168 142 C 158 126, 176 114, 166 96 C 160 84, 172 74, 168 62" stroke="#E9F2FF" stroke-width="5" stroke-linecap="round" fill="none" style="animation-delay: -1.30s;"/><path class="tn-khoi" d="M126 146 C 134 130, 118 118, 128 102" stroke="#E9F2FF" stroke-width="4" stroke-linecap="round" fill="none" style="animation-delay: -1.95s;"/></g>
-            <!-- giá đỡ và đèn -->
             <path d="M84 334 L62 404 M216 334 L238 404" stroke="#7D8AA6" stroke-width="5" stroke-linecap="round"/>
             <ellipse cx="150" cy="352" rx="70" ry="26" fill="url(#tnSang)" opacity="{{lua}}"/>
             <g opacity="{{lua}}" style="transition: opacity 0.4s ease;">
@@ -466,14 +461,12 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
             <rect x="132" y="358" width="36" height="46" rx="6" fill="#56627A"/>
             <rect x="124" y="398" width="52" height="8" rx="4" fill="#44506A"/>
             <rect x="60" y="328" width="180" height="8" rx="4" fill="#8B97B1"/>
-            <!-- cốc -->
             <path d="M78 146 V308 Q78 326 96 326 H204 Q222 326 222 308 V146" fill="#CFE6FF" fill-opacity="0.07" stroke="#D5E8FA" stroke-opacity="0.85" stroke-width="3" stroke-linejoin="round"/>
             <path d="M72 146 H84 M216 146 H228" stroke="#D5E8FA" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round"/>
             <rect x="81" y="{{nuocY}}" width="138" height="{{nuocH}}" rx="4" fill="url(#tnNuoc)" fill-opacity="0.9" style="transition: y 0.6s ease, height 0.6s ease;"/>
             <g opacity="{{da0}}" style="transition: opacity 0.6s ease;"><rect x="88" y="284" width="34" height="32" rx="7" transform="rotate(-6 105 300)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M95 292 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(-6 105 300)"/></g><g opacity="{{da1}}" style="transition: opacity 0.6s ease;"><rect x="126" y="287" width="34" height="32" rx="7" transform="rotate(4 143 303)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M133 295 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(4 143 303)"/></g><g opacity="{{da2}}" style="transition: opacity 0.6s ease;"><rect x="164" y="283" width="34" height="32" rx="7" transform="rotate(-3 181 299)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M171 291 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(-3 181 299)"/></g><g opacity="{{da3}}" style="transition: opacity 0.6s ease;"><rect x="104" y="250" width="34" height="32" rx="7" transform="rotate(8 121 266)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M111 258 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(8 121 266)"/></g><g opacity="{{da4}}" style="transition: opacity 0.6s ease;"><rect x="144" y="249" width="34" height="32" rx="7" transform="rotate(-5 161 265)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M151 257 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(-5 161 265)"/></g><g opacity="{{da5}}" style="transition: opacity 0.6s ease;"><rect x="182" y="254" width="34" height="32" rx="7" transform="rotate(6 199 270)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M189 262 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(6 199 270)"/></g><g opacity="{{da6}}" style="transition: opacity 0.6s ease;"><rect x="124" y="216" width="34" height="32" rx="7" transform="rotate(-2 141 232)" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity="0.8" stroke-width="1.5"/><path d="M131 224 h12" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="3" stroke-linecap="round" transform="rotate(-2 141 232)"/></g>
             <g opacity="{{botOp}}"><circle class="tn-bot" cx="98" cy="318" r="3" fill="#FFFFFF" fill-opacity="0.75" style="{{bot0}}"/><circle class="tn-bot" cx="116" cy="318" r="4" fill="#FFFFFF" fill-opacity="0.75" style="{{bot1}}"/><circle class="tn-bot" cx="134" cy="318" r="5" fill="#FFFFFF" fill-opacity="0.75" style="{{bot2}}"/><circle class="tn-bot" cx="152" cy="318" r="3" fill="#FFFFFF" fill-opacity="0.75" style="{{bot3}}"/><circle class="tn-bot" cx="170" cy="318" r="4" fill="#FFFFFF" fill-opacity="0.75" style="{{bot4}}"/><circle class="tn-bot" cx="188" cy="318" r="5" fill="#FFFFFF" fill-opacity="0.75" style="{{bot5}}"/><circle class="tn-bot" cx="108" cy="318" r="3" fill="#FFFFFF" fill-opacity="0.75" style="{{bot6}}"/><circle class="tn-bot" cx="160" cy="318" r="4" fill="#FFFFFF" fill-opacity="0.75" style="{{bot7}}"/></g>
             <path d="M88 160 V300" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="5" stroke-linecap="round"/>
-            <!-- nhiệt kế -->
             <rect x="196" y="40" width="14" height="266" rx="7" fill="#FFFFFF" fill-opacity="0.16" stroke="#E6EEF8" stroke-opacity="0.9" stroke-width="1.5"/>
             <rect x="200" y="{{cotY}}" width="6" height="{{cotH}}" rx="3" fill="#FF5A4E" style="transition: y 0.3s linear, height 0.3s linear;"/>
             <circle cx="203" cy="308" r="10" fill="#FF5A4E" stroke="#FFD1CC" stroke-width="1.5"/>
@@ -481,7 +474,6 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
             <text x="222" y="271.1" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#D6E2F5">0</text>
             <text x="222" y="189.0" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#D6E2F5">50</text>
             <text x="222" y="106.9" font-family="Be Vietnam Pro, sans-serif" font-size="11" fill="#D6E2F5">100</text>
-            <!-- ống kính phóng to -->
             <circle cx="128" cy="276" r="20" fill="none" stroke="#F4C878" stroke-width="2.5" stroke-dasharray="5 4"/>
             <path d="M148 276 H280" stroke="#F4C878" stroke-width="2" stroke-dasharray="5 5" stroke-opacity="0.8"/>
           </svg>
@@ -546,7 +538,6 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
     </div>
   </section>
 
-  <!-- ĐIỀU KHIỂN -->
   <div class="ph-the" style="flex-shrink: 0; margin: 18px 36px 0 36px; padding: 18px 24px; display: flex; align-items: center; gap: 22px; border-radius: 22px;">
     <button type="button" class="tn-nut" onClick="{{batTat}}">
       <span style="width: 26px; height: 26px; border-radius: 50%; background: rgba(43,20,6,0.12); display: flex; align-items: center; justify-content: center;">
@@ -565,7 +556,6 @@ input[type="range"].tn-range::-moz-range-thumb { width: 22px; height: 22px; bord
     </div>
   </div>
 
-  <!-- QUAN SÁT + THUẬT NGỮ -->
   <div style="flex-shrink: 0; margin: 18px 36px 0 36px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start;">
     <div class="ph-the" style="padding: 20px 24px; border-radius: 22px; background: linear-gradient(160deg, #FFFFFF 0%, #FFF7EC 100%);">
       <p style="margin: 0 0 8px 0; font-family: 'Lora', Georgia, serif; font-size: 20px; font-weight: 600; color: #1F2933;">{{lbThay}}</p>
@@ -623,7 +613,6 @@ class Component extends DCLogic {
   }
 
   dinh(s) {
-    // giữ hai chữ cuối trên cùng một dòng để không "rơi chữ" (một chữ đứng trơ ở dòng cuối)
     if (typeof s !== 'string' || /[;{}]/.test(s)) return s;
     s = s.replace(/(\d) (?=[\dA-Za-zÀ-ỹ%°ΩΦλ])/g, '$1\u00a0');
     if (s.length < 8) return s;
@@ -733,11 +722,10 @@ class Component extends DCLogic {
       return 100;
     }
     var T = nhietDo(p);
-    var f = p < 6 ? 0 : (p < 22 ? (p - 6) / 16 : 1);          // phần nước đá đã tan
-    var g = p < 42 ? 0 : (p < 100 ? (p - 42) / 58 : 1);        // phần nước đã hoá hơi
+    var f = p < 6 ? 0 : (p < 22 ? (p - 6) / 16 : 1);
+    var g = p < 42 ? 0 : (p < 100 ? (p - 42) / 58 : 1);
     var pha = p < 6 ? 0 : (p < 22 ? 1 : (p < 42 ? 2 : (p < 100 ? 3 : 4)));
 
-    // màu theo nhiệt độ
     var STOP = [[-20, [110, 168, 255]], [0, [92, 214, 255]], [40, [46, 230, 181]], [80, [244, 208, 63]], [100, [255, 181, 71]], [120, [255, 107, 90]]];
     function mau(t) {
       for (var i = 1; i < STOP.length; i++) {
@@ -752,7 +740,6 @@ class Component extends DCLogic {
     var toi = 'rgb(' + c.map(function (x) { return Math.round(x * 0.45 + 11 * 0.55); }).join(',') + ')';
     var nhanhK = (T + 20) / 140;
 
-    // phân tử
     var nTan = Math.round(f * PT.length), nHoi = Math.round(g * PT.length);
     var pt = PT.map(function (q, i) {
       var the = 'r';
@@ -768,14 +755,12 @@ class Component extends DCLogic {
       return { st: 'left: ' + xy[0] + 'px; top: ' + xy[1] + 'px; background: radial-gradient(circle at 35% 30%, #FFFFFF 0%, ' + hex + ' 42%, ' + toi + ' 100%); box-shadow: 0 0 12px ' + hex + '; animation: ' + ten + ' ' + dur + 's ' + easing + ' -' + (i * 0.17).toFixed(2) + 's infinite alternate;' };
     });
 
-    // đồ thị: phần đã đi qua
     var d = 'M' + gx(0).toFixed(1) + ' ' + gy(-20).toFixed(1);
     for (var i = 1; i < MOC.length; i++) {
       if (p >= MOC[i][0]) d += ' L' + gx(MOC[i][0]).toFixed(1) + ' ' + gy(MOC[i][1]).toFixed(1);
       else { d += ' L' + gx(p).toFixed(1) + ' ' + gy(T).toFixed(1); break; }
     }
 
-    // cốc nước
     var mucNuoc = pha === 0 ? 0 : (pha === 1 ? f : (pha === 2 ? 1 : (pha === 3 ? 1 - g : 0)));
     var cao = Math.round(mucNuoc * 100);
     var soDa = pha === 0 ? 7 : (pha === 1 ? Math.ceil(7 * (1 - f)) : 0);

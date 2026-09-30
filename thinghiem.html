@@ -35,8 +35,6 @@
     .tn-h { display: table; margin-bottom: 12px; padding: 5px 14px; border-radius: 999px; background: linear-gradient(135deg, #FFB547, #F57C00); color: var(--ink); font-size: 15px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; box-shadow: 0 4px 12px rgba(245, 124, 0, .3); }
     .tn-ghi { margin: 10px 2px 0; font-size: 13.5px; line-height: 1.45; color: var(--ink-3); }
     .tn-kinh { position: relative; width: 250px; height: 250px; margin: 4px auto 0; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1A4A9E 0%, #072460 75%); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--blue-line), 0 10px 24px rgba(13, 71, 161, .2); }
-    /* Không đặt transition cho background/box-shadow: màu đổi liên tục theo nhiệt độ,
-       transition sẽ bị khởi động lại mỗi khung hình và làm phân tử nhấp nháy. */
     .tn-pt { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; transition: left 1.2s cubic-bezier(.3, .7, .3, 1), top 1.2s cubic-bezier(.3, .7, .3, 1); }
     @keyframes tn-rung { from { transform: translate(-1.6px, 1px); } to { transform: translate(1.6px, -1.2px); } }
     @keyframes tn-troi1 { 0% { transform: translate(0, 0); } 33% { transform: translate(7px, -5px); } 66% { transform: translate(-6px, 4px); } 100% { transform: translate(3px, 3px); } }
@@ -45,9 +43,6 @@
     @keyframes tn-bay1 { 0% { transform: translate(0, 0); } 25% { transform: translate(30px, -20px); } 50% { transform: translate(-8px, -34px); } 75% { transform: translate(-30px, 10px); } 100% { transform: translate(6px, 18px); } }
     @keyframes tn-bay2 { 0% { transform: translate(0, 0); } 25% { transform: translate(-26px, 22px); } 50% { transform: translate(18px, 30px); } 75% { transform: translate(28px, -16px); } 100% { transform: translate(-10px, -24px); } }
     @keyframes tn-bay3 { 0% { transform: translate(0, 0); } 30% { transform: translate(20px, 26px); } 60% { transform: translate(-30px, 6px); } 100% { transform: translate(12px, -30px); } }
-    /* Lửa phập phùng: mỗi lớp một nhịp riêng (0,61 / 0,53 / 0,47 / 0,37 s) — các số không chia hết
-       cho nhau nên ngọn lửa không bao giờ lặp đều như đang thở; thêm lay nghiêng nhẹ như gió lùa.
-       Tàn lửa bay lên rồi tắt, quầng nóng dưới đáy cốc thở theo lửa. */
     @keyframes tn-lua-ngoai { 0%, 100% { transform: scale(1, 1) skewX(0); } 20% { transform: scale(.96, 1.12) skewX(-3deg); } 45% { transform: scale(1.03, .9) skewX(2deg); } 70% { transform: scale(.94, 1.17) skewX(-1.5deg); } 85% { transform: scale(1.02, .97) skewX(2.5deg); } }
     @keyframes tn-lua-trong { 0%, 100% { transform: scale(1, 1); opacity: .95; } 30% { transform: scale(.92, 1.1); opacity: .8; } 60% { transform: scale(1.04, .93); opacity: 1; } }
     @keyframes tn-lua-phu { 0%, 100% { transform: scale(1, .9) skewX(0); opacity: .75; } 40% { transform: scale(.9, 1.2) skewX(-5deg); opacity: .95; } 70% { transform: scale(1.05, .85) skewX(4deg); opacity: .6; } }
@@ -62,7 +57,6 @@
     .tn-tan { animation: tn-tan 1.6s ease-out infinite; }
     .tn-hao { transform-box: fill-box; transform-origin: 50% 50%; animation: tn-hao .9s ease-in-out infinite; }
     #sang { transform-box: fill-box; transform-origin: 50% 50%; animation: tn-sang .73s ease-in-out infinite; }
-    /* Giọt nước bắn lên mặt nước khi sôi (dùng chung --len với bọt để biết mặt nước ở đâu) */
     @keyframes tn-ban { 0% { transform: translate(0, var(--len, -60px)); opacity: 0; } 18% { opacity: .9; } 50% { transform: translate(var(--dx, 5px), calc(var(--len, -60px) - 16px)); } 100% { transform: translate(calc(var(--dx, 5px) * 1.7), var(--len, -60px)); opacity: 0; } }
     .tn-ban { animation: tn-ban .9s ease-out infinite; }
     @keyframes tn-len { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .95; } 100% { transform: translateY(var(--len, -70px)); opacity: 0; } }
@@ -79,20 +73,16 @@
     .legend .bar { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink-3); margin-top: 6px; }
     .legend .bar i { flex: 1; height: 6px; border-radius: 3px; background: linear-gradient(90deg, #6EA8FF, #5CD6FF, #2EE6B5, #F4D03F, #FFB547, #FF6B5A); }
     .readout { display: flex; gap: 12px; margin-top: 8px; }
-    /* Ô nhiệt độ giữ bề rộng cố định và dùng chữ số đều nhau, nếu không cả hàng sẽ
-       co giãn mỗi lần con số đổi (−20,0 → 0,0) và trông như bị giật. */
     .readout .o { flex: none; padding: 10px 14px; border-radius: 14px; background: var(--blue-soft); border: 1.5px solid var(--blue-line); white-space: nowrap; }
     .readout .o:first-child { min-width: 142px; }
     .readout .o.grow { flex: 1; min-width: 0; white-space: normal; }
     .readout .l { font-size: 14px; font-weight: 600; color: var(--ink-3); }
     .readout .t { margin-top: 2px; font-family: var(--font-display); font-size: 30px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
-    /* chừa sẵn chỗ cho "−20,0" để chữ °C không nhích qua lại khi số đổi */
     .readout .t #tHien { display: inline-block; min-width: 5ch; text-align: right; }
     .readout .t small { font-size: 17px; color: var(--ink-3); }
     .readout .s { margin-top: 4px; font-size: 17px; font-weight: 700; line-height: 1.35; min-height: 44px; }
     svg.dc, svg.dt { display: block; max-width: 100%; height: auto; margin: 0 auto; }
     .controls { margin-top: 18px; padding: 18px 24px; display: flex; align-items: center; gap: 22px; border-radius: 22px; flex-wrap: wrap; }
-    /* min-width: giữ bề rộng khi chữ đổi "Đun" ↔ "Tạm dừng", nếu không cả hàng nút sẽ nhích */
     .tn-nut { white-space: nowrap; min-height: 52px; min-width: 176px; justify-content: center; display: inline-flex; align-items: center; gap: 10px; padding: 0 26px; border-radius: 999px; font-size: 17px; font-weight: 800; background: var(--grad-cta); color: var(--ink); box-shadow: 0 6px 0 #C25400, 0 14px 28px rgba(245, 124, 0, .32); transition: transform .15s ease, box-shadow .15s ease; }
     .tn-nut:active { transform: translateY(4px); box-shadow: 0 2px 0 #C25400, 0 8px 18px rgba(245, 124, 0, .28); }
     .tn-nut .ic { width: 26px; height: 26px; border-radius: 50%; background: rgba(15, 37, 72, .12); display: grid; place-items: center; }
@@ -124,14 +114,9 @@
     @media (max-width: 1080px) { .tn-stage .grid3 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .tn-stage .grid3 > :last-child { grid-column: 1 / -1; } }
     @media (max-width: 900px) { .below { grid-template-columns: 1fr; } .head { flex-direction: column; align-items: flex-start; gap: 10px; } }
     @media (max-width: 720px) { .tn-stage { padding: 12px; border-radius: 20px; } .tn-stage .grid3 { grid-template-columns: 1fr; } .controls { padding: 14px 16px; gap: 12px; } .tn-nut { flex: 1; justify-content: center; min-width: 0; } .readout { flex-wrap: wrap; } .readout .t { font-size: 24px; }
-      /* Thẻ dài (nowrap trong site.css) đẩy rộng cả cột và làm trang tràn ngang */
       .tn-tn .tag, .head .tag.lab { white-space: normal; text-align: left; }
       .below > div, .below .panel { min-width: 0; }
     }
-    /* Máy bật "giảm chuyển động" (nhiều máy phòng thực hành tắt hiệu ứng Windows cho nhẹ):
-       site.css tắt MỌI hiệu ứng bằng * { animation: none !important }. Ở đây GIẢM chứ không tắt:
-       lửa, bọt và hơi nước là hiện tượng cần quan sát nên đặt lại tên hiệu ứng (lớp có độ ưu tiên
-       cao hơn * nên thắng), chạy chậm và dịu hơn; phần trang trí thì vẫn tắt. */
     @media (prefers-reduced-motion: reduce) {
       .tn-lua.ngoai { animation-name: tn-lua-ngoai !important; animation-duration: 1.7s !important; animation-timing-function: ease-in-out !important; animation-iteration-count: infinite !important; }
       .tn-lua.trong { animation-name: tn-lua-trong !important; animation-duration: 1.5s !important; animation-timing-function: ease-in-out !important; animation-iteration-count: infinite !important; }
@@ -210,11 +195,7 @@
     const PT = [{"r":[50,80],"l":[41.7,123.3],"k":[207.2,112.7],"o":22},{"r":[80,80],"l":[76.7,119.1],"k":[86.9,173.2],"o":8},{"r":[110,80],"l":[103.1,121.0],"k":[94.2,47.1],"o":4},{"r":[140,80],"l":[138.7,124.5],"k":[162.3,157.4],"o":10},{"r":[170,80],"l":[175.9,122.8],"k":[151.6,58.0],"o":0},{"r":[200,80],"l":[207.6,123.3],"k":[58.5,156.2],"o":11},{"r":[50,110],"l":[50.5,148.5],"k":[136.6,190.7],"o":17},{"r":[80,110],"l":[83.6,152.2],"k":[26.2,139.8],"o":20},{"r":[110,110],"l":[115.6,151.6],"k":[173.6,210.2],"o":12},{"r":[140,110],"l":[148.7,150.5],"k":[124.1,27.6],"o":1},{"r":[170,110],"l":[184.4,148.2],"k":[177.8,127.2],"o":15},{"r":[200,110],"l":[222.4,145.1],"k":[125.5,134.5],"o":7},{"r":[50,140],"l":[40.1,177.8],"k":[202.7,145.0],"o":3},{"r":[80,140],"l":[75.1,172.7],"k":[85.2,206.3],"o":2},{"r":[110,140],"l":[112.9,179.6],"k":[117.1,223.9],"o":16},{"r":[140,140],"l":[137.1,175.4],"k":[157.3,99.7],"o":18},{"r":[170,140],"l":[170.4,174.5],"k":[111.7,79.7],"o":9},{"r":[200,140],"l":[208.2,173.3],"k":[50.0,95.4],"o":14},{"r":[50,170],"l":[57.0,198.3],"k":[212.6,76.8],"o":21},{"r":[80,170],"l":[83.7,205.5],"k":[84.5,140.0],"o":13},{"r":[110,170],"l":[119.0,202.4],"k":[181.9,51.4],"o":23},{"r":[140,170],"l":[154.0,202.8],"k":[51.9,186.2],"o":19},{"r":[170,170],"l":[184.8,199.2],"k":[192.6,175.6],"o":6},{"r":[200,170],"l":[201.2,189.7],"k":[50.2,58.3],"o":5}];
     const LUOI = "M50 80 L80 80 M50 80 L50 110 M80 80 L110 80 M80 80 L80 110 M110 80 L140 80 M110 80 L110 110 M140 80 L170 80 M140 80 L140 110 M170 80 L200 80 M170 80 L170 110 M200 80 L200 110 M50 110 L80 110 M50 110 L50 140 M80 110 L110 110 M80 110 L80 140 M110 110 L140 110 M110 110 L110 140 M140 110 L170 110 M140 110 L140 140 M170 110 L200 110 M170 110 L170 140 M200 110 L200 140 M50 140 L80 140 M50 140 L50 170 M80 140 L110 140 M80 140 L80 170 M110 140 L140 140 M110 140 L110 170 M140 140 L170 140 M140 140 L140 170 M170 140 L200 140 M170 140 L170 170 M200 140 L200 170 M50 170 L80 170 M80 170 L110 170 M110 170 L140 170 M140 170 L170 170 M170 170 L200 170";
     const PHA_MAU = ['#6EA8FF', '#5CD6FF', '#2EE6B5', '#FFB547', '#FF7A59'];
-    const PHA_CHU = ['#1565C0', '#0B6F94', '#0F7A5F', '#B54D00', '#C62828'];   // cùng pha, đủ tương phản trên nền trắng
-    /* Mô hình nhiệt: 0,5 kg nước đá từ −20 °C, cấp nhiệt đều. Hằng số theo SGK KNTT (Bài 4, 5).
-       Tiến trình p (0–100) = phần trăm nhiệt lượng đã nhận, nên trục thời gian của đồ thị
-       có tỉ lệ các đoạn đúng như thật: đun đá 1,4 % · tan 10,9 % · đun nước 13,7 % · sôi 74 %.
-       Đoạn đun đá dốc gấp đôi đoạn đun nước vì c_đá ≈ ½ c_nước. */
+    const PHA_CHU = ['#1565C0', '#0B6F94', '#0F7A5F', '#B54D00', '#C62828'];
     const M_KG = 0.5, C_DA = 2100, C_NUOC = 4200, LAMBDA = 3.34e5, L_HOI = 2.26e6;
     const Q_DA = M_KG * C_DA * 20, Q_TAN = M_KG * LAMBDA, Q_NUOC = M_KG * C_NUOC * 100, Q_HOI = M_KG * L_HOI;
     const Q_TONG = Q_DA + Q_TAN + Q_NUOC + Q_HOI;
@@ -223,13 +204,12 @@
     const gx = q => 70 + q * 4.3, gy = t => 300 - (t + 20) * (270 / 130);
     const DA = [[88, 284, -6], [126, 287, 4], [164, 283, -3], [104, 250, 8], [144, 249, -5], [182, 254, 6], [124, 216, -2]];
     const BOT_X = [98, 116, 134, 152, 170, 188, 108, 160];
-    const BAN = [[112, 2.2, -6], [143, 1.8, 5], [166, 2, 7], [185, 1.6, -4]];   /* giot nuoc ban khi soi */
+    const BAN = [[112, 2.2, -6], [143, 1.8, 5], [166, 2, 7], [185, 1.6, -4]];
     const KHOI = ['M112 142 C 102 124, 122 112, 112 94 C 104 80, 118 70, 114 58', 'M140 140 C 150 122, 130 110, 142 92 C 150 78, 136 68, 144 54', 'M168 142 C 158 126, 176 114, 166 96 C 160 84, 172 74, 168 62', 'M126 146 C 134 130, 118 118, 128 102'];
     const TN_IDS = ['change-of-state', 'melting-point', 'boiling-point', 'vaporization', 'specific-latent-heat-of-fusion', 'specific-latent-heat-of-vaporization', 'molecule', 'temperature'];
     const TN_STATIC = [['thể rắn', 'solid'], ['thể lỏng', 'liquid'], ['thể khí', 'gas'], ['sự nóng chảy', 'melting'], ['sự sôi', 'boiling']];
     let p = Math.min(100, Math.max(0, +(PH.qs('p') || 0))), chay = false, toc = 1, timer = null, moc = 0;
 
-    /* ---------- dựng SVG một lần ---------- */
     function buildApparatus() {
       const da = DA.map((d, i) => `<g id="da${i}" style="transition:opacity .6s ease"><rect x="${d[0]}" y="${d[1]}" width="34" height="32" rx="7" transform="rotate(${d[2]} ${d[0] + 17} ${d[1] + 16})" fill="url(#tnDa)" stroke="#E8F7FF" stroke-opacity=".8" stroke-width="1.5"/><path d="M${d[0] + 7} ${d[1] + 8} h12" stroke="#FFFFFF" stroke-opacity=".85" stroke-width="3" stroke-linecap="round" transform="rotate(${d[2]} ${d[0] + 17} ${d[1] + 16})"/></g>`).join('');
       const bot = BOT_X.map((x, i) => `<circle class="tn-bot" cx="${x}" cy="318" r="${3 + (i % 3)}" fill="#FFFFFF" fill-opacity=".75" style="animation-delay:-${(i * .17).toFixed(2)}s"/>`).join('')
@@ -281,26 +261,12 @@
       $('kinh').insertAdjacentHTML('beforeend', PT.map((q, i) => `<span class="tn-pt" id="pt${i}"></span>`).join(''));
     }
 
-    /* ---------- tính toán và cập nhật ---------- */
     const nhietDo = q => { for (let i = 1; i < MOC.length; i++) if (q <= MOC[i][0]) { const a = MOC[i - 1], b = MOC[i]; return a[1] + (b[1] - a[1]) * (q - a[0]) / (b[0] - a[0]); } return 100; };
     const STOP = [[-20, [110, 168, 255]], [0, [92, 214, 255]], [40, [46, 230, 181]], [80, [244, 208, 63]], [100, [255, 181, 71]], [120, [255, 107, 90]]];
     const mau = t => { for (let i = 1; i < STOP.length; i++) if (t <= STOP[i][0]) { const a = STOP[i - 1], b = STOP[i], k = (t - a[0]) / (b[0] - a[0]); return [0, 1, 2].map(j => Math.round(a[1][j] + (b[1][j] - a[1][j]) * k)); } return STOP[STOP.length - 1][1]; };
     let lastPha = -1, lastLang = null, lastKey = '', lastHex = '', lastCao = -1, lastIcon = '';
-    // Chỉ chạm vào DOM khi giá trị thật sự đổi. Nếu ghi đè mỗi khung hình, trình duyệt
-    // phải dựng lại phần tử liên tục -> nút và số liệu bị nháy/giật.
     const setTxt = (el, v) => { if (el.__v !== v) { el.__v = v; el.textContent = v; } };
     const setAttr = (el, k, v) => { const s = String(v); if (el.getAttribute(k) !== s) el.setAttribute(k, s); };
-    /* ---------- Âm thanh thí nghiệm ----------
-       Tiếng bếp và tiếng nước sôi được tổng hợp ngay trong trình duyệt bằng Web Audio,
-       không tải tệp âm thanh nào nên trang vẫn chạy được khi mất mạng.
-       Ba lớp chồng lên nhau cho giống tiếng sôi thật:
-         1. tiếng bếp  — nhiễu lọc trầm, rất khẽ, to dần theo nhiệt độ;
-         2. tiếng xì xèo — nhiễu lọc dải 900–2500 Hz, chỉ nổi lên khi bắt đầu sôi;
-         3. tiếng bọt   — mỗi bọt là một hình sin có tần số ĐI LÊN rồi tắt nhanh
-                          (bọt khí co lại khi vỡ nên cao dần, không phải thấp dần
-                          như tiếng giọt nước rơi).
-       Chỉ phát sau khi học sinh bấm Đun, tắt hẳn khi tạm dừng hoặc rời khỏi tab.
-       Nút loa lưu lựa chọn vào máy. */
     const AM = (() => {
       let ctx = null, master = null, humGain = null, xeoGain = null, hen = 0, soiMuc = 0;
       const bat = () => localStorage.getItem('ph-tn-am') !== '0';
@@ -334,7 +300,6 @@
         try { sHum.start(); sXeo.start(); } catch (e) { }
         return true;
       }
-      /* Một bọt khí: tần số đi lên, tắt trong khoảng 40–110 ms. to = bọt lớn (ít, trầm). */
       function bot(to) {
         if (!ctx) return;
         const t = ctx.currentTime;
@@ -355,7 +320,7 @@
         hen = setTimeout(() => {
           if (soiMuc > 0 && bat()) {
             bot(Math.random() < 0.10);
-            if (soiMuc > 0.6 && Math.random() < 0.45) bot(false);   /* sôi mạnh thì bọt chồng nhau */
+            if (soiMuc > 0.6 && Math.random() < 0.45) bot(false);
             lich();
           } else { hen = 0; }
         }, 18 + Math.random() * (210 - 170 * soiMuc));
@@ -363,15 +328,14 @@
       return {
         bat,
         datBat(v) { try { localStorage.setItem('ph-tn-am', v ? '1' : '0'); } catch (e) { } if (!v) this.dung(); },
-        /* chay: đang đun · soi: mức sôi 0..1 · nong: mức nóng 0..1 */
         capNhat(chay, soi, nong) {
           if (!chay || !bat()) { this.dung(); return; }
           if (!mo()) return;
           if (ctx.state === 'suspended') { try { ctx.resume(); } catch (e) { } }
           const t = ctx.currentTime;
           master.gain.setTargetAtTime(0.62, t, 0.2);
-          humGain.gain.setTargetAtTime((0.045 + 0.06 * nong) * (1 - 0.5 * soi), t, 0.3);   /* soi cang manh thi tieng bep cang lui xuong nen */
-          xeoGain.gain.setTargetAtTime(0.17 * soi * (0.78 + 0.44 * Math.random()), t, 0.12);   /* hơi dao động cho giống nước sôi cuộn */
+          humGain.gain.setTargetAtTime((0.045 + 0.06 * nong) * (1 - 0.5 * soi), t, 0.3);
+          xeoGain.gain.setTargetAtTime(0.17 * soi * (0.78 + 0.44 * Math.random()), t, 0.12);
           soiMuc = soi;
           if (soi > 0 && !hen) lich();
         },
@@ -396,7 +360,6 @@
       const T = nhietDo(p);
       const f = p < P1 ? 0 : (p < P2 ? (p - P1) / (P2 - P1) : 1), g = p < P3 ? 0 : (p < 100 ? (p - P3) / (100 - P3) : 1);
       const pha = p < P1 ? 0 : (p < P2 ? 1 : (p < P3 ? 2 : (p < 100 ? 3 : 4)));
-      // làm tròn màu để không phải ghi lại 24 phân tử ở mỗi khung hình
       const c = mau(T).map(v => Math.round(v / 4) * 4);
       const hex = `rgb(${c.join(',')})`, dam = `rgb(${c.map(x => Math.round(x * .72)).join(',')})`, toi = `rgb(${c.map(x => Math.round(x * .45 + 11 * .55)).join(',')})`, nhanhK = (T + 20) / 140;
       const nTan = Math.round(f * PT.length), nHoi = Math.round(g * PT.length);
@@ -414,14 +377,12 @@
         });
         lastKey = key; lastHex = hex;
       }
-      // đồ thị
       let d = `M${gx(0).toFixed(1)} ${gy(-20).toFixed(1)}`;
       for (let i = 1; i < MOC.length; i++) { if (p >= MOC[i][0]) d += ` L${gx(MOC[i][0]).toFixed(1)} ${gy(MOC[i][1]).toFixed(1)}`; else { d += ` L${gx(p).toFixed(1)} ${gy(T).toFixed(1)}`; break; } }
       setAttr($('duong'), 'd', d);
       const cx = gx(p).toFixed(1), cy = gy(T).toFixed(1);
       ['nhip', 'diem'].forEach(id => { const e = $(id); setAttr(e, 'cx', cx); setAttr(e, 'cy', cy); setAttr(e, id === 'nhip' ? 'stroke' : 'fill', dam); });
       const ng = $('ngang'); setAttr(ng, 'x2', cx); setAttr(ng, 'y1', cy); setAttr(ng, 'y2', cy);
-      // cốc nước
       const mucNuoc = pha === 0 ? 0 : pha === 1 ? f : pha === 2 ? 1 : pha === 3 ? 1 - g : 0; const cao = Math.round(mucNuoc * 100);
       const nuoc = $('nuoc'); setAttr(nuoc, 'y', 323 - cao); setAttr(nuoc, 'height', cao);
       setAttr($('nuocTren'), 'stop-color', pha >= 2 ? (T > 60 ? '#5FB4E8' : '#6FD3F0') : '#8FE0F7');
@@ -433,7 +394,6 @@
       const lua = p >= 100 ? 0 : ((chay || p > 0) ? 1 : .15); setAttr($('lua'), 'opacity', lua); setAttr($('sang'), 'opacity', lua);
       const cot = $('cot'); setAttr(cot, 'height', ((T + 20) / 140 * 230 + 6).toFixed(1)); setAttr(cot, 'y', (300 - (T + 20) / 140 * 230).toFixed(1));
       setAttr($('luoi'), 'stroke-opacity', pha === 0 ? .35 : pha === 1 ? (.35 * (1 - f)).toFixed(2) : 0);
-      // số liệu, trạng thái
       setTxt($('tHien'), (Math.round(T * 10) / 10).toFixed(1).replace('.', en() ? '.' : ',').replace('-', '−'));
       const phan = Math.round((pha === 1 ? f : g) * 100);
       setTxt($('moTaPha'), PH.ui('mo' + pha, { p: phan }));
@@ -448,14 +408,12 @@
         lastIcon = ico;
         $('icDun').innerHTML = chay ? '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0F2548" stroke-width="3" stroke-linecap="round"><path d="M8 5v14M16 5v14"/></svg>' : '<svg viewBox="0 0 24 24" width="15" height="15" fill="#0F2548" stroke="#0F2548" stroke-width="2" stroke-linejoin="round"><path d="M7 5v14l11-7z"/></svg>';
       }
-      // không ghi đè thanh kéo khi học sinh đang cầm nó
       const tua = $('tua');
       if (document.activeElement !== tua && +tua.value !== p) tua.value = p;
       setAttr(tua, 'aria-valuetext', $('tHien').textContent + ' °C');
       AM.capNhat(chay, pha === 3 ? Math.min(1, 0.25 + 0.9 * (p - P3) / (100 - P3)) : 0, Math.min(1, p / 100));
     }
 
-    /* ---------- chữ tĩnh theo mức ---------- */
     function renderText() {
       const l1 = PH.lessonTitle(1);
       $('crumb').innerHTML = `<a href="baihoc.html">${PH.uiFmt('navLessons')}</a> · <a href="baihoc.html#chuong-1">${PH.uiFmt('chapter')} I</a> · <a href="bai.html?n=1">${PH.esc(en() ? l1.en : l1.vi)}</a>`;
@@ -478,20 +436,12 @@
     }
     $('tnTn').addEventListener('click', e => { const b = e.target.closest('[data-term]'); if (b) PH.showTerm(b.dataset.term, b); });
 
-    /* ---------- điều khiển ---------- */
-    // Nhịp chạy: 30 lần/giây cho mượt, nhưng mỗi bước tính theo THỜI GIAN THẬT đã trôi qua,
-    // nên tốc độ đun như nhau trên máy nhanh lẫn máy chậm.
-    // Dùng setInterval chứ không dùng requestAnimationFrame: một số trình duyệt trong ứng dụng
-    // (Facebook, Zalo, trình duyệt nhúng) không chạy requestAnimationFrame và thí nghiệm sẽ đứng im.
-    /* Tốc độ chạy theo từng đoạn (giây ở mức ×1): đoạn đun đá chỉ chiếm 1,4 % nhiệt lượng,
-       chạy đều sẽ vụt qua trong nửa giây nên cho mỗi đoạn một thời lượng riêng để quan sát được;
-       đồ thị vẫn vẽ theo tỉ lệ nhiệt lượng thật, chỉ tốc độ xem là thay đổi. */
     const THOI_LUONG = [[0, P1, 3], [P1, P2, 6], [P2, P3, 6], [P3, 100, 12]];
     const tocTai = q => { for (const [a, b, s] of THOI_LUONG) if (q < b) return (b - a) / s; return (100 - P3) / 12; };
     function buoc() {
       const now = performance.now();
       if (!chay) { moc = now; return; }
-      const dt = Math.min(.12, (now - moc) / 1000); moc = now;   // chặn bước nhảy khi quay lại tab
+      const dt = Math.min(.12, (now - moc) / 1000); moc = now;
       p = Math.min(100, p + tocTai(p) * toc * dt);
       if (p >= 100) { p = 100; chay = false; }
       update();

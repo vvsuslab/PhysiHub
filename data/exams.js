@@ -1,4 +1,3 @@
-// PhysiHub — dữ liệu đề ôn. Sửa trực tiếp trong tệp này (không còn exams.json nguồn).
 window.PH = window.PH || {};
 PH.EXAMS = [
   {

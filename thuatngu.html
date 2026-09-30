@@ -52,7 +52,6 @@
     .kiem-tra .steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 26px; }
     .kiem-tra .step { display: flex; gap: 12px; align-items: flex-start; font-size: 16.5px; line-height: 1.55; color: var(--ink-2); }
     .kiem-tra .note { margin-top: 12px; font-size: 16px; color: var(--ink-3); }
-    /* Hộp thoại: chi tiết, thẻ ghi nhớ, kiểm tra */
     .overlay { position: fixed; inset: 0; background: rgba(31, 41, 51, .45); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 70; }
     .overlay.show { display: flex; }
     .dialog { width: min(600px, 100%); max-height: calc(100vh - 32px); overflow: auto; border-radius: 22px; }
@@ -152,7 +151,6 @@
     const TERMS = PH.TERMS || [];
     const $ = id => document.getElementById(id);
     const en = () => PH.lang() === 'en';
-    // ?t=<id> mở chi tiết · ?c=<1..4> lọc chương · ?loc=chua|thuoc · ?l=<bài> · ?q=<từ khoá>
     let filter = { c: +(PH.qs('c') || 0) || 0, loc: PH.qs('loc') || '', l: +(PH.qs('l') || 0) || 0 };
     let query = PH.qs('q') || '', showVi = false;
     $('q').value = query;
@@ -200,7 +198,6 @@
       $('grid').innerHTML = list.map(cardHTML).join('');
     }
 
-    /* ---- Hộp thoại ---- */
     const overlay = $('overlay'), dialog = $('dialog');
     let lastFocus = null;
     function openDialog(html, cls) { lastFocus = document.activeElement; dialog.className = 'card dialog ' + (cls || ''); dialog.innerHTML = html; overlay.classList.add('show'); dialog.tabIndex = -1; dialog.focus({ preventScroll: true }); }
@@ -254,7 +251,7 @@
         return { t, opts: PH.shuffle([t].concat(wrong)) };
       });
       let i = 0, ok = 0, locked = false;
-      const askEn = PH.lang() !== 'vi'; // mức 2–3: cho thuật ngữ tiếng Anh, chọn nghĩa Việt; mức 1: ngược lại
+      const askEn = PH.lang() !== 'vi';
       const draw = () => {
         const q = qs[i];
         dialog.innerHTML = `<div class="top"><b>${PH.uiFmt('qTitle', { i: i + 1, n: qs.length })}</b><span class="small muted">${PH.uiFmt('correctSoFar', { k: ok })}</span><button class="btn ghost sm" type="button" data-close>${PH.uiFmt('close')}</button></div>

@@ -1,9 +1,3 @@
-/* =====================================================================
-   PhysiHub — mã dùng chung: mức ngôn ngữ, header/footer, thuật ngữ,
-   phát âm, tiến độ học (localStorage), tiện ích.
-   Thứ tự nạp trong mỗi trang: site.css → data/*.js → site.js → script trang
-   Bản 2 (23/9/2026): đầu trang hai tầng, menu sổ, tìm kiếm, chữ giao diện ba mức, chống rơi chữ.
-   ===================================================================== */
 window.PH = window.PH || {};
 (function (PH) {
   'use strict';
@@ -13,16 +7,12 @@ window.PH = window.PH || {};
     get(k, fallback) {
       try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch (e) { return fallback; }
     },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* riêng tư / bộ nhớ đầy */ }
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { }
     }
   };
 
-  /* ---------- Tiện ích ---------- */
   PH.esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-  /* Chỉ số dưới: "E_lk" hiện thành E kèm "lk" nhỏ bên dưới, "A_(Z+1)" thành A kèm "Z+1".
-     Chạy trên nút văn bản của trang đã dựng xong nên không đụng tới tên biến trong mã;
-     chạy lại nhiều lần cũng không sao vì sau lần đầu trong văn bản không còn dấu gạch dưới. */
   const RE_CHISO = /([A-Za-z0-9\u0394\u03a6\u03bb)])([_^])(?:\(([^()]{1,14})\)|([A-Za-z0-9\u00c0-\u1ef9]{1,8}))/g;
   PH.chiSo = root => {
     root = root || document.body;
@@ -50,9 +40,7 @@ window.PH = window.PH || {};
   PH.qs = name => new URLSearchParams(location.search).get(name);
   PH.shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   PH.sample = (arr, n) => PH.shuffle(arr).slice(0, n);
-  // Chuẩn hoá để tìm kiếm: bỏ dấu, chỉ số trên, khoảng trắng và dấu nhân
   PH.norm = s => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[\s.·⋅×*_'’()-]/g, '');
-  // Số theo cách viết Việt Nam: 2,5 · 126
   PH.num = (x, digits) => {
     if (x == null || isNaN(x)) return '';
     const s = digits == null ? String(+(+x).toFixed(4)) : (+x).toFixed(digits);
@@ -61,28 +49,23 @@ window.PH = window.PH || {};
   PH.parseNum = s => parseFloat(String(s || '').trim().replace(',', '.'));
   PH.pad2 = n => String(n).padStart(2, '0');
   PH.mmss = sec => PH.pad2(Math.floor(sec / 60)) + ':' + PH.pad2(sec % 60);
-  // Nội dung do JS sinh ra sau khi trang tải, nên trình duyệt không tự cuộn tới #neo.
-  // Gọi hàm này sau khi vẽ xong để link dạng baihoc.html#chuong-3 hoạt động.
   PH.applyHash = () => {
     const id = decodeURIComponent(location.hash.slice(1)); if (!id) return;
     const el = document.getElementById(id); if (!el) return;
     requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   };
 
-  /* ---------- Mức ngôn ngữ ---------- */
   PH.LANGS = [
     { id: 'vi', long: 'Tiếng Việt', short: 'VI', level: 1, mult: 1 },
     { id: 'bi', long: 'Song ngữ', short: 'VI+EN', level: 2, mult: 1.5 },
     { id: 'en', long: 'English', short: 'EN', level: 3, mult: 2 }
   ];
-  // Nhớ mức ngôn ngữ trong bộ nhớ: PH.lang() được gọi hàng trăm lần mỗi lần vẽ lại,
-  // đọc localStorage mỗi lần làm máy yếu bị khựng.
   let langCache = null;
   PH.lang = () => {
     if (langCache === null) { const v = store.get(KEY.lang, 'vi'); langCache = PH.LANGS.some(l => l.id === v) ? v : 'vi'; }
     return langCache;
   };
-  window.addEventListener('storage', e => { if (e.key === KEY.lang) langCache = null; });   // đổi ở tab khác
+  window.addEventListener('storage', e => { if (e.key === KEY.lang) langCache = null; });
   PH.langInfo = id => PH.LANGS.find(l => l.id === (id || PH.lang()));
   PH.setLang = id => {
     if (!PH.LANGS.some(l => l.id === id)) return;
@@ -92,7 +75,6 @@ window.PH = window.PH || {};
   };
   PH.onLang = fn => document.addEventListener('ph:lang', e => fn(e.detail));
 
-  // Chuỗi thô theo mức hiện tại (dùng cho title, aria, so sánh)
   PH.T = t => {
     if (t == null) return '';
     if (typeof t !== 'object') return String(t);
@@ -101,7 +83,6 @@ window.PH = window.PH || {};
     if (l === 'bi' && t.en) return t.vi + ' — ' + t.en;
     return t.vi || t.en || '';
   };
-  // HTML theo mức: t = {vi, en}. Mức 1: Việt · Mức 2: Việt + Anh · Mức 3: Anh (thiếu Anh thì rơi về Việt)
   PH.L = (t, opts) => {
     opts = opts || {};
     if (t == null) return '';
@@ -114,16 +95,13 @@ window.PH = window.PH || {};
     return `<span class="bi"><span class="vi">${vi}</span><span class="${enCls}">${en}</span></span>`;
   };
 
-  /* ---------- Tiến độ học (chỉ lưu trên máy này) ---------- */
   const emptyProgress = () => ({ lessons: {}, last: null, terms: {}, games: {}, exams: {} });
   PH.progress = () => Object.assign(emptyProgress(), store.get(KEY.progress, {}));
   PH.save = p => { store.set(KEY.progress, p); document.dispatchEvent(new CustomEvent('ph:progress')); };
   PH.update = fn => { const p = PH.progress(); fn(p); PH.save(p); return p; };
   PH.visitLesson = n => PH.update(p => { p.lessons[n] = Object.assign({ done: false }, p.lessons[n], { visited: Date.now() }); p.last = { lesson: n, at: Date.now() }; });
   PH.finishLesson = (n, score) => PH.update(p => { p.lessons[n] = Object.assign({}, p.lessons[n], { done: true, score, at: Date.now() }); });
-  // noteTerm: CHỈ gọi khi học sinh thật sự trả lời một câu (quiz, trò chơi) — nó quyết định "đã thuộc".
   PH.noteTerm = (id, wrong) => PH.update(p => { const t = p.terms[id] || { seen: 0, wrong: 0 }; t.seen++; if (wrong) t.wrong++; p.terms[id] = t; });
-  // lookTerm: chỉ ghi nhận việc MỞ XEM nghĩa, không tính vào "đã thuộc".
   PH.lookTerm = id => PH.update(p => { const t = p.terms[id] || { seen: 0, wrong: 0 }; t.look = (t.look || 0) + 1; p.terms[id] = t; });
   PH.weakTermIds = () => { const t = PH.progress().terms; return Object.keys(t).filter(id => t[id].wrong > 0).sort((a, b) => t[b].wrong - t[a].wrong); };
   PH.chapterProgress = c => {
@@ -133,7 +111,6 @@ window.PH = window.PH || {};
   };
   PH.reset = () => { try { localStorage.removeItem(KEY.progress); } catch (e) {} };
 
-  /* ---------- Dữ liệu ---------- */
   PH.chapter = c => (PH.CHAPTERS || []).find(x => x.n === +c);
   PH.lesson = n => (PH.LESSONS || []).find(x => x.n === +n);
   PH.lessonTitle = n => { const l = PH.lesson(n); return l ? { vi: `Bài ${l.n}. ${l.vi}`, en: `Lesson ${l.n}. ${l.en}` } : { vi: `Bài ${n}`, en: `Lesson ${n}` }; };
@@ -144,8 +121,6 @@ window.PH = window.PH || {};
   PH.termsForChapter = c => (PH.TERMS || []).filter(t => t.chapter === +c);
   PH.hasContent = n => !!(PH.CONTENT && PH.CONTENT[String(n)]);
 
-  /* ---------- Phạm vi ôn (dùng chung cho các trò chơi) ---------- */
-  // { type: 'all' | 'chapter' | 'lesson' | 'weak', chapter?, lesson? }
   PH.scope = () => {
     const q = { chapter: PH.qs('chapter'), lesson: PH.qs('lesson'), scope: PH.qs('scope') };
     if (q.lesson) return { type: 'lesson', lesson: +q.lesson };
@@ -170,7 +145,6 @@ window.PH = window.PH || {};
     return en ? 'All terms' : 'Tất cả thuật ngữ';
   };
 
-  /* ---------- Nhật kí trò chơi (kỷ lục, nhiệm vụ trong ngày, chuỗi ngày) ---------- */
   const dayKey = ts => { const d = new Date(ts); return d.getFullYear() + '-' + PH.pad2(d.getMonth() + 1) + '-' + PH.pad2(d.getDate()); };
   PH.logGame = (game, info) => PH.update(p => {
     p.games.log = (p.games.log || []).slice(-200); p.games.log.push(Object.assign({ game, at: Date.now(), lang: PH.lang() }, info));
@@ -188,7 +162,6 @@ window.PH = window.PH || {};
     return n;
   };
 
-  /* ---------- Biểu tượng (SVG nội tuyến, không cần thư viện) ---------- */
   const ICONS = {
     search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
     speaker: '<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>',
@@ -208,11 +181,9 @@ window.PH = window.PH || {};
     list: '<path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>'
   };
-  // Đơn vị hiển thị theo mức ngôn ngữ (vd. MeV/nuclôn ↔ MeV/nucleon)
   PH.unitOf = t => (t && ((PH.lang() === 'en' && t.unitEn) || t.unit)) || '';
   PH.icon = (name, cls) => `<svg class="icon${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ''}</svg>`;
 
-  /* ---------- Phát âm tiếng Anh (Web Speech API, không cần file âm thanh) ---------- */
   let voice = null;
   function pickVoice() {
     if (!('speechSynthesis' in window)) return null;
@@ -229,7 +200,6 @@ window.PH = window.PH || {};
     speechSynthesis.speak(u);
   };
 
-  /* ---------- Thông báo nhỏ ---------- */
   let toastEl, toastTimer;
   PH.toast = (msg, ms) => {
     if (!toastEl) { toastEl = document.createElement('div'); toastEl.className = 'ph-toast'; toastEl.setAttribute('role', 'status'); toastEl.setAttribute('aria-live', 'polite'); document.body.appendChild(toastEl); }
@@ -237,10 +207,6 @@ window.PH = window.PH || {};
     clearTimeout(toastTimer); toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms || 2200);
   };
 
-  /* ---------- Tiếng phản hồi cho trò chơi ----------
-     Tổng hợp ngay trong trình duyệt bằng Web Audio (không tải tệp âm thanh), mỗi tiếng
-     dưới 0,4 s. Chỉ tạo bộ phát sau thao tác đầu tiên của người chơi (trình duyệt yêu cầu).
-     Lựa chọn bật/tắt lưu ở khoá ph-am, mặc định bật. */
   PH.am = (() => {
     let ctx = null, master = null;
     const bat = () => store.get('ph-am', true) !== false;
@@ -252,7 +218,6 @@ window.PH = window.PH || {};
       const nen = ctx.createDynamicsCompressor(); nen.threshold.value = -12; nen.ratio.value = 8;
       master.connect(nen); nen.connect(ctx.destination); return true;
     }
-    /* một nốt: tần số f (Hz), bắt đầu sau tre giây, dài dai giây, dạng sóng, biên độ, trượt tới f2 */
     function not(f, tre, dai, dang, bien, f2) {
       const t = ctx.currentTime + tre, o = ctx.createOscillator(), g = ctx.createGain();
       o.type = dang || 'sine'; o.frequency.setValueAtTime(f, t);
@@ -271,15 +236,14 @@ window.PH = window.PH || {};
     const A = {
       bat,
       datBat(v) { store.set('ph-am', !!v); document.dispatchEvent(new CustomEvent('ph:am')); },
-      dung()    { choi(() => { not(659, 0, .11, 'sine', .45); not(880, .09, .16, 'sine', .45); }); },            /* trả lời đúng: hai nốt đi lên */
-      sai()     { choi(() => { not(190, 0, .22, 'sawtooth', .22, 140); nhieu(0, .12, .12, 500); }); },            /* trả lời sai: tiếng rè trầm đi xuống */
-      lat()     { choi(() => { nhieu(0, .04, .25, 2600); not(1100, 0, .05, 'triangle', .12); }); },               /* lật ô: tách nhẹ */
-      ghep()    { choi(() => { not(523, 0, .1, 'sine', .4); not(659, .08, .1, 'sine', .4); not(784, .16, .22, 'sine', .45); }); },  /* ghép đúng: ba nốt đi lên */
-      lech()    { choi(() => { not(330, 0, .13, 'triangle', .3); not(247, .12, .2, 'triangle', .3); }); },       /* ghép sai: hai nốt đi xuống, êm */
-      matMang() { choi(() => { not(120, 0, .25, 'sine', .5, 70); nhieu(0, .18, .2, 300); }); },                 /* mất mạng: tiếng thịch trầm */
-      thang()   { choi(() => { [523, 659, 784, 1047].forEach((f, i) => not(f, i * .1, i === 3 ? .4 : .12, 'sine', .42)); }); },   /* thắng: hồi kèn ngắn */
-      thua()    { choi(() => { [392, 330, 262].forEach((f, i) => not(f, i * .16, .22, 'triangle', .35)); }); },   /* thua: ba nốt đi xuống */
-      /* gắn một nút loa: tự vẽ nhãn, đổi khi bấm, cập nhật khi đổi ngôn ngữ */
+      dung()    { choi(() => { not(659, 0, .11, 'sine', .45); not(880, .09, .16, 'sine', .45); }); },
+      sai()     { choi(() => { not(190, 0, .22, 'sawtooth', .22, 140); nhieu(0, .12, .12, 500); }); },
+      lat()     { choi(() => { nhieu(0, .04, .25, 2600); not(1100, 0, .05, 'triangle', .12); }); },
+      ghep()    { choi(() => { not(523, 0, .1, 'sine', .4); not(659, .08, .1, 'sine', .4); not(784, .16, .22, 'sine', .45); }); },
+      lech()    { choi(() => { not(330, 0, .13, 'triangle', .3); not(247, .12, .2, 'triangle', .3); }); },
+      matMang() { choi(() => { not(120, 0, .25, 'sine', .5, 70); nhieu(0, .18, .2, 300); }); },
+      thang()   { choi(() => { [523, 659, 784, 1047].forEach((f, i) => not(f, i * .1, i === 3 ? .4 : .12, 'sine', .42)); }); },
+      thua()    { choi(() => { [392, 330, 262].forEach((f, i) => not(f, i * .16, .22, 'triangle', .35)); }); },
       gan(btn) {
         if (!btn) return;
         const ve = () => { const on = bat(); btn.innerHTML = PH.icon(on ? 'speaker' : 'x', 'sm') + PH.esc(PH.ui(on ? 'amOn' : 'amOff')); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); };
@@ -290,8 +254,6 @@ window.PH = window.PH || {};
     return A;
   })();
 
-  /* ---------- Chữ trên giao diện theo mức ngôn ngữ ----------
-     Mức 1 và 2 hiện tiếng Việt (mức 2 có dòng tiếng Anh nhỏ ở menu), mức 3 hiện tiếng Anh. */
   PH.UI = {
     navHome: ['Trang chủ', 'Home'], navLessons: ['Bài học', 'Lessons'], navTerms: ['Thuật ngữ', 'Glossary'],
     navExams: ['Luyện đề', 'Exam practice'], navGames: ['Trò chơi', 'Games'], navLab: ['Thí nghiệm ảo', 'Virtual lab'], navMenu: ['Menu chính', 'Main menu'],
@@ -366,8 +328,6 @@ window.PH = window.PH || {};
   PH.uiFmt = (key, vars) => PH.esc(PH.dinh(PH.ui(key, vars)));
   PH.uiRaw = (key, vars) => PH.esc(PH.ui(key, vars));
 
-  /* ---------- Chống "rơi chữ" ----------
-     Hai chữ cuối câu và số đi liền đơn vị (1 kg, 60 W, 4 bài) được nối bằng dấu cách không ngắt. */
   PH.dinh = s => {
     if (typeof s !== 'string' || /[<>{}]/.test(s)) return s;
     s = s.replace(/(\d) (?=[\dA-Za-zÀ-ỹ%°ΩΦλ])/g, '$1 ');
@@ -377,22 +337,18 @@ window.PH = window.PH || {};
     return s.replace(/ (\S+)$/, ' $1');
   };
 
-  /* ---------- Phạm vi bản mẫu: 16 bài, 4 bài mỗi chương (chốt 22/9/2026) ----------
-     Đổi PH.MO_TAT_CA = true để mở mọi bài đã có nội dung. */
   PH.MAU = [1, 2, 3, 4, 8, 9, 10, 11, 14, 15, 16, 17, 21, 22, 23, 24];
   PH.MO_TAT_CA = false;
   PH.isSample = n => PH.MO_TAT_CA ? true : PH.MAU.includes(+n);
   PH.canOpen = n => PH.hasContent(n) && PH.isSample(n);
   PH.sampleLessons = () => (PH.LESSONS || []).filter(l => PH.canOpen(l.n));
   PH.LAB_LESSON = 1;
-  // Tiến độ tính trên các bài mẫu mở được của chương
   PH.sampleProgress = c => {
     const ch = PH.chapter(c); if (!ch) return { total: 0, done: 0, pct: 0 };
     const p = PH.progress(); const open = ch.lessons.filter(n => PH.canOpen(n));
     const done = open.filter(n => p.lessons[n] && p.lessons[n].done).length;
     return { total: open.length, done, pct: open.length ? Math.round(done / open.length * 100) : 0 };
   };
-  // Bài nên học tiếp: bài đang dở, hoặc bài mẫu đầu tiên chưa xong sau bài vừa học
   PH.nextLesson = () => {
     const p = PH.progress(); const list = PH.sampleLessons().map(l => l.n);
     const last = p.last && PH.canOpen(p.last.lesson) ? p.last.lesson : null;
@@ -403,15 +359,10 @@ window.PH = window.PH || {};
     return after ? { n: after, state: 'next' } : { n: last, state: 'done' };
   };
 
-  /* ---------- Thuật ngữ đã thuộc ---------- */
   const thuoc = r => !!(r && r.seen >= 2 && r.wrong === 0);
   PH.isMastered = id => thuoc(PH.progress().terms[id]);
-  // Đọc tiến độ MỘT lần rồi lọc; gọi PH.isMastered trong vòng lặp sẽ đọc và phân tích
-  // lại toàn bộ dữ liệu 79 lần cho mỗi lần vẽ con số.
   PH.masteredCount = () => { const t = PH.progress().terms; return (PH.TERMS || []).filter(x => thuoc(t[x.id])).length; };
 
-  /* ---------- Tra từ điển: phát âm chuẩn nghe trên Oxford Learner’s / Cambridge ----------
-     Trang không sao chép tệp âm thanh của từ điển; nút mở đúng trang từ điển có nút nghe. */
   PH.dictLinks = t => {
     const en = t.en || '';
     const ox = t.oxford ? 'https://www.oxfordlearnersdictionaries.com/definition/english/' + t.oxford
@@ -421,7 +372,6 @@ window.PH = window.PH || {};
   };
   PH.dictHTML = t => `<span class="dict-links"><span class="dl-lb">${PH.uiFmt('hearOn')}</span>${PH.dictLinks(t).map(d => `<a href="${d.url}" target="_blank" rel="noopener" title="${PH.esc(d.label)}" aria-label="${PH.esc(d.label)}">${d.name}</a>`).join('')}</span>`;
 
-  /* ---------- Biểu tượng nét ---------- */
   const ICON2 = {
     home: '<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
     down: '<path d="m6 9 6 6 6-6"/>', right: '<path d="m9 6 6 6-6 6"/>',
@@ -452,11 +402,9 @@ window.PH = window.PH || {};
   };
   Object.assign(ICONS, ICON2);
   PH.CH_ICON = { 1: 'thermo', 2: 'gas', 3: 'magnet', 4: 'atom' };
-  // Nhãn mục kiểu slide: huy hiệu tròn có biểu tượng + dải màu. tone: '' (xanh) | 'orange'; size: '' | 'sm'
   PH.label = (icon, text, tone, size) => `<span class="ph-label${tone ? ' ' + tone : ''}${size ? ' ' + size : ''}"><span class="b">${PH.icon(icon)}</span><span class="t">${text}</span></span>`;
   PH.LOGO = '<svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><defs><radialGradient id="ph-logo-g" cx="38%" cy="32%" r="72%"><stop offset="0" stop-color="#1E88E5"/><stop offset="1" stop-color="#0A3483"/></radialGradient></defs><circle cx="20" cy="20" r="19" fill="url(#ph-logo-g)"/><g fill="none" stroke="#5FD3F3" stroke-width="1.5"><ellipse cx="20" cy="20" rx="13" ry="5"/><ellipse cx="20" cy="20" rx="13" ry="5" transform="rotate(60 20 20)"/><ellipse cx="20" cy="20" rx="13" ry="5" transform="rotate(120 20 20)"/></g><circle cx="20" cy="20" r="3.2" fill="#F2C14E"/></svg>';
 
-  /* ---------- Tìm kiếm trên đầu trang: 16 bài mẫu + toàn bộ thuật ngữ, không phân biệt dấu, gợi ý khi gõ sai ---------- */
   const lev = (a, b) => {
     const d = []; for (let i = 0; i <= a.length; i++) d[i] = [i];
     for (let j = 1; j <= b.length; j++) d[0][j] = j;
@@ -488,7 +436,6 @@ window.PH = window.PH || {};
     return { hits, suggest };
   };
 
-  /* ---------- Đầu trang, chân trang ---------- */
   const NAV = [
     { id: 'lessons', href: 'baihoc.html', key: 'navLessons', icon: 'book' },
     { id: 'terms', href: 'thuatngu.html', key: 'navTerms', icon: 'speaker' },
@@ -604,8 +551,6 @@ window.PH = window.PH || {};
     xoa.addEventListener('click', () => { input.value = ''; draw(); input.focus(); });
     box.addEventListener('focusin', () => { if (input.value.trim()) kq.hidden = false; });
   }
-  // Đóng bảng kết quả khi bấm ra ngoài — gắn MỘT lần cho cả trang.
-  // (Trước đây gắn bên trong bindSearch nên mỗi lần dựng lại đầu trang lại thêm 2 listener không bao giờ gỡ.)
   document.addEventListener('click', e => {
     if (e.target.closest('.ph-tim')) return;
     document.querySelectorAll('.ph-tim-kq').forEach(kq => { kq.hidden = true; });
@@ -617,23 +562,19 @@ window.PH = window.PH || {};
     if (mobLang) mobLang.addEventListener('click', () => { const ids = PH.LANGS.map(l => l.id); PH.setLang(ids[(ids.indexOf(PH.lang()) + 1) % ids.length]); });
     const mobTim = header.querySelector('.ph-mob-tim'), mobBox = header.querySelector('.ph-mob-search');
     if (mobTim) mobTim.addEventListener('click', () => { const open = !mobBox.classList.contains('open'); mobBox.classList.toggle('open', open); mobTim.setAttribute('aria-expanded', open); if (open) mobBox.querySelector('input').focus(); });
-    // Bảng menu dựng khi rê chuột / Tab tới lần đầu (nhẹ cho trang)
     header.querySelectorAll('.ph-mm').forEach(mm => {
       const fill = () => { const p = mm.querySelector('.ph-mm-p'); if (!p.dataset.ok) { p.innerHTML = MENUS[p.dataset.menu](); p.dataset.ok = '1'; } };
       mm.addEventListener('mouseenter', fill); mm.addEventListener('focusin', fill); mm.addEventListener('touchstart', fill, { passive: true });
-      // Trên máy tính bảng (không có chuột): chạm lần đầu mở bảng, chạm lần hai mới đi tới trang.
-      // Dùng class 'mo' chứ không gán style cứng — gán style cứng thì bảng không bao giờ đóng lại được.
       const nut = mm.querySelector('.ph-bar-i');
       nut.setAttribute('aria-haspopup', 'true'); nut.setAttribute('aria-expanded', 'false');
       nut.addEventListener('click', e => {
-        if (!window.matchMedia('(hover: none)').matches) return;   // máy có chuột: giữ cách rê chuột
-        if (mm.classList.contains('mo')) return;                   // đang mở: chạm lần hai là đi tới trang
+        if (!window.matchMedia('(hover: none)').matches) return;
+        if (mm.classList.contains('mo')) return;
         e.preventDefault(); fill(); dongMenu();
         mm.classList.add('mo'); nut.setAttribute('aria-expanded', 'true');
       });
     });
   }
-  // Đóng mọi bảng menu đang mở (gắn một lần cho cả trang)
   function dongMenu() {
     document.querySelectorAll('.ph-mm.mo').forEach(x => {
       x.classList.remove('mo');
@@ -660,8 +601,6 @@ window.PH = window.PH || {};
     const tabs = document.createElement('nav'); tabs.className = 'ph-tabs'; tabs.setAttribute('aria-label', PH.ui('navMenu')); document.body.appendChild(tabs);
     renderHeader();
     document.addEventListener('ph:lang', () => { document.documentElement.lang = PH.lang() === 'en' ? 'en' : 'vi'; renderHeader(); if (opts.title) PH.setTitle(opts.title); });
-    // Tiến độ đổi rất thường xuyên (mỗi câu trả lời): chỉ sửa đúng con số và độ dài thanh,
-    // không dựng lại đầu trang cũng không dựng lại khối HTML — vừa nhanh vừa không mất focus.
     document.addEventListener('ph:progress', () => {
       const m = PH.masteredCount(), n = (PH.TERMS || []).length, pct = n ? Math.round(m / n * 100) : 0;
       document.querySelectorAll('.ph-metric, .ph-strip').forEach(el => {
@@ -671,11 +610,9 @@ window.PH = window.PH || {};
     });
     if (opts.title) PH.setTitle(opts.title);
     document.documentElement.lang = PH.lang() === 'en' ? 'en' : 'vi';
-    // Biểu tượng trong huy hiệu tròn của dải tiêu đề (.page-hero h1::before)
     const HERO_IC = { lessons: 'book', terms: 'speaker', exams: 'exam', games: 'game', lab: 'flask' };
     const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[opts.heroIcon || HERO_IC[opts.active] || 'book'] || ''}</svg>`;
     document.documentElement.style.setProperty('--hero-ic', `url("data:image/svg+xml,${encodeURIComponent(heroSvg)}")`);
-    // Dải "đang ngoại tuyến" nhỏ dưới đầu trang
     const off = document.createElement('div'); off.className = 'ph-offline'; off.hidden = true; off.setAttribute('role', 'status');
     off.style.cssText = 'background:#FFF6EA;color:#0F2548;border-bottom:1px solid #F6C995;font-size:13px;padding:7px 16px;align-items:center;gap:10px;justify-content:center';
     const drawOff = () => { off.hidden = navigator.onLine !== false; off.style.display = off.hidden ? 'none' : 'flex'; off.innerHTML = `${PH.icon('wifi', 'sm')}<b style="white-space:nowrap">${PH.uiFmt('offline')}</b><span style="opacity:.85">${PH.uiFmt('offlineNote')}</span>`; };
@@ -683,7 +620,6 @@ window.PH = window.PH || {};
     PH.reveal();
   };
   PH.setTitle = t => { document.title = PH.esc(PH.T(t)).replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>') + ' · PhysiHub'; };
-  // Phần tử .reveal hiện dần khi cuộn tới; không bao giờ để nội dung bị ẩn quá 2,5 giây
   PH.reveal = root => {
     const els = [...(root || document).querySelectorAll('.reveal:not(.in)')];
     els.forEach(e => { if (e.getBoundingClientRect().top < window.innerHeight * .95) e.classList.add('in'); });
@@ -692,11 +628,8 @@ window.PH = window.PH || {};
     els.forEach(e => { if (!e.classList.contains('in')) io.observe(e); });
     setTimeout(() => { els.forEach(e => e.classList.add('in')); io.disconnect(); }, 2500);
   };
-  // Lưới an toàn: nếu một trang nào đó lỗi trước khi kịp gọi PH.reveal, nội dung vẫn phải hiện ra
-  // (các khối .reveal mặc định trong suốt — không có lưới này học sinh sẽ thấy trang trắng).
   setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(e => e.classList.add('in')), 3500);
 
-  /* ---------- Tô sáng thuật ngữ trong văn bản + popover ---------- */
   let viRe = null, enRe = null;
   function buildRegex() {
     const terms = PH.TERMS || []; if (!terms.length) return;
@@ -708,17 +641,16 @@ window.PH = window.PH || {};
     try {
       viRe = new RegExp(`(?<![\\p{L}\\p{N}])(${vis.join('|')})(?![\\p{L}\\p{N}])`, 'giu');
       enRe = new RegExp(`(?<![\\p{L}\\p{N}])(${ens.join('|')})(?![\\p{L}\\p{N}])`, 'giu');
-    } catch (e) { // trình duyệt cũ không có lookbehind
+    } catch (e) {
       viRe = new RegExp(`(${vis.join('|')})`, 'gi'); enRe = new RegExp(`(${ens.join('|')})`, 'gi');
     }
   }
   const findTerm = (text, isEn) => { const k = text.replace(/\u00a0/g, ' ').toLowerCase(); return (PH.TERMS || []).find(t => (isEn ? t.en : t.vi).toLowerCase() === k); };
 
-  // Tô sáng lần xuất hiện đầu tiên của mỗi thuật ngữ trong từng khối (mỗi phần tử có class "hl")
   PH.highlight = root => {
     if (!viRe) buildRegex(); if (!viRe) return;
     const blocks = root.classList && root.classList.contains('hl') ? [root] : root.querySelectorAll('.hl');
-    const kemSeen = new Set(); // mỗi thuật ngữ chỉ hiện tiếng Anh kèm một lần trong mỗi lần gọi
+    const kemSeen = new Set();
     blocks.forEach(block => {
       if (block.dataset.hl === '1') return;
       block.dataset.hl = '1';
@@ -738,7 +670,6 @@ window.PH = window.PH || {};
           const span = document.createElement('span'); span.className = 'term'; span.dataset.term = term.id; span.textContent = m[1];
           span.setAttribute('role', 'button'); span.tabIndex = 0;
           frag.appendChild(span); last = m.index + m[1].length;
-          // Mức 1: thuật ngữ tiếng Anh hiện kèm trong ngoặc, ngay sau từ tiếng Việt
           if (!isEn && PH.lang() === 'vi' && !block.classList.contains('nokem') && !kemSeen.has(term.id)) { kemSeen.add(term.id); const k = document.createElement('span'); k.className = 'kem'; k.lang = 'en'; k.textContent = '\u00a0(' + term.en + ')'; frag.appendChild(k); }
         }
         if (changed) { frag.appendChild(document.createTextNode(text.slice(last))); node.parentNode.replaceChild(frag, node); }
@@ -767,11 +698,10 @@ window.PH = window.PH || {};
     const r = anchor.getBoundingClientRect(); const w = pop.offsetWidth, h = pop.offsetHeight;
     let left = r.left + window.scrollX; if (left + w > window.scrollX + document.documentElement.clientWidth - 12) left = window.scrollX + document.documentElement.clientWidth - w - 12;
     pop.style.left = Math.max(12, left) + 'px';
-    // Không đủ chỗ bên dưới thì lật lên trên, để thẻ nghĩa không nằm ngoài màn hình
     const duoi = window.innerHeight - r.bottom, tren = r.top;
     pop.style.top = (duoi < h + 16 && tren > h + 16 ? r.top + window.scrollY - h - 8 : r.bottom + window.scrollY + 8) + 'px';
     anchor.classList.add('open'); popAnchor = anchor;
-    PH.lookTerm(t.id);   // chỉ ghi "đã xem", KHÔNG tính là đã thuộc
+    PH.lookTerm(t.id);
   };
   document.addEventListener('click', e => {
     const sp = e.target.closest('[data-speak]'); if (sp) { PH.speak(sp.dataset.speak); return; }
@@ -782,11 +712,8 @@ window.PH = window.PH || {};
     if (e.key === 'Escape') closePop();
     if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('term')) { e.preventDefault(); PH.showTerm(e.target.dataset.term, e.target); }
   });
-  // Chỉ đóng khi xoay máy: trên điện thoại, cuộn làm thanh địa chỉ thu lại và sinh 'resize',
-  // nếu đóng theo resize thì thẻ nghĩa biến mất ngay lúc học sinh đang đọc.
   window.addEventListener('orientationchange', closePop);
 
-  /* ---------- Ứng dụng web (PWA): cài lên màn hình chính, dùng offline ---------- */
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
   }
@@ -794,8 +721,6 @@ window.PH = window.PH || {};
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; document.dispatchEvent(new CustomEvent('ph:installable')); });
   PH.canInstall = () => !!installPrompt;
   PH.install = async () => { if (!installPrompt) return false; installPrompt.prompt(); const r = await installPrompt.userChoice; installPrompt = null; return r.outcome === 'accepted'; };
-  /* Quét chỉ số dưới: một lần khi trang dựng xong, và cho phần nội dung dựng thêm về sau
-     (lọc danh sách thuật ngữ, đổi ngôn ngữ, chấm bài…). Gộp 80 ms một lần cho đỡ tốn. */
   (function () {
     let hangCho = [], hen = 0;
     const quet = () => { hen = 0; const ds = hangCho; hangCho = []; ds.forEach(n => { if (n.isConnected) PH.chiSo(n); }); };

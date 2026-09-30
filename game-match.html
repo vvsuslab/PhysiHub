@@ -27,7 +27,6 @@
     .cardx { aspect-ratio: 1 / 1; perspective: 800px; }
     .cardx .in { position: relative; width: 100%; height: 100%; transition: transform .35s; transform-style: preserve-3d; }
     .cardx.up .in, .cardx.done .in { transform: rotateY(180deg); }
-    /* overflow: hidden — câu dài trên thẻ (ví dụ phát biểu định luật) không được tràn đè thẻ bên cạnh */
     .face { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; border: 1px solid var(--line-strong); overflow: hidden; }
     .face.back { color: var(--sky); cursor: pointer; }
     .face.back .mark { width: 46%; max-width: 54px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, .92); box-shadow: 0 4px 12px rgba(13, 71, 161, .16), inset 0 0 0 1.5px rgba(30, 136, 229, .16); transition: transform .25s ease; }
@@ -51,7 +50,6 @@
     .stat .v.gold { color: var(--gold); }
     .stat .progress { margin-top: 8px; }
     @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .board { grid-template-columns: repeat(3, 1fr); } .face.front .t { font-size: 16px; } }
-    /* Điện thoại: 2 cột cho thẻ đủ rộng chứa câu dài; thẻ cao hơn một chút */
     @media (max-width: 600px) {
       .board { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .cardx { aspect-ratio: 1 / 1; }
@@ -113,16 +111,12 @@
     const langPill = () => { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); };
     renderStatic(); langPill(); PH.onLang(() => { langPill(); renderStatic(); renderStats(); });
 
-    // 'van' đánh số ván chơi: mọi setTimeout đang chờ của ván cũ phải tự huỷ khi bắt đầu ván mới,
-    // nếu không ván mới sẽ được cộng sẵn cặp đã ghép của ván trước và ghi kỉ lục giả.
     let cards = [], open = [], lock = false, flips = 0, matched = 0, timer = null, endAt = 0, startedAt = 0, running = false, van = 0;
 
     function buildPairs() {
       const terms = PH.scopeTerms(scope);
-      if (PH.lang() === 'en') { // mức English: thuật ngữ ↔ kí hiệu · đơn vị, không dùng cặp công thức tiếng Việt
+      if (PH.lang() === 'en') {
         const withSym = terms.filter(t => t.symbol || t.unit); const pool0 = withSym.length >= PAIRS_PER_GAME ? withSym : (PH.TERMS || []).filter(t => t.symbol || t.unit);
-        // Bỏ các thuật ngữ cho ra cùng một mặt thẻ "kí hiệu · đơn vị" (ví dụ melting point và
-        // boiling point đều ra "°C, K"): nếu để lọt, học sinh lật đúng nội dung mà vẫn bị báo sai.
         const daCo = new Set();
         const kyHieu = t => { const s = t.symbol, u = PH.unitOf(t); return s && u ? s + ' (' + u + ')' : (s || u || ''); };
         const pool = PH.shuffle(pool0).filter(t => { const k = kyHieu(t); if (!k || daCo.has(k)) return false; daCo.add(k); return true; });
@@ -135,7 +129,7 @@
       const tPick = PH.sample(terms, Math.max(0, PAIRS_PER_GAME - fPick.length));
       let pairs = fPick.map(p => ({ id: p.id, a: { k: p.a.kind, t: p.a.title, math: true }, b: { k: p.b.kind, t: p.b.title, math: false } }))
         .concat(tPick.map(t => ({ id: t.id, a: { k: PH.ui('kTerm'), t: t.vi }, b: { k: 'term', t: t.en, en: true } })));
-      if (pairs.length < PAIRS_PER_GAME) { // thiếu thì bù từ toàn bộ ngân hàng
+      if (pairs.length < PAIRS_PER_GAME) {
         const used = new Set(pairs.map(p => p.id));
         PH.shuffle((PH.TERMS || []).filter(t => !used.has(t.id))).slice(0, PAIRS_PER_GAME - pairs.length).forEach(t => pairs.push({ id: t.id, a: { k: PH.ui('kTerm'), t: t.vi }, b: { k: 'term', t: t.en, en: true } }));
       }
@@ -163,7 +157,7 @@
       document.getElementById('best').textContent = b.bestFlips ? PH.ui('bestTxt', { f: b.bestFlips, t: PH.mmss(b.bestTime || 0) }) : PH.ui('noBest');
     }
     function finish(won) {
-      if (!running) return;   // tránh chạy hai lần (vừa hết giờ vừa ghép xong) làm chồng hai bảng kết quả
+      if (!running) return;
       running = false; clearInterval(timer);
       (won ? PH.am.thang() : PH.am.thua());
       const time = Math.round((Date.now() - startedAt) / 1000);
@@ -178,7 +172,6 @@
       if (won) confetti();
       document.getElementById('btnAgain').addEventListener('click', start);
     }
-    // Mưa giấy màu khi ghép xong bảng
     function confetti() {
       const box = document.createElement('div'); box.className = 'confetti';
       const colors = ['#0D47A1', '#1E88E5', '#F57C00', '#FFB547', '#1C9A9C', '#90CAF9'];
@@ -198,7 +191,7 @@
       if (open.length === 2) {
         lock = true;
         const [a, b] = open; const ca = cards[+a.dataset.i], cb = cards[+b.dataset.i];
-        const vanNay = van;   // chụp lại số ván; nếu người chơi bấm "Ván mới" trong lúc chờ thì bỏ qua
+        const vanNay = van;
         if (ca.pid === cb.pid) {
           setTimeout(() => {
             if (vanNay !== van) return;

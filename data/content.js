@@ -1,4 +1,3 @@
-// PhysiHub — nội dung bài học. Sửa trực tiếp trong tệp này (không còn content.json nguồn).
 window.PH = window.PH || {};
 PH.CONTENT = {
   "1" : {

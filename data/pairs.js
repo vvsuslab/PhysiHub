@@ -1,4 +1,3 @@
-// PhysiHub — cặp thẻ trò chơi Ghép cặp. Sửa trực tiếp trong tệp này (không còn pairs.json nguồn).
 window.PH = window.PH || {};
 PH.PAIRS = [
   {

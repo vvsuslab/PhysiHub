@@ -90,11 +90,7 @@
       status1: ['Số liệu dưới đây đếm trực tiếp từ dữ liệu của trang, không gõ tay.', 'The figures below are counted directly from the site’s data, not typed by hand.'],
       stTerms: ['thuật ngữ trong kho', 'terms in the glossary'], stAdded: ['thuật ngữ do nhóm bổ sung ngoài SGK', 'terms added by the team beyond the textbook'],
       stDraft: ['bài mẫu đang hoàn thiện thêm', 'sample lessons still being expanded'], stExams: ['đề ôn theo cấu trúc 2025', 'practice tests in the 2025 format'],
-      sHow: ['Cách nhóm làm', 'How the team works'],
-      how1: ['Trang viết bằng HTML, CSS và JavaScript thuần, đặt trên GitHub Pages; không có máy chủ, không có tài khoản. Tiến độ học, kỉ lục trò chơi và bài làm chỉ lưu trên máy của em (localStorage), không gửi đi đâu.', 'The site is plain HTML, CSS and JavaScript on GitHub Pages; there is no server and no account. Progress, game records and answers are stored only on your device (localStorage) and are never sent anywhere.'],
-      how2: ['Khi khảo sát, nhóm chỉ ghi mã lớp và số thứ tự, không thu thập họ tên hay thông tin cá nhân.', 'In surveys the team records only a class code and a roll number — no names or personal details.'],
-      how4: ['Mã nguồn công khai tại GitHub; góp ý gửi qua mục Issues.', 'The source code is public on GitHub; feedback goes through Issues.'],
-      openRepo: ['Mã nguồn trên GitHub', 'Source on GitHub'], feedback: ['Góp ý cho nhóm', 'Send feedback'], allLinks: ['Tất cả liên kết', 'All links']
+      allLinks: ['Tất cả liên kết', 'All links']
     });
     PH.mount({ active: null, heroIcon: 'info', title: { vi: 'Về dự án', en: 'About the project' } });
     const $ = id => document.getElementById(id);
@@ -103,7 +99,7 @@
       const terms = PH.TERMS || [], added = terms.filter(t => t.added).length;
       const sample = PH.sampleLessons(); const drafted = sample.filter(l => PH.CONTENT[String(l.n)].drafted).length;
       const nQ = (PH.EXAMS || []).reduce((s, x) => s + x.parts.reduce((a, p) => a + p.items.length, 0), 0);
-      const SECS = [['mau', 'sSample'], ['nguon', 'sSources'], ['phat-am', 'sIpa'], ['kiem-tra', 'sCheck'], ['tham-dinh', 'sStatus'], ['cach-lam', 'sHow']];
+      const SECS = [['mau', 'sSample'], ['nguon', 'sSources'], ['phat-am', 'sIpa'], ['kiem-tra', 'sCheck'], ['tham-dinh', 'sStatus']];
       $('toc').setAttribute('aria-label', PH.ui('onThisPage'));
       $('toc').innerHTML = `<p class="eyebrow" style="padding:0 12px 6px">${PH.uiFmt('onThisPage')}</p>` + SECS.map(s => `<a href="#${s[0]}">${PH.uiFmt(s[1])}</a>`).join('') + `<a href="lienket.html" style="margin-top:8px;font-weight:600">${PH.uiFmt('allLinks')} →</a>`;
       const li = keys => `<ul>${keys.map(k => `<li>${PH.uiFmt(k)}</li>`).join('')}</ul>`;
@@ -115,9 +111,7 @@
         <section class="card sec" id="phat-am"><div class="sh"><span class="num-dot">3</span><h2 class="sec-title">${PH.uiFmt('sIpa')}</h2></div><p>${PH.uiFmt('ipa1')}</p><p>${PH.uiFmt('ipa2')}</p><p>${PH.uiFmt('ipa3')}</p></section>
         <section class="card sec" id="kiem-tra"><div class="sh"><span class="num-dot">4</span><h2 class="sec-title">${PH.uiFmt('sCheck')}</h2></div><div class="steps">${['chk1', 'chk2', 'chk3', 'chk4'].map(k => `<div><p>${PH.uiFmt(k)}</p></div>`).join('')}</div><p style="margin-top:12px">${PH.uiFmt('masteredHint')}</p></section>
         <section class="card sec" id="tham-dinh"><div class="sh"><span class="num-dot">5</span><h2 class="sec-title">${PH.uiFmt('sStatus')}</h2></div><p>${PH.uiFmt('status1')}</p>
-          <div class="stats"><div class="o"><div class="n">${terms.length}</div><div class="l">${PH.uiFmt('stTerms')}</div></div><div class="o"><div class="n">${added}</div><div class="l">${PH.uiFmt('stAdded')}</div></div><div class="o"><div class="n">${drafted} / ${sample.length}</div><div class="l">${PH.uiFmt('stDraft')}</div></div><div class="o"><div class="n">${(PH.EXAMS || []).length}</div><div class="l">${PH.uiFmt('stExams')}</div></div></div></section>
-        <section class="card sec" id="cach-lam"><div class="sh"><span class="num-dot">6</span><h2 class="sec-title">${PH.uiFmt('sHow')}</h2></div><p>${PH.uiFmt('how1')}</p><p>${PH.uiFmt('how2')}</p><p>${PH.uiFmt('how4')}</p>
-          <div class="row" style="margin-top:14px"><a class="btn outline sm" href="https://github.com/vvsuslab/PhysiHub" target="_blank" rel="noopener">${PH.uiFmt('openRepo')}</a><a class="btn gold sm" href="https://github.com/vvsuslab/PhysiHub/issues" target="_blank" rel="noopener">${PH.uiFmt('feedback')}</a></div></section>`;
+          <div class="stats"><div class="o"><div class="n">${terms.length}</div><div class="l">${PH.uiFmt('stTerms')}</div></div><div class="o"><div class="n">${added}</div><div class="l">${PH.uiFmt('stAdded')}</div></div><div class="o"><div class="n">${drafted} / ${sample.length}</div><div class="l">${PH.uiFmt('stDraft')}</div></div><div class="o"><div class="n">${(PH.EXAMS || []).length}</div><div class="l">${PH.uiFmt('stExams')}</div></div></div></section>`;
     }
     render(); PH.onLang(render); PH.applyHash(); window.addEventListener('hashchange', PH.applyHash);
   </script>

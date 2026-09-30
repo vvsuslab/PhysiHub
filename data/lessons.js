@@ -1,4 +1,3 @@
-// PhysiHub chapter & lesson list — SGK Vật lí 12, Kết nối tri thức với cuộc sống (25 lessons).
 window.PH = window.PH || {};
 
 PH.CHAPTERS = [

@@ -21,7 +21,6 @@
   <meta name="apple-mobile-web-app-title" content="PhysiHub">
   <style>
     .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr) 272px; gap: 24px; align-items: start; }
-    /* Mục lục chương */
     .toc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
     .toc-head .icon-tile { width: 40px; height: 40px; border-radius: 12px; }
     .toc-head .lb { font-size: 15px; font-weight: 700; color: var(--accent-ink); }
@@ -41,10 +40,8 @@
     .toc-foot .lb { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
     .toc-foot .progress { background: var(--accent-soft); }
     .toc-foot .note { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--ink-3); }
-    /* Nội dung — kiểu slide: dải xanh đầu bài, khung xanh nhạt "Nội dung chính", khung cam "Trong đó" */
     .paper { padding: 0 0 30px; border-radius: 22px; overflow: hidden; }
     .paper > .in { padding: 0 34px; }
-    /* Đầu bài như đầu slide: một dải xanh mảnh (huy hiệu sách + tên bài), vạch cam chéo bên phải; ảnh chương nằm dưới, trên nền trắng */
     .banner { margin-bottom: 22px; }
     .banner .bar { position: relative; overflow: hidden; display: flex; align-items: center; gap: 14px; min-height: 78px; padding: 12px 128px 12px 18px; background: var(--grad-bar); }
     .banner .bar::after { content: ""; position: absolute; top: 0; bottom: 0; right: -38px; width: 140px; background: linear-gradient(90deg, #fff 0 4px, #2F80D8 4px, #4B97E4 100%); border-left: 12px solid var(--orange); transform: skewX(-24deg); }
@@ -82,7 +79,6 @@
     .bang { overflow: auto; }
     .cta-row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 22px; }
     .goi-y { margin-top: 12px; font-size: 15.5px; color: var(--ink-4); }
-    /* Tự kiểm tra */
     .selfcheck { scroll-margin-top: 130px; }
     .selfcheck .meta { position: absolute; right: 18px; top: 12px; font-size: 15.5px; color: var(--ink-3); }
     .q { margin-top: 16px; }
@@ -99,7 +95,6 @@
     .why.show { display: block; }
     .result { margin-top: 16px; display: none; }
     .result.show { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-    /* Cột phải */
     .side { position: sticky; top: calc(var(--header-h) + 16px); }
     .side > .ph-label { margin: 0 0 12px -4px; }
     .tn-card { padding: 13px 15px; margin-bottom: 10px; border-radius: 14px; border-left: 4px solid var(--sky); }
@@ -119,7 +114,6 @@
     .hoc-tiep .ph-mm-l .nm { display: block; font-size: 16px; font-weight: 600; line-height: 1.4; }
     .hoc-tiep .next { margin: 12px 0 8px; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); }
     .hoc-tiep .lab-link { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; color: var(--c1-ink); }
-    /* Bài chưa có nội dung */
     .trong-box .in { padding-bottom: 6px; }
     .toc-mob { display: none; }
     @media (max-width: 1080px) {
@@ -222,7 +216,6 @@
     function renderToc() {
       if (!ch) { $('toc').innerHTML = ''; return; }
       const pr = PH.sampleProgress(ch.n); const p = PH.progress();
-      /* Mức Song ngữ: tên bài hiện thêm dòng tiếng Anh ngay dưới tên tiếng Việt */
       const enBai = l => (PH.lang() === 'bi' && l && l.en) ? `<span class="tn-en en" lang="en">${PH.esc(PH.dinh(l.en))}</span>` : '';
       const rows = ch.lessons.map(m => {
         const l = PH.lesson(m); const done = p.lessons[m] && p.lessons[m].done;
@@ -237,7 +230,6 @@
       $('tocMob').innerHTML = `<a class="pill" href="baihoc.html#chuong-${ch.n}">${PH.icon(PH.CH_ICON[ch.n], 'sm')}${PH.uiFmt('chapter')} ${PH.roman(ch.n)}</a>` + ch.lessons.map(m => `<a class="pill${m === n ? ' active acc-' + ch.n : ''}${PH.canOpen(m) ? '' : ' muted'}" href="bai.html?n=${m}"${PH.canOpen(m) ? '' : ' style="opacity:.6"'}>${PH.uiFmt('lesson')} ${m}</a>`).join('');
     }
 
-    // Gom các đoạn văn liền nhau thành khung "Nội dung chính" có vòng số; công thức → khung xanh + khung cam "Trong đó"
     function bodyHTML() {
       let html = '', items = [], k = 0, firstText = true;
       const flush = () => {
@@ -319,7 +311,6 @@
       const terms = PH.termsForLesson(n);
       const cards = terms.map(t => `<div class="card o tn-card"><div class="top"><p class="nm">${PH.esc(PH.dinh(en() ? t.en : t.vi))}</p>${t.unit ? `<span class="unit">${PH.esc(PH.unitOf(t))}</span>` : (t.symbol ? `<span class="unit">${PH.esc(t.symbol)}</span>` : '')}</div>${en() ? '' : `<span class="en" lang="en">${PH.esc(PH.dinh(t.en))}</span>`}
         <div class="ipa-row"><span class="ipa" lang="en">${PH.esc(t.ipa)}</span>${PH.hasVoice() ? `<button type="button" class="speak-btn ghost" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}</div>${PH.dictHTML(t)}</div>`).join('');
-      // Học tiếp
       const list = PH.sampleLessons().map(l => l.n); const i = list.indexOf(n);
       const all = (PH.LESSONS || []).map(l => l.n); const j = all.indexOf(n);
       const prev = i > 0 ? list[i - 1] : (j > 0 ? all[j - 1] : null);
@@ -353,12 +344,11 @@
     });
 
     function render() { renderToc(); renderPaper(); renderSide(); }
-    if (open) PH.visitLesson(n); // chỉ ghi nhớ bài mở được để nút "Tiếp tục" không trỏ vào bài trống
+    if (open) PH.visitLesson(n);
     render();
     PH.onLang(render);
     document.addEventListener('ph:progress', renderToc);
 
-    // Ghi nhớ đã đọc tới đâu (phần trăm), để trang chủ hiện "Đã đọc … %"
     if (open) {
       let best = (PH.progress().lessons[n] || {}).read || 0, timer = null;
       const measure = () => {

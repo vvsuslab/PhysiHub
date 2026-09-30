@@ -1,18 +1,14 @@
-// Kiểm tra nhanh toàn bộ kho PhysiHub trước khi đưa lên mạng.
-// Cách chạy (ở thư mục gốc của kho):  node tools/kiem-tra.mjs
-// LỖI = phải sửa trước khi đưa lên. CẢNH BÁO = nên sửa, hoặc hỏi giáo viên.
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 const GOC = join(dirname(fileURLToPath(import.meta.url)), '..');
-const MAU = [1, 2, 3, 4, 8, 9, 10, 11, 14, 15, 16, 17, 21, 22, 23, 24]; // 16 bài mẫu đã chốt ngày 22/9/2026
+const MAU = [1, 2, 3, 4, 8, 9, 10, 11, 14, 15, 16, 17, 21, 22, 23, 24];
 const loi = [], canhBao = [], thongTin = [];
 const doc = p => readFileSync(join(GOC, p), 'utf8').replace(/^﻿/, '');
 const co = p => existsSync(join(GOC, p));
 
-// ---------- 1. Dữ liệu JSON đọc được và khớp với tệp .js ----------
 const DL = {};
 for (const ten of ['terms', 'pairs', 'content', 'exams']) {
   const p = `data/${ten}.json`;
@@ -35,7 +31,6 @@ if (co('data/lessons.js')) {
   try { vm.runInNewContext(doc('data/lessons.js'), ctx); LESSONS = ctx.PH.LESSONS || []; } catch (e) { loi.push(`data/lessons.js: ${e.message}`); }
 }
 
-// ---------- 2. Thuật ngữ ----------
 if (Array.isArray(DL.terms)) {
   const ids = new Set();
   for (const t of DL.terms) {
@@ -55,7 +50,6 @@ if (Array.isArray(DL.terms)) {
   if (cho) thongTin.push(`${cho}/${DL.terms.length} thuật ngữ đang gắn "added": true (chờ giáo viên thẩm định)`);
 }
 
-// ---------- 3. Mọi cặp { vi, en } phải đủ hai thứ tiếng ----------
 function duyet(x, duong) {
   if (Array.isArray(x)) x.forEach((y, i) => duyet(y, `${duong}[${i}]`));
   else if (x && typeof x === 'object') {
@@ -66,7 +60,6 @@ function duyet(x, duong) {
 }
 for (const ten of ['content', 'exams', 'pairs']) if (DL[ten]) duyet(DL[ten], ten);
 
-// ---------- 4. Chính tả và thuật ngữ đã chốt ----------
 function tepVanBan(thuMuc = '') {
   const ra = [];
   for (const f of readdirSync(join(GOC, thuMuc))) {
@@ -80,7 +73,6 @@ function tepVanBan(thuMuc = '') {
 }
 const TEP = tepVanBan();
 const QUY_TAC = [
-  // Bỏ qua mã định danh (id, slug, ?t=…, -of-vaporization) và cụm "electromagnetic induction" (đúng)
   [/(?<![-\w"'=\/])vaporization(?![-\w"'])/g, 'dùng chính tả Anh – Anh "vaporisation"'],
   [/(?<!electro)magnetic induction(?! \(|\))/gi, 'thuật ngữ "cảm ứng từ" dùng "magnetic flux density" (đề cương Cambridge 9702)'],
   [/\b(Vật lý|vật lý|Vật Lý|Vật Lí)\b/g, 'viết "Vật lí"'],
@@ -89,8 +81,8 @@ const QUY_TAC = [
   [/\b(lý|Lý)\b/g, 'viết "lí"'],
 ];
 for (const p of TEP) {
-  if (/\.js$/.test(p) && /^data[\\/]/.test(p)) continue; // đã kiểm qua .json
-  if (/^(html[\\/]|g12\.html)/.test(p)) continue; // giao diện cũ, không trang nào liên kết tới (xem THÔNG TIN)
+  if (/\.js$/.test(p) && /^data[\\/]/.test(p)) continue;
+  if (/^(html[\\/]|g12\.html)/.test(p)) continue;
   const s = doc(p);
   for (const [re, loiKhuyen] of QUY_TAC) {
     const m = s.match(re);
@@ -102,7 +94,6 @@ for (const l of LESSONS) {
   if (/(?<!electro)magnetic induction/i.test(l.en || '')) canhBao.push(`data/lessons.js bài ${l.n}: "Magnetic induction" → "Magnetic flux density"`);
 }
 
-// ---------- 5. Ứng dụng ngoại tuyến (PWA) ----------
 if (co('sw.js')) {
   const m = doc('sw.js').match(/SHELL\s*=\s*\[([\s\S]*?)\]/);
   if (m) for (const x of m[1].match(/'[^']+'|"[^"]+"/g) || []) {
@@ -116,7 +107,6 @@ if (co('manifest.webmanifest')) {
   } catch (e) { loi.push(`manifest.webmanifest: ${e.message}`); }
 }
 
-// ---------- 6. Liên kết nội bộ trong các trang ----------
 for (const p of TEP.filter(f => /\.html$/.test(f))) {
   const s = doc(p);
   for (const m of s.matchAll(/(?:href|src)="([^"#?]+)[^"]*"/g)) {
@@ -127,7 +117,6 @@ for (const p of TEP.filter(f => /\.html$/.test(f))) {
   }
 }
 
-// ---------- 7. Phạm vi 16 bài mẫu ----------
 if (DL.content) {
   const coNoiDung = Object.keys(DL.content).map(Number);
   const ngoai = coNoiDung.filter(n => !MAU.includes(n));
@@ -136,7 +125,6 @@ if (DL.content) {
   if (thieu.length) canhBao.push(`Bài mẫu chưa có nội dung: ${thieu.join(', ')}`);
 }
 
-// ---------- Báo cáo ----------
 const in_ = (tieuDe, ds) => { if (ds.length) { console.log(`\n${tieuDe} (${ds.length})`); for (const x of [...new Set(ds)]) console.log('  - ' + x); } };
 in_('LỖI — phải sửa', loi);
 in_('CẢNH BÁO — nên sửa', canhBao);

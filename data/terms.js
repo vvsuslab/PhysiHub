@@ -1,4 +1,3 @@
-// PhysiHub — ngân hàng thuật ngữ. Sửa data/terms.json rồi chạy: node tools/build-data.mjs (hoặc sửa cả hai tệp cho khớp).
 window.PH = window.PH || {};
 PH.TERMS = [
   {

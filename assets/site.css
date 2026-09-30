@@ -1,13 +1,4 @@
-/* =====================================================================
-   PhysiHub — hệ thiết kế dùng chung (bản 2, theo mockup chốt 23/9/2026)
-   Quy ước: tiếng Việt = mực (--ink), tiếng Anh = nâu đậm (--gold, Lora nghiêng)
-   Mỗi chương một màu: --c1 … --c4 (tô), --c1-ink … (chữ), --c1-soft … (nền nhạt)
-   ===================================================================== */
-
 :root {
-  /* Bảng màu bản 3 (24/9/2026): theo slide "Bài 5. Nhiệt nóng chảy riêng".
-     Tỉ lệ như slide: nền TRẮNG là chính; khung xanh rất nhạt viền xanh, khung cam nhạt viền cam;
-     xanh đậm chỉ dùng cho dải tiêu đề mảnh, nhãn mục, vòng số; cam làm điểm nhấn. Không dùng khối nền xanh đậm lớn. */
   --bg: #FFFFFF;
   --surface: #FFFFFF;
   --surface-2: #F6F9FE;
@@ -17,17 +8,17 @@
   --ink-2: #2B4064;
   --ink-3: #4F5F77;
   --ink-4: #5C6B80;
-  --navy: #0D47A1;          /* xanh dương đậm — màu chủ đạo */
+  --navy: #0D47A1;
   --navy-2: #1565C0;
   --navy-soft: #E6F0FB;
-  --sky: #1E88E5;           /* vòng số, biểu tượng */
-  --blue-soft: #EDF5FD;     /* nền khung xanh nhạt */
-  --blue-line: #B8D7F3;     /* viền khung xanh */
-  --orange: #F57C00;        /* điểm nhấn */
+  --sky: #1E88E5;
+  --blue-soft: #EDF5FD;
+  --blue-line: #B8D7F3;
+  --orange: #F57C00;
   --orange-2: #FFA726;
-  --orange-soft: #FFF6EA;   /* nền khung cam nhạt */
-  --orange-line: #F6C995;   /* viền khung cam */
-  --gold: #A84600;          /* chữ tiếng Anh, nhãn nhỏ màu cam đậm (đạt 5,9:1 trên nền trắng) */
+  --orange-soft: #FFF6EA;
+  --orange-line: #F6C995;
+  --gold: #A84600;
   --gold-2: #8F3C00;
   --gold-soft: #FFF3E3;
   --amber: #FFA726;
@@ -53,8 +44,8 @@
   --grad-label: linear-gradient(90deg, #0D47A1 0%, #1976D2 100%);
   --grad-label-orange: linear-gradient(90deg, #D84315 0%, #EF6C00 100%);
   --font-sans: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-  --font-display: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;   /* tiêu đề, số lớn */
-  --font-serif: "Lora", Georgia, "Times New Roman", serif;                /* chỉ cho chữ tiếng Anh và công thức */
+  --font-display: "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
   --font-ipa: "Charis SIL", "Noto Sans", "Segoe UI", "Lucida Sans Unicode", sans-serif;
   --radius: 18px;
   --radius-sm: 12px;
@@ -85,15 +76,11 @@ h1, h2, h3, .serif { font-family: var(--font-display); font-weight: 800; line-he
 h1 { font-size: clamp(27px, 3.6vw, 38px); }
 h2 { font-size: clamp(21px, 2.4vw, 25px); font-weight: 800; color: var(--navy); }
 h3 { font-size: 19px; font-weight: 700; }
-/* Chỉ số dưới trong công thức: nhỏ hơn nhưng không làm giãn dòng */
 sub, sup { font-size: .72em; line-height: 0; }
-/* Tiêu đề mục kiểu slide: chữ xanh đậm, gạch cam bên dưới */
 .sec-title { display: inline-block; padding-bottom: 6px; color: var(--navy); background: linear-gradient(var(--orange), var(--orange)) left bottom / 100% 3px no-repeat; }
 p, li, td, dd { text-wrap: pretty; }
 
 .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 40px; }
-/* Màn hình rộng (máy bàn, máy chiếu): nới khung nội dung và phóng chữ nhẹ.
-   Nếu giữ nguyên 1200px thì trên màn 1790px nội dung chỉ chiếm 67%, nhìn rất nhỏ. */
 @media (min-width: 1500px) {
   :root { --max: 1460px; }
   body { font-size: 17px; }
@@ -103,7 +90,6 @@ p, li, td, dd { text-wrap: pretty; }
 }
 main { flex: 1; padding: 26px 0 48px; }
 
-/* ---------- Ngôn ngữ ---------- */
 .vi { color: var(--ink); }
 .en { color: var(--gold); font-family: var(--font-serif); font-style: italic; }
 [data-lang="en"] .en { font-family: inherit; font-style: normal; color: inherit; }
@@ -115,9 +101,6 @@ main { flex: 1; padding: 26px 0 48px; }
 .num-dot { width: 30px; height: 30px; flex: none; border-radius: 50%; display: inline-grid; place-items: center; background: var(--sky); color: #fff; font-size: 16.5px; font-weight: 800; box-shadow: 0 4px 10px rgba(30, 136, 229, .3); }
 .nw { white-space: nowrap; }
 
-/* =====================================================================
-   ĐẦU TRANG HAI TẦNG
-   ===================================================================== */
 .ph-header { position: sticky; top: 0; z-index: 50; }
 .ph-top { background: var(--surface); border-bottom: 1px solid var(--line); }
 .ph-top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
@@ -140,8 +123,6 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-lang button:hover { background: #DCEBFA; color: var(--ink); }
 .ph-lang button.active { background: var(--grad-label); color: #fff; font-weight: 700; box-shadow: 0 3px 10px rgba(13, 71, 161, .3); }
 .ph-lang .short { display: none; }
-/* Máy tính bảng dựng đứng (iPad 768px): tên mức ngôn ngữ đầy đủ làm thanh đầu trang
-   rộng quá khung và cả trang bị cuộn ngang — khoảng này dùng nhãn ngắn VI / VI+EN / EN. */
 @media (min-width: 721px) and (max-width: 1199px) {
   .ph-top .wrap { gap: 14px; }
   .ph-lang .long { display: none; }
@@ -149,7 +130,6 @@ main { flex: 1; padding: 26px 0 48px; }
   .ph-lang button { padding: 0 10px; }
 }
 
-/* Ô tìm kiếm */
 .ph-tim { position: relative; flex: 1 1 auto; min-width: 240px; max-width: 470px; }
 .ph-tim-o { display: block; width: 100%; height: 44px; padding: 0 52px 0 20px; border-radius: 999px; border: 1.5px solid var(--line-strong); background: var(--surface-2); font-size: 16px; color: var(--ink); outline: none; transition: border-color .2s, box-shadow .2s, background .2s; }
 .ph-tim-o:hover { border-color: #8FB8E4; background: var(--surface); }
@@ -175,7 +155,6 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-kq-rong .chips a { padding: 6px 12px; border-radius: 999px; background: var(--orange-soft); border: 1px solid var(--orange-line); color: var(--c1-ink); font-size: 16px; font-weight: 600; }
 .ph-kq-rong .chips a:hover { background: #FFE6C7; }
 
-/* Thanh menu */
 .ph-bar { position: relative; background: var(--surface); box-shadow: 0 6px 16px rgba(13, 71, 161, .06); }
 .ph-bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--navy-2) 0 72%, var(--orange) 72% 100%); pointer-events: none; }
 .ph-bar .wrap { display: flex; align-items: stretch; height: 48px; }
@@ -186,8 +165,6 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-bar-i:hover::after, .ph-mm:hover > .ph-bar-i::after, .ph-mm:focus-within > .ph-bar-i::after, .ph-bar-on::after { transform: scaleX(1); }
 .ph-bar-on { background: var(--blue-soft); color: var(--navy-2); }
 .ph-bar-i .lb { display: flex; flex-direction: column; line-height: 1.15; }
-/* Nút trang chủ chỉ có mỗi biểu tượng nên để cỡ 18px như icon trong chữ sẽ trông bé
-   so với thanh menu cao 48px — phóng to và làm nét đậm hơn cho cân. */
 .ph-bar .wrap > a:first-child .icon { width: 25px; height: 25px; stroke-width: 2.1; }
 .ph-bar-sub { display: none; font-family: var(--font-serif); font-style: italic; font-size: 14px; font-weight: 500; color: var(--gold); }
 [data-lang="bi"] .ph-bar-sub { display: block; }
@@ -200,7 +177,6 @@ main { flex: 1; padding: 26px 0 48px; }
   box-shadow: 0 28px 60px rgba(20, 32, 66, .24); padding: 22px 26px 20px; opacity: 0; visibility: hidden; transform: translateY(8px);
   transition: opacity .2s, transform .2s, visibility 0s linear .2s; z-index: 55; text-align: left; font-weight: 400; white-space: normal;
 }
-/* Man hinh thap (1024x768, may chieu): bang menu khong chay qua day man hinh */
 .ph-mm-p { max-height: calc(100vh - 128px); overflow-y: auto; overscroll-behavior: contain; }
 .ph-mm:hover .ph-mm-p, .ph-mm:focus-within .ph-mm-p, .ph-mm.mo .ph-mm-p { opacity: 1; visibility: visible; transform: none; transition: opacity .22s ease .05s, transform .22s ease .05s, visibility 0s linear 0s; }
 .ph-mm-h { margin: 0 0 10px; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
@@ -230,13 +206,11 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-mm-box p { font-size: 16px; line-height: 1.55; color: var(--ink-2); }
 .ph-mm-tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; font-size: 15.5px; font-weight: 600; white-space: nowrap; }
 
-/* Điện thoại: đầu trang một hàng, thanh thẻ đáy */
 .ph-mob { display: none; }
 .ph-tabs { display: none; }
 .ph-strip { display: none; }
 .ph-mob-search { display: none; }
 
-/* ---------- Chân trang ---------- */
 .ph-footer { position: relative; background: var(--surface); padding: 22px 0 24px; font-size: 16px; color: var(--navy); }
 .ph-footer::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--navy-2) 0 72%, var(--orange) 72% 100%); }
 .ph-footer p:first-child { font-weight: 600; }
@@ -245,15 +219,11 @@ main { flex: 1; padding: 26px 0 48px; }
 .ph-footer nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 26px; flex: none; }
 .ph-footer nav a { display: inline-flex; align-items: center; min-height: 32px; white-space: nowrap; }
 
-/* =====================================================================
-   THÀNH PHẦN DÙNG CHUNG
-   ===================================================================== */
 .card { background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease; }
 .card.soft { background: var(--surface-2); }
 a.card:hover, .card.lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
 a.card { color: inherit; }
 .card-title { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--navy); }
-/* Ô đổi màu khi rê chuột theo màu của mục */
 .o { border: 1.5px solid var(--line); transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease; }
 .o:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-3px); }
 
@@ -313,8 +283,6 @@ a.card { color: inherit; }
 .tone-gold { background: var(--grad-cta); }
 .tone-teal { background: linear-gradient(135deg, #34C3B8, #178C9C); }
 .tone-violet { background: linear-gradient(135deg, #7986CB, #3F51B5); }
-/* Ô biểu tượng trong bảng menu sổ xuống: .tone-* chỉ có 1 lớp nên thua .ph-mm-l .ic (2 lớp),
-   nền gradient không được áp, biểu tượng màu trắng nằm trên nền xanh nhạt nên gần như vô hình. */
 .ph-mm-l .ic.tone-1 { background: linear-gradient(135deg, var(--c1-g1), var(--c1-g2)); }
 .ph-mm-l .ic.tone-2 { background: linear-gradient(135deg, var(--c2-g1), var(--c2-g2)); }
 .ph-mm-l .ic.tone-3 { background: linear-gradient(135deg, var(--c3-g1), var(--c3-g2)); }
@@ -351,8 +319,6 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .math { font-family: var(--font-serif); font-size: 18px; font-weight: 600; font-style: italic; letter-spacing: .01em; color: var(--navy); }
 .mono { font-family: "JetBrains Mono", Consolas, "Courier New", monospace; }
 
-/* Khối mở đầu dùng chung — như đầu slide: MỘT dải tiêu đề xanh mảnh (huy hiệu tròn bên trái, vạch cam chéo bên phải),
-   phần giới thiệu nằm trên nền trắng bên dưới. Không dùng khối xanh đậm lớn. */
 .page-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto auto 1fr; column-gap: 28px; row-gap: 12px; align-items: start; margin-bottom: 26px; color: var(--ink); }
 .page-hero > div:first-child { display: contents; }
 .page-hero h1 { grid-row: 1; grid-column: 1 / -1; position: relative; overflow: hidden; min-height: 70px; display: flex; align-items: center; margin: 0; padding: 12px 290px 12px 88px; border-radius: 16px 16px 16px 16px; background: var(--grad-bar); color: #fff; text-transform: uppercase; letter-spacing: .3px; font-size: clamp(22px, 2.5vw, 30px); line-height: 1.2; box-shadow: 0 10px 24px rgba(13, 71, 161, .16); }
@@ -364,7 +330,6 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .page-hero > :nth-child(2):not(h1):not(p) { grid-column: 2; grid-row: 2 / 5; align-self: start; }
 .page-hero .ico { display: none; }
 .page-hero .spacer { display: none; }
-/* Trang chủ: khối mở đầu nền trắng, viền xanh nhạt, vạch xanh–cam trên đỉnh như chân slide */
 .hero-panel { position: relative; overflow: hidden; background: linear-gradient(180deg, #FFFFFF 0%, #F5F9FE 100%); border: 1.5px solid var(--line); border-radius: 26px; padding: 40px 48px 36px; box-shadow: var(--shadow); color: var(--ink); }
 .hero-panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, var(--navy) 0%, var(--navy-2) 70%, var(--orange) 70% 100%); }
 .hero-panel::after { content: ""; position: absolute; top: -20px; right: 34px; width: 22px; height: 90px; background: var(--orange-2); transform: skewX(-24deg); box-shadow: -34px 0 0 var(--navy-2); opacity: .9; }
@@ -376,8 +341,6 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .glass { background: var(--blue-soft); border: 1.5px solid var(--blue-line); border-radius: 22px; color: var(--ink); }
 .glass-lite { background: #fff; border: 1.5px solid var(--line); border-radius: 20px; color: var(--ink); }
 
-/* ---------- Nhãn mục kiểu slide: huy hiệu tròn + dải màu ----------
-   <span class="ph-label"><span class="b">icon</span><span class="t">Nội dung chính</span></span>  ·  .orange cho nhãn cam */
 .ph-label { display: inline-flex; align-items: center; max-width: 100%; }
 .ph-label .b { position: relative; z-index: 1; width: 48px; height: 48px; flex: none; border-radius: 50%; background: #fff; border: 3px solid var(--sky); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 4px 12px rgba(13, 71, 161, .2); }
 .ph-label .b svg { width: 22px; height: 22px; }
@@ -389,7 +352,6 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .ph-label.sm .t { font-size: 17px; padding: 5px 18px 5px 22px; margin-left: -14px; }
 .ph-label.sm.orange .t { font-size: 20px; }
 
-/* ---------- Khung nội dung: xanh nhạt viền xanh, cam nhạt viền cam ---------- */
 .panel { position: relative; background: var(--blue-soft); border: 1.5px solid var(--blue-line); border-radius: 20px; padding: 18px 20px; }
 .panel.orange { background: var(--orange-soft); border-color: var(--orange-line); }
 .panel.white { background: var(--surface); }
@@ -397,13 +359,11 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .panel.has-label > .ph-label { position: absolute; left: -6px; top: -25px; }
 .panel.has-label > .ph-label.sm { top: -21px; }
 
-/* ---------- Ảnh thật có nhãn chú thích ---------- */
 .figure { position: relative; border-radius: 18px; overflow: hidden; background: #DCE7F3; box-shadow: var(--shadow); }
 .figure img { width: 100%; height: 100%; object-fit: cover; }
 .figure .cap { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); max-width: calc(100% - 24px); padding: 6px 16px; border-radius: 10px; background: rgba(237, 245, 253, .94); border: 1.5px solid var(--blue-line); color: var(--navy); font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 4px 12px rgba(4, 22, 66, .18); }
 .figure .cap.orange { background: rgba(255, 246, 234, .95); border-color: var(--orange-line); color: var(--c1-ink); }
 
-/* ---------- Thuật ngữ được tô sáng + thẻ nghĩa ---------- */
 .term { cursor: pointer; border-bottom: 2px solid var(--sky); color: var(--navy); font-weight: 600; padding-bottom: 1px; transition: background .15s; }
 .term:hover, .term.open { background: var(--navy-soft); border-radius: 3px; }
 .kem { font-family: var(--font-serif); font-style: italic; color: var(--gold); font-size: .93em; }
@@ -429,21 +389,17 @@ hr.sep { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 .dict-links a:hover { background: #DCEBFA; border-color: var(--navy-2); color: var(--navy); }
 .dict-links a::after { content: "↗"; font-size: 14px; opacity: .7; }
 
-/* ---------- Toast ---------- */
 .ph-toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(12px); background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 16.5px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 80; max-width: calc(100vw - 32px); }
 .ph-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ---------- Bảng ---------- */
 table.tbl { width: 100%; border-collapse: collapse; font-size: 16.5px; background: var(--surface); }
 table.tbl th, table.tbl td { text-align: left; padding: 9px 12px; border: 1px solid #CFE0F2; vertical-align: top; }
 table.tbl th { font-size: 16px; font-weight: 700; color: var(--navy); background: #DCEBFA; }
 table.tbl td:first-child { font-weight: 600; }
 
-/* ---------- Khung xám đang tải ---------- */
 .skel { border-radius: 10px; background: linear-gradient(90deg, #E6EEF8 25%, #F2F6FC 50%, #E6EEF8 75%); background-size: 200% 100%; animation: skel 1.2s linear infinite; min-height: 14px; }
 @keyframes skel { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-/* ---------- Hiện dần khi cuộn ---------- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .55s ease, transform .55s ease; }
 .reveal.in { opacity: 1; transform: none; }
 .reveal[data-delay="1"] { transition-delay: .08s; }
@@ -451,9 +407,6 @@ table.tbl td:first-child { font-weight: 600; }
 .reveal[data-delay="3"] { transition-delay: .24s; }
 @keyframes ph-noi { 0% { transform: translateY(0); } 50% { transform: translateY(-9px); } 100% { transform: translateY(0); } }
 
-/* =====================================================================
-   RESPONSIVE
-   ===================================================================== */
 @media (max-width: 1080px) {
   .wrap { padding: 0 24px; }
   .ph-mm-p { left: 24px; right: 24px; }
@@ -530,19 +483,15 @@ table.tbl td:first-child { font-weight: 600; }
   a { color: inherit; }
 }
 
-/* Màn hẹp (721–1279px): 7 mục menu với cỡ chữ mới cần bớt đệm mới đủ chỗ */
 @media (min-width: 721px) and (max-width: 1279px) {
   .ph-bar .wrap { padding: 0 24px; }
   .ph-bar-i { padding: 0 9px; gap: 5px; }
 }
-/* Dải 721–799px: 7 mục menu rất chật, thu thêm đệm và cỡ chữ */
 @media (min-width: 721px) and (max-width: 799px) {
   .ph-bar .wrap { padding: 0 12px; }
   .ph-bar-i { padding: 0 6px; gap: 4px; font-size: 16.5px; }
 }
 
-/* Mức 1 (Tiếng Việt) chỉ hiện tiếng Việt: ẩn dòng tiêu đề/tên dịch sang tiếng Anh.
-   Thuật ngữ tiếng Anh vẫn hiện kèm (đúng mô tả của mức 1) — các thẻ thuật ngữ không bị ảnh hưởng. */
 [data-lang="vi"] .sub-en,
 [data-lang="vi"] .h1-en,
 [data-lang="vi"] .ten-en { display: none; }

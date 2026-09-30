@@ -111,6 +111,8 @@
       scopeLbl: ['Phạm vi:', 'Scope:'], levelPill: ['Mức {l} · điểm ×{m}', 'Level {l} · points ×{m}'], exitRound: ['Thoát ván', 'Leave the round'],
       lineLbl: ['chạm vạch này là mất một mạng', 'reach this line and you lose a life'],
       fbIdle: ['Chọn đúng nghĩa của thuật ngữ đang được tô vàng trước khi nó chạm vạch.', 'Pick the right meaning of the highlighted term before it hits the line.'],
+      fbIdleType: ['Gõ thuật ngữ tiếng Anh của thẻ đang được tô vàng trước khi nó chạm vạch.', 'Type the English term for the highlighted card before it hits the line.'],
+      fbIdleListen: ['Nghe rồi gõ thuật ngữ tiếng Anh của thẻ đang được tô vàng trước khi nó chạm vạch.', 'Listen, then type the English term for the highlighted card before it hits the line.'],
       foot: ['Điểm mỗi thuật ngữ = 10 × hệ số tốc độ × hệ số ngôn ngữ. Trả lời càng nhanh và ở mức ngôn ngữ càng cao thì điểm càng lớn.', 'Points per term = 10 × speed factor × language factor. The faster you answer and the higher your level, the more you score.'],
       lTime: ['Thời gian còn lại', 'Time left'], secs: ['{n} giây', '{n} s'], lScore: ['Điểm', 'Score'], lStreak: ['Chuỗi đúng liên tiếp', 'Streak'], lLives: ['Mạng còn lại', 'Lives left'],
       lModes: ['Chế độ chơi', 'Game mode'], mA: ['Chọn nghĩa', 'Choose the meaning'], mB: ['Gõ từ tiếng Anh', 'Type the English term'], mC: ['Nghe rồi gõ', 'Listen and type'],
@@ -129,24 +131,22 @@
       intro: ['{n} thuật ngữ · 60 giây · 3 mạng. Thuật ngữ rơi từ trên xuống — trả lời thuật ngữ đang tô vàng trước khi nó chạm vạch. Chọn chế độ A, B hoặc C ở cột bên.', '{n} terms · 60 seconds · 3 lives. Terms fall from the top — answer the highlighted one before it hits the line. Pick mode A, B or C on the side.'],
       startBtn2: ['Bắt đầu', 'Start']
     });
-    PH.mount({ active: 'games', noFooter: true, title: { vi: 'Term Rush', en: 'Term Rush' } });
+    PH.mount({ active: 'games', noFooter: true, title: 'Term Rush' });
     const $ = id => document.getElementById(id);
     function renderStatic() {
-      $('scopeLbl').textContent = PH.ui('scopeLbl'); $('exitLink').textContent = PH.ui('exitRound'); $('lineLbl').textContent = PH.ui('lineLbl'); $('foot').textContent = PH.ui('foot');
+      $('scopeLbl').textContent = PH.ui('scopeLbl'); $('scopeLabel').textContent = PH.scopeLabel(scope); $('exitLink').textContent = PH.ui('exitRound'); $('lineLbl').textContent = PH.ui('lineLbl'); $('foot').textContent = PH.ui('foot');
       ['lTime', 'lScore', 'lStreak', 'lLives', 'lModes', 'mA', 'mB', 'mC', 'noteWeak'].forEach(k => { $(k).textContent = PH.ui(k); });
     }
     const ROUND = 60, LIVES = 3, FALL_MS = 9000, SPAWN_MS = 3200, MAX_ON_SCREEN = 3;
     const arena = document.getElementById('arena');
     let mode = 'choose', pool = [], items = [], timer = null, endAt = 0, spawnAt = 0, raf = null;
-    // multVan: hệ số điểm được CHỐT lúc bắt đầu ván. Nếu đọc hệ số tại lúc trả lời,
-    // học sinh có thể đọc đề ở mức Tiếng Việt rồi bấm sang English để ăn ×2.
     let score = 0, streak = 0, lives = LIVES, correct = 0, wrongIds = [], running = false, lastAsked = null, multVan = 1;
+    let leftSec = ROUND, board = null, lastFb = [null];
 
     const scope = PH.scope();
-    document.getElementById('scopeLabel').textContent = PH.scopeLabel(scope);
     renderStatic();
     function langPill() { const l = PH.langInfo(); document.getElementById('langPill').textContent = PH.ui('levelPill', { l: l.id === 'vi' ? 'Tiếng Việt' : l.id === 'bi' ? PH.ui('bilingual') : 'English', m: PH.lang() === 'en' ? l.mult : PH.num(l.mult) }); }
-    langPill(); PH.onLang(() => { langPill(); renderStatic(); renderStats(); if (running) renderAnswer(); else setFeedback(null); });
+    langPill(); PH.onLang(() => { langPill(); renderStatic(); renderTime(); renderStats(); refreshCards(); renderBoard(); setFeedback(...lastFb); if (running) renderAnswer(); });
 
     function buildPool() {
       let t = PH.scopeTerms(scope);
@@ -154,10 +154,9 @@
       return PH.shuffle(t);
     }
 
-    /* ----- vòng chơi ----- */
     function start() {
-      pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true;
-      multVan = PH.langInfo().mult;   // chốt hệ số theo mức ngôn ngữ lúc bắt đầu ván
+      pool = buildPool(); items = []; score = 0; streak = 0; lives = LIVES; correct = 0; wrongIds = []; running = true; board = null;
+      multVan = PH.langInfo().mult;
       arena.querySelectorAll('.fall, .overlay').forEach(e => e.remove());
       endAt = Date.now() + ROUND * 1000; spawnAt = 0;
       clearInterval(timer); timer = setInterval(tickTime, 250); tickTime();
@@ -165,27 +164,25 @@
       renderStats(); setFeedback(null);
       spawn();
     }
+    function renderTime() { document.getElementById('time').textContent = PH.ui('secs', { n: leftSec }); }
     function tickTime() {
-      const left = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
-      document.getElementById('time').textContent = PH.ui('secs', { n: left });
+      leftSec = Math.max(0, Math.ceil((endAt - Date.now()) / 1000)); renderTime();
       document.getElementById('timebar').style.width = Math.max(0, Math.min(100, (endAt - Date.now()) / (ROUND * 1000) * 100)) + '%';
-      if (left === 0 && running) end(PH.ui('timeUp'));
+      if (leftSec === 0 && running) end('timeUp');
     }
+    const cardText = term => mode === 'choose' ? term.en : (PH.lang() === 'en' ? term.en.replace(/[a-z]/g, '_') : term.vi);
+    const clampX = el => { el.style.left = Math.min(parseFloat(el.style.left) || 10, Math.max(10, arena.clientWidth - el.offsetWidth - 10)) + 'px'; };
+    function refreshCards() { items.forEach(it => { it.el.textContent = cardText(it.term); clampX(it.el); }); }
     function spawn() {
       if (!running || items.length >= MAX_ON_SCREEN || !pool.length) return;
       const term = pool.shift();
       const el = document.createElement('div'); el.className = 'fall';
-      // Chế độ B (gõ từ tiếng Anh) và C (nghe rồi gõ): KHÔNG hiện sẵn từ tiếng Anh trên thẻ rơi,
-      // nếu không học sinh chỉ việc chép lại, hai chế độ đó mất tác dụng luyện tập.
-      el.textContent = mode === 'choose' ? term.en : (PH.lang() === 'en' ? term.en.replace(/[a-z]/g, '_') : term.vi);
+      el.textContent = cardText(term);
       arena.appendChild(el);
-      // Đo bề rộng THẬT sau khi gắn vào trang rồi mới kẹp vị trí, vì thẻ dài tới hơn 300px
-      // sẽ bị khung cắt mất chữ nếu đoán cứng 260px.
-      const maxX = Math.max(0, arena.clientWidth - el.offsetWidth - 20);
-      el.style.left = (10 + Math.random() * maxX) + 'px';
+      el.style.left = (10 + Math.random() * Math.max(0, arena.clientWidth - el.offsetWidth - 20)) + 'px';
       items.push({ term, el, born: performance.now(), hint: false });
       spawnAt = Date.now() + SPAWN_MS;
-      renderAnswer();
+      markActive();
     }
     function frame(now) {
       if (!running) return;
@@ -197,7 +194,7 @@
       const hit = items.find(it => it.p >= 1);
       if (hit) miss(hit, 'chạm vạch');
       if (Date.now() >= spawnAt) spawn();
-      if (!items.length && !pool.length) end(PH.ui('allDone'));
+      if (!items.length && !pool.length) end('allDone');
       markActive();
       raf = requestAnimationFrame(frame);
     }
@@ -208,14 +205,13 @@
       if (a && a.term !== lastAsked) renderAnswer();
     }
 
-    /* ----- câu hỏi & trả lời ----- */
     function renderAnswer() {
       const a = activeItem(); const ask = document.getElementById('ask'), box = document.getElementById('answer'), hint = document.getElementById('hint');
       if (!a) { ask.innerHTML = ''; box.innerHTML = ''; hint.textContent = ''; return; }
+      const typed = lastAsked === a.term && document.getElementById('typeIn') ? document.getElementById('typeIn').value : '';
       lastAsked = a.term; const t = a.term; const l = PH.lang();
       hint.textContent = '';
       if (mode === 'choose') {
-        // Mức 1–2: chọn nghĩa tiếng Việt · Mức 3: chọn định nghĩa tiếng Anh
         const en = l === 'en';
         const others = PH.sample((PH.TERMS || []).filter(x => x.id !== t.id && (en ? x.defEn : x.vi)), 3);
         const opts = PH.shuffle([t].concat(others));
@@ -228,6 +224,7 @@
           ? `${PH.uiFmt('listenType')} <button class="speak-btn" type="button" data-speak="${PH.esc(t.en)}" title="${PH.uiFmt('listenAgain')}" aria-label="${PH.uiFmt('listenAgain')}">${PH.icon('speaker', 'sm')}</button> <span class="small muted">(${PH.esc(l === 'en' ? t.defEn : t.vi)})</span>`
           : `${PH.uiFmt('typeFor')} <b class="vi" style="color:var(--ink)">${PH.esc(l === 'en' ? t.defEn : t.vi)}</b> ${l === 'vi' ? `<span class="small muted">— ${PH.esc(t.defVi)}</span>` : ''}`;
         box.innerHTML = `<form class="typebox" id="typeForm"><input type="text" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${listen ? '…' : PH.uiFmt('egPh')}"><button class="btn" type="submit">${PH.uiFmt('answer')}</button></form>`;
+        if (typed) document.getElementById('typeIn').value = typed;
         if (listen) PH.speak(t.en);
         setTimeout(() => { const i = document.getElementById('typeIn'); if (i) i.focus(); }, 0);
       }
@@ -236,26 +233,24 @@
     function hitOk(it) {
       const pts = points(it); score += pts; streak++; correct++; PH.am.dung();
       PH.noteTerm(it.term.id, false);
-      setFeedback(true, it.term, PH.ui('plusPts', { n: pts }));
+      setFeedback(true, it.term, ['plusPts', { n: pts }]);
       sparks(it.el);
       const sc = document.getElementById('score'); sc.classList.remove('bump'); void sc.offsetWidth; sc.classList.add('bump');
       remove(it, 'hit');
     }
     function miss(it, why) {
       lives--; streak = 0; wrongIds.push(it.term.id); PH.noteTerm(it.term.id, true); (why === 'chạm vạch' ? PH.am.matMang() : PH.am.sai());
-      setFeedback(false, it.term, PH.ui(why === 'chạm vạch' ? 'hitLine' : 'wrongLife'));
+      setFeedback(false, it.term, [why === 'chạm vạch' ? 'hitLine' : 'wrongLife']);
       remove(it, 'missed');
-      if (lives <= 0) end(PH.ui('noLives'));
+      if (lives <= 0) end('noLives');
     }
-    // Hiệu ứng: giữ nguyên vị trí rơi hiện tại rồi chạy animation "nổ" (đúng) hoặc "rung" (sai)
     function remove(it, fx) {
       items = items.filter(x => x !== it);
       const m = /translateY\(([-\d.]+)px\)/.exec(it.el.style.transform || ''); it.el.style.setProperty('--y', (m ? m[1] : 0) + 'px');
       it.el.classList.add(fx || 'gone'); setTimeout(() => it.el.remove(), 450);
       renderStats(); lastAsked = null; renderAnswer();
-      if (running && !items.length) spawn(); // không bắt người chơi chờ thuật ngữ kế tiếp
+      if (running && !items.length) spawn();
     }
-    // Tia sáng bắn ra từ thuật ngữ vừa trả lời đúng
     function sparks(el) {
       const r = el.getBoundingClientRect(), a = arena.getBoundingClientRect();
       const cx = r.left - a.left + r.width / 2, cy = r.top - a.top + r.height / 2;
@@ -269,10 +264,10 @@
       }
     }
     function setFeedback(ok, t, extra) {
-      const fb = document.getElementById('fb');
-      if (ok == null) { fb.innerHTML = `<span class="small muted">${PH.uiFmt('fbIdle')}</span>`; return; }
+      const fb = document.getElementById('fb'); lastFb = [ok, t, extra];
+      if (ok == null) { fb.innerHTML = `<span class="small muted">${PH.uiFmt(mode === 'choose' ? 'fbIdle' : mode === 'type' ? 'fbIdleType' : 'fbIdleListen')}</span>`; return; }
       const en = PH.lang() === 'en';
-      fb.innerHTML = `<span class="dot ${ok ? 'ok' : 'no'}">${PH.icon(ok ? 'check' : 'x', 'sm')}</span><span>${PH.uiFmt(ok ? 'right' : 'notRight')} — <b class="en" lang="en">${PH.esc(t.en)}</b> ${PH.uiFmt('isVi')} <b>${PH.esc(en ? t.defEn : t.vi)}</b>${t.symbol ? `, ${PH.uiFmt('symbolIs', { s: t.symbol })}` : ''}. <span class="muted">${PH.esc(extra)}</span></span>${PH.canOpen(t.lesson) ? `<a class="small" href="bai.html?n=${t.lesson}">${PH.uiFmt('seeLesson', { n: t.lesson })}</a>` : ''}`;
+      fb.innerHTML = `<span class="dot ${ok ? 'ok' : 'no'}">${PH.icon(ok ? 'check' : 'x', 'sm')}</span><span>${PH.uiFmt(ok ? 'right' : 'notRight')} — <b class="en" lang="en">${PH.esc(t.en)}</b> ${PH.uiFmt('isVi')} <b>${PH.esc(en ? t.defEn : t.vi)}</b>${t.symbol ? `, ${PH.uiFmt('symbolIs', { s: t.symbol })}` : ''}. <span class="muted">${PH.uiFmt(extra[0], extra[1])}</span></span>${PH.canOpen(t.lesson) ? `<a class="small" href="bai.html?n=${t.lesson}">${PH.uiFmt('seeLesson', { n: t.lesson })}</a>` : ''}`;
     }
     function renderStats() {
       document.getElementById('score').textContent = score; document.getElementById('streak').textContent = streak;
@@ -282,20 +277,29 @@
     function end(reason) {
       if (!running) return; running = false; clearInterval(timer); cancelAnimationFrame(raf); (lives <= 0 ? PH.am.thua() : PH.am.thang());
       items.forEach(it => it.el.remove()); items = [];
-      const best = (PH.progress().games.termrush || {}).best || 0;
+      board = { kind: 'end', reason, best: (PH.progress().games.termrush || {}).best || 0 };
       PH.logGame('termrush', { score, correct, wrong: wrongIds.length, mode });
-      const wrongTerms = [...new Set(wrongIds)].map(PH.termById).filter(Boolean);
+      renderBoard();
+      document.getElementById('ask').innerHTML = ''; document.getElementById('answer').innerHTML = ''; document.getElementById('hint').textContent = '';
+    }
+    function renderBoard() {
+      arena.querySelectorAll('.overlay').forEach(e => e.remove());
+      if (!board) return;
       const ov = document.createElement('div'); ov.className = 'overlay';
-      ov.innerHTML = `<div class="small muted">${PH.esc(reason)}</div><h2>${PH.uiFmt('pts', { n: score })}</h2>
-        <p>${PH.uiFmt('rightWrong', { c: correct, w: wrongIds.length })}${score > best ? ` · <b style="color:var(--gold-2)">${PH.uiFmt('newRecord')}</b>` : best ? ` · ${PH.uiFmt('record', { n: best })}` : ''}</p>
-        ${wrongTerms.length ? `<p class="small">${PH.uiFmt('review')} ${wrongTerms.slice(0, 6).map(t => `<a href="thuatngu.html?t=${t.id}">${PH.esc(t.en)}</a>`).join(', ')}</p>` : ''}
-        <div class="row"><button class="btn" id="btnAgain">${PH.uiFmt('again')}</button><a class="btn outline" href="games.html">${PH.uiFmt('backGames')}</a></div>`;
+      if (board.kind === 'intro') {
+        const t = PH.scopeTerms(scope); const n = t.length < 4 ? (PH.TERMS || []).length : t.length;
+        ov.innerHTML = `<h2>Term Rush</h2><p>${PH.uiFmt('intro', { n })}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
+      } else {
+        const best = board.best, wrongTerms = [...new Set(wrongIds)].map(PH.termById).filter(Boolean);
+        ov.innerHTML = `<div class="small muted">${PH.uiFmt(board.reason)}</div><h2>${PH.uiFmt('pts', { n: score })}</h2>
+          <p>${PH.uiFmt('rightWrong', { c: correct, w: wrongIds.length })}${score > best ? ` · <b style="color:var(--gold-2)">${PH.uiFmt('newRecord')}</b>` : best ? ` · ${PH.uiFmt('record', { n: best })}` : ''}</p>
+          ${wrongTerms.length ? `<p class="small">${PH.uiFmt('review')} ${wrongTerms.slice(0, 6).map(t => `<a href="thuatngu.html?t=${t.id}">${PH.esc(t.en)}</a>`).join(', ')}</p>` : ''}
+          <div class="row"><button class="btn" id="btnAgain">${PH.uiFmt('again')}</button><a class="btn outline" href="games.html">${PH.uiFmt('backGames')}</a></div>`;
+      }
       arena.appendChild(ov);
-      document.getElementById('btnAgain').addEventListener('click', start);
-      document.getElementById('ask').innerHTML = ''; document.getElementById('answer').innerHTML = '';
+      ov.querySelector('button').addEventListener('click', start);
     }
 
-    /* ----- sự kiện ----- */
     document.getElementById('answer').addEventListener('click', e => {
       const b = e.target.closest('.opt'); if (!b || !running) return;
       const it = activeItem(); if (!it) return;
@@ -315,20 +319,13 @@
     document.querySelector('.modes').addEventListener('click', e => {
       const b = e.target.closest('[data-mode]'); if (!b) return; mode = b.dataset.mode;
       document.querySelectorAll('.modes button').forEach(x => x.classList.toggle('active', x === b));
-      lastAsked = null; if (running) renderAnswer();
+      refreshCards(); setFeedback(null); if (running) renderAnswer();
     });
     document.querySelector('.modes button').classList.add('active');
-    window.addEventListener('resize', () => { items.forEach(it => { it.el.style.left = Math.min(parseFloat(it.el.style.left), Math.max(0, arena.clientWidth - 200)) + 'px'; }); });
+    window.addEventListener('resize', () => items.forEach(it => clampX(it.el)));
 
-    // Màn hình bắt đầu
-    (function intro() {
-      const n = PH.scopeTerms(scope).length;
-      const ov = document.createElement('div'); ov.className = 'overlay';
-      ov.innerHTML = `<h2>Term Rush</h2><p>${PH.uiFmt('intro', { n })}</p><button class="btn" id="btnStart">${PH.uiFmt('startBtn2')}</button>`;
-      arena.appendChild(ov); renderStats(); setFeedback(null);
-      document.getElementById('btnStart').addEventListener('click', start);
-      PH.am.gan(document.getElementById('btnAm'));
-    })();
+    board = { kind: 'intro' }; renderBoard(); renderTime(); renderStats(); setFeedback(null);
+    PH.am.gan(document.getElementById('btnAm'));
   </script>
 </body>
 </html>
