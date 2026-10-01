@@ -285,6 +285,7 @@ window.PH = window.PH || {};
     ft2: ['Nội dung bám SGK Vật lí 12 (Kết nối tri thức với cuộc sống) và đề minh hoạ của Bộ GD&ĐT, dùng cho mục đích học tập.', 'Content follows the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series) and the Ministry of Education’s sample exams, for learning purposes only.'],
     ftAll: ['Tất cả liên kết', 'All links'], ftAbout: ['Về dự án', 'About the project'], ftSources: ['Nguồn học liệu', 'Sources'],
     listen: ['Nghe phát âm', 'Play pronunciation'], listenMachine: ['Đọc bằng giọng máy của trình duyệt', 'Read aloud by the browser voice'],
+    awaiting: ['chờ thẩm định', 'awaiting review'], added: ['bổ sung · chờ thẩm định', 'added · awaiting review'],
     hearOn: ['Nghe phát âm trên', 'Hear it on'], hearOxford: ['Nghe trên Oxford', 'Hear it on Oxford'], hearCambridge: ['Nghe trên Cambridge', 'Hear it on Cambridge'],
     openInGlossary: ['Mở trong kho thuật ngữ', 'Open in the glossary'], noVoice: ['Máy này chưa có giọng đọc tiếng Anh — em nghe trên Oxford hoặc Cambridge nhé.', 'No English voice on this device — listen on Oxford or Cambridge instead.'],
     amOn: ['Tắt tiếng', 'Mute'], amOff: ['Bật tiếng', 'Unmute'],

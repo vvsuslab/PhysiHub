@@ -133,7 +133,7 @@
       how1: ['Tên tiếng Việt lấy đúng như SGK Vật lí 12 Kết nối tri thức với cuộc sống.', 'The Vietnamese name is taken exactly from the Grade 12 Physics textbook (Kết nối tri thức với cuộc sống series).'],
       how2: ['Tên tiếng Anh đối chiếu giáo trình Cambridge International AS & A Level Physics và OpenStax.', 'The English name is checked against the Cambridge International AS & A Level Physics syllabus and OpenStax.'],
       how3: ['Phiên âm đối chiếu từ điển Oxford Learner’s và Collins. Nút nghe mở trang từ điển Oxford hoặc Cambridge; nút loa nhỏ đọc bằng giọng máy của trình duyệt.', 'IPA is checked against the Oxford Learner’s and Collins dictionaries. The listen links open the Oxford or Cambridge entry; the small speaker reads with the browser voice.'],
-      how4: ['Mỗi thuật ngữ được giáo viên Vật lí và giáo viên tiếng Anh cùng duyệt trước khi đưa vào kho.', 'Every term is approved by both a physics teacher and an English teacher before it enters the glossary.'],
+      how4: ['Giáo viên Vật lí và giáo viên tiếng Anh duyệt xong mới bỏ nhãn “chờ thẩm định”.', 'The “awaiting review” label is removed only after a physics teacher and an English teacher approve the term.'],
       noMatchG: ['Không có thuật ngữ nào khớp đúng với “{q}”.', 'No term matches “{q}” exactly.'], noneInFilter: ['Không có thuật ngữ nào trong bộ lọc này.', 'No terms in this filter.'],
       clearFilter: ['Bỏ lọc', 'Clear filters'],
       relatedFormula: ['Công thức liên quan', 'Related formula'], exampleLbl: ['Ví dụ theo dạng đề thi', 'Exam-style example'],
@@ -184,7 +184,7 @@
         <span class="nm" ${en() ? 'lang="en"' : ''}>${PH.esc(PH.dinh(main))}</span>${sub ? `<span class="sub ${en() ? 'vi' : 'en'}" ${en() ? '' : 'lang="en"'}>${PH.esc(PH.dinh(sub))}</span>` : ''}
         <span class="ipa-row">${PH.hasVoice() ? `<button type="button" class="speak-btn" data-speak="${PH.esc(t.en)}" aria-label="${PH.uiFmt('listenMachine')}" title="${PH.uiFmt('listenMachine')}">${PH.icon('speaker', 'sm')}</button>` : ''}<span class="ipa" lang="en">${PH.esc(t.ipa)}</span></span>
         ${PH.dictHTML(t)}
-        <span class="tags">${khHTML(t)}</span>
+        <span class="tags">${khHTML(t)}${t.added ? `<span class="tag gold">${PH.uiFmt('awaiting')}</span>` : ''}</span>
         <a class="more" href="thuatngu.html?t=${encodeURIComponent(t.id)}" aria-label="${PH.uiFmt('details')}: ${PH.esc(t.en)}" title="${PH.uiFmt('details')}">${PH.icon('right', 'sm')}</a></div>`;
     }
     function renderGrid() {
@@ -218,6 +218,7 @@
         ${t.formula ? `<div class="fbox"><div class="lbl">${PH.uiFmt('relatedFormula')}</div><div class="math">${PH.esc(t.formula)}</div></div>` : ''}
         ${(t.exampleEn || t.exampleVi) ? `<div class="ex"><div class="lbl">${PH.uiFmt('exampleLbl')}</div>${l !== 'vi' && t.exampleEn ? `<span class="en" lang="en">“${PH.esc(t.exampleEn)}”</span>` : ''}${l !== 'en' && t.exampleVi ? `<div>${PH.esc(t.exampleVi)}</div>` : ''}</div>` : ''}
         
+        ${t.added ? `<div style="margin-top:12px"><span class="tag gold">${PH.uiFmt('added')}</span></div>` : ''}
         <div class="btns">${PH.canOpen(t.lesson) ? `<a class="btn outline sm" href="bai.html?n=${t.lesson}">${PH.uiFmt('openLesson', { n: t.lesson })}</a>` : ''}<a class="btn outline sm" href="game-termrush.html?lesson=${t.lesson}">${PH.uiFmt('practiseThis')}</a></div>`, 'detail acc-' + t.chapter);
       dialog.onclick = e => { if (e.target.closest('[data-close]')) closeDialog(); };
       PH.noteTerm(t.id, false);
